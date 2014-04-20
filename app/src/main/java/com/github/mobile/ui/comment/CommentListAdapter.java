@@ -18,7 +18,6 @@ package com.github.mobile.ui.comment;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -47,6 +46,16 @@ public class CommentListAdapter extends MultiTypeAdapter {
     private final HttpImageGetter imageGetter;
 
     /**
+     * Callback listener to be invoked when user tries to edit a comment.
+     */
+     private final EditCommentListener editCommentListener;
+
+    /**
+     * Callback listener to be invoked when user tries to edit a comment.
+     */
+    private final DeleteCommentListener deleteCommentListener;
+
+    /**
      * Create list adapter
      *
      * @param activity
@@ -55,12 +64,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param imageGetter
      */
     public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        super(activity.getLayoutInflater());
-
-        this.resources = activity.getResources();
-        this.avatars = avatars;
-        this.imageGetter = imageGetter;
-        setItems(elements);
+        this(activity, elements, avatars, imageGetter, null, null);
     }
 
     /**
@@ -72,6 +76,27 @@ public class CommentListAdapter extends MultiTypeAdapter {
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
         this(activity, null, avatars, imageGetter);
+    }
+
+    /**
+     * Create list adapter
+     *
+     * @param activity
+     * @param avatars
+     * @param imageGetter
+     * @param editCommentListener
+     * @param deleteCommentListener
+     */
+    public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter,
+            EditCommentListener editCommentListener, DeleteCommentListener deleteCommentListener) {
+        super(activity.getLayoutInflater());
+
+        this.resources = activity.getResources();
+        this.avatars = avatars;
+        this.imageGetter = imageGetter;
+        this.editCommentListener = editCommentListener;
+        this.deleteCommentListener = deleteCommentListener;
+        setItems(elements);
     }
 
     @Override
@@ -183,6 +208,30 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         setText(1, comment.getUser().getLogin());
         setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+
+        // Edit Comment ImageButton
+        if (editCommentListener != null) {
+            imageView(4).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editCommentListener.onEditComment(comment);
+                }
+            });
+        } else {
+            imageView(4).setVisibility(View.GONE);
+        }
+
+        // Delete Comment ImageButton
+        if (deleteCommentListener != null) {
+            imageView(5).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteCommentListener.onDeleteComment(comment);
+                }
+            });
+        } else {
+            imageView(5).setVisibility(View.GONE);
+        }
     }
 
     public MultiTypeAdapter setItems(Collection<?> items) {
@@ -233,7 +282,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected int[] getChildViewIds(int type) {
         if(type == 0)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
-                    R.id.tv_comment_date, R.id.iv_avatar };
+                    R.id.tv_comment_date, R.id.iv_avatar, R.id.iv_comment_edit, R.id.iv_comment_delete };
         else
             return new int[]{R.id.tv_event_icon, R.id.tv_event, R.id.iv_avatar};
     }
