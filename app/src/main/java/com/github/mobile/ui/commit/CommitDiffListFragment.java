@@ -24,8 +24,12 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.RequestCodes.COMMENT_CREATE;
 import android.accounts.Account;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -38,12 +42,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.kevinsawicki.wishlist.ViewFinder;
 import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
 import com.github.mobile.R.id;
 import com.github.mobile.R.layout;
 import com.github.mobile.R.menu;
@@ -199,6 +205,9 @@ public class CommitDiffListFragment extends DialogFragment implements
         case id.m_refresh:
             refreshCommit();
             return true;
+        case id.m_copy_hash:
+            copyHashToClipboard();
+            return true;
         case id.m_comment:
             startActivityForResult(
                     CreateCommentActivity.createIntent(repository, base),
@@ -210,6 +219,18 @@ public class CommitDiffListFragment extends DialogFragment implements
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void copyHashToClipboard() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ClipboardManager manager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("hash", commit.getSha());
+            manager.setPrimaryClip(clip);
+        } else {
+            android.text.ClipboardManager manager = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            manager.setText(commit.getSha());
+        }
+        Toast.makeText(getActivity(), R.string.toast_msg_copied, Toast.LENGTH_SHORT).show();
     }
 
     private void shareCommit() {
