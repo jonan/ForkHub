@@ -112,7 +112,7 @@
     <string name="issue_event_head_ref_restored"> restored the branch</string>
     <!--  -->
 
-    <string name="app_name">GitHub</string>
+    <string name="app_name">ForkHub</string>
     <string name="news">News</string>
     <string name="issues">Issues</string>
     <string name="gists">Gists</string>
