@@ -20,8 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.mobile.R.id;
-import com.github.mobile.R.layout;
+import com.github.mobile.R;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
@@ -47,7 +46,7 @@ public class CommentListAdapter extends SingleTypeAdapter<Comment> {
      */
     public CommentListAdapter(LayoutInflater inflater, Comment[] elements,
             AvatarLoader avatars, HttpImageGetter imageGetter) {
-        super(inflater, layout.comment_item);
+        super(inflater, R.layout.comment_item);
 
         this.avatars = avatars;
         this.imageGetter = imageGetter;
@@ -90,7 +89,7 @@ public class CommentListAdapter extends SingleTypeAdapter<Comment> {
 
     @Override
     protected int[] getChildViewIds() {
-        return new int[] { id.tv_comment_body, id.tv_comment_author,
-                id.tv_comment_date, id.iv_avatar };
+        return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
+                R.id.tv_comment_date, R.id.iv_avatar };
     }
 }
