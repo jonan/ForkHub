@@ -19,11 +19,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.github.mobile.R;
 import com.google.inject.Inject;
 import com.squareup.picasso.Picasso;
