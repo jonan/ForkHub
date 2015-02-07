@@ -78,6 +78,7 @@ import java.util.Locale;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.PullRequest;
@@ -93,6 +94,10 @@ public class IssueFragment extends DialogFragment {
     private int issueNumber;
 
     private List<Comment> comments;
+
+    private List<IssueEvent> events;
+
+    private List<Object> items;
 
     private RepositoryId repositoryId;
 
@@ -235,11 +240,11 @@ public class IssueFragment extends DialogFragment {
                 .findViewById(R.id.tv_loading);
         loadingText.setText(R.string.loading_comments);
 
-        if (issue == null || (issue.getComments() > 0 && comments == null))
+        if (issue == null || (issue.getComments() > 0 && items == null))
             adapter.addHeader(loadingView);
 
-        if (issue != null && comments != null)
-            updateList(issue, comments);
+        if (issue != null && items != null)
+            updateList(issue, items);
         else {
             if (issue != null)
                 updateHeader(issue);
@@ -335,7 +340,7 @@ public class IssueFragment extends DialogFragment {
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
                 new CommentListAdapter(activity.getLayoutInflater(), avatars,
-                        commentImageGetter));
+                        commentImageGetter, issue));
         list.setAdapter(adapter);
     }
 
@@ -446,21 +451,44 @@ public class IssueFragment extends DialogFragment {
             @Override
             protected void onSuccess(FullIssue fullIssue) throws Exception {
                 super.onSuccess(fullIssue);
-
                 if (!isUsable())
                     return;
 
                 issue = fullIssue.getIssue();
                 comments = fullIssue;
-                updateList(fullIssue.getIssue(), fullIssue);
+                events = (List<IssueEvent>) fullIssue.getEvents();
+                List<Object> allItems = new ArrayList<>();
+
+                int start = 0;
+                for (Comment comment : comments) {
+                    for(int e = start; e < events.size(); e++) {
+                        IssueEvent event = events.get(e);
+                        if (comment.getCreatedAt().after(event.getCreatedAt())) {
+                            if(event.getEvent().equals("closed") || event.getEvent().equals("reopened") || event.getEvent().equals("merged"))
+                                allItems.add(event);
+                            start++;
+                        }
+                    }
+                    allItems.add(comment);
+                }
+
+                //Adding the last events or if there are no comments
+                for(int e = start; e < events.size(); e++) {
+                    IssueEvent event = events.get(e);
+                    if(event.getEvent().equals("closed") || event.getEvent().equals("reopened") || event.getEvent().equals("merged"))
+                        allItems.add(event);
+                }
+
+                items = allItems;
+                updateList(fullIssue.getIssue(), allItems);
             }
         }.execute();
-
     }
 
-    private void updateList(Issue issue, List<Comment> comments) {
-        adapter.getWrappedAdapter().setItems(comments);
+    private void updateList(Issue issue, List<Object> items) {
+        adapter.getWrappedAdapter().setItems(items);
         adapter.removeHeader(loadingView);
+        adapter.getWrappedAdapter().setIssue(issue);
 
         headerView.setVisibility(VISIBLE);
         updateHeader(issue);
@@ -536,7 +564,7 @@ public class IssueFragment extends DialogFragment {
             if (comments != null) {
                 comments.add(comment);
                 issue.setComments(issue.getComments() + 1);
-                updateList(issue, comments);
+                updateList(issue, items);
             } else
                 refreshIssue();
             return;
