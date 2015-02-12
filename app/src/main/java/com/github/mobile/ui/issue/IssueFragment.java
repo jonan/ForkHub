@@ -438,19 +438,14 @@ public class IssueFragment extends DialogFragment {
     }
 
     private void refreshIssue() {
-        getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
-
         new RefreshIssueTask(getActivity(), repositoryId, issueNumber,
                 bodyImageGetter, commentImageGetter) {
 
             @Override
             protected void onException(Exception e) throws RuntimeException {
                 super.onException(e);
-
                 ToastUtils.show(getActivity(), e, string.error_issue_load);
                 ViewUtils.setGone(progress, true);
-
-                getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
             }
 
             @Override
@@ -463,8 +458,6 @@ public class IssueFragment extends DialogFragment {
                 issue = fullIssue.getIssue();
                 comments = fullIssue;
                 updateList(fullIssue.getIssue(), fullIssue);
-
-                getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
             }
         }.execute();
 
