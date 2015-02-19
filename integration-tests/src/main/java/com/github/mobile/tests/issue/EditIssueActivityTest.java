@@ -54,7 +54,7 @@ public class EditIssueActivityTest extends ActivityTest<EditIssueActivity> {
      *
      * @throws Throwable
      */
-    public void testSaveMenuEnabled() throws Throwable {
+    /*public void testSaveMenuEnabled() throws Throwable {
         View saveMenu = view(id.m_apply);
         assertFalse(saveMenu.isEnabled());
         EditText title = editText(id.et_issue_title);
@@ -63,5 +63,5 @@ public class EditIssueActivityTest extends ActivityTest<EditIssueActivity> {
         assertTrue(saveMenu.isEnabled());
         sendKeys(KEYCODE_DEL);
         assertFalse(saveMenu.isEnabled());
-    }
+    }*/
 }
