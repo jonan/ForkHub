@@ -34,7 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.ui.user.NewsListAdapter;
 import com.github.mobile.util.AvatarLoader;
 
@@ -104,7 +104,7 @@ public class NewsEventTextTest extends AndroidTestCase {
         adapter.setItems(new Object[] { event });
         View view = adapter.getView(0, null, null);
         assertNotNull(view);
-        text = (TextView) view.findViewById(id.tv_event);
+        text = (TextView) view.findViewById(R.id.tv_event);
         assertNotNull(text);
     }
 

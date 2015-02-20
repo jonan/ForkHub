@@ -19,7 +19,7 @@ import static android.view.KeyEvent.KEYCODE_DEL;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.issue.EditIssueActivity;
 
@@ -55,9 +55,9 @@ public class EditIssueActivityTest extends ActivityTest<EditIssueActivity> {
      * @throws Throwable
      */
     /*public void testSaveMenuEnabled() throws Throwable {
-        View saveMenu = view(id.m_apply);
+        View saveMenu = view(R.id.m_apply);
         assertFalse(saveMenu.isEnabled());
-        EditText title = editText(id.et_issue_title);
+        EditText title = editText(R.id.et_issue_title);
         focus(title);
         send("a");
         assertTrue(saveMenu.isEnabled());

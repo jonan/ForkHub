@@ -19,7 +19,7 @@ import static android.view.KeyEvent.KEYCODE_DEL;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.gist.CreateCommentActivity;
 
@@ -53,9 +53,9 @@ public class CreateCommentActivityTest extends
      * @throws Throwable
      */
     public void testEmptyCommentIsProhitibed() throws Throwable {
-        View createMenu = view(id.m_apply);
+        View createMenu = view(R.id.m_apply);
         assertFalse(createMenu.isEnabled());
-        final EditText comment = editText(id.et_comment);
+        final EditText comment = editText(R.id.et_comment);
         focus(comment);
         send("a");
         assertTrue(createMenu.isEnabled());
