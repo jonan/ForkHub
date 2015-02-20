@@ -19,7 +19,7 @@ import android.accounts.AccountManager;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.LoginActivity;
 import com.github.mobile.tests.ActivityTest;
@@ -50,10 +50,10 @@ public class LoginActivityTest extends ActivityTest<LoginActivity> {
      * @throws Throwable
      */
     public void testSignInIsDisabled() throws Throwable {
-        View loginMenu = view(id.m_login);
+        View loginMenu = view(R.id.m_login);
         assertFalse(loginMenu.isEnabled());
-        final EditText login = editText(id.et_login);
-        final EditText password = editText(id.et_password);
+        final EditText login = editText(R.id.et_login);
+        final EditText password = editText(R.id.et_password);
         focus(login);
         send("loginname");
         assertEquals("loginname", login.getText().toString());

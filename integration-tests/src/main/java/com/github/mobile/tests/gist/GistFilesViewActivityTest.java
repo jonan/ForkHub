@@ -17,7 +17,7 @@ package com.github.mobile.tests.gist;
 
 import android.support.v4.view.ViewPager;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.gist.GistFilesViewActivity;
@@ -72,8 +72,7 @@ public class GistFilesViewActivityTest extends
      * @throws Throwable
      */
     public void testChangingPages() throws Throwable {
-        final ViewPager pager = (ViewPager) getActivity().findViewById(
-                id.vp_pages);
+        final ViewPager pager = (ViewPager) getActivity().findViewById(R.id.vp_pages);
         assertEquals(0, pager.getCurrentItem());
         ui(new Runnable() {
 

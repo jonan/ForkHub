@@ -20,7 +20,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.mobile.R.id;
+import com.github.mobile.R;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.gist.CreateGistActivity;
 
@@ -42,9 +42,9 @@ public class CreateGistActivityTest extends ActivityTest<CreateGistActivity> {
     public void testCreateWithInitialText() {
         setActivityIntent(new Intent().putExtra(EXTRA_TEXT, "gist content"));
 
-        View createMenu = view(id.m_apply);
+        View createMenu = view(R.id.m_apply);
         assertTrue(createMenu.isEnabled());
-        EditText content = editText(id.et_gist_content);
+        EditText content = editText(R.id.et_gist_content);
         assertEquals("gist content", content.getText().toString());
     }
 
@@ -54,9 +54,9 @@ public class CreateGistActivityTest extends ActivityTest<CreateGistActivity> {
      * @throws Throwable
      */
     public void testCreateWithNoInitialText() throws Throwable {
-        View createMenu = view(id.m_apply);
+        View createMenu = view(R.id.m_apply);
         assertFalse(createMenu.isEnabled());
-        EditText content = editText(id.et_gist_content);
+        EditText content = editText(R.id.et_gist_content);
         focus(content);
         send("gist content");
         assertTrue(createMenu.isEnabled());
