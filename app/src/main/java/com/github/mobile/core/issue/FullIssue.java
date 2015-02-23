@@ -62,12 +62,10 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
         return issue;
     }
 
-
     /**
      * @return events
      */
     public Collection<IssueEvent> getEvents() {
         return events;
     }
-
 }

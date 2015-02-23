@@ -44,8 +44,6 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     private final HttpImageGetter imageGetter;
 
-    private Issue issue;
-
     /**
      * Create list adapter
      *
@@ -53,15 +51,13 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param elements
      * @param avatars
      * @param imageGetter
-     * @param issue
      */
     public CommentListAdapter(LayoutInflater inflater, Comment[] elements,
-            AvatarLoader avatars, HttpImageGetter imageGetter, Issue issue) {
+            AvatarLoader avatars, HttpImageGetter imageGetter) {
         super(inflater);
 
         this.avatars = avatars;
         this.imageGetter = imageGetter;
-        this.issue = issue;
         setItems(elements);
     }
 
@@ -71,11 +67,10 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param inflater
      * @param avatars
      * @param imageGetter
-     * @param issue
      */
     public CommentListAdapter(LayoutInflater inflater, AvatarLoader avatars,
-            HttpImageGetter imageGetter, Issue issue) {
-        this(inflater, null, avatars, imageGetter, issue);
+            HttpImageGetter imageGetter) {
+        this(inflater, null, avatars, imageGetter);
     }
 
     @Override
@@ -126,8 +121,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(Color.rgb(102,102,102));
             break;
         case "merged":
-            message += String.format(" commit <b>%s</b> into <tt>%s</tt> from <tt>%s</tt>", event.getCommitId().substring(0,6), issue.getPullRequest().getBase().getRef(),
-                issue.getPullRequest().getHead().getRef());
+            message += String.format(" commit <b>%s</b>", event.getCommitId().substring(0,6));
             setText(0, TypefaceUtils.ICON_MERGE);
             textView(0).setTextColor(Color.rgb(110,84,148));
             break;
@@ -174,10 +168,6 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         notifyDataSetChanged();
         return this;
-    }
-
-    public void setIssue(Issue issue) {
-        this.issue = issue;
     }
 
     @Override

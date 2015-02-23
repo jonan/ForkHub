@@ -32,8 +32,8 @@ import static com.github.mobile.RequestCodes.ISSUE_EDIT;
 import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 import static com.github.mobile.util.TypefaceUtils.ICON_COMMIT;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -340,7 +340,7 @@ public class IssueFragment extends DialogFragment {
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
                 new CommentListAdapter(activity.getLayoutInflater(), avatars,
-                        commentImageGetter, issue));
+                        commentImageGetter));
         list.setAdapter(adapter);
     }
 
@@ -416,8 +416,7 @@ public class IssueFragment extends DialogFragment {
             float closed = milestone.getClosedIssues();
             float total = closed + milestone.getOpenIssues();
             if (total > 0) {
-                ((LayoutParams) milestoneProgressArea.getLayoutParams()).weight = closed
-                        / total;
+                ((LayoutParams) milestoneProgressArea.getLayoutParams()).weight = closed / total;
                 milestoneProgressArea.setVisibility(VISIBLE);
             } else
                 milestoneProgressArea.setVisibility(GONE);
@@ -427,8 +426,7 @@ public class IssueFragment extends DialogFragment {
 
         String state = issue.getState();
         if (state != null && state.length() > 0)
-            state = state.substring(0, 1).toUpperCase(Locale.US)
-                    + state.substring(1);
+            state = state.substring(0, 1).toUpperCase(Locale.US) + state.substring(1);
         else
             state = "";
 
@@ -461,10 +459,11 @@ public class IssueFragment extends DialogFragment {
 
                 int start = 0;
                 for (Comment comment : comments) {
-                    for(int e = start; e < events.size(); e++) {
+                    for (int e = start; e < events.size(); e++) {
                         IssueEvent event = events.get(e);
                         if (comment.getCreatedAt().after(event.getCreatedAt())) {
-                            allItems.add(event);
+                            if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                                allItems.add(event);
                             start++;
                         } else {
                             e = events.size();
@@ -474,9 +473,10 @@ public class IssueFragment extends DialogFragment {
                 }
 
                 // Adding the last events or if there are no comments
-                for(int e = start; e < events.size(); e++) {
+                for (int e = start; e < events.size(); e++) {
                     IssueEvent event = events.get(e);
-                    allItems.add(event);
+                    if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                        allItems.add(event);
                 }
 
                 items = allItems;
@@ -488,7 +488,6 @@ public class IssueFragment extends DialogFragment {
     private void updateList(Issue issue, List<Object> items) {
         adapter.getWrappedAdapter().setItems(items);
         adapter.removeHeader(loadingView);
-        adapter.getWrappedAdapter().setIssue(issue);
 
         headerView.setVisibility(VISIBLE);
         updateHeader(issue);
