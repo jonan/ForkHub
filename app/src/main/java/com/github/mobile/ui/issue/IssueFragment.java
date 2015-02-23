@@ -464,19 +464,19 @@ public class IssueFragment extends DialogFragment {
                     for(int e = start; e < events.size(); e++) {
                         IssueEvent event = events.get(e);
                         if (comment.getCreatedAt().after(event.getCreatedAt())) {
-                            if(event.getEvent().equals("closed") || event.getEvent().equals("reopened") || event.getEvent().equals("merged"))
-                                allItems.add(event);
+                            allItems.add(event);
                             start++;
+                        } else {
+                            e = events.size();
                         }
                     }
                     allItems.add(comment);
                 }
 
-                //Adding the last events or if there are no comments
+                // Adding the last events or if there are no comments
                 for(int e = start; e < events.size(); e++) {
                     IssueEvent event = events.get(e);
-                    if(event.getEvent().equals("closed") || event.getEvent().equals("reopened") || event.getEvent().equals("merged"))
-                        allItems.add(event);
+                    allItems.add(event);
                 }
 
                 items = allItems;
