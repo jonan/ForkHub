@@ -32,8 +32,8 @@ import static com.github.mobile.RequestCodes.ISSUE_EDIT;
 import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 import static com.github.mobile.util.TypefaceUtils.ICON_COMMIT;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,6 +78,7 @@ import java.util.Locale;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.PullRequest;
@@ -92,7 +93,7 @@ public class IssueFragment extends DialogFragment {
 
     private int issueNumber;
 
-    private List<Comment> comments;
+    private List<Object> items;
 
     private RepositoryId repositoryId;
 
@@ -235,11 +236,11 @@ public class IssueFragment extends DialogFragment {
                 .findViewById(R.id.tv_loading);
         loadingText.setText(R.string.loading_comments);
 
-        if (issue == null || (issue.getComments() > 0 && comments == null))
+        if (issue == null || (issue.getComments() > 0 && items == null))
             adapter.addHeader(loadingView);
 
-        if (issue != null && comments != null)
-            updateList(issue, comments);
+        if (issue != null && items != null)
+            updateList(issue, items);
         else {
             if (issue != null)
                 updateHeader(issue);
@@ -411,8 +412,7 @@ public class IssueFragment extends DialogFragment {
             float closed = milestone.getClosedIssues();
             float total = closed + milestone.getOpenIssues();
             if (total > 0) {
-                ((LayoutParams) milestoneProgressArea.getLayoutParams()).weight = closed
-                        / total;
+                ((LayoutParams) milestoneProgressArea.getLayoutParams()).weight = closed / total;
                 milestoneProgressArea.setVisibility(VISIBLE);
             } else
                 milestoneProgressArea.setVisibility(GONE);
@@ -422,8 +422,7 @@ public class IssueFragment extends DialogFragment {
 
         String state = issue.getState();
         if (state != null && state.length() > 0)
-            state = state.substring(0, 1).toUpperCase(Locale.US)
-                    + state.substring(1);
+            state = state.substring(0, 1).toUpperCase(Locale.US) + state.substring(1);
         else
             state = "";
 
@@ -446,20 +445,46 @@ public class IssueFragment extends DialogFragment {
             @Override
             protected void onSuccess(FullIssue fullIssue) throws Exception {
                 super.onSuccess(fullIssue);
-
                 if (!isUsable())
                     return;
 
                 issue = fullIssue.getIssue();
-                comments = fullIssue;
-                updateList(fullIssue.getIssue(), fullIssue);
+
+                List<IssueEvent> events = (List<IssueEvent>) fullIssue.getEvents();
+                int numEvents = events.size();
+
+                List<Object> allItems = new ArrayList<>();
+
+                int start = 0;
+                for (Comment comment : fullIssue) {
+                    for (int e = start; e < numEvents; e++) {
+                        IssueEvent event = events.get(e);
+                        if (comment.getCreatedAt().after(event.getCreatedAt())) {
+                            if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                                allItems.add(event);
+                            start++;
+                        } else {
+                            e = numEvents;
+                        }
+                    }
+                    allItems.add(comment);
+                }
+
+                // Adding the last events or if there are no comments
+                for (int e = start; e < numEvents; e++) {
+                    IssueEvent event = events.get(e);
+                    if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                        allItems.add(event);
+                }
+
+                items = allItems;
+                updateList(fullIssue.getIssue(), allItems);
             }
         }.execute();
-
     }
 
-    private void updateList(Issue issue, List<Comment> comments) {
-        adapter.getWrappedAdapter().setItems(comments);
+    private void updateList(Issue issue, List<Object> items) {
+        adapter.getWrappedAdapter().setItems(items);
         adapter.removeHeader(loadingView);
 
         headerView.setVisibility(VISIBLE);
@@ -533,10 +558,10 @@ public class IssueFragment extends DialogFragment {
         case COMMENT_CREATE:
             Comment comment = (Comment) data
                     .getSerializableExtra(EXTRA_COMMENT);
-            if (comments != null) {
-                comments.add(comment);
+            if (items != null) {
+                items.add(comment);
                 issue.setComments(issue.getComments() + 1);
-                updateList(issue, comments);
+                updateList(issue, items);
             } else
                 refreshIssue();
             return;
