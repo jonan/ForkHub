@@ -74,7 +74,6 @@ public class SourceEditor {
         WebSettings settings = view.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
-        settings.setUseWideViewPort(true);
         view.addJavascriptInterface(this, "SourceEditor");
 
         this.view = view;
