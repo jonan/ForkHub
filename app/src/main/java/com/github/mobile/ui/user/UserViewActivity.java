@@ -18,10 +18,6 @@ package com.github.mobile.ui.user;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_USER;
-import static com.github.mobile.util.TypefaceUtils.ICON_FOLLOW;
-import static com.github.mobile.util.TypefaceUtils.ICON_NEWS;
-import static com.github.mobile.util.TypefaceUtils.ICON_PUBLIC;
-import static com.github.mobile.util.TypefaceUtils.ICON_WATCH;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,6 +36,7 @@ import com.github.mobile.core.user.UnfollowUserTask;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
+import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.User;
@@ -176,13 +173,13 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
     protected String getIcon(int position) {
         switch (position) {
         case 0:
-            return ICON_NEWS;
+            return TypefaceUtils.ICON_RSS;
         case 1:
-            return ICON_PUBLIC;
+            return TypefaceUtils.ICON_REPO;
         case 2:
-            return ICON_WATCH;
+            return TypefaceUtils.ICON_EYE;
         case 3:
-            return ICON_FOLLOW;
+            return TypefaceUtils.ICON_RADIO_TOWER;
         default:
             return super.getIcon(position);
         }

@@ -19,8 +19,6 @@ import static android.app.SearchManager.QUERY;
 import static android.content.Intent.ACTION_SEARCH;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.util.TypefaceUtils.ICON_PERSON;
-import static com.github.mobile.util.TypefaceUtils.ICON_PUBLIC;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -34,6 +32,7 @@ import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.HomeActivity;
 import com.github.mobile.util.ToastUtils;
+import com.github.mobile.util.TypefaceUtils;
 
 /**
  * Activity to view search results
@@ -99,9 +98,9 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     protected String getIcon(int position) {
         switch (position) {
         case 0:
-            return ICON_PUBLIC;
+            return TypefaceUtils.ICON_REPO;
         case 1:
-            return ICON_PERSON;
+            return TypefaceUtils.ICON_PERSON;
         default:
             return super.getIcon(position);
         }

@@ -19,11 +19,6 @@ import static com.actionbarsherlock.app.ActionBar.NAVIGATION_MODE_LIST;
 import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_BOOKMARKS;
 import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_DASHBOARD;
 import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_GISTS;
-import static com.github.mobile.util.TypefaceUtils.ICON_FOLLOW;
-import static com.github.mobile.util.TypefaceUtils.ICON_NEWS;
-import static com.github.mobile.util.TypefaceUtils.ICON_PUBLIC;
-import static com.github.mobile.util.TypefaceUtils.ICON_TEAM;
-import static com.github.mobile.util.TypefaceUtils.ICON_WATCH;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,6 +43,7 @@ import com.github.mobile.ui.issue.IssueDashboardActivity;
 import com.github.mobile.ui.repo.OrganizationLoader;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.PreferenceUtils;
+import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -289,13 +285,13 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     protected String getIcon(int position) {
         switch (position) {
         case 0:
-            return ICON_NEWS;
+            return TypefaceUtils.ICON_RSS;
         case 1:
-            return ICON_PUBLIC;
+            return TypefaceUtils.ICON_REPO;
         case 2:
-            return isDefaultUser ? ICON_WATCH : ICON_TEAM;
+            return isDefaultUser ? TypefaceUtils.ICON_EYE : TypefaceUtils.ICON_ORGANIZATION;
         case 3:
-            return ICON_FOLLOW;
+            return TypefaceUtils.ICON_BROADCAST;
         default:
             return super.getIcon(position);
         }

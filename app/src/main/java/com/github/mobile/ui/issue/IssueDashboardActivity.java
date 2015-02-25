@@ -17,10 +17,6 @@ package com.github.mobile.ui.issue;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.util.TypefaceUtils.ICON_ADD;
-import static com.github.mobile.util.TypefaceUtils.ICON_BROADCAST;
-import static com.github.mobile.util.TypefaceUtils.ICON_FOLLOW;
-import static com.github.mobile.util.TypefaceUtils.ICON_WATCH;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -29,6 +25,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.HomeActivity;
+import com.github.mobile.util.TypefaceUtils;
 
 /**
  * Dashboard activity for issues
@@ -70,13 +67,13 @@ public class IssueDashboardActivity extends
     protected String getIcon(int position) {
         switch (position) {
         case 0:
-            return ICON_WATCH;
+            return TypefaceUtils.ICON_EYE;
         case 1:
-            return ICON_FOLLOW;
+            return TypefaceUtils.ICON_PERSON;
         case 2:
-            return ICON_ADD;
+            return TypefaceUtils.ICON_PLUS;
         case 3:
-            return ICON_BROADCAST;
+            return TypefaceUtils.ICON_RADIO_TOWER;
         default:
             return super.getIcon(position);
         }

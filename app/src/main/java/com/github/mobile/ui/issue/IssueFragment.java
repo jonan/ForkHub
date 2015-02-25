@@ -32,7 +32,6 @@ import static com.github.mobile.RequestCodes.ISSUE_EDIT;
 import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
-import static com.github.mobile.util.TypefaceUtils.ICON_COMMIT;
 import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 import android.app.Activity;
 import android.content.Intent;
@@ -362,7 +361,7 @@ public class IssueFragment extends DialogFragment {
 
             TextView icon = (TextView) headerView.findViewById(R.id.tv_commit_icon);
             TypefaceUtils.setOcticons(icon);
-            icon.setText(ICON_COMMIT);
+            icon.setText(TypefaceUtils.ICON_GIT_COMMIT);
 
             String commits = getString(R.string.pull_request_commits,
                     issue.getPullRequest().getCommits());

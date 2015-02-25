@@ -20,10 +20,6 @@ import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
 import static com.github.mobile.ui.repo.RepositoryPagerAdapter.ITEM_CODE;
-import static com.github.mobile.util.TypefaceUtils.ICON_CODE;
-import static com.github.mobile.util.TypefaceUtils.ICON_COMMIT;
-import static com.github.mobile.util.TypefaceUtils.ICON_ISSUE_OPEN;
-import static com.github.mobile.util.TypefaceUtils.ICON_NEWS;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +44,7 @@ import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.ToastUtils;
+import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -210,13 +207,13 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
     protected String getIcon(int position) {
         switch (position) {
         case 0:
-            return ICON_NEWS;
+            return TypefaceUtils.ICON_RSS;
         case 1:
-            return ICON_CODE;
+            return TypefaceUtils.ICON_FILE_CODE;
         case 2:
-            return ICON_COMMIT;
+            return TypefaceUtils.ICON_GIT_COMMIT;
         case 3:
-            return ICON_ISSUE_OPEN;
+            return TypefaceUtils.ICON_ISSUE_OPENED;
         default:
             return super.getIcon(position);
         }

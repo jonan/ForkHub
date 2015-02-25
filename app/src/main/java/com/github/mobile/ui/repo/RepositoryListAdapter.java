@@ -15,16 +15,12 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.util.TypefaceUtils.ICON_FORK;
-import static com.github.mobile.util.TypefaceUtils.ICON_MIRROR_PRIVATE;
-import static com.github.mobile.util.TypefaceUtils.ICON_MIRROR_PUBLIC;
-import static com.github.mobile.util.TypefaceUtils.ICON_PRIVATE;
-import static com.github.mobile.util.TypefaceUtils.ICON_PUBLIC;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.util.TypefaceUtils;
 
 /**
  * Adapter for a list of repositories
@@ -64,16 +60,16 @@ public abstract class RepositoryListAdapter<V> extends SingleTypeAdapter<V> {
             final String mirrorUrl) {
         if (TextUtils.isEmpty(mirrorUrl))
             if (isPrivate)
-                setText(0, ICON_PRIVATE);
+                setText(0, TypefaceUtils.ICON_LOCK);
             else if (isFork)
-                setText(0, ICON_FORK);
+                setText(0, TypefaceUtils.ICON_REPO_FORKED);
             else
-                setText(0, ICON_PUBLIC);
+                setText(0, TypefaceUtils.ICON_REPO);
         else {
             if (isPrivate)
-                setText(0, ICON_MIRROR_PRIVATE);
+                setText(0, TypefaceUtils.ICON_MIRROR);
             else
-                setText(0, ICON_MIRROR_PUBLIC);
+                setText(0, TypefaceUtils.ICON_MIRROR);
         }
 
         if (!TextUtils.isEmpty(description))

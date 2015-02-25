@@ -18,8 +18,6 @@ package com.github.mobile.ui.comment;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.HONEYCOMB_MR1;
 import static com.github.mobile.Intents.EXTRA_COMMENT;
-import static com.github.mobile.util.TypefaceUtils.ICON_EDIT;
-import static com.github.mobile.util.TypefaceUtils.ICON_WATCH;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +28,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Comment;
@@ -131,9 +130,9 @@ public abstract class CreateCommentActivity extends
     protected String getIcon(final int position) {
         switch (position) {
         case 0:
-            return ICON_EDIT;
+            return TypefaceUtils.ICON_PENCIL;
         case 1:
-            return ICON_WATCH;
+            return TypefaceUtils.ICON_EYE;
         default:
             return super.getIcon(position);
         }

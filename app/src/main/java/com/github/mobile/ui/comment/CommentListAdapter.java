@@ -109,20 +109,20 @@ public class CommentListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(Color.rgb(102,102,102));
             break;
         case "closed":
-            setText(0, TypefaceUtils.ICON_ISSUE_CLOSE);
+            setText(0, TypefaceUtils.ICON_CIRCLE_SLASH);
             textView(0).setTextColor(Color.rgb(189,44,0));
             break;
         case "reopened":
-            setText(0, TypefaceUtils.ICON_ISSUE_REOPEN);
+            setText(0, TypefaceUtils.ICON_PRIMITIVE_DOT);
             textView(0).setTextColor(Color.rgb(108,198,68));
             break;
         case "renamed":
-            setText(0, TypefaceUtils.ICON_EDIT);
+            setText(0, TypefaceUtils.ICON_PENCIL);
             textView(0).setTextColor(Color.rgb(102,102,102));
             break;
         case "merged":
             message += String.format(" commit <b>%s</b>", event.getCommitId().substring(0,6));
-            setText(0, TypefaceUtils.ICON_MERGE);
+            setText(0, TypefaceUtils.ICON_GIT_MERGE);
             textView(0).setTextColor(Color.rgb(110,84,148));
             break;
         case "locked":
