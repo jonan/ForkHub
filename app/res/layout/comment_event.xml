@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ListItem"
-    android:paddingTop="5dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="5dp">
 
     <TextView
+        android:id="@+id/tv_event_icon"
         style="@style/ListIcon"
-        android:id="@+id/tv_event_icon" />
+        android:layout_width="16dp" />
 
     <ImageView
         android:id="@+id/iv_avatar"
@@ -19,8 +20,6 @@
 
     <TextView
         android:id="@+id/tv_event"
-        style="@style/ListTitleText"
-        android:layout_marginLeft="16dp"
-        android:textSize="15sp"
-        android:textStyle="normal" />
+        style="@style/ListSubtitleText"
+        android:layout_marginLeft="16dp" />
 </LinearLayout>
