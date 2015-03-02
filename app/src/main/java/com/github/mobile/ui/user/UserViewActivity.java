@@ -179,7 +179,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         case 2:
             return TypefaceUtils.ICON_EYE;
         case 3:
-            return TypefaceUtils.ICON_RADIO_TOWER;
+            return TypefaceUtils.ICON_BROADCAST;
         default:
             return super.getIcon(position);
         }
