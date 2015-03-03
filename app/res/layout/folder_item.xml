@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem" >
+    style="@style/ListItem">
 
     <TextView
         android:id="@+id/tv_folder_icon"
@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/tv_folder_icon"
         android:orientation="horizontal"
-        android:paddingLeft="10dp" >
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/tv_folder"
@@ -42,24 +42,27 @@
         <TextView
             android:id="@+id/tv_folders_icon"
             style="@style/ListIcon"
-            android:text="@string/icon_folder" />
+            android:text="@string/icon_folder"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/tv_folders"
+            android:minEms="1"
+            android:gravity="right"
             style="@style/ListNumericSubtitleText"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp" />
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:id="@+id/tv_files_icon"
             style="@style/ListIcon"
-            android:paddingLeft="5dp"
-            android:text="@string/icon_file" />
+            android:text="@string/icon_file"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/tv_files"
-            style="@style/ListNumericSubtitleText"
-            android:paddingLeft="5dp" />
+            android:minEms="1"
+            android:gravity="right"
+            style="@style/ListNumericSubtitleText" />
     </LinearLayout>
 
 </RelativeLayout>
