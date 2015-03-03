@@ -33,7 +33,7 @@
         style="@style/PrimaryIcon"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/rb_selected"
-        android:text="@string/icon_fork" />
+        android:text="@string/icon_branch" />
 
     <TextView
         android:id="@+id/tv_ref"

@@ -230,7 +230,7 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
         if (RefUtils.isTag(ref))
             branchIconView.setText(R.string.icon_tag);
         else
-            branchIconView.setText(R.string.icon_fork);
+            branchIconView.setText(R.string.icon_branch);
     }
 
     private void setRef(final Reference ref) {

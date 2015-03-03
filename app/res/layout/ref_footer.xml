@@ -29,7 +29,7 @@
         style="@style/PrimaryIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/icon_fork"
+        android:text="@string/icon_branch"
         android:textColor="@color/actionbar_text" />
 
     <TextView

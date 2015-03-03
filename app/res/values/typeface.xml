@@ -16,13 +16,14 @@
 -->
 <resources>
 
-    <string name="icon_pull_request">\uf20E</string>
-    <string name="icon_comment">\uf04f</string>
+    <string name="icon_pull_request">\uf009</string>
+    <string name="icon_comment">\uf02b</string>
     <string name="icon_file">\uf011</string>
-    <string name="icon_tag">\uf215</string>
-    <string name="icon_folder">\uf216</string>
-    <string name="icon_folders">\uf217</string>
+    <string name="icon_tag">\uf015</string>
+    <string name="icon_folder">\uf016</string>
+    <string name="icon_folders">\uf017</string>
     <string name="icon_star">\uf02a</string>
-    <string name="icon_fork">\uf020</string>
+    <string name="icon_fork">\uf002</string>
+    <string name="icon_branch">\uf020</string>
 
 </resources>

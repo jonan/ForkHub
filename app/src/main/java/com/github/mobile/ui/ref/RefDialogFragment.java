@@ -79,7 +79,7 @@ public class RefDialogFragment extends SingleChoiceDialogFragment {
             if (RefUtils.isTag(item))
                 setText(0, R.string.icon_tag);
             else
-                setText(0, R.string.icon_fork);
+                setText(0, R.string.icon_branch);
             setText(1, RefUtils.getName(item));
             setChecked(2, selected == position);
         }

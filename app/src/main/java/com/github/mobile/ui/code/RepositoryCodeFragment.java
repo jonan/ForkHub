@@ -265,7 +265,7 @@ public class RepositoryCodeFragment extends DialogFragment implements
         if (RefUtils.isTag(tree.reference))
             branchIconView.setText(R.string.icon_tag);
         else
-            branchIconView.setText(R.string.icon_fork);
+            branchIconView.setText(R.string.icon_branch);
 
         adapter.getWrappedAdapter().setIndented(folder.entry != null);
 
