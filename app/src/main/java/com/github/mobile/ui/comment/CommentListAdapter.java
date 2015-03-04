@@ -32,7 +32,6 @@ import com.github.mobile.util.TypefaceUtils;
 import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
-import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.IssueEvent;
 
 /**
@@ -132,6 +131,10 @@ public class CommentListAdapter extends MultiTypeAdapter {
         case "unlocked":
             setText(0, TypefaceUtils.ICON_KEY);
             textView(0).setTextColor(Color.rgb(51,51,51));
+            break;
+        case "head_ref_deleted":
+            setText(0, TypefaceUtils.ICON_GIT_BRANCH);
+            textView(0).setTextColor(Color.rgb(153,153,153));
             break;
         }
 
