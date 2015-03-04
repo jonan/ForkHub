@@ -9,12 +9,13 @@
 - Improve how github.com links are manage and add support for opening new types of links.
 - Improve the source viewer for many languages.
 - Fix duplicated issues when searching.
+- Update all icons.
 
 ### Added
 - Add forking support.
-- Add support for copying the hash of a commit
-- Add new swipe-to-refresh animation
-- Add basic event information in issues
+- Add support for copying the hash of a commit.
+- Add new swipe-to-refresh animation.
+- Add basic event information in issues.
 
 ### Translations
 - New translations: CS, IS.
