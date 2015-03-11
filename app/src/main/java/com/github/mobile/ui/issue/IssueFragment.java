@@ -71,6 +71,7 @@ import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -334,8 +335,7 @@ public class IssueFragment extends DialogFragment {
 
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity.getLayoutInflater(), avatars,
-                        commentImageGetter));
+                new CommentListAdapter(activity, avatars, commentImageGetter));
         list.setAdapter(adapter);
     }
 
@@ -454,12 +454,13 @@ public class IssueFragment extends DialogFragment {
 
                 List<Object> allItems = new ArrayList<>();
 
+                List<String> excludedEvents = Arrays.asList(IssueEvent.TYPE_MENTIONED, IssueEvent.TYPE_SUBSCRIBED);
                 int start = 0;
                 for (Comment comment : fullIssue) {
                     for (int e = start; e < numEvents; e++) {
                         IssueEvent event = events.get(e);
                         if (comment.getCreatedAt().after(event.getCreatedAt())) {
-                            if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                            if (!excludedEvents.contains(event.getEvent()))
                                 allItems.add(event);
                             start++;
                         } else {
@@ -472,7 +473,7 @@ public class IssueFragment extends DialogFragment {
                 // Adding the last events or if there are no comments
                 for (int e = start; e < numEvents; e++) {
                     IssueEvent event = events.get(e);
-                    if (!event.getEvent().equals("mentioned") && !event.getEvent().equals("subscribed"))
+                    if (!excludedEvents.contains(event.getEvent()))
                         allItems.add(event);
                 }
 
