@@ -15,7 +15,7 @@
 - Add forking support.
 - Add support for copying the hash of a commit.
 - Add new swipe-to-refresh animation.
-- Add basic event information in issues.
+- Add event information to issues.
 
 ### Translations
 - New translations: CS, IS.
