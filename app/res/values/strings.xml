@@ -94,6 +94,24 @@
     <string name="updating_milestone">Updating Milestone…</string>
     <!--  -->
 
+    <!-- Issue events texts -->
+    <string name="issue_event_label_assigned">was assigned by %1$s</string>
+    <string name="issue_event_label_unassigned">was unassigned by %1$s</string>
+    <string name="issue_event_label_added">added the %1$s label</string>
+    <string name="issue_event_label_removed">removed the %1$s label</string>
+    <string name="issue_event_milestone_added">added this to the %1$s milestone</string>
+    <string name="issue_event_milestone_removed">removed this from the %1$s milestone</string>
+    <string name="issue_event_merged">merged commit %1$s</string>
+    <string name="issue_event_referenced">referenced this</string>
+    <string name="issue_event_closed">closed this</string>
+    <string name="issue_event_reopened">reopened this</string>
+    <string name="issue_event_rename">changed the title</string>
+    <string name="issue_event_lock">locked and limited conversation to collaborators</string>
+    <string name="issue_event_unlock">unlocked this conversation</string>
+    <string name="issue_event_head_ref_deleted">deleted the branch</string>
+    <string name="issue_event_head_ref_restored"> restored the branch</string>
+    <!--  -->
+
     <string name="app_name">GitHub</string>
     <string name="news">News</string>
     <string name="issues">Issues</string>

@@ -16,10 +16,11 @@
 package com.github.mobile.ui.comment;
 
 
+import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
@@ -39,6 +40,8 @@ import org.eclipse.egit.github.core.IssueEvent;
  */
 public class CommentListAdapter extends MultiTypeAdapter {
 
+    private final Resources resources;
+
     private final AvatarLoader avatars;
 
     private final HttpImageGetter imageGetter;
@@ -46,15 +49,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
     /**
      * Create list adapter
      *
-     * @param inflater
+     * @param activity
      * @param elements
      * @param avatars
      * @param imageGetter
      */
-    public CommentListAdapter(LayoutInflater inflater, Comment[] elements,
-            AvatarLoader avatars, HttpImageGetter imageGetter) {
-        super(inflater);
+    public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter) {
+        super(activity.getLayoutInflater());
 
+        this.resources = activity.getResources();
         this.avatars = avatars;
         this.imageGetter = imageGetter;
         setItems(elements);
@@ -63,13 +66,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
     /**
      * Create list adapter
      *
-     * @param inflater
+     * @param activity
      * @param avatars
      * @param imageGetter
      */
-    public CommentListAdapter(LayoutInflater inflater, AvatarLoader avatars,
-            HttpImageGetter imageGetter) {
-        this(inflater, null, avatars, imageGetter);
+    public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
+        this(activity, null, avatars, imageGetter);
     }
 
     @Override
@@ -82,59 +84,92 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     protected void updateEvent(final IssueEvent event) {
         TypefaceUtils.setOcticons(textView(0));
-        String message = String.format("<b>%s</b> %s", event.getActor().getLogin(), event.getEvent());
-        avatars.bind(imageView(2), event.getActor());
-
         String eventString = event.getEvent();
 
+        String message;
+        if (eventString.equals(IssueEvent.TYPE_ASSIGNED) || eventString.equals(IssueEvent.TYPE_UNASSIGNED)) {
+            message = String.format("<b>%s</b> ", event.getAssignee().getLogin());
+            avatars.bind(imageView(2), event.getAssignee());
+        } else {
+            message = String.format("<b>%s</b> ", event.getActor().getLogin());
+            avatars.bind(imageView(2), event.getActor());
+        }
+
         switch (eventString) {
-        case "assigned":
-        case "unassigned":
+        case IssueEvent.TYPE_ASSIGNED:
+            message += String.format(resources.getString(R.string.issue_event_label_assigned), "<b>" + event.getActor().getLogin() + "</b>");
             setText(0, TypefaceUtils.ICON_PERSON);
-            textView(0).setTextColor(Color.rgb(102,102,102));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case "labeled":
-        case "unlabeled":
+        case IssueEvent.TYPE_UNASSIGNED:
+            message += String.format(resources.getString(R.string.issue_event_label_unassigned), "<b>" + event.getActor().getLogin() + "</b>");
+            setText(0, TypefaceUtils.ICON_PERSON);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case IssueEvent.TYPE_LABELED:
+            message += String.format(resources.getString(R.string.issue_event_label_added), "<b>" + event.getLabel().getName() + "</b>");
             setText(0, TypefaceUtils.ICON_TAG);
-            textView(0).setTextColor(Color.rgb(102,102,102));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case "referenced":
+        case IssueEvent.TYPE_UNLABELED:
+            message += String.format(resources.getString(R.string.issue_event_label_removed), "<b>" + event.getLabel().getName() + "</b>");
+            setText(0, TypefaceUtils.ICON_TAG);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case IssueEvent.TYPE_REFERENCED:
+            message += resources.getString(R.string.issue_event_referenced);
             setText(0, TypefaceUtils.ICON_BOOKMARK);
-            textView(0).setTextColor(Color.rgb(102,102,102));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case "milestoned":
-        case "demilestoned":
+        case IssueEvent.TYPE_MILESTONED:
+            message += String.format(resources.getString(R.string.issue_event_milestone_added), "<b>" + event.getMilestone().getTitle() + "</b>");
             setText(0, TypefaceUtils.ICON_MILESTONE);
-            textView(0).setTextColor(Color.rgb(102,102,102));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case "closed":
+        case IssueEvent.TYPE_DEMILESTONED:
+            message += String.format(resources.getString(R.string.issue_event_milestone_removed), "<b>" + event.getMilestone().getTitle() + "</b>");
+            setText(0, TypefaceUtils.ICON_MILESTONE);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case IssueEvent.TYPE_CLOSED:
+            message += resources.getString(R.string.issue_event_closed);
             setText(0, TypefaceUtils.ICON_CIRCLE_SLASH);
-            textView(0).setTextColor(Color.rgb(189,44,0));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
             break;
-        case "reopened":
+        case IssueEvent.TYPE_REOPENED:
+            message += resources.getString(R.string.issue_event_reopened);
             setText(0, TypefaceUtils.ICON_PRIMITIVE_DOT);
-            textView(0).setTextColor(Color.rgb(108,198,68));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
             break;
-        case "renamed":
+        case IssueEvent.TYPE_RENAMED:
+            message += resources.getString(R.string.issue_event_rename);
             setText(0, TypefaceUtils.ICON_PENCIL);
-            textView(0).setTextColor(Color.rgb(102,102,102));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case "merged":
-            message += String.format(" commit <b>%s</b>", event.getCommitId().substring(0,6));
+        case IssueEvent.TYPE_MERGED:
+            message += String.format(resources.getString(R.string.issue_event_merged), "<b>" + event.getCommitId().substring(0,7) + "</b>");
             setText(0, TypefaceUtils.ICON_GIT_MERGE);
-            textView(0).setTextColor(Color.rgb(110,84,148));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_purple));
             break;
-        case "locked":
+        case IssueEvent.TYPE_LOCKED:
+            message += resources.getString(R.string.issue_event_lock);
             setText(0, TypefaceUtils.ICON_LOCK);
-            textView(0).setTextColor(Color.rgb(51,51,51));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_dark));
             break;
-        case "unlocked":
+        case IssueEvent.TYPE_UNLOCKED:
+            message += resources.getString(R.string.issue_event_unlock);
             setText(0, TypefaceUtils.ICON_KEY);
-            textView(0).setTextColor(Color.rgb(51,51,51));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_dark));
             break;
-        case "head_ref_deleted":
+        case IssueEvent.TYPE_HEAD_REF_DELETED:
+            message += resources.getString(R.string.issue_event_head_ref_deleted);
             setText(0, TypefaceUtils.ICON_GIT_BRANCH);
-            textView(0).setTextColor(Color.rgb(153,153,153));
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
+            break;
+        case IssueEvent.TYPE_HEAD_REF_RESTORED:
+            message += resources.getString(R.string.issue_event_head_ref_restored);
+            setText(0, TypefaceUtils.ICON_GIT_BRANCH);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
             break;
         }
 
