@@ -97,12 +97,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         switch (eventString) {
         case IssueEvent.TYPE_ASSIGNED:
-            message += String.format(resources.getString(R.string.issue_event_label_assigned), "<b>" + event.getActor().getLogin() + "</b>");
+            message += String.format(resources.getString(R.string.issue_event_label_assigned));
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case IssueEvent.TYPE_UNASSIGNED:
-            message += String.format(resources.getString(R.string.issue_event_label_unassigned), "<b>" + event.getActor().getLogin() + "</b>");
+            message += String.format(resources.getString(R.string.issue_event_label_unassigned));
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
