@@ -61,8 +61,7 @@ public class IssueStore extends ItemStore {
      * @return issue or null if not in store
      */
     public RepositoryIssue getIssue(IRepositoryIdProvider repository, int number) {
-        ItemReferences<RepositoryIssue> repoIssues = repos.get(repository
-                .generateId());
+        ItemReferences<RepositoryIssue> repoIssues = repos.get(repository.generateId());
         return repoIssues != null ? repoIssues.get(number) : null;
     }
 
@@ -81,32 +80,6 @@ public class IssueStore extends ItemStore {
         return addIssue(repo, issue);
     }
 
-    private RepositoryIssue createRepositoryIssue(Issue issue) {
-        if (issue instanceof RepositoryIssue)
-            return (RepositoryIssue) issue;
-
-        RepositoryIssue repoIssue = new RepositoryIssue();
-        repoIssue.setAssignee(issue.getAssignee());
-        repoIssue.setBody(issue.getBody());
-        repoIssue.setBodyHtml(issue.getBodyHtml());
-        repoIssue.setBodyText(issue.getBodyText());
-        repoIssue.setClosedAt(issue.getClosedAt());
-        repoIssue.setComments(issue.getComments());
-        repoIssue.setCreatedAt(issue.getCreatedAt());
-        repoIssue.setHtmlUrl(issue.getHtmlUrl());
-        repoIssue.setId(issue.getId());
-        repoIssue.setLabels(issue.getLabels());
-        repoIssue.setMilestone(issue.getMilestone());
-        repoIssue.setNumber(issue.getNumber());
-        repoIssue.setPullRequest(issue.getPullRequest());
-        repoIssue.setState(issue.getState());
-        repoIssue.setTitle(issue.getTitle());
-        repoIssue.setUpdatedAt(issue.getUpdatedAt());
-        repoIssue.setUrl(issue.getUrl());
-        repoIssue.setUser(issue.getUser());
-        return repoIssue;
-    }
-
     /**
      * Add issue to store
      *
@@ -114,25 +87,11 @@ public class IssueStore extends ItemStore {
      * @param issue
      * @return issue
      */
-    public RepositoryIssue addIssue(IRepositoryIdProvider repository,
-            Issue issue) {
+    public RepositoryIssue addIssue(IRepositoryIdProvider repository, Issue issue) {
         issue.setBodyHtml(HtmlUtils.format(issue.getBodyHtml()).toString());
         RepositoryIssue current = getIssue(repository, issue.getNumber());
         if (current != null) {
-            current.setAssignee(issue.getAssignee());
-            current.setBody(issue.getBody());
-            current.setBodyHtml(issue.getBodyHtml());
-            current.setClosedAt(issue.getClosedAt());
-            current.setComments(issue.getComments());
-            current.setLabels(issue.getLabels());
-            current.setMilestone(issue.getMilestone());
-            current.setPullRequest(issue.getPullRequest());
-            current.setState(issue.getState());
-            current.setTitle(issue.getTitle());
-            current.setUpdatedAt(issue.getUpdatedAt());
-            if (issue instanceof RepositoryIssue)
-                current.setRepository(((RepositoryIssue) issue).getRepository());
-            return current;
+            return copyIssue(current, issue);
         } else {
             String repoId = repository.generateId();
             ItemReferences<RepositoryIssue> repoIssues = repos.get(repoId);
@@ -154,8 +113,8 @@ public class IssueStore extends ItemStore {
      * @return refreshed issue
      * @throws IOException
      */
-    public RepositoryIssue refreshIssue(IRepositoryIdProvider repository,
-            int number) throws IOException {
+    public RepositoryIssue refreshIssue(IRepositoryIdProvider repository, int number)
+            throws IOException {
         Issue issue;
         try {
             issue = issueService.getIssue(repository, number);
@@ -185,8 +144,42 @@ public class IssueStore extends ItemStore {
      * @return edited issue
      * @throws IOException
      */
-    public RepositoryIssue editIssue(IRepositoryIdProvider repository,
-            Issue issue) throws IOException {
+    public RepositoryIssue editIssue(IRepositoryIdProvider repository, Issue issue)
+            throws IOException {
         return addIssue(repository, issueService.editIssue(repository, issue));
+    }
+
+    private RepositoryIssue createRepositoryIssue(Issue issue) {
+        if (issue instanceof RepositoryIssue)
+            return (RepositoryIssue) issue;
+
+        return copyIssue(new RepositoryIssue(), issue);
+    }
+
+    private RepositoryIssue copyIssue(RepositoryIssue to, Issue from) {
+        to.setId(from.getId());
+        to.setUser(from.getUser());
+        to.setAssignee(from.getAssignee());
+        to.setBody(from.getBody());
+        to.setBodyHtml(from.getBodyHtml());
+        to.setBodyText(from.getBodyText());
+        to.setHtmlUrl(from.getHtmlUrl());
+        to.setClosedBy(from.getClosedBy());
+        to.setClosedAt(from.getClosedAt());
+        to.setCreatedAt(from.getCreatedAt());
+        to.setUpdatedAt(from.getUpdatedAt());
+        to.setComments(from.getComments());
+        to.setNumber(from.getNumber());
+        to.setLabels(from.getLabels());
+        to.setMilestone(from.getMilestone());
+        to.setPullRequest(from.getPullRequest());
+        to.setState(from.getState());
+        to.setTitle(from.getTitle());
+        to.setUrl(from.getUrl());
+
+        if (from instanceof RepositoryIssue)
+            to.setRepository(((RepositoryIssue) from).getRepository());
+
+        return to;
     }
 }
