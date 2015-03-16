@@ -102,7 +102,7 @@
     <string name="issue_event_milestone_added">added this to the %1$s milestone</string>
     <string name="issue_event_milestone_removed">removed this from the %1$s milestone</string>
     <string name="issue_event_merged">merged commit %1$s</string>
-    <string name="issue_event_referenced">referenced this</string>
+    <string name="issue_event_referenced">referenced this issue from commit %1$s</string>
     <string name="issue_event_closed">closed this</string>
     <string name="issue_event_reopened">reopened this</string>
     <string name="issue_event_rename">changed the title</string>
