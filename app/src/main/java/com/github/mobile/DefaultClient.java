@@ -20,8 +20,6 @@ import static android.os.Build.VERSION_CODES.FROYO;
 
 import com.github.kevinsawicki.http.HttpRequest;
 
-import java.net.HttpURLConnection;
-
 import org.eclipse.egit.github.core.client.GitHubClient;
 
 /**
@@ -29,7 +27,7 @@ import org.eclipse.egit.github.core.client.GitHubClient;
  */
 public class DefaultClient extends GitHubClient {
 
-    private static final String USER_AGENT = "GitHubAndroid/1.6";
+    private static final String USER_AGENT = "GitHubAndroid/1.9";
 
     static {
         // Disable http.keepAlive on Froyo and below
@@ -45,15 +43,5 @@ public class DefaultClient extends GitHubClient {
 
         setSerializeNulls(false);
         setUserAgent(USER_AGENT);
-    }
-
-    @Override
-    protected HttpURLConnection configureRequest(HttpURLConnection request) {
-        super.configureRequest(request);
-
-        request.setRequestProperty(HEADER_ACCEPT,
-                "application/vnd.github.beta.full+json");
-
-        return request;
     }
 }

@@ -187,9 +187,9 @@ public class GistsViewActivity extends PagerActivity implements
             actionBar.setSubtitle(null);
             actionBar.setLogo(null);
             actionBar.setIcon(R.drawable.app_icon);
-        } else if (gist.getUser() != null) {
-            avatars.bind(actionBar, gist.getUser());
-            actionBar.setSubtitle(gist.getUser().getLogin());
+        } else if (gist.getOwner() != null) {
+            avatars.bind(actionBar, gist.getOwner());
+            actionBar.setSubtitle(gist.getOwner().getLogin());
         } else {
             actionBar.setSubtitle(R.string.anonymous);
             actionBar.setLogo(null);

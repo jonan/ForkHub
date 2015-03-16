@@ -55,10 +55,10 @@ public class CreateCommentActivity extends
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getString(R.string.gist_title) + gist.getId());
-        User user = gist.getUser();
-        if (user != null)
-            actionBar.setSubtitle(user.getLogin());
-        avatars.bind(actionBar, user);
+        User owner = gist.getOwner();
+        if (owner != null)
+            actionBar.setSubtitle(owner.getLogin());
+        avatars.bind(actionBar, owner);
     }
 
     @Override

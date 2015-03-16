@@ -87,12 +87,12 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
         else
             setText(1, R.string.no_description_given);
 
-        User user = gist.getUser();
-        avatars.bind(imageView(5), user);
+        User owner = gist.getOwner();
+        avatars.bind(imageView(5), owner);
 
         StyledText authorText = new StyledText();
-        if (user != null)
-            authorText.bold(user.getLogin());
+        if (owner != null)
+            authorText.bold(owner.getLogin());
         else
             authorText.bold(anonymous);
         authorText.append(' ');

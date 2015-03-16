@@ -119,10 +119,10 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
             @Override
             public List<RepositoryCommit> loadData() throws Exception {
                 if (TextUtils.isEmpty(ref)) {
-                    String defaultBranch = repository.getMasterBranch();
+                    String defaultBranch = repository.getDefaultBranch();
                     if (TextUtils.isEmpty(defaultBranch)) {
                         defaultBranch = repoService.getRepository(repository)
-                                .getMasterBranch();
+                                .getDefaultBranch();
                         if (TextUtils.isEmpty(defaultBranch))
                             defaultBranch = "master";
                     }

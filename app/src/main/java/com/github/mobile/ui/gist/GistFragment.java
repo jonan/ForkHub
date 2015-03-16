@@ -178,11 +178,11 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
     private boolean isOwner() {
         if (gist == null)
             return false;
-        User user = gist.getUser();
-        if (user == null)
+        User owner = gist.getOwner();
+        if (owner == null)
             return false;
         String login = AccountUtils.getLogin(getActivity());
-        return login != null && login.equals(user.getLogin());
+        return login != null && login.equals(owner.getLogin());
     }
 
     private void updateHeader(Gist gist) {
@@ -291,9 +291,9 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
         StringBuilder subject = new StringBuilder("Gist ");
         String id = gist.getId();
         subject.append(id);
-        User user = gist.getUser();
-        if (user != null && !TextUtils.isEmpty(user.getLogin()))
-            subject.append(" by ").append(user.getLogin());
+        User owner = gist.getOwner();
+        if (owner != null && !TextUtils.isEmpty(owner.getLogin()))
+            subject.append(" by ").append(owner.getLogin());
         startActivity(ShareUtils.create(subject, "https://gist.github.com/"
                 + id));
     }

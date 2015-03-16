@@ -75,10 +75,10 @@ public class RefreshTreeTask extends AuthenticatedUserTask<FullTree> {
         Reference ref = reference;
         String branch = RefUtils.getPath(ref);
         if (branch == null) {
-            branch = repository.getMasterBranch();
+            branch = repository.getDefaultBranch();
             if (TextUtils.isEmpty(branch)) {
                 branch = repoService.getRepository(repository)
-                        .getMasterBranch();
+                        .getDefaultBranch();
                 if (TextUtils.isEmpty(branch))
                     throw new IOException(
                             "Repository does not have master branch");
