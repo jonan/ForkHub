@@ -352,7 +352,7 @@ public class AvatarLoader {
      * @param user A CommitUser object that points to the desired user.
      */
     public void bind(final ImageView view, final CommitUser user) {
-        p.load(R.drawable.spinner_inner).resize(avatarSize, avatarSize).into(view);
+        bind(view, "");
         /*if (user == null)
             return setImage(loadingAvatar, view);
 
@@ -388,7 +388,7 @@ public class AvatarLoader {
      * @param user a SearchUser object that refers to the desired user.
      */
     public void bind(final ImageView view, final SearchUser user) {
-        p.load(R.drawable.spinner_inner).resize(avatarSize, avatarSize).into(view);
+        bind(view, "");
         /*if (user == null)
             return setImage(loadingAvatar, view);
 
@@ -414,6 +414,11 @@ public class AvatarLoader {
      * @param url
      */
     private void bind(final ImageView view, String url) {
+        if (url == null) {
+            p.load(R.drawable.spinner_inner).resize(avatarSize, avatarSize).into(view);
+            return;
+        }
+
         if (url.contains("?")) {
             url = url.substring(0 ,url.indexOf("?"));
         }
