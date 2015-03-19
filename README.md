@@ -45,7 +45,8 @@ It also uses many other open source libraries such as:
 ## Contributing
 
 Please fork this repository and contribute back using
-[pull requests](https://github.com/jonan/ForkHub/pulls).
+[pull requests](https://github.com/jonan/ForkHub/pulls) to the `github` branch.
+That way it will be easier to someday merge everything back to upstream.
 
 Any contributions, large or small, major features, bug fixes, additional
 language translations, unit/integration tests are welcomed and appreciated
