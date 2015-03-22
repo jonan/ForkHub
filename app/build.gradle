@@ -53,7 +53,6 @@ dependencies {
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.github.rtyley:roboguice-sherlock:1.5'
-    compile 'com.github.kevinsawicki:http-request:5.6'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.0.0-SNAPSHOT'
     compile 'com.android.support:support-v4:21.0.3'

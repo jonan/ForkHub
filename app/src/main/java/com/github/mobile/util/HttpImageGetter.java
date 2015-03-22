@@ -31,11 +31,13 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.widget.TextView;
 
-import com.github.kevinsawicki.http.HttpRequest;
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.google.inject.Inject;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,8 +60,7 @@ public class HttpImageGetter implements ImageGetter {
 
         private LoadingImageGetter(final Context context, final int size) {
             int imageSize = ServiceUtils.getIntPixels(context, size);
-            image = context.getResources().getDrawable(
-                    R.drawable.image_loading_icon);
+            image = context.getResources().getDrawable(R.drawable.image_loading_icon);
             image.setBounds(0, 0, imageSize, imageSize);
         }
 
@@ -77,15 +78,15 @@ public class HttpImageGetter implements ImageGetter {
 
     private final Context context;
 
-    private final File dir;
-
-    private final int width;
+    private int width;
 
     private final Map<Object, CharSequence> rawHtmlCache = new HashMap<Object, CharSequence>();
 
     private final Map<Object, CharSequence> fullHtmlCache = new HashMap<Object, CharSequence>();
 
     private final ContentsService service;
+
+    private final OkHttpClient client = new OkHttpClient();
 
     /**
      * Create image getter for context
@@ -97,8 +98,7 @@ public class HttpImageGetter implements ImageGetter {
     public HttpImageGetter(Context context, ContentsService service) {
         this.context = context;
         this.service = service;
-        dir = context.getCacheDir();
-        width = ServiceUtils.getDisplayWidth(context);
+        width = (int) (ServiceUtils.getDisplayWidth(context) * 0.90);
         loading = new LoadingImageGetter(context, 24);
     }
 
@@ -205,8 +205,7 @@ public class HttpImageGetter implements ImageGetter {
      * @return
      * @throws IOException
      */
-    private Drawable requestRepositoryImage(final String source)
-            throws IOException {
+    private Drawable requestRepositoryImage(final String source) throws IOException {
         if (TextUtils.isEmpty(source))
             return null;
 
@@ -272,29 +271,18 @@ public class HttpImageGetter implements ImageGetter {
             // Ignore and attempt request over regular HTTP request
         }
 
-        File output = null;
         try {
-            output = File.createTempFile("image", ".jpg", dir);
-            HttpRequest request = HttpRequest.get(source);
-            if (!request.ok())
-                throw new IOException("Unexpected response code: "
-                        + request.code());
-            request.receive(output);
-            Bitmap bitmap = ImageUtils.getBitmap(output, width, MAX_VALUE);
+            Request request = new Request.Builder().url(source).build();
+            Response response = client.newCall(request).execute();
+
+            Bitmap bitmap = ImageUtils.getBitmap(response.body().bytes(), width, MAX_VALUE);
             if (bitmap == null)
                 return loading.getDrawable(source);
-
-            BitmapDrawable drawable = new BitmapDrawable(
-                    context.getResources(), bitmap);
+            BitmapDrawable drawable = new BitmapDrawable(context.getResources(), bitmap);
             drawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
             return drawable;
         } catch (IOException e) {
             return loading.getDrawable(source);
-        } catch (HttpRequestException e) {
-            return loading.getDrawable(source);
-        } finally {
-            if (output != null)
-                output.delete();
         }
     }
 }

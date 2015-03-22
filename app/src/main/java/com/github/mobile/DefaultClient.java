@@ -15,11 +15,6 @@
  */
 package com.github.mobile;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.FROYO;
-
-import com.github.kevinsawicki.http.HttpRequest;
-
 import org.eclipse.egit.github.core.client.GitHubClient;
 
 /**
@@ -28,12 +23,6 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 public class DefaultClient extends GitHubClient {
 
     private static final String USER_AGENT = "GitHubAndroid/1.9";
-
-    static {
-        // Disable http.keepAlive on Froyo and below
-        if (SDK_INT <= FROYO)
-            HttpRequest.keepAlive(false);
-    }
 
     /**
      * Create client
