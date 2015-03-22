@@ -186,7 +186,7 @@ public class AvatarLoader {
 
     private void bind(final ImageView view, String url) {
         if (url == null) {
-            p.load(R.drawable.spinner_inner).resize(avatarSize, avatarSize).into(view);
+            p.load(R.drawable.gravatar_icon).into(view);
             return;
         }
 
