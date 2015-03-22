@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
@@ -74,14 +75,18 @@ public class AvatarLoader {
     public AvatarLoader(final Context context) {
         this.context = context;
 
-        OkHttpClient client = new OkHttpClient();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            OkHttpClient client = new OkHttpClient();
 
-        // Install an HTTP cache in the application cache directory.
-        File cacheDir = new File(context.getCacheDir(), "http");
-        Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
-        client.setCache(cache);
+            // Install an HTTP cache in the application cache directory.
+            File cacheDir = new File(context.getCacheDir(), "http");
+            Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
+            client.setCache(cache);
 
-        p = new Picasso.Builder(context).downloader(new OkHttpDownloader(client)).build();
+            p = new Picasso.Builder(context).downloader(new OkHttpDownloader(client)).build();
+        } else {
+            p = Picasso.with(context);
+        }
 
         float density = context.getResources().getDisplayMetrics().density;
         cornerRadius = CORNER_RADIUS_IN_DIP * density;
