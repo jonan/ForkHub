@@ -19,7 +19,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
@@ -27,9 +26,6 @@ import android.widget.ImageView;
 import com.actionbarsherlock.app.ActionBar;
 import com.github.mobile.R;
 import com.google.inject.Inject;
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -48,8 +44,6 @@ import roboguice.util.RoboAsyncTask;
  * Avatar utilities
  */
 public class AvatarLoader {
-    static final int DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
-
     private static final String TAG = "AvatarLoader";
 
     private static final float CORNER_RADIUS_IN_DIP = 3;
@@ -74,19 +68,7 @@ public class AvatarLoader {
     @Inject
     public AvatarLoader(final Context context) {
         this.context = context;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            OkHttpClient client = new OkHttpClient();
-
-            // Install an HTTP cache in the application cache directory.
-            File cacheDir = new File(context.getCacheDir(), "http");
-            Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
-            client.setCache(cache);
-
-            p = new Picasso.Builder(context).downloader(new OkHttpDownloader(client)).build();
-        } else {
-            p = Picasso.with(context);
-        }
+        p = Picasso.with(context);
 
         float density = context.getResources().getDisplayMetrics().density;
         cornerRadius = CORNER_RADIUS_IN_DIP * density;
@@ -97,9 +79,8 @@ public class AvatarLoader {
 
         // TODO remove this eventually
         // Delete the old cache
-        final File avatarDir = new File(context.getCacheDir(), "avatars/github.com");
-        if (avatarDir.isDirectory())
-            deleteCache(avatarDir);
+        deleteCache(new File(context.getCacheDir(), "avatars"));
+        deleteCache(new File(context.getCacheDir(), "http"));
     }
 
     /**
@@ -196,6 +177,7 @@ public class AvatarLoader {
 
         p.load(url)
                 .placeholder(R.drawable.gravatar_icon)
+                .noFade()
                 .resize(avatarSize, avatarSize)
                 .transform(transformation)
                 .into(view);
