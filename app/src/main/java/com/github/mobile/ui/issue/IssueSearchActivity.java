@@ -48,6 +48,8 @@ public class IssueSearchActivity extends RoboSherlockFragmentActivity {
 
     private SearchIssueListFragment issueFragment;
 
+    private String query;
+
     @Override
     public boolean onCreateOptionsMenu(Menu options) {
         getSupportMenuInflater().inflate(R.menu.search, options);
@@ -105,12 +107,19 @@ public class IssueSearchActivity extends RoboSherlockFragmentActivity {
         issueFragment.refresh();
     }
 
+    @Override
+    public boolean onSearchRequested() {
+        startSearch(query, true, null, false);
+        return true;
+    }
+
     private void handleIntent(Intent intent) {
         if (ACTION_SEARCH.equals(intent.getAction()))
             search(intent.getStringExtra(QUERY));
     }
 
     private void search(final String query) {
+        this.query = query;
         getSupportActionBar().setTitle(query);
         IssueSearchSuggestionsProvider.save(this, query);
         issueFragment.setQuery(query);
