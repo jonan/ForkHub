@@ -22,14 +22,13 @@
     android:background="@drawable/footer_selector"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
-    android:visibility="gone" >
+    android:visibility="gone">
 
     <TextView
         android:id="@+id/tv_branch_icon"
         style="@style/PrimaryIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/icon_branch"
         android:textColor="@color/actionbar_text" />
 
     <TextView

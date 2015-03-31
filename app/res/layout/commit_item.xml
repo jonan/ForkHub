@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem" >
+    style="@style/ListItem">
 
     <ImageView
         android:id="@+id/iv_avatar"
@@ -49,7 +49,7 @@
         android:layout_alignLeft="@id/tv_commit_message"
         android:layout_below="@id/tv_commit_message"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_commit_author"
@@ -60,8 +60,7 @@
 
         <TextView
             android:id="@+id/tv_comment_icon"
-            style="@style/ListIcon"
-            android:text="@string/icon_comment" />
+            style="@style/ListIcon" />
 
         <TextView
             android:id="@+id/tv_commit_comments"

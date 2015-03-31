@@ -70,9 +70,12 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
     protected View initialize(View view) {
         view = super.initialize(view);
 
-        TypefaceUtils.setOcticons(
-                (TextView) view.findViewById(R.id.tv_comment_icon),
-                (TextView) view.findViewById(R.id.tv_file_icon));
+        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
+        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+        TextView fileIcon = (TextView) view .findViewById(R.id.tv_file_icon);
+        fileIcon.setText(TypefaceUtils.ICON_FILE_TEXT);
+        TypefaceUtils.setOcticons(commentIcon, fileIcon);
+
         anonymous = view.getResources().getString(R.string.anonymous);
         return view;
     }

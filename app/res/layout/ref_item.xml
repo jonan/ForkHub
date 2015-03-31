@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem" >
+    style="@style/ListItem">
 
     <RadioButton
         android:id="@+id/rb_selected"
@@ -32,8 +32,7 @@
         android:id="@+id/tv_ref_icon"
         style="@style/PrimaryIcon"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/rb_selected"
-        android:text="@string/icon_branch" />
+        android:layout_toRightOf="@id/rb_selected" />
 
     <TextView
         android:id="@+id/tv_ref"

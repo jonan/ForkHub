@@ -15,14 +15,13 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem" >
+    style="@style/ListItem">
 
     <TextView
         android:id="@+id/tv_file_icon"
         style="@style/EventIcon"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/icon_file" />
+        android:layout_alignParentTop="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/tv_file_icon"
         android:orientation="horizontal"
-        android:paddingLeft="10dp" >
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/tv_file"

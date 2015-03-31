@@ -228,9 +228,9 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
     private void updateRefLabel() {
         branchView.setText(RefUtils.getName(ref));
         if (RefUtils.isTag(ref))
-            branchIconView.setText(R.string.icon_tag);
+            branchIconView.setText(TypefaceUtils.ICON_TAG);
         else
-            branchIconView.setText(R.string.icon_branch);
+            branchIconView.setText(TypefaceUtils.ICON_GIT_BRANCH);
     }
 
     private void setRef(final Reference ref) {
@@ -263,6 +263,7 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
         branchFooterView = finder.find(R.id.rl_branch);
         branchView = finder.find(R.id.tv_branch);
         branchIconView = finder.find(R.id.tv_branch_icon);
+        branchIconView.setText(TypefaceUtils.ICON_GIT_BRANCH);
         TypefaceUtils.setOcticons(branchIconView);
         branchFooterView.setOnClickListener(new OnClickListener() {
 

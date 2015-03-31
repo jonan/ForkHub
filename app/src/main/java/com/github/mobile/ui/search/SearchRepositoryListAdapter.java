@@ -55,9 +55,12 @@ public class SearchRepositoryListAdapter extends
     protected View initialize(View view) {
         view = super.initialize(view);
 
-        TypefaceUtils.setOcticons(textView(view, 0),
-                (TextView) view.findViewById(R.id.tv_forks_icon),
-                (TextView) view.findViewById(R.id.tv_watchers_icon));
+        TextView forksIcon = (TextView) view.findViewById(R.id.tv_forks_icon);
+        forksIcon.setText(TypefaceUtils.ICON_REPO_FORKED);
+        TextView watchersIcon = (TextView) view.findViewById(R.id.tv_watchers_icon);
+        watchersIcon.setText(TypefaceUtils.ICON_STAR);
+
+        TypefaceUtils.setOcticons(textView(view, 0), forksIcon, watchersIcon);
         return view;
     }
 

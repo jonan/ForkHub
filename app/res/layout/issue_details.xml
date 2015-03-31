@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
         android:id="@+id/iv_avatar"
@@ -33,13 +33,11 @@
     <TextView
         android:id="@+id/tv_pull_request_icon"
         style="@style/ListIcon"
-        android:paddingRight="5dp"
-        android:text="@string/icon_pull_request" />
+        android:paddingRight="5dp" />
 
     <TextView
         android:id="@+id/tv_comment_icon"
-        style="@style/ListIcon"
-        android:text="@string/icon_comment" />
+        style="@style/ListIcon" />
 
     <TextView
         android:id="@+id/tv_issue_comments"

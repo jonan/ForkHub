@@ -17,14 +17,13 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_path"
-    style="@style/HeaderListItem" >
+    style="@style/HeaderListItem">
 
     <TextView
         android:id="@+id/tv_folder_icon"
         style="@style/PrimaryIcon"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:text="@string/icon_folders" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/tv_path"

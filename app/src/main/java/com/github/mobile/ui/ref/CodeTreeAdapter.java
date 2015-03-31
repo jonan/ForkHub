@@ -128,14 +128,18 @@ public class CodeTreeAdapter extends MultiTypeAdapter {
 
         switch (type) {
         case TYPE_BLOB:
-            TypefaceUtils.setOcticons((TextView) view
-                    .findViewById(R.id.tv_file_icon));
+            TextView fileIcon = (TextView) view .findViewById(R.id.tv_file_icon);
+            fileIcon.setText(TypefaceUtils.ICON_FILE_TEXT);
+            TypefaceUtils.setOcticons(fileIcon);
             break;
         case TYPE_TREE:
-            TypefaceUtils.setOcticons(
-                    (TextView) view.findViewById(R.id.tv_folder_icon),
-                    (TextView) view.findViewById(R.id.tv_folders_icon),
-                    (TextView) view.findViewById(R.id.tv_files_icon));
+            TextView folderIcon = (TextView) view.findViewById(R.id.tv_folder_icon);
+            folderIcon.setText(TypefaceUtils.ICON_FILE_DIRECTORY);
+            TextView foldersIcon = (TextView) view.findViewById(R.id.tv_folders_icon);
+            foldersIcon.setText(TypefaceUtils.ICON_FILE_DIRECTORY);
+            TextView filesIcon = (TextView) view.findViewById(R.id.tv_files_icon);
+            filesIcon.setText(TypefaceUtils.ICON_FILE_TEXT);
+            TypefaceUtils.setOcticons(folderIcon, foldersIcon, filesIcon);
         }
 
         return view;

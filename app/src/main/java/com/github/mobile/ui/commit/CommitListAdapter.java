@@ -71,8 +71,9 @@ public class CommitListAdapter extends SingleTypeAdapter<RepositoryCommit> {
     protected View initialize(View view) {
         view = super.initialize(view);
 
-        TypefaceUtils.setOcticons((TextView) view
-                .findViewById(R.id.tv_comment_icon));
+        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
+        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(commentIcon);
         return view;
     }
 

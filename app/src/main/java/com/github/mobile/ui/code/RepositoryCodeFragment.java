@@ -222,6 +222,7 @@ public class RepositoryCodeFragment extends DialogFragment implements
         branchFooterView = finder.find(R.id.rl_branch);
         branchView = finder.find(R.id.tv_branch);
         branchIconView = finder.find(R.id.tv_branch_icon);
+        branchIconView.setText(TypefaceUtils.ICON_GIT_BRANCH);
         branchFooterView.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -230,15 +231,15 @@ public class RepositoryCodeFragment extends DialogFragment implements
             }
         });
 
-        pathHeaderView = activity.getLayoutInflater().inflate(R.layout.path_item,
-                null);
+        pathHeaderView = activity.getLayoutInflater().inflate(R.layout.path_item, null);
         pathView = (TextView) pathHeaderView.findViewById(R.id.tv_path);
         pathView.setMovementMethod(LinkMovementMethod.getInstance());
         if (pathShowing)
             adapter.addHeader(pathHeaderView);
 
-        TypefaceUtils.setOcticons(branchIconView,
-                (TextView) pathHeaderView.findViewById(R.id.tv_folder_icon));
+        TextView folderIcon = (TextView) pathHeaderView.findViewById(R.id.tv_folder_icon);
+        folderIcon.setText(TypefaceUtils.ICON_FILE_SUBMODULE);
+        TypefaceUtils.setOcticons(branchIconView, folderIcon);
         listView.setAdapter(adapter);
     }
 
@@ -263,9 +264,9 @@ public class RepositoryCodeFragment extends DialogFragment implements
 
         branchView.setText(tree.branch);
         if (RefUtils.isTag(tree.reference))
-            branchIconView.setText(R.string.icon_tag);
+            branchIconView.setText(TypefaceUtils.ICON_TAG);
         else
-            branchIconView.setText(R.string.icon_branch);
+            branchIconView.setText(TypefaceUtils.ICON_GIT_BRANCH);
 
         adapter.getWrappedAdapter().setIndented(folder.entry != null);
 

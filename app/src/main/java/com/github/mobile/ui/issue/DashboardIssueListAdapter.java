@@ -61,8 +61,10 @@ public class DashboardIssueListAdapter extends
         view = super.initialize(view);
 
         numberPaintFlags = textView(view, 1).getPaintFlags();
-        TypefaceUtils.setOcticons(textView(view, 6),
-                (TextView) view.findViewById(R.id.tv_comment_icon));
+        setText(6, TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
+        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 6), commentIcon);
         return view;
     }
 

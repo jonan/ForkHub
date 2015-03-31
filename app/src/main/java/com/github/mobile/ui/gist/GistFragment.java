@@ -354,10 +354,10 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
         final Typeface octicons = TypefaceUtils.getOcticons(activity);
         for (GistFile file : files.values()) {
             View fileView = inflater.inflate(R.layout.gist_file_item, null);
-            ((TextView) fileView.findViewById(R.id.tv_file)).setText(file
-                    .getFilename());
-            ((TextView) fileView.findViewById(R.id.tv_file_icon))
-                    .setTypeface(octicons);
+            ((TextView) fileView.findViewById(R.id.tv_file)).setText(file.getFilename());
+            TextView fileIcon = (TextView) fileView.findViewById(R.id.tv_file_icon);
+            fileIcon.setText(TypefaceUtils.ICON_FILE_TEXT);
+            fileIcon.setTypeface(octicons);
             adapter.addHeader(fileView, file, true);
             fileHeaders.add(fileView);
         }

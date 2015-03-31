@@ -60,12 +60,19 @@ public class SearchIssueListAdapter extends IssueListAdapter<SearchIssue> {
         view = super.initialize(view);
 
         numberPaintFlags = textView(view, 0).getPaintFlags();
-        TypefaceUtils.setOcticons(
-                (TextView) view.findViewById(R.id.tv_pull_request_icon),
-                (TextView) view.findViewById(R.id.tv_comment_icon));
+
+        TextView pullRequestIcon = (TextView) view.findViewById(R.id.tv_pull_request_icon);
+        pullRequestIcon.setText(TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        ViewUtils.setGone(pullRequestIcon, true);
+
+        TextView commentIcon = (TextView) view.findViewById(R.id.tv_comment_icon);
+        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+
+        TypefaceUtils.setOcticons(pullRequestIcon, commentIcon);
+
         for (int i = 0; i < MAX_LABELS; i++)
             ViewUtils.setGone(view.findViewById(R.id.v_label0 + i), true);
-        ViewUtils.setGone(view.findViewById(R.id.tv_pull_request_icon), true);
+
         return view;
     }
 

@@ -53,8 +53,10 @@ public class RepositoryIssueListAdapter extends IssueListAdapter<Issue> {
         view = super.initialize(view);
 
         numberPaintFlags = textView(view, 0).getPaintFlags();
-        TypefaceUtils.setOcticons(textView(view, 5),
-                (TextView) view.findViewById(R.id.tv_comment_icon));
+        setText(5, TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
+        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 5), commentIcon);
         return view;
     }
 

@@ -77,9 +77,9 @@ public class RefDialogFragment extends SingleChoiceDialogFragment {
         @Override
         protected void update(int position, Reference item) {
             if (RefUtils.isTag(item))
-                setText(0, R.string.icon_tag);
+                setText(0, TypefaceUtils.ICON_TAG);
             else
-                setText(0, R.string.icon_branch);
+                setText(0, TypefaceUtils.ICON_GIT_BRANCH);
             setText(1, RefUtils.getName(item));
             setChecked(2, selected == position);
         }
