@@ -108,7 +108,6 @@ public class CommentListAdapter extends MultiTypeAdapter {
     }
 
     protected void updateEvent(final IssueEvent event) {
-        TypefaceUtils.setOcticons(textView(0));
         String eventString = event.getEvent();
 
         String message;
@@ -211,26 +210,26 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         // Edit Comment ImageButton
         if (editCommentListener != null) {
-            imageView(4).setOnClickListener(new View.OnClickListener() {
+            view(4).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     editCommentListener.onEditComment(comment);
                 }
             });
         } else {
-            imageView(4).setVisibility(View.GONE);
+            view(4).setVisibility(View.GONE);
         }
 
         // Delete Comment ImageButton
         if (deleteCommentListener != null) {
-            imageView(5).setOnClickListener(new View.OnClickListener() {
+            view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     deleteCommentListener.onDeleteComment(comment);
                 }
             });
         } else {
-            imageView(5).setVisibility(View.GONE);
+            view(5).setVisibility(View.GONE);
         }
     }
 
@@ -261,7 +260,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected View initialize(int type, View view) {
         view = super.initialize(type, view);
 
-        textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
+        if (type == 0) {
+            textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
+            TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
+            setText(view, 4, TypefaceUtils.ICON_PENCIL);
+            setText(view, 5, TypefaceUtils.ICON_X);
+        } else {
+            TypefaceUtils.setOcticons(textView(view, 0));
+        }
+
         return view;
     }
 
