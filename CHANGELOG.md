@@ -13,6 +13,7 @@
 
 ### Added
 - Add forking support.
+- Add support for editing and deleting issue comments.
 - Add support for copying the hash of a commit.
 - Add new swipe-to-refresh animation.
 - Add event information to issues.
