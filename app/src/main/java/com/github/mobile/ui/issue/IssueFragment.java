@@ -26,6 +26,8 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
 import static com.github.mobile.Intents.EXTRA_USER;
 import static com.github.mobile.RequestCodes.COMMENT_CREATE;
+import static com.github.mobile.RequestCodes.COMMENT_EDIT;
+import static com.github.mobile.RequestCodes.COMMENT_DELETE;
 import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_CLOSE;
 import static com.github.mobile.RequestCodes.ISSUE_EDIT;
@@ -57,6 +59,7 @@ import com.github.mobile.core.issue.FullIssue;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.core.issue.IssueUtils;
 import com.github.mobile.core.issue.RefreshIssueTask;
+import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
@@ -335,7 +338,7 @@ public class IssueFragment extends DialogFragment {
 
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity, avatars, commentImageGetter));
+                new CommentListAdapter(activity, avatars, commentImageGetter, this, isCollaborator));
         list.setAdapter(adapter);
     }
 
@@ -517,6 +520,17 @@ public class IssueFragment extends DialogFragment {
         case ISSUE_REOPEN:
             stateTask.edit(false);
             break;
+        case COMMENT_DELETE:
+            final Comment comment = (Comment) arguments.getSerializable(EXTRA_COMMENT);
+            new DeleteCommentTask(getActivity(), repositoryId, comment) {
+                @Override
+                protected void onSuccess(Comment comment) throws Exception {
+                    super.onSuccess(comment);
+                    // TODO: update the commit without reloading the full issue
+                    refreshIssue();
+                }
+            }.start();
+            break;
         }
     }
 
@@ -554,7 +568,7 @@ public class IssueFragment extends DialogFragment {
             Issue editedIssue = (Issue) data.getSerializableExtra(EXTRA_ISSUE);
             bodyImageGetter.encode(editedIssue.getId(), editedIssue.getBodyHtml());
             updateHeader(editedIssue);
-            return;
+            break;
         case COMMENT_CREATE:
             Comment comment = (Comment) data
                     .getSerializableExtra(EXTRA_COMMENT);
@@ -564,8 +578,35 @@ public class IssueFragment extends DialogFragment {
                 updateList(issue, items);
             } else
                 refreshIssue();
-            return;
+            break;
+        case COMMENT_EDIT:
+            // TODO: update the commit without reloading the full issue
+            refreshIssue();
+            break;
         }
+    }
+
+    /**
+     * Edit existing comment
+     */
+    public void editComment(Comment comment) {
+        startActivityForResult(
+                CreateCommentActivity.createIntent(repositoryId, issueNumber, user, comment),
+                COMMENT_EDIT);
+    }
+
+    /**
+     * Delete existing comment
+     */
+    public void deleteComment(Comment comment) {
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_COMMENT, comment);
+        ConfirmDialogFragment.show(
+                (DialogFragmentActivity) getActivity(),
+                COMMENT_DELETE,
+                getActivity().getString(R.string.confirm_comment_delete_title),
+                getActivity().getString(R.string.confirm_comment_delete_message),
+                args);
     }
 
     private void shareIssue() {

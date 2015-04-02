@@ -18,13 +18,14 @@ package com.github.mobile.ui.comment;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.ui.issue.IssueFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
@@ -34,6 +35,7 @@ import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IssueEvent;
+import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for a list of {@link Comment} objects
@@ -46,22 +48,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     private final HttpImageGetter imageGetter;
 
-    /**
-     * Create list adapter
-     *
-     * @param activity
-     * @param elements
-     * @param avatars
-     * @param imageGetter
-     */
-    public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        super(activity.getLayoutInflater());
+    private final IssueFragment issueFragment;
 
-        this.resources = activity.getResources();
-        this.avatars = avatars;
-        this.imageGetter = imageGetter;
-        setItems(elements);
-    }
+    private final String user;
+
+    private final boolean isCollaborator;
+
 
     /**
      * Create list adapter
@@ -71,7 +63,27 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param imageGetter
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        this(activity, null, avatars, imageGetter);
+        this(activity, avatars, imageGetter, null, false);
+    }
+
+    /**
+     * Create list adapter
+     *
+     * @param activity
+     * @param avatars
+     * @param imageGetter
+     * @param issueFragment
+     */
+    public CommentListAdapter(Activity activity, AvatarLoader avatars,
+            HttpImageGetter imageGetter, IssueFragment issueFragment, boolean isCollaborator) {
+        super(activity.getLayoutInflater());
+
+        this.resources = activity.getResources();
+        this.avatars = avatars;
+        this.imageGetter = imageGetter;
+        this.issueFragment = issueFragment;
+        this.isCollaborator = isCollaborator;
+        this.user = AccountUtils.getLogin(activity);
     }
 
     @Override
@@ -83,7 +95,6 @@ public class CommentListAdapter extends MultiTypeAdapter {
     }
 
     protected void updateEvent(final IssueEvent event) {
-        TypefaceUtils.setOcticons(textView(0));
         String eventString = event.getEvent();
 
         String message;
@@ -183,6 +194,30 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         setText(1, comment.getUser().getLogin());
         setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+
+        boolean canEdit = isCollaborator || comment.getUser().getLogin().equals(user);
+
+        if (issueFragment != null && canEdit) {
+            // Edit button
+            setGone(4, false);
+            view(4).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    issueFragment.editComment(comment);
+                }
+            });
+            // Delete button
+            setGone(5, false);
+            view(5).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    issueFragment.deleteComment(comment);
+                }
+            });
+        } else {
+            setGone(4, true);
+            setGone(5, true);
+        }
     }
 
     public MultiTypeAdapter setItems(Collection<?> items) {
@@ -212,7 +247,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected View initialize(int type, View view) {
         view = super.initialize(type, view);
 
-        textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
+        if (type == 0) {
+            textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
+            TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
+            setText(view, 4, TypefaceUtils.ICON_PENCIL);
+            setText(view, 5, TypefaceUtils.ICON_X);
+        } else {
+            TypefaceUtils.setOcticons(textView(view, 0));
+        }
+
         return view;
     }
 
@@ -233,7 +276,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected int[] getChildViewIds(int type) {
         if(type == 0)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
-                    R.id.tv_comment_date, R.id.iv_avatar };
+                    R.id.tv_comment_date, R.id.iv_avatar, R.id.iv_comment_edit, R.id.iv_comment_delete };
         else
             return new int[]{R.id.tv_event_icon, R.id.tv_event, R.id.iv_avatar};
     }
