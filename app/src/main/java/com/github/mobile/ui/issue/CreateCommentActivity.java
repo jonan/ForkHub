@@ -15,6 +15,7 @@
  */
 package com.github.mobile.ui.issue;
 
+import static com.github.mobile.Intents.EXTRA_COMMENT;
 import static com.github.mobile.Intents.EXTRA_ISSUE_NUMBER;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
@@ -46,12 +47,24 @@ public class CreateCommentActivity extends
      * @param user
      * @return intent
      */
-    public static Intent createIntent(RepositoryId repoId, int issueNumber,
-            User user) {
+    public static Intent createIntent(RepositoryId repoId, int issueNumber, User user) {
+        return createIntent(repoId, issueNumber, user, null);
+    }
+
+    /**
+     * Create intent to create a comment
+     *
+     * @param repoId
+     * @param issueNumber
+     * @param user
+     * @return intent
+     */
+    public static Intent createIntent(RepositoryId repoId, int issueNumber, User user, Comment comment) {
         Builder builder = new Builder("issue.comment.create.VIEW");
         builder.repo(repoId);
         builder.add(EXTRA_ISSUE_NUMBER, issueNumber);
         builder.add(EXTRA_USER, user);
+        builder.add(EXTRA_COMMENT, comment);
         return builder.toIntent();
     }
 
@@ -59,10 +72,17 @@ public class CreateCommentActivity extends
 
     private int issueNumber;
 
+    /**
+     * Comment to edit.
+     */
+    private Comment comment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         issueNumber = getIntExtra(EXTRA_ISSUE_NUMBER);
-        repositoryId = new RepositoryId(getStringExtra(EXTRA_REPOSITORY_OWNER),
+        comment = getSerializableExtra(EXTRA_COMMENT);
+        repositoryId = new RepositoryId(
+                getStringExtra(EXTRA_REPOSITORY_OWNER),
                 getStringExtra(EXTRA_REPOSITORY_NAME));
 
         super.onCreate(savedInstanceState);
@@ -74,20 +94,35 @@ public class CreateCommentActivity extends
     }
 
     @Override
-    protected void createComment(String comment) {
-        new CreateCommentTask(this, repositoryId, issueNumber, comment) {
+    protected void createComment(String commentText) {
+        if (comment != null) {
+            comment.setBody(commentText);
 
-            @Override
-            protected void onSuccess(Comment comment) throws Exception {
-                super.onSuccess(comment);
+            new EditCommentTask(this, repositoryId, comment) {
+                @Override
+                protected void onSuccess(Comment comment) throws Exception {
+                    super.onSuccess(comment);
 
-                finish(comment);
-            }
-        }.start();
+                    finish(comment);
+                }
+            }.start();
+        } else {
+            new CreateCommentTask(this, repositoryId, issueNumber, commentText) {
+
+                @Override
+                protected void onSuccess(Comment comment) throws Exception {
+                    super.onSuccess(comment);
+
+                    finish(comment);
+                }
+            }.start();
+        }
     }
 
     @Override
     protected CommentPreviewPagerAdapter createAdapter() {
-        return new CommentPreviewPagerAdapter(this, repositoryId);
+        CommentPreviewPagerAdapter commentPreviewPagerAdapter = new CommentPreviewPagerAdapter(this, repositoryId);
+        commentPreviewPagerAdapter.setCommentText(comment != null ? comment.getBody() : null);
+        return commentPreviewPagerAdapter;
     }
 }

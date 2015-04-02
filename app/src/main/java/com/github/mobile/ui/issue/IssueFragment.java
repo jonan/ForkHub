@@ -65,8 +65,6 @@ import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.comment.CommentListAdapter;
-import com.github.mobile.ui.comment.DeleteCommentListener;
-import com.github.mobile.ui.comment.EditCommentListener;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -340,8 +338,7 @@ public class IssueFragment extends DialogFragment {
 
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity, null, avatars, commentImageGetter,
-                        editCommentListener, deleteCommentListener));
+                new CommentListAdapter(activity, avatars, commentImageGetter, this));
         list.setAdapter(adapter);
     }
 
@@ -589,6 +586,29 @@ public class IssueFragment extends DialogFragment {
         }
     }
 
+    /**
+     * Edit existing comment
+     */
+    public void editComment(Comment comment) {
+        startActivityForResult(
+                CreateCommentActivity.createIntent(repositoryId, issueNumber, user, comment),
+                COMMENT_EDIT);
+    }
+
+    /**
+     * Delete existing comment
+     */
+    public void deleteComment(Comment comment) {
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_COMMENT, comment);
+        ConfirmDialogFragment.show(
+                (DialogFragmentActivity) getActivity(),
+                COMMENT_DELETE,
+                getActivity().getString(R.string.confirm_comment_delete_title),
+                getActivity().getString(R.string.confirm_comment_delete_message),
+                args);
+    }
+
     private void shareIssue() {
         String id = repositoryId.generateId();
         if (IssueUtils.isPullRequest(issue))
@@ -642,31 +662,4 @@ public class IssueFragment extends DialogFragment {
             return super.onOptionsItemSelected(item);
         }
     }
-
-    /**
-     * Edit existing comment
-     */
-    final EditCommentListener editCommentListener = new EditCommentListener() {
-        public void onEditComment(Comment comment) {
-            startActivityForResult(EditCommentActivity.createIntent(
-                    repositoryId, issueNumber, comment, user), COMMENT_EDIT);
-        }
-    };
-
-    /**
-     * Delete existing comment
-     */
-    final DeleteCommentListener deleteCommentListener = new DeleteCommentListener() {
-        public void onDeleteComment(Comment comment) {
-            Bundle args = new Bundle();
-            args.putSerializable(EXTRA_COMMENT, comment);
-            ConfirmDialogFragment.show(
-                    (DialogFragmentActivity) getActivity(),
-                    COMMENT_DELETE,
-                    getActivity()
-                            .getString(R.string.confirm_comment_delete_title),
-                    getActivity().getString(
-                            R.string.confirm_comment_delete_message), args);
-        }
-    };
 }

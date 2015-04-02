@@ -24,6 +24,7 @@ import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.ui.issue.IssueFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
@@ -45,27 +46,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     private final HttpImageGetter imageGetter;
 
-    /**
-     * Callback listener to be invoked when user tries to edit a comment.
-     */
-     private final EditCommentListener editCommentListener;
+    private final IssueFragment issueFragment;
 
-    /**
-     * Callback listener to be invoked when user tries to edit a comment.
-     */
-    private final DeleteCommentListener deleteCommentListener;
-
-    /**
-     * Create list adapter
-     *
-     * @param activity
-     * @param elements
-     * @param avatars
-     * @param imageGetter
-     */
-    public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        this(activity, elements, avatars, imageGetter, null, null);
-    }
 
     /**
      * Create list adapter
@@ -75,7 +57,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param imageGetter
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        this(activity, null, avatars, imageGetter);
+        this(activity, avatars, imageGetter, null);
     }
 
     /**
@@ -84,19 +66,16 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param activity
      * @param avatars
      * @param imageGetter
-     * @param editCommentListener
-     * @param deleteCommentListener
+     * @param issueFragment
      */
-    public CommentListAdapter(Activity activity, Comment[] elements, AvatarLoader avatars, HttpImageGetter imageGetter,
-            EditCommentListener editCommentListener, DeleteCommentListener deleteCommentListener) {
+    public CommentListAdapter(Activity activity, AvatarLoader avatars,
+            HttpImageGetter imageGetter, IssueFragment issueFragment) {
         super(activity.getLayoutInflater());
 
         this.resources = activity.getResources();
         this.avatars = avatars;
         this.imageGetter = imageGetter;
-        this.editCommentListener = editCommentListener;
-        this.deleteCommentListener = deleteCommentListener;
-        setItems(elements);
+        this.issueFragment = issueFragment;
     }
 
     @Override
@@ -209,27 +188,29 @@ public class CommentListAdapter extends MultiTypeAdapter {
         setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
 
         // Edit Comment ImageButton
-        if (editCommentListener != null) {
+        if (issueFragment != null) {
+            setGone(4, false);
             view(4).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    editCommentListener.onEditComment(comment);
+                    issueFragment.editComment(comment);
                 }
             });
         } else {
-            view(4).setVisibility(View.GONE);
+            setGone(4, true);
         }
 
         // Delete Comment ImageButton
-        if (deleteCommentListener != null) {
+        if (issueFragment != null) {
+            setGone(5, false);
             view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteCommentListener.onDeleteComment(comment);
+                    issueFragment.deleteComment(comment);
                 }
             });
         } else {
-            view(5).setVisibility(View.GONE);
+            setGone(5, true);
         }
     }
 

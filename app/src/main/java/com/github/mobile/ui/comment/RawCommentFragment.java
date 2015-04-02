@@ -83,8 +83,6 @@ public class RawCommentFragment extends DialogFragment {
 
     /**
      * Set comment text
-     *
-     * @return text
      */
     public void setText(String comment) {
         if (commentText != null) {
