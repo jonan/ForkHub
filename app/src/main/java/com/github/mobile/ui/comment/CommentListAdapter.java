@@ -24,6 +24,7 @@ import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.issue.IssueFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -34,6 +35,7 @@ import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IssueEvent;
+import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for a list of {@link Comment} objects
@@ -48,6 +50,10 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     private final IssueFragment issueFragment;
 
+    private final String user;
+
+    private final boolean isCollaborator;
+
 
     /**
      * Create list adapter
@@ -57,7 +63,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param imageGetter
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        this(activity, avatars, imageGetter, null);
+        this(activity, avatars, imageGetter, null, false);
     }
 
     /**
@@ -69,13 +75,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param issueFragment
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars,
-            HttpImageGetter imageGetter, IssueFragment issueFragment) {
+            HttpImageGetter imageGetter, IssueFragment issueFragment, boolean isCollaborator) {
         super(activity.getLayoutInflater());
 
         this.resources = activity.getResources();
         this.avatars = avatars;
         this.imageGetter = imageGetter;
         this.issueFragment = issueFragment;
+        this.isCollaborator = isCollaborator;
+        this.user = AccountUtils.getLogin(activity);
     }
 
     @Override
@@ -187,8 +195,10 @@ public class CommentListAdapter extends MultiTypeAdapter {
         setText(1, comment.getUser().getLogin());
         setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
 
-        // Edit Comment ImageButton
-        if (issueFragment != null) {
+        boolean canEdit = isCollaborator || comment.getUser().getLogin().equals(user);
+
+        if (issueFragment != null && canEdit) {
+            // Edit button
             setGone(4, false);
             view(4).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,12 +206,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
                     issueFragment.editComment(comment);
                 }
             });
-        } else {
-            setGone(4, true);
-        }
-
-        // Delete Comment ImageButton
-        if (issueFragment != null) {
+            // Delete button
             setGone(5, false);
             view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -210,6 +215,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
                 }
             });
         } else {
+            setGone(4, true);
             setGone(5, true);
         }
     }

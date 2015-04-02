@@ -338,7 +338,7 @@ public class IssueFragment extends DialogFragment {
 
         Activity activity = getActivity();
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity, avatars, commentImageGetter, this));
+                new CommentListAdapter(activity, avatars, commentImageGetter, this, isCollaborator));
         list.setAdapter(adapter);
     }
 
