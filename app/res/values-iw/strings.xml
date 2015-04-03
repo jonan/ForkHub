@@ -15,6 +15,7 @@
   limitations under the License.
 -->
 <resources>
+  <string name="app_name">GitHub</string>
   <string name="error_orgs_load">טעינת ארגון משתמש &amp; נכשלה</string>
   <string name="error_issues_load">נכשלה טעינת סוגיות</string>
   <string name="error_repos_load">טעינת מאגרים נכשלה</string>

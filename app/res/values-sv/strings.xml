@@ -94,7 +94,7 @@
     <string name="updating_milestone">Uppdaterar Milstolpar…</string>
     <!--  -->
 
-    <string name="app_name">ForkHub</string>
+    <string name="app_name">GitHub</string>
     <string name="news">Nyheter</string>
     <string name="issues">Frågor</string>
     <string name="gists">Gists</string>
