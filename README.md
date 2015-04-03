@@ -18,7 +18,6 @@ It also uses many other open source libraries such as:
 * [Picasso](http://square.github.io/picasso/)
 * [CodeMirror](https://github.com/codemirror/CodeMirror)
 * [ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
-* [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
 * [RoboGuice](https://github.com/roboguice/roboguice)
 
 These are just a few of the major dependencies, the entire list of dependencies
