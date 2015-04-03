@@ -273,5 +273,31 @@
     <string name="preview">Vista previa</string>
     <string name="show_raw_markdown">Mostrar markdown</string>
     <string name="render_markdown">Procesar markdown</string>
+    <string name="confirm_comment_delete_message">¿Seguro que quieres eliminar este comentario?</string>
+    <string name="confirm_comment_delete_title">Eliminar comentario</string>
+    <string name="copy_hash">Copiar hash</string>
+    <string name="deleting_comment">Borrando comentario…</string>
+    <string name="editing_comment">Editando comentario…</string>
+    <string name="error_forking_repository">Error al hacer fork</string>
+    <string name="fork">Fork</string>
+    <string name="forking_repository">Haciendo fork…</string>
+    <string name="issue_event_closed">cerró esto</string>
+    <string name="issue_event_head_ref_deleted">eliminó la rama</string>
+    <string name="issue_event_head_ref_restored">restauró la rama</string>
+    <string name="issue_event_label_added">añadió la etiqueta %1$s</string>
+    <string name="issue_event_label_assigned">fue asignado</string>
+    <string name="issue_event_label_removed">eliminó la etiqueta %1$s</string>
+    <string name="issue_event_label_unassigned">fue desasignado</string>
+    <string name="issue_event_lock">bloqueó y limitó la conversación a los colaboradores</string>
+    <string name="issue_event_merged">mergeó el commit %1$s</string>
+    <string name="issue_event_milestone_added">añadió esto al hito %1$s</string>
+    <string name="issue_event_milestone_removed">eliminó esto del hito %1$s</string>
+    <string name="issue_event_rename">modificó el título</string>
+    <string name="issue_event_reopened">reabrió esto</string>
+    <string name="issue_event_unlock">desbloqueó esta conversación</string>
+    <string name="issue_event_referenced">hizo referencia a esta incidencia desde el commit %1$s</string>
+    <string name="toast_msg_copied">Copiado al portapapeles</string>
+    <string name="username_or_email">Usuario o correo electrónico</string>
+    <string name="code_authentication_failed">Autenticación fallida! Código de verificación erroneo</string>
 
 </resources>
