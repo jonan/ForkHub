@@ -55,6 +55,7 @@ import android.widget.TextView;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
+import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.core.issue.FullIssue;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.core.issue.IssueUtils;
@@ -103,6 +104,8 @@ public class IssueFragment extends DialogFragment {
     private Issue issue;
 
     private User user;
+
+    private String loggedUser;
 
     private boolean isCollaborator;
 
@@ -337,8 +340,9 @@ public class IssueFragment extends DialogFragment {
         });
 
         Activity activity = getActivity();
+        loggedUser = AccountUtils.getLogin(activity);
         adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity, avatars, commentImageGetter, this, isCollaborator));
+                new CommentListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
         list.setAdapter(adapter);
     }
 
@@ -554,7 +558,13 @@ public class IssueFragment extends DialogFragment {
     @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
         inflater.inflate(R.menu.issue_view, optionsMenu);
+        MenuItem editItem = optionsMenu.findItem(R.id.m_edit);
         stateItem = optionsMenu.findItem(R.id.m_state);
+        if (editItem != null && stateItem != null) {
+            boolean canEdit = isCollaborator || issue.getUser().getLogin().equals(loggedUser);
+            editItem.setVisible(canEdit);
+            stateItem.setVisible(canEdit);
+        }
         updateStateItem(issue);
     }
 

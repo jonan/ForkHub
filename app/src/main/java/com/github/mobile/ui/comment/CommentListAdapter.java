@@ -24,7 +24,6 @@ import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.issue.IssueFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -35,7 +34,6 @@ import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IssueEvent;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for a list of {@link Comment} objects
@@ -63,7 +61,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param imageGetter
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars, HttpImageGetter imageGetter) {
-        this(activity, avatars, imageGetter, null, false);
+        this(activity, avatars, imageGetter, null, false, "");
     }
 
     /**
@@ -75,7 +73,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
      * @param issueFragment
      */
     public CommentListAdapter(Activity activity, AvatarLoader avatars,
-            HttpImageGetter imageGetter, IssueFragment issueFragment, boolean isCollaborator) {
+            HttpImageGetter imageGetter, IssueFragment issueFragment,
+            boolean isCollaborator, String loggedUser) {
         super(activity.getLayoutInflater());
 
         this.resources = activity.getResources();
@@ -83,7 +82,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
         this.imageGetter = imageGetter;
         this.issueFragment = issueFragment;
         this.isCollaborator = isCollaborator;
-        this.user = AccountUtils.getLogin(activity);
+        this.user = loggedUser;
     }
 
     @Override

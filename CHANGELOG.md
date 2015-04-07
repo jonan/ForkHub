@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fix bug that didn't allow you to see issues if you are not the maintainer of the repo.
+- You can now edit issues you've created in third party repos.
 - Improve image loading to save memory. This fixes a lot of 'Out of memory' crashes.
 - Use Gradle instead of Maven for compilation.
 - Improve how github.com links are manage and add support for opening new types of links.

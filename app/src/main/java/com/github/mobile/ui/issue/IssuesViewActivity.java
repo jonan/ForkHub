@@ -25,7 +25,6 @@ import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.mobile.Intents.Builder;
@@ -294,18 +293,6 @@ public class IssuesViewActivity extends PagerActivity {
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem editItem = menu.findItem(R.id.m_edit);
-        MenuItem stateItem = menu.findItem(R.id.m_state);
-        if (editItem != null && stateItem != null) {
-            editItem.setVisible(isCollaborator);
-            stateItem.setVisible(isCollaborator);
-        }
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
