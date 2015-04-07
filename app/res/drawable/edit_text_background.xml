@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item>
         <shape>
@@ -41,6 +41,11 @@
         android:top="2dp">
         <shape>
             <solid android:color="@color/edit_text_background" />
+            <padding
+                android:bottom="10dp"
+                android:left="10dp"
+                android:right="10dp"
+                android:top="10dp" />
 
             <corners android:radius="1dp" />
         </shape>
