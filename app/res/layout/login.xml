@@ -61,7 +61,7 @@
                 android:paddingTop="10dp"
                 android:text="@string/password" />
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/et_password"
                 style="@style/LoginEditText"
                 android:imeOptions="actionDone"
