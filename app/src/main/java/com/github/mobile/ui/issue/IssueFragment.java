@@ -561,7 +561,12 @@ public class IssueFragment extends DialogFragment {
         MenuItem editItem = optionsMenu.findItem(R.id.m_edit);
         stateItem = optionsMenu.findItem(R.id.m_state);
         if (editItem != null && stateItem != null) {
-            boolean canEdit = isCollaborator || issue.getUser().getLogin().equals(loggedUser);
+            boolean canEdit;
+            if (issue != null)
+                canEdit= isCollaborator || issue.getUser().getLogin().equals(loggedUser);
+            else
+                canEdit= isCollaborator;
+            
             editItem.setVisible(canEdit);
             stateItem.setVisible(canEdit);
         }
