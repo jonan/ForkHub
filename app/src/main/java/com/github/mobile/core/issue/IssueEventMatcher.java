@@ -37,7 +37,7 @@ public class IssueEventMatcher {
      * @param event
      * @return issue or null if event doesn't apply
      */
-    public Issue getIssue(Event event) {
+    public static Issue getIssue(Event event) {
         if (event == null)
             return null;
         EventPayload payload = event.getPayload();

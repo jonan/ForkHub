@@ -17,6 +17,7 @@ package com.github.mobile.core.repo;
 
 import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
 import static org.eclipse.egit.github.core.event.Event.TYPE_FORK;
+import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
 import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
 import android.text.TextUtils;
@@ -71,7 +72,7 @@ public class RepositoryEventMatcher {
      * @param event
      * @return gist or null if event doesn't apply
      */
-    public Repository getRepository(final Event event) {
+    public static Repository getRepository(final Event event) {
         if (event == null)
             return null;
 
@@ -90,7 +91,7 @@ public class RepositoryEventMatcher {
         }
 
         if (TYPE_CREATE.equals(type) || TYPE_WATCH.equals(type)
-                || TYPE_PUBLIC.equals(type))
+                || TYPE_PUBLIC.equals(type) || TYPE_MEMBER.equals(type))
             return getRepository(event.getRepo(), event.getActor(),
                     event.getOrg());
 

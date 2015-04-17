@@ -66,26 +66,6 @@ import org.eclipse.egit.github.core.service.EventService;
  */
 public abstract class NewsFragment extends PagedItemFragment<Event> {
 
-    /**
-     * Matcher for finding an {@link Issue} from an {@link Event}
-     */
-    protected final IssueEventMatcher issueMatcher = new IssueEventMatcher();
-
-    /**
-     * Matcher for finding a {@link Gist} from an {@link Event}
-     */
-    protected final GistEventMatcher gistMatcher = new GistEventMatcher();
-
-    /**
-     * Matcher for finding a {@link Repository} from an {@link Event}
-     */
-    protected final RepositoryEventMatcher repoMatcher = new RepositoryEventMatcher();
-
-    /**
-     * Matcher for finding a {@link User} from an {@link Event}
-     */
-    protected final UserEventMatcher userMatcher = new UserEventMatcher();
-
     @Inject
     private AvatarLoader avatars;
 
@@ -121,7 +101,7 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
             return;
         }
 
-        Issue issue = issueMatcher.getIssue(event);
+        Issue issue = IssueEventMatcher.getIssue(event);
         if (issue != null) {
             Repository repo = RepositoryEventMatcher.getRepository(
                     event.getRepo(), event.getActor(), event.getOrg());
@@ -129,17 +109,17 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
             return;
         }
 
-        Gist gist = gistMatcher.getGist(event);
+        Gist gist = GistEventMatcher.getGist(event);
         if (gist != null) {
             startActivity(GistsViewActivity.createIntent(gist));
             return;
         }
 
-        Repository repo = repoMatcher.getRepository(event);
+        Repository repo = RepositoryEventMatcher.getRepository(event);
         if (repo != null)
             viewRepository(repo);
 
-        UserPair users = userMatcher.getUsers(event);
+        UserPair users = UserEventMatcher.getUsers(event);
         if (users != null)
             viewUser(users);
     }

@@ -33,7 +33,7 @@ public class GistEventMatcher {
      * @param event
      * @return gist or null if event doesn't apply
      */
-    public Gist getGist(final Event event) {
+    public static Gist getGist(final Event event) {
         if (event == null)
             return null;
         EventPayload payload = event.getPayload();

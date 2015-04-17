@@ -54,7 +54,7 @@ public class UserEventMatcher {
      * @param event
      * @return user or null if event doesn't apply
      */
-    public UserPair getUsers(final Event event) {
+    public static UserPair getUsers(final Event event) {
         if (event == null)
             return null;
 
