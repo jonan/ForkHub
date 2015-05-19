@@ -211,7 +211,7 @@ public class EditIssueActivity extends DialogFragmentActivity {
             if (assignee != null)
                 issue.setAssignee(assignee);
             else
-                issue.setAssignee(new User().setLogin(""));
+                issue.setAssignee(null);
             updateAssignee();
             break;
         case ISSUE_LABELS_UPDATE:
