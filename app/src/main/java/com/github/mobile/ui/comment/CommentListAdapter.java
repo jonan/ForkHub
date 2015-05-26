@@ -127,7 +127,14 @@ public class CommentListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case IssueEvent.TYPE_REFERENCED:
-            message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + event.getCommitId().substring(0,7) + "</b>");
+            String commitString;
+            // GitHub sometimes returns a null commit
+            if (event.getCommitId() == null) {
+                commitString = "???????";
+            } else {
+                commitString = event.getCommitId().substring(0,7);
+            }
+            message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + commitString + "</b>");
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
