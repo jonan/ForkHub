@@ -1,6 +1,8 @@
 # Change Log
 
-## [Unreleased][unreleased]
+## [Unreleased]
+
+## [ForkHub v0.9.0]
 
 ### Fixed
 - Fix bug that didn't allow you to see issues if you are not the maintainer of the repo.
@@ -25,5 +27,8 @@
 
 ## [1.9.0] - 2014-02-21
 
-[unreleased]: https://github.com/github/android/compare/1.9.0...master
-[1.9.0]: https://github.com/github/android/releases/tag/1.9.0
+- Last official GitHub release
+
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.0...master
+[ForkHub v0.9.0]: https://github.com/jonan/ForkHub/compare/1.9.0...ForkHub-v0.9.0
+[1.9.0]: https://github.com/jonan/ForkHub/releases/tag/1.9.0
