@@ -1,8 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.triplet.play'
+
+if (file('credentials.config').exists() ) {
+    apply from: 'credentials.config';
+}
 
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
+
     defaultConfig {
         applicationId 'jp.forkhub'
         minSdkVersion 8
@@ -37,6 +43,11 @@ android {
             assets.srcDirs = ['assets']
         }
         androidTest.setRoot(project(':integration-tests').projectDir.absolutePath + "/src/main")
+    }
+
+    play {
+        track = 'beta'
+        uploadImages = true
     }
 }
 
