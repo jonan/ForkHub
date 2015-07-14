@@ -5,7 +5,7 @@
 ### Fixed
 - Don't show all the stared repos.
 
-## [ForkHub v0.9.0]
+## [ForkHub v0.9.0] - 2015-05-27
 
 ### Fixed
 - Fix bug that didn't allow you to see issues if you are not the maintainer of the repo.
