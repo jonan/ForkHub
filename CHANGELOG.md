@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Don't show all the stared repos.
+
 ## [ForkHub v0.9.0]
 
 ### Fixed

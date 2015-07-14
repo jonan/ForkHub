@@ -175,7 +175,9 @@ public class OrganizationRepositories implements
                         }
                     });
             all.addAll(repos.getRepositories());
-            all.addAll(watcher.getWatched());
+            // TODO: fix
+            // With the API change this is adding all stared repos, not the watched ones.
+            //all.addAll(watcher.getWatched());
             return new ArrayList<Repository>(all);
         } else
             return repos.getOrgRepositories(org.getLogin());
