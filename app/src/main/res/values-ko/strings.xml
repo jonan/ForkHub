@@ -83,7 +83,7 @@
     <string name="search_title">검색…</string>
     <string name="clear_search_history">검색기록 삭제</string>
     <string name="search_history_cleared">검색기록 삭제됨</string>
-    <string name="login_activity_authenticating">로그인중…</string>
+    <string name="login_activity_authenticating">로그인 중…</string>
     <string name="creating_gist">Gist 생성중…</string>
     <string name="create">생성</string>
     <string name="create_gist">Gist 생성</string>
@@ -132,8 +132,8 @@
     <string name="select_labels">라벨 선택</string>
     <string name="no_milestone">마일스톤 없음</string>
     <string name="unassigned">담당자 없음</string>
-    <string name="assigned">is assigned</string>
-    <string name="no_gists_found">No Gists found</string>
+    <string name="assigned">이(가) 확인함</string>
+    <string name="no_gists_found">어던 Gists 도 찾을 수 없음</string>
     <string name="confirm_gist_delete_title">삭제 확인</string>
     <string name="confirm_gist_delete_message">Gist를 정말로 삭제하시겠습니까?</string>
     <string name="deleting_gist">Gist 삭제중…</string>
@@ -153,7 +153,7 @@
     <string name="none">없음</string>
     <string name="section_issue_labels">라벨:</string>
     <string name="log_in">로그인</string>
-    <string name="signup_link">New to GitHub? &lt;a href=\"https://github.com/join\">Click here&lt;/a> to sign up</string>
+    <string name="signup_link">GitHub 에 처음 이십니까? &lt;a href=\"https://github.com/join\">여기를 클릭하여&lt;/a> 가입하세요</string>
     <string name="connection_failed">GitHub에 연결할 수 없습니다</string>
     <string name="invalid_login_or_password">계정 또는 비밀번호를 확인해주세요</string>
     <string name="invalid_password">비밀번호를 확인해주세요</string>
@@ -165,7 +165,7 @@
     <string name="following_self">팔로잉</string>
     <string name="members">멤버</string>
     <string name="closing_issue">이슈 종결처리중…</string>
-    <string name="reopening_issue">이슈 재오픈중…</string>
+    <string name="reopening_issue">이슈 다시 여는중…</string>
     <string name="avatar">아바타</string>
     <string name="creating_issue">이슈 생성중…</string>
     <string name="prefix_created">created\u0020</string>
@@ -182,13 +182,13 @@
     <string name="milestone">마일스톤</string>
     <string name="labels">라벨</string>
     <string name="issue_confirm_close_message">해당 이슈를 종결하시겠습니까?</string>
-    <string name="issue_confirm_reopen_message">해당 이슈를 다시 열겠습니까?</string>
+    <string name="issue_confirm_reopen_message">해당 이슈를 다시 열으시겠습니까?</string>
     <string name="issue_confirm_close_title">이슈 닫기</string>
-    <string name="issue_confirm_reopen_title">이슈 재오픈</string>
+    <string name="issue_confirm_reopen_title">이슈 다시 열기</string>
     <string name="closed">종결됨</string>
     <string name="no_description_given">설명없음</string>
     <string name="close">종결</string>
-    <string name="reopen">Reopen</string>
+    <string name="reopen">다시열기</string>
     <string name="title_invalid_github_url">GitHub URL이 잘못됨</string>
     <string name="message_invalid_github_url">이 어플리케이션에서는 해당 URL을 열 수 없음\n{0}</string>
     <string name="recently_viewed">최근 열람</string>
@@ -202,7 +202,7 @@
     <string name="authored">작성된</string>
     <string name="committed">커밋된</string>
     <string name="diff_line_message">무엇을 하기 원합니까?</string>
-    <string name="comment_on_line">Comment on line</string>
+    <string name="comment_on_line">줄에 댓글달기</string>
     <string name="view_entire_file">전체 파일 보기</string>
     <string name="comparing_commits">커밋 {0} 비교</string>
     <string name="enable_wrapping">감추기 가능</string>
@@ -212,8 +212,8 @@
     <string name="unfollowing_user">팔로윙 취소…</string>
     <string name="starring_repository">즐겨찾기…</string>
     <string name="unstarring_repository">즐겨찾기 해제…</string>
-    <string name="navigate_to">Navigate to…</string>
-    <string name="navigate_to_user">Navigate to %s</string>
+    <string name="navigate_to">이동하기</string>
+    <string name="navigate_to_user">%s 로 이동</string>
     <string name="contributions">%d 커밋</string>
 
     <!-- Tab titles, should be as short as possible -->
@@ -229,12 +229,12 @@
     <string name="tab_commits">커밋</string>
     <string name="tab_issues">이슈</string>
     <string name="tab_watched">watched</string>
-    <string name="tab_assigned">assigned</string>
-    <string name="tab_created">created</string>
-    <string name="tab_mentioned">mentioned</string>
-    <string name="tab_mine">mine</string>
+    <string name="tab_assigned">담당 지정받음</string>
+    <string name="tab_created">생성됨</string>
+    <string name="tab_mentioned">언급됨</string>
+    <string name="tab_mine">내 것</string>
     <string name="tab_starred">즐겨찾기</string>
-    <string name="tab_all">all</string>
+    <string name="tab_all">모두</string>
     <!--  -->
     <string name="share">공유</string>
     <string name="show_password">비밀번호 보여주기</string>
