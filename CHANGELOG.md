@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Fixed
+- Improve the source viewer for many languages (CodeMirror 4.13.0).
+
+### Translations
+- Improve translations: KO.
+
 ## [ForkHub v0.9.1] - 2015-07-22
 
 ### Fixed
@@ -15,7 +21,7 @@
 - Improve image loading to save memory. This fixes a lot of 'Out of memory' crashes.
 - Use Gradle instead of Maven for compilation.
 - Improve how github.com links are manage and add support for opening new types of links.
-- Improve the source viewer for many languages.
+- Improve the source viewer for many languages (CodeMirror 4.8.0).
 - Fix duplicated issues when searching.
 - Update all icons.
 
