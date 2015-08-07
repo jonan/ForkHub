@@ -22,7 +22,7 @@ import org.eclipse.egit.github.core.client.GitHubClient;
  */
 public class DefaultClient extends GitHubClient {
 
-    private static final String USER_AGENT = "GitHubAndroid/1.9";
+    private static final String USER_AGENT = "ForkHub/1.0";
 
     /**
      * Create client
