@@ -4,6 +4,7 @@
 
 ### Fixed
 - Improve the source viewer for many languages (CodeMirror 4.13.0).
+- Update all icons (Octicons v3.0.1).
 
 ### Translations
 - Improve translations: KO.
@@ -23,7 +24,7 @@
 - Improve how github.com links are manage and add support for opening new types of links.
 - Improve the source viewer for many languages (CodeMirror 4.8.0).
 - Fix duplicated issues when searching.
-- Update all icons.
+- Update all icons (Octicons v2.2.0).
 
 ### Added
 - Add forking support.

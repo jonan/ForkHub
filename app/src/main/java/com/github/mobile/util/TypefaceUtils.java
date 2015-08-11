@@ -31,9 +31,6 @@ public class TypefaceUtils {
      * All octicon icons
      */
     public static final String ICON_ALERT = "\uf02d";
-    public static final String ICON_ALIGNMENT_ALIGN = "\uf08a";
-    public static final String ICON_ALIGNMENT_ALIGNED_TO = "\uf08e";
-    public static final String ICON_ALIGNMENT_UNALIGN = "\uf08b";
     public static final String ICON_ARROW_DOWN = "\uf03f";
     public static final String ICON_ARROW_LEFT = "\uf040";
     public static final String ICON_ARROW_RIGHT = "\uf03e";
@@ -42,7 +39,8 @@ public class TypefaceUtils {
     public static final String ICON_ARROW_SMALL_RIGHT = "\uf071";
     public static final String ICON_ARROW_SMALL_UP = "\uf09f";
     public static final String ICON_ARROW_UP = "\uf03d";
-    public static final String ICON_BEER = "\uf069";
+    public static final String ICON_BEAKER = "\uf0dd";
+    public static final String ICON_BELL = "\uf0de";
     public static final String ICON_BOOK = "\uf007";
     public static final String ICON_BOOKMARK = "\uf07b";
     public static final String ICON_BRIEFCASE = "\uf0d3";
@@ -70,6 +68,7 @@ public class TypefaceUtils {
     public static final String ICON_DASH = "\uf0ca";
     public static final String ICON_DASHBOARD = "\uf07d";
     public static final String ICON_DATABASE = "\uf096";
+    public static final String ICON_DESKTOP_DOWNLOAD = "\uf0dc";
     public static final String ICON_DEVICE_CAMERA = "\uf056";
     public static final String ICON_DEVICE_CAMERA_VIDEO = "\uf057";
     public static final String ICON_DEVICE_DESKTOP = "\uf27c";
@@ -117,10 +116,6 @@ public class TypefaceUtils {
     public static final String ICON_ISSUE_OPENED = "\uf026";
     public static final String ICON_ISSUE_REOPENED = "\uf027";
     public static final String ICON_JERSEY = "\uf019";
-    public static final String ICON_JUMP_DOWN = "\uf072";
-    public static final String ICON_JUMP_LEFT = "\uf0a5";
-    public static final String ICON_JUMP_RIGHT = "\uf0a6";
-    public static final String ICON_JUMP_UP = "\uf073";
     public static final String ICON_KEY = "\uf049";
     public static final String ICON_KEYBOARD = "\uf00d";
     public static final String ICON_LAW = "\uf0d8";
@@ -139,14 +134,9 @@ public class TypefaceUtils {
     public static final String ICON_MARKDOWN = "\uf0c9";
     public static final String ICON_MEGAPHONE = "\uf077";
     public static final String ICON_MENTION = "\uf0be";
-    public static final String ICON_MICROSCOPE = "\uf089";
     public static final String ICON_MILESTONE = "\uf075";
     public static final String ICON_MIRROR = "\uf024";
     public static final String ICON_MORTAR_BOARD = "\uf0d7";
-    public static final String ICON_MOVE_DOWN = "\uf0a8";
-    public static final String ICON_MOVE_LEFT = "\uf074";
-    public static final String ICON_MOVE_RIGHT = "\uf0a9";
-    public static final String ICON_MOVE_UP = "\uf0a7";
     public static final String ICON_MUTE = "\uf080";
     public static final String ICON_NO_NEWLINE = "\uf09c";
     public static final String ICON_OCTOFACE = "\uf008";
@@ -156,17 +146,11 @@ public class TypefaceUtils {
     public static final String ICON_PENCIL = "\uf058";
     public static final String ICON_PERSON = "\uf018";
     public static final String ICON_PIN = "\uf041";
-    public static final String ICON_PLAYBACK_FAST_FORWARD = "\uf0bd";
-    public static final String ICON_PLAYBACK_PAUSE = "\uf0bb";
-    public static final String ICON_PLAYBACK_PLAY = "\uf0bf";
-    public static final String ICON_PLAYBACK_REWIND = "\uf0bc";
     public static final String ICON_PLUG = "\uf0d4";
     public static final String ICON_PLUS = "\uf05d";
-    public static final String ICON_PODIUM = "\uf0af";
     public static final String ICON_PRIMITIVE_DOT = "\uf052";
     public static final String ICON_PRIMITIVE_SQUARE = "\uf053";
     public static final String ICON_PULSE = "\uf085";
-    public static final String ICON_PUZZLE = "\uf0c0";
     public static final String ICON_QUESTION = "\uf02c";
     public static final String ICON_QUOTE = "\uf063";
     public static final String ICON_RADIO_TOWER = "\uf030";
@@ -186,10 +170,8 @@ public class TypefaceUtils {
     public static final String ICON_SETTINGS = "\uf07c";
     public static final String ICON_SIGN_IN = "\uf036";
     public static final String ICON_SIGN_OUT = "\uf032";
-    public static final String ICON_SPLIT = "\uf0c6";
     public static final String ICON_SQUIRREL = "\uf0b2";
     public static final String ICON_STAR = "\uf02a";
-    public static final String ICON_STEPS = "\uf0c7";
     public static final String ICON_STOP = "\uf08f";
     public static final String ICON_SYNC = "\uf087";
     public static final String ICON_TAG = "\uf015";
@@ -207,6 +189,7 @@ public class TypefaceUtils {
     public static final String ICON_UNFOLD = "\uf039";
     public static final String ICON_UNMUTE = "\uf0ba";
     public static final String ICON_VERSIONS = "\uf064";
+    public static final String ICON_WATCH = "\uf0e0";
     public static final String ICON_X = "\uf081";
     public static final String ICON_ZAP = "\u26A1";
 
