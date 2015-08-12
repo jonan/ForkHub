@@ -107,7 +107,9 @@ public abstract class CreateCommentActivity extends
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.m_apply:
-            createComment(adapter.getCommentText());
+            if (adapter != null && !TextUtils.isEmpty(adapter.getCommentText())) {
+                createComment(adapter.getCommentText());
+            }
             return true;
         default:
             return super.onOptionsItemSelected(item);
