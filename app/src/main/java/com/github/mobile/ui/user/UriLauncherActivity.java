@@ -63,7 +63,10 @@ public class UriLauncherActivity extends Activity {
         if (intent != null) {
             context.startActivity(intent);
         } else {
-            context.startActivity(new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE));
+            intent = new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE);
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE));
+            }
         }
     }
 
