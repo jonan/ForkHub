@@ -5,7 +5,7 @@
 ### Fixed
 - Creating or editing a comment could crash the app on old Android versions.
 - Improve the source viewer for many languages (CodeMirror 4.13.0).
-- Update all icons (Octicons v3.0.1).
+- Update all icons (Octicons v3.1.0).
 
 ### Translations
 - Improve translations: KO.

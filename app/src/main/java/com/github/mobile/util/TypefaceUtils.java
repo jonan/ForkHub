@@ -168,6 +168,7 @@ public class TypefaceUtils {
     public static final String ICON_SEARCH = "\uf02e";
     public static final String ICON_SERVER = "\uf097";
     public static final String ICON_SETTINGS = "\uf07c";
+    public static final String ICON_SHIELD = "\uf0e1";
     public static final String ICON_SIGN_IN = "\uf036";
     public static final String ICON_SIGN_OUT = "\uf032";
     public static final String ICON_SQUIRREL = "\uf0b2";
