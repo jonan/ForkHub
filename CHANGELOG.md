@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v0.9.2] - 2015-08-20
 
 ### Fixed
 - Creating or editing a comment could crash the app on old Android versions.
@@ -42,7 +42,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.1...master
+[ForkHub v0.9.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.1...ForkHub-v0.9.2
 [ForkHub v0.9.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.0...ForkHub-v0.9.1
 [ForkHub v0.9.0]: https://github.com/jonan/ForkHub/compare/1.9.0...ForkHub-v0.9.0
 [1.9.0]: https://github.com/jonan/ForkHub/releases/tag/1.9.0
