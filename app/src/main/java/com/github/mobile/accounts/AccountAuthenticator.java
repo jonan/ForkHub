@@ -23,7 +23,6 @@ import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.accounts.AccountManager.KEY_INTENT;
 import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
 import static com.github.mobile.accounts.AccountConstants.APP_NOTE;
-import static com.github.mobile.accounts.AccountConstants.APP_NOTE_URL;
 import static com.github.mobile.accounts.LoginActivity.PARAM_AUTHTOKEN_TYPE;
 import static com.github.mobile.accounts.LoginActivity.PARAM_USERNAME;
 import android.accounts.AbstractAccountAuthenticator;
@@ -97,12 +96,6 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
         if (auth == null)
             return false;
 
-        if (!APP_NOTE.equals(auth.getNote()))
-            return false;
-
-        if (!APP_NOTE_URL.equals(auth.getNoteUrl()))
-            return false;
-
         List<String> scopes = auth.getScopes();
         return scopes != null && scopes.containsAll(requiredScopes);
     }
@@ -137,8 +130,7 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
      */
     public static String createAuthorization(final OAuthService service) throws IOException {
         Authorization auth = new Authorization();
-        auth.setNote(APP_NOTE);
-        auth.setNoteUrl(APP_NOTE_URL);
+        auth.setNote(APP_NOTE + " " + System.currentTimeMillis());
         auth.setScopes(SCOPES);
         auth = service.createAuthorization(auth);
         return auth != null ? auth.getToken() : null;

@@ -217,9 +217,7 @@ public class TwoFactorAuthActivity extends RoboActionBarActivity {
                 client.setOtpCode(otpCode);
 
                 OAuthService service = new OAuthService(client);
-                String authToken = AccountAuthenticator.getAuthorization(service);
-                if (authToken == null)
-                    authToken = AccountAuthenticator.createAuthorization(service);
+                String authToken = AccountAuthenticator.createAuthorization(service);
                 client.setOAuth2Token(authToken);
 
                 User user = new UserService(client).getUser();
