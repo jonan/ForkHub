@@ -30,7 +30,7 @@ public class RefUtilsTest extends AndroidTestCase {
      * Verify {@link RefUtils#isBranch(org.eclipse.egit.github.core.Reference)}
      */
     public void testIsBranch() {
-        assertFalse(RefUtils.isBranch(null));
+        assertFalse(RefUtils.isBranch((Reference) null));
         assertFalse(RefUtils.isBranch(new Reference()));
         assertFalse(RefUtils.isBranch(new Reference().setRef("")));
         assertFalse(RefUtils.isBranch(new Reference().setRef("test")));
@@ -63,7 +63,6 @@ public class RefUtilsTest extends AndroidTestCase {
                 .setRef("refs/pull/6/merge")));
         assertFalse(RefUtils
                 .isValid(new Reference().setRef("refs/pull/6/head")));
-        assertTrue(RefUtils.isValid(new Reference().setRef("refs/pull")));
         assertTrue(RefUtils.isValid(new Reference().setRef("refs/heads/b1")));
         assertTrue(RefUtils.isValid(new Reference().setRef("refs/tags/v1")));
     }

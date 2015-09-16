@@ -39,11 +39,17 @@ public class RefUtils {
      * @return true if branch, false otherwise
      */
     public static boolean isBranch(final Reference ref) {
-        if (ref != null) {
-            String name = ref.getRef();
-            return !TextUtils.isEmpty(name) && name.startsWith(PREFIX_HEADS);
-        } else
-            return false;
+        return ref != null && isBranch(ref.getRef());
+    }
+
+    /**
+     * Is reference a branch?
+     *
+     * @param name
+     * @return true if branch, false otherwise
+     */
+    public static boolean isBranch(final String name) {
+        return !TextUtils.isEmpty(name) && name.startsWith(PREFIX_HEADS);
     }
 
     /**
@@ -123,10 +129,6 @@ public class RefUtils {
      * @return true if valid, false otherwise
      */
     public static boolean isValid(final Reference ref) {
-        if (ref == null)
-            return false;
-
-        String name = ref.getRef();
-        return !TextUtils.isEmpty(name) && !name.startsWith(PREFIX_PULL);
+        return isBranch(ref) || isTag(ref);
     }
 }
