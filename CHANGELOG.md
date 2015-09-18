@@ -1,9 +1,10 @@
 # Change Log
 
-## [ForkHub v1.0.0 RC] - 2015-09-15
+## [Unreleased]
 
 ### Fixed
 - Fix two-factor authentication.
+- Fix loading annotated tags
 
 ## [ForkHub v0.9.2] - 2015-08-20
 
@@ -47,7 +48,7 @@
 
 - Last official GitHub release
 
-[ForkHub v1.0.0 RC]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...master
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...master
 [ForkHub v0.9.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.1...ForkHub-v0.9.2
 [ForkHub v0.9.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.0...ForkHub-v0.9.1
 [ForkHub v0.9.0]: https://github.com/jonan/ForkHub/compare/1.9.0...ForkHub-v0.9.0

@@ -32,6 +32,8 @@ public class RefUtils {
 
     private static final String PREFIX_HEADS = PREFIX_REFS + "heads/";
 
+    private static final String TYPE_TAG = "tag";
+
     /**
      * Is reference a branch?
      *
@@ -60,6 +62,17 @@ public class RefUtils {
      */
     public static boolean isTag(final Reference ref) {
         return ref != null && isTag(ref.getRef());
+    }
+
+    /**
+     * Is reference an annotated tag?
+     *
+     * @param ref
+     * @return true if annotated tag, false otherwise
+     */
+    public static boolean isAnnotatedTag(final Reference ref) {
+        return ref != null && ref.getObject() != null
+                && TYPE_TAG.equals(ref.getObject().getType());
     }
 
     /**

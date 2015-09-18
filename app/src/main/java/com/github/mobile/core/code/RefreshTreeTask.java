@@ -29,6 +29,7 @@ import java.io.IOException;
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.Reference;
 import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.Tag;
 import org.eclipse.egit.github.core.Tree;
 import org.eclipse.egit.github.core.service.DataService;
 import org.eclipse.egit.github.core.service.RepositoryService;
@@ -91,6 +92,13 @@ public class RefreshTreeTask extends AuthenticatedUserTask<FullTree> {
             if (!isValidRef(ref))
                 throw new IOException(
                         "Reference does not have associated commit SHA-1");
+        }
+
+        if (RefUtils.isAnnotatedTag(ref)) {
+            Tag tag = dataService.getTag(repository, ref.getObject().getSha());
+            if (!TextUtils.isEmpty(tag.getObject().getSha())) {
+                ref.setObject(tag.getObject());
+            }
         }
 
         Commit commit = dataService.getCommit(repository, ref.getObject()
