@@ -75,6 +75,8 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
     @Inject
     protected EventService service;
 
+    private boolean showRepoName = true;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -230,6 +232,15 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
     }
 
     /**
+     * Set if the repository's name should be displayed in each item
+     *
+     * @param showRepoName
+     */
+    protected void setShowRepoName(boolean showRepoName) {
+        this.showRepoName = showRepoName;
+    }
+
+    /**
      * Start an activity to view the given repository
      *
      * @param repository
@@ -274,7 +285,7 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
     @Override
     protected SingleTypeAdapter<Event> createAdapter(List<Event> items) {
         return new NewsListAdapter(getActivity().getLayoutInflater(),
-                items.toArray(new Event[items.size()]), avatars);
+                items.toArray(new Event[items.size()]), avatars, showRepoName);
     }
 
     @Override
