@@ -522,7 +522,18 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
             formatCommitComment(event, main, details);
             break;
         case TYPE_CREATE:
-            icon = TypefaceUtils.ICON_REPO;
+            String refType = ((CreatePayload) event.getPayload()).getRefType();
+            switch (refType) {
+                case "branch":
+                    icon = TypefaceUtils.ICON_GIT_BRANCH;
+                    break;
+                case "tag":
+                    icon = TypefaceUtils.ICON_TAG;
+                    break;
+                default:
+                    icon = TypefaceUtils.ICON_REPO;
+                    break;
+            }
             formatCreate(event, main, details);
             break;
         case TYPE_DELETE:
