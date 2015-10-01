@@ -15,9 +15,6 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_BOOKMARKS;
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_DASHBOARD;
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_GISTS;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -27,7 +24,6 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,7 +59,7 @@ import org.eclipse.egit.github.core.User;
  */
 public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         NavigationView.OnNavigationItemSelectedListener,
-        ActionBar.OnNavigationListener, OrganizationSelectionProvider,
+        OrganizationSelectionProvider,
         LoaderCallbacks<List<User>> {
 
     private static final String TAG = "HomeActivity";
@@ -79,8 +75,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     private boolean isDefaultUser;
 
     private List<User> orgs = Collections.emptyList();
-
-    private HomeDropdownListAdapter homeAdapter;
 
     private DrawerLayout navigationDrawer;
 
@@ -171,18 +165,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             reloadOrgs();
     }
 
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-
-        // TODO This is now deprecated, should look at switching to child spinner view via Toolbar
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        homeAdapter = new HomeDropdownListAdapter(this, orgs, avatars);
-        actionBar.setListNavigationCallbacks(homeAdapter, this);
-    }
-
     private void setOrg(User org) {
         Log.d(TAG, "setOrg : " + org.getLogin());
 
@@ -245,34 +227,8 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
-    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        if (homeAdapter.isOrgPosition(itemPosition)) {
-            homeAdapter.setSelected(itemPosition);
-            setOrg(orgs.get(itemPosition));
-        } else if (homeAdapter.getOrgCount() > 0) {
-            switch (homeAdapter.getAction(itemPosition)) {
-            case ACTION_GISTS:
-                startActivity(new Intent(this, GistsActivity.class));
-                break;
-            case ACTION_DASHBOARD:
-                startActivity(new Intent(this, IssueDashboardActivity.class));
-                break;
-            case ACTION_BOOKMARKS:
-                startActivity(FiltersViewActivity.createIntent());
-                break;
-            }
-            int orgSelected = homeAdapter.getSelected();
-            ActionBar actionBar = getSupportActionBar();
-            if (orgSelected < actionBar.getNavigationItemCount())
-                actionBar.setSelectedNavigationItem(orgSelected);
-        }
-        return true;
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() < orgs.size()) {
-            homeAdapter.setSelected(menuItem.getItemId());
             setOrg(orgs.get(menuItem.getItemId()));
             swapNavigationMenu();
             navigationDrawer.closeDrawer(GravityCompat.START);
@@ -307,28 +263,28 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     public void onLoadFinished(Loader<List<User>> listLoader, List<User> orgs) {
         this.orgs = orgs;
 
+        int sharedPreferencesOrgId = sharedPreferences.getInt(PREF_ORG_ID, -1);
+        int targetOrgId = org == null ? sharedPreferencesOrgId : org.getId();
+        MenuItem targetOrgMenu = null;
+
         Menu menu = navigationView.getMenu();
         menu.removeGroup(R.id.user_select);
         for (int i = 0; i < orgs.size(); ++i) {
             final MenuItem item = menu.add(R.id.user_select, i, Menu.NONE, orgs.get(i).getLogin());
             avatars.bind(item, orgs.get(i));
+            if (orgs.get(i).getId() == targetOrgId) {
+                targetOrgMenu = item;
+            }
         }
+
+        // If the target org is invalid (e.g. first login), select the first one
+        if (targetOrgId == -1) {
+            setOrg(orgs.get(0));
+        }
+
         menu.setGroupVisible(R.id.user_select, false);
 
-        if (homeAdapter != null)
-            homeAdapter.setOrgs(orgs);
-        else
-            configureActionBar();
-
-        int sharedPreferencesOrgId = sharedPreferences.getInt(PREF_ORG_ID, -1);
-        int targetOrgId = org == null ? sharedPreferencesOrgId : org.getId();
-
-        ActionBar actionBar = getSupportActionBar();
-        for (int i = 0; i < orgs.size(); i++)
-            if (orgs.get(i).getId() == targetOrgId) {
-                actionBar.setSelectedNavigationItem(i);
-                break;
-            }
+        onNavigationItemSelected(targetOrgMenu);
     }
 
     @Override
