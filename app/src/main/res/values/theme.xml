@@ -23,6 +23,8 @@
         <item name="android:windowBackground">@color/background</item>
     </style>
 
+    <style name="Theme.GitHub.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar" />
+
     <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
         <item name="displayOptions">showHome|showTitle|useLogo</item>
         <item name="background">@drawable/actionbar_background</item>

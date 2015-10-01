@@ -26,7 +26,8 @@
         <activity
             android:name=".ui.user.HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:hardwareAccelerated="true">
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.GitHub.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

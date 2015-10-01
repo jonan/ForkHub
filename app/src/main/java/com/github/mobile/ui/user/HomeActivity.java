@@ -24,6 +24,8 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,10 +100,28 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
+                this, navigationDrawer, toolbar, R.string.app_name, R.string.app_name) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                if (isUserNavVisible) {
+                    swapNavigationMenu();
+                }
+
+            }
+        };
+
+        navigationDrawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
 
         navigationIconTint = navigationView.getItemIconTintList();
         findViewById(R.id.nav_header).setOnClickListener(new View.OnClickListener() {
@@ -230,7 +250,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() < orgs.size()) {
             setOrg(orgs.get(menuItem.getItemId()));
-            swapNavigationMenu();
             navigationDrawer.closeDrawer(GravityCompat.START);
             return false;
         }
@@ -265,7 +284,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
 
         int sharedPreferencesOrgId = sharedPreferences.getInt(PREF_ORG_ID, -1);
         int targetOrgId = org == null ? sharedPreferencesOrgId : org.getId();
-        MenuItem targetOrgMenu = null;
 
         Menu menu = navigationView.getMenu();
         menu.removeGroup(R.id.user_select);
@@ -273,7 +291,7 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             final MenuItem item = menu.add(R.id.user_select, i, Menu.NONE, orgs.get(i).getLogin());
             avatars.bind(item, orgs.get(i));
             if (orgs.get(i).getId() == targetOrgId) {
-                targetOrgMenu = item;
+                setOrg(orgs.get(i));
             }
         }
 
@@ -283,8 +301,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         }
 
         menu.setGroupVisible(R.id.user_select, false);
-
-        onNavigationItemSelected(targetOrgMenu);
     }
 
     @Override

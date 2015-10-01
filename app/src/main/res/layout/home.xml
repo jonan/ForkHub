@@ -21,7 +21,19 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false">
 
-    <include layout="@layout/pager_with_tabs" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/actionbar_background_top" />
+
+        <include layout="@layout/pager_with_tabs" />
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
