@@ -26,8 +26,7 @@
         <activity
             android:name=".ui.user.HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@style/Theme.GitHub.NoActionBar">
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +35,7 @@
 
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value="com.github.mobile.ui.search.SearchActivity" />
+                android:value="com.github.mobile.ui.search.SearchActivity"/>
         </activity>
         <activity
             android:name=".ui.gist.CreateGistActivity"

@@ -3,8 +3,12 @@ package com.github.mobile.ui.roboactivities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
+import com.github.mobile.R;
 import com.google.inject.Key;
 
 import java.util.HashMap;
@@ -44,6 +48,16 @@ public class RoboActionBarActivity extends ActionBarActivity implements RoboCont
         injector.injectMembersWithoutViews( this );
         super.onCreate( savedInstanceState );
         eventManager.fire( new OnCreateEvent( savedInstanceState ) );
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+
+        View toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar((Toolbar) toolbar);
+        }
     }
 
     @Override

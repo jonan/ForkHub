@@ -14,9 +14,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/actionbar_background_top" />
 
     <fragment
         android:id="@android:id/list"
@@ -24,4 +31,4 @@
         android:layout_height="match_parent"
         class="com.github.mobile.ui.commit.CommitCompareListFragment" />
 
-</RelativeLayout>
+</LinearLayout>

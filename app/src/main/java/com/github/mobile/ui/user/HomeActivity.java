@@ -100,13 +100,12 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
                 this, navigationDrawer, toolbar, R.string.app_name, R.string.app_name) {

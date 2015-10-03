@@ -41,6 +41,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -162,6 +163,8 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         accountManager = AccountManager.get(this);
 

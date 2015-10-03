@@ -21,6 +21,12 @@
     android:gravity="center"
     android:orientation="vertical" >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/actionbar_background_top" />
+
     <ProgressBar
         android:id="@+id/pb_loading"
         style="@style/Spinner"
@@ -43,6 +49,9 @@
         app:selectedColor="@color/pager_title_selected_text"
         app:titlePadding="10dp" />
 
-    <include layout="@layout/pager" />
+    <com.github.mobile.ui.ViewPager
+        android:id="@+id/vp_pages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
