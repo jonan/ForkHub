@@ -16,7 +16,7 @@
 package com.github.mobile.ui.repo;
 
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.app.Activity;
+import android.content.Context;
 
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.UserEventMatcher.UserPair;
@@ -39,9 +39,10 @@ public class RepositoryNewsFragment extends NewsFragment {
     private Repository repo;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
+        setShowRepoName(false);
         repo = getSerializableExtra(EXTRA_REPOSITORY);
     }
 

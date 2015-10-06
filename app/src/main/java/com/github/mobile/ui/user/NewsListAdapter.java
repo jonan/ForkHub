@@ -185,280 +185,9 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
         return text;
     }
 
-    private static void formatCommitComment(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" commented on ");
-        boldRepo(main, event);
-
-        CommitCommentPayload payload = (CommitCommentPayload) event
-                .getPayload();
-        appendCommitComment(details, payload.getComment());
-    }
-
-    private static void formatDownload(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" uploaded a file to ");
-        boldRepo(main, event);
-
-        DownloadPayload payload = (DownloadPayload) event.getPayload();
-        Download download = payload.getDownload();
-        if (download != null)
-            appendText(details, download.getName());
-    }
-
-    private static void formatCreate(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        main.append(" created ");
-        CreatePayload payload = (CreatePayload) event.getPayload();
-        String refType = payload.getRefType();
-        main.append(refType);
-        main.append(' ');
-        if (!"repository".equals(refType)) {
-            main.append(payload.getRef());
-            main.append(" at ");
-            boldRepo(main, event);
-        } else
-            boldRepoName(main, event);
-    }
-
-    private static void formatDelete(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        DeletePayload payload = (DeletePayload) event.getPayload();
-        main.append(" deleted ");
-        main.append(payload.getRefType());
-        main.append(' ');
-        main.append(payload.getRef());
-        main.append(" at ");
-
-        boldRepo(main, event);
-    }
-
-    private static void formatFollow(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" started following ");
-        boldUser(main, ((FollowPayload) event.getPayload()).getTarget());
-    }
-
-    private static void formatFork(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" forked repository ");
-        boldRepo(main, event);
-    }
-
-    private static void formatGist(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        GistPayload payload = (GistPayload) event.getPayload();
-
-        main.append(' ');
-        String action = payload.getAction();
-        if ("create".equals(action))
-            main.append("created");
-        else if ("update".equals(action))
-            main.append("updated");
-        else
-            main.append(action);
-        main.append(" Gist ");
-        main.append(payload.getGist().getId());
-    }
-
-    private static void formatWiki(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" updated the wiki in ");
-        boldRepo(main, event);
-    }
-
-    private static void formatIssueComment(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        main.append(" commented on ");
-
-        IssueCommentPayload payload = (IssueCommentPayload) event.getPayload();
-
-        Issue issue = payload.getIssue();
-        String number;
-        if (IssueUtils.isPullRequest(issue))
-            number = "pull request " + issue.getNumber();
-        else
-            number = "issue " + issue.getNumber();
-        main.bold(number);
-
-        main.append(" on ");
-
-        boldRepo(main, event);
-
-        appendComment(details, payload.getComment());
-    }
-
-    private static void formatIssues(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        IssuesPayload payload = (IssuesPayload) event.getPayload();
-        String action = payload.getAction();
-        Issue issue = payload.getIssue();
-        main.append(' ');
-        main.append(action);
-        main.append(' ');
-        main.bold("issue " + issue.getNumber());
-        main.append(" on ");
-
-        boldRepo(main, event);
-
-        appendText(details, issue.getTitle());
-    }
-
-    private static void formatAddMember(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" added ");
-        User member = ((MemberPayload) event.getPayload()).getMember();
-        if (member != null)
-            main.bold(member.getLogin());
-        main.append(" as a collaborator to ");
-        boldRepo(main, event);
-    }
-
-    private static void formatPublic(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" open sourced repository ");
-        boldRepo(main, event);
-    }
-
-    private static void formatWatch(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" starred ");
-        boldRepo(main, event);
-    }
-
-    private static void formatReviewComment(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-        main.append(" commented on ");
-        boldRepo(main, event);
-
-        PullRequestReviewCommentPayload payload = (PullRequestReviewCommentPayload) event
-                .getPayload();
-        appendCommitComment(details, payload.getComment());
-    }
-
-    private static void formatPullRequest(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        PullRequestPayload payload = (PullRequestPayload) event.getPayload();
-        String action = payload.getAction();
-        if ("synchronize".equals(action))
-            action = "updated";
-        main.append(' ');
-        main.append(action);
-        main.append(' ');
-        main.bold("pull request " + payload.getNumber());
-        main.append(" on ");
-
-        boldRepo(main, event);
-
-        if ("opened".equals(action) || "closed".equals(action)) {
-            PullRequest request = payload.getPullRequest();
-            if (request != null) {
-                String title = request.getTitle();
-                if (!TextUtils.isEmpty(title))
-                    details.append(title);
-            }
-        }
-    }
-
-    private static void formatPush(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        main.append(" pushed to ");
-        PushPayload payload = (PushPayload) event.getPayload();
-        String ref = payload.getRef();
-        if (ref.startsWith("refs/heads/"))
-            ref = ref.substring(11);
-        main.bold(ref);
-        main.append(" at ");
-
-        boldRepo(main, event);
-
-        final List<Commit> commits = payload.getCommits();
-        int size = commits != null ? commits.size() : -1;
-        if (size > 0) {
-            if (size != 1)
-                details.append(FORMAT_INT.format(size)).append(" new commits");
-            else
-                details.append("1 new commit");
-
-            int max = 3;
-            int appended = 0;
-            for (Commit commit : commits) {
-                if (commit == null)
-                    continue;
-
-                String sha = commit.getSha();
-                if (TextUtils.isEmpty(sha))
-                    continue;
-
-                details.append('\n');
-                if (sha.length() > 7)
-                    details.monospace(sha.substring(0, 7));
-                else
-                    details.monospace(sha);
-
-                String message = commit.getMessage();
-                if (!TextUtils.isEmpty(message)) {
-                    details.append(' ');
-                    int newline = message.indexOf('\n');
-                    if (newline > 0)
-                        details.append(message.subSequence(0, newline));
-                    else
-                        details.append(message);
-                }
-
-                appended++;
-                if (appended == max)
-                    break;
-            }
-        }
-    }
-
-    private static void formatTeamAdd(Event event, StyledText main,
-            StyledText details) {
-        boldActor(main, event);
-
-        TeamAddPayload payload = (TeamAddPayload) event.getPayload();
-
-        main.append(" added ");
-
-        User user = payload.getUser();
-        if (user != null)
-            boldUser(main, user);
-        else
-            boldRepoName(main, event);
-
-        main.append(" to team");
-
-        Team team = payload.getTeam();
-        String teamName = team != null ? team.getName() : null;
-        if (teamName != null)
-            main.append(' ').bold(teamName);
-    }
-
     private final AvatarLoader avatars;
+
+    private final boolean showRepoName;
 
     /**
      * Create list adapter
@@ -468,11 +197,28 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
      * @param avatars
      */
     public NewsListAdapter(LayoutInflater inflater, Event[] elements,
-            AvatarLoader avatars) {
+                           AvatarLoader avatars) {
         super(inflater, R.layout.news_item);
 
         this.avatars = avatars;
         setItems(elements);
+        this.showRepoName = true;
+    }
+
+    /**
+     * Create list adapter
+     *
+     * @param inflater
+     * @param elements
+     * @param avatars
+     */
+    public NewsListAdapter(LayoutInflater inflater, Event[] elements,
+                           AvatarLoader avatars, boolean showRepoName) {
+        super(inflater, R.layout.news_item);
+
+        this.avatars = avatars;
+        setItems(elements);
+        this.showRepoName = showRepoName;
     }
 
     /**
@@ -621,5 +367,319 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
             setGone(2, true);
 
         setText(4, TimeUtils.getRelativeTime(event.getCreatedAt()));
+    }
+
+    private void formatCommitComment(Event event, StyledText main,
+                                     StyledText details) {
+        boldActor(main, event);
+        main.append(" commented");
+
+        if (showRepoName) {
+            main.append(" on ");
+            boldRepo(main, event);
+        }
+
+        CommitCommentPayload payload = (CommitCommentPayload) event
+                .getPayload();
+        appendCommitComment(details, payload.getComment());
+    }
+
+    private void formatDownload(Event event, StyledText main,
+                                StyledText details) {
+        boldActor(main, event);
+        main.append(" uploaded a file");
+
+        if (showRepoName) {
+            main.append(" to ");
+            boldRepo(main, event);
+        }
+
+        DownloadPayload payload = (DownloadPayload) event.getPayload();
+        Download download = payload.getDownload();
+        if (download != null)
+            appendText(details, download.getName());
+    }
+
+    private void formatCreate(Event event, StyledText main,
+                              StyledText details) {
+        boldActor(main, event);
+
+        main.append(" created ");
+        CreatePayload payload = (CreatePayload) event.getPayload();
+        String refType = payload.getRefType();
+        main.append(refType);
+        if (!"repository".equals(refType)) {
+            main.append(' ');
+            main.bold(payload.getRef());
+            if (showRepoName) {
+                main.append(" at ");
+                boldRepo(main, event);
+            }
+        } else if (showRepoName) {
+            main.append(' ');
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatDelete(Event event, StyledText main,
+                              StyledText details) {
+        boldActor(main, event);
+
+        DeletePayload payload = (DeletePayload) event.getPayload();
+        main.append(" deleted ");
+        main.append(payload.getRefType());
+        main.append(' ');
+        main.bold(payload.getRef());
+
+        if (showRepoName) {
+            main.append(" at ");
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatFollow(Event event, StyledText main,
+                              StyledText details) {
+        boldActor(main, event);
+        main.append(" started following ");
+        boldUser(main, ((FollowPayload) event.getPayload()).getTarget());
+    }
+
+    private void formatFork(Event event, StyledText main,
+                            StyledText details) {
+        boldActor(main, event);
+        main.append(" forked repository ");
+        boldRepo(main, event);
+    }
+
+    private void formatGist(Event event, StyledText main,
+                            StyledText details) {
+        boldActor(main, event);
+
+        GistPayload payload = (GistPayload) event.getPayload();
+
+        main.append(' ');
+        String action = payload.getAction();
+        if ("create".equals(action))
+            main.append("created");
+        else if ("update".equals(action))
+            main.append("updated");
+        else
+            main.append(action);
+        main.append(" Gist ");
+        main.append(payload.getGist().getId());
+    }
+
+    private void formatWiki(Event event, StyledText main,
+                            StyledText details) {
+        boldActor(main, event);
+        main.append(" updated the wiki");
+
+        if (showRepoName) {
+            main.append(" in ");
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatIssueComment(Event event, StyledText main,
+                                    StyledText details) {
+        boldActor(main, event);
+
+        main.append(" commented on ");
+
+        IssueCommentPayload payload = (IssueCommentPayload) event.getPayload();
+
+        Issue issue = payload.getIssue();
+        String number;
+        if (IssueUtils.isPullRequest(issue))
+            number = "pull request " + issue.getNumber();
+        else
+            number = "issue " + issue.getNumber();
+        main.bold(number);
+
+        if (showRepoName) {
+            main.append(" on ");
+            boldRepo(main, event);
+        }
+
+        appendComment(details, payload.getComment());
+    }
+
+    private void formatIssues(Event event, StyledText main,
+                              StyledText details) {
+        boldActor(main, event);
+
+        IssuesPayload payload = (IssuesPayload) event.getPayload();
+        String action = payload.getAction();
+        Issue issue = payload.getIssue();
+        main.append(' ');
+        main.append(action);
+        main.append(' ');
+        main.bold("issue " + issue.getNumber());
+
+        if (showRepoName) {
+            main.append(" on ");
+            boldRepo(main, event);
+        }
+
+        appendText(details, issue.getTitle());
+    }
+
+    private void formatAddMember(Event event, StyledText main,
+                                 StyledText details) {
+        boldActor(main, event);
+        main.append(" added ");
+        User member = ((MemberPayload) event.getPayload()).getMember();
+        if (member != null)
+            main.bold(member.getLogin());
+        main.append(" as a collaborator");
+
+        if (showRepoName) {
+            main.append(" to ");
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatPublic(Event event, StyledText main,
+                              StyledText details) {
+        boldActor(main, event);
+        main.append(" open sourced repository ");
+
+        if (showRepoName) {
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatWatch(Event event, StyledText main,
+                             StyledText details) {
+        boldActor(main, event);
+        main.append(" starred ");
+
+        if (showRepoName) {
+            boldRepo(main, event);
+        }
+    }
+
+    private void formatReviewComment(Event event, StyledText main,
+                                     StyledText details) {
+        PullRequestReviewCommentPayload payload = (PullRequestReviewCommentPayload) event
+                .getPayload();
+
+        boldActor(main, event);
+        main.append(" reviewed ");
+        main.bold("pull request " + payload.getPullRequest().getNumber());
+
+        if (showRepoName) {
+            main.append(" on ");
+            boldRepo(main, event);
+        }
+
+        appendCommitComment(details, payload.getComment());
+    }
+
+    private void formatPullRequest(Event event, StyledText main,
+                                   StyledText details) {
+        boldActor(main, event);
+
+        PullRequestPayload payload = (PullRequestPayload) event.getPayload();
+        String action = payload.getAction();
+        if ("synchronize".equals(action))
+            action = "updated";
+        main.append(' ');
+        main.append(action);
+        main.append(' ');
+        main.bold("pull request " + payload.getNumber());
+
+        if (showRepoName) {
+            main.append(" on ");
+            boldRepo(main, event);
+        }
+
+        if ("opened".equals(action) || "closed".equals(action)) {
+            PullRequest request = payload.getPullRequest();
+            if (request != null) {
+                String title = request.getTitle();
+                if (!TextUtils.isEmpty(title))
+                    details.append(title);
+            }
+        }
+    }
+
+    private void formatPush(Event event, StyledText main,
+                            StyledText details) {
+        boldActor(main, event);
+
+        main.append(" pushed to ");
+        PushPayload payload = (PushPayload) event.getPayload();
+        String ref = payload.getRef();
+        if (ref.startsWith("refs/heads/"))
+            ref = ref.substring(11);
+        main.bold(ref);
+
+        if (showRepoName) {
+            main.append(" at ");
+            boldRepo(main, event);
+        }
+
+        final List<Commit> commits = payload.getCommits();
+        int size = commits != null ? commits.size() : -1;
+        if (size > 0) {
+            if (size != 1)
+                details.append(FORMAT_INT.format(size)).append(" new commits");
+            else
+                details.append("1 new commit");
+
+            int max = 3;
+            int appended = 0;
+            for (Commit commit : commits) {
+                if (commit == null)
+                    continue;
+
+                String sha = commit.getSha();
+                if (TextUtils.isEmpty(sha))
+                    continue;
+
+                details.append('\n');
+                if (sha.length() > 7)
+                    details.monospace(sha.substring(0, 7));
+                else
+                    details.monospace(sha);
+
+                String message = commit.getMessage();
+                if (!TextUtils.isEmpty(message)) {
+                    details.append(' ');
+                    int newline = message.indexOf('\n');
+                    if (newline > 0)
+                        details.append(message.subSequence(0, newline));
+                    else
+                        details.append(message);
+                }
+
+                appended++;
+                if (appended == max)
+                    break;
+            }
+        }
+    }
+
+    private void formatTeamAdd(Event event, StyledText main,
+                               StyledText details) {
+        boldActor(main, event);
+
+        TeamAddPayload payload = (TeamAddPayload) event.getPayload();
+
+        main.append(" added ");
+
+        User user = payload.getUser();
+        if (user != null)
+            boldUser(main, user);
+        else
+            boldRepoName(main, event);
+
+        main.append(" to team");
+
+        Team team = payload.getTeam();
+        String teamName = team != null ? team.getName() : null;
+        if (teamName != null)
+            main.append(' ').bold(teamName);
     }
 }

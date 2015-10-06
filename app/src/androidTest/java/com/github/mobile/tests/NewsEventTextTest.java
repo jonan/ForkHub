@@ -134,7 +134,7 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         event.setPayload(payload);
         updateView(event);
 
-        verify("user created repository repo");
+        verify("user created repository user/repo");
     }
 
     /**

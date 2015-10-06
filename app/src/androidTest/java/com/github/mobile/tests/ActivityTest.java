@@ -35,6 +35,13 @@ public abstract class ActivityTest<T extends Activity> extends
         super(activityClass);
     }
 
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        setActivityInitialTouchMode(true);
+    }
+
     /**
      * Verify activity was created successfully
      */
