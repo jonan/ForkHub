@@ -447,8 +447,11 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
     private void formatFork(Event event, StyledText main,
                             StyledText details) {
         boldActor(main, event);
-        main.append(" forked repository ");
-        boldRepo(main, event);
+        main.append(" forked repository");
+        if (showRepoName) {
+            main.append(' ');
+            boldRepo(main, event);
+        }
     }
 
     private void formatGist(Event event, StyledText main,
