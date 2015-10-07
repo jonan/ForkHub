@@ -22,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.github.mobile.R;
@@ -88,10 +89,45 @@ public class AvatarLoader {
      *
      * @param actionBar An ActionBar object on which you're placing the user's avatar.
      * @param user      An AtomicReference that points to the desired user.
-     * @return this helper
      */
     public void bind(final ActionBar actionBar, final User user) {
         bind(actionBar, new AtomicReference<User>(user));
+    }
+
+    /**
+     * Sets the logo on the {@link MenuItem} to the user's avatar.
+     *
+     * @param item A MenuItem object on which you're placing the user's avatar.
+     * @param user A User object that points to the desired user.
+     */
+    public void bind(final MenuItem item, final User user) {
+        if (user == null)
+            return;
+
+        String avatarUrl = user.getAvatarUrl();
+        if (TextUtils.isEmpty(avatarUrl))
+            return;
+
+        // Remove the URL params as they are not needed and break cache
+        if (avatarUrl.contains("?") && !avatarUrl.contains("gravatar")) {
+            avatarUrl = avatarUrl.substring(0, avatarUrl.indexOf("?"));
+        }
+
+        final String url = avatarUrl;
+
+        new FetchAvatarTask(context) {
+
+            @Override
+            public BitmapDrawable call() throws Exception {
+                Bitmap image = Bitmap.createScaledBitmap(p.load(url).get(), avatarSize, avatarSize, false);
+                return new BitmapDrawable(context.getResources(), ImageUtils.roundCorners(image, cornerRadius));
+            }
+
+            @Override
+            protected void onSuccess(BitmapDrawable image) throws Exception {
+                item.setIcon(image);
+            }
+        }.execute();
     }
 
     /**
@@ -99,7 +135,6 @@ public class AvatarLoader {
      *
      * @param actionBar     An ActionBar object on which you're placing the user's avatar.
      * @param userReference An AtomicReference that points to the desired user.
-     * @return this helper
      */
     public void bind(final ActionBar actionBar, final AtomicReference<User> userReference) {
         if (userReference == null)
@@ -235,7 +270,7 @@ public class AvatarLoader {
         }
     }
 
-    public class RoundedCornersTransformation implements Transformation {
+    private class RoundedCornersTransformation implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
             return ImageUtils.roundCorners(source, cornerRadius);

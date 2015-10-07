@@ -15,20 +15,24 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_BOOKMARKS;
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_DASHBOARD;
-import static com.github.mobile.ui.user.HomeDropdownListAdapter.ACTION_GISTS;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
@@ -56,7 +60,8 @@ import org.eclipse.egit.github.core.User;
  * Home screen activity
  */
 public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
-    ActionBar.OnNavigationListener, OrganizationSelectionProvider,
+        NavigationView.OnNavigationItemSelectedListener,
+        OrganizationSelectionProvider,
         LoaderCallbacks<List<User>> {
 
     private static final String TAG = "HomeActivity";
@@ -73,7 +78,13 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
 
     private List<User> orgs = Collections.emptyList();
 
-    private HomeDropdownListAdapter homeAdapter;
+    private DrawerLayout navigationDrawer;
+
+    private NavigationView navigationView;
+
+    private ColorStateList navigationIconTint;
+
+    private boolean isUserNavVisible = false;
 
     private Set<OrganizationSelectionListener> orgSelectionListeners = new LinkedHashSet<OrganizationSelectionListener>();
 
@@ -89,6 +100,36 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        navigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
+                this, navigationDrawer, toolbar, R.string.app_name, R.string.app_name) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                if (isUserNavVisible) {
+                    swapNavigationMenu();
+                }
+
+            }
+        };
+
+        navigationDrawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        navigationIconTint = navigationView.getItemIconTintList();
+        findViewById(R.id.nav_header).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                swapNavigationMenu();
+            }
+        });
+
         getSupportLoaderManager().initLoader(0, null, this);
     }
 
@@ -97,14 +138,12 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
                 new LoaderCallbacks<List<User>>() {
 
                     @Override
-                    public Loader<List<User>> onCreateLoader(int id,
-                            Bundle bundle) {
+                    public Loader<List<User>> onCreateLoader(int id, Bundle bundle) {
                         return HomeActivity.this.onCreateLoader(id, bundle);
                     }
 
                     @Override
-                    public void onLoadFinished(Loader<List<User>> loader,
-                            final List<User> users) {
+                    public void onLoadFinished(Loader<List<User>> loader, final List<User> users) {
                         HomeActivity.this.onLoadFinished(loader, users);
                         if (users.isEmpty())
                             return;
@@ -145,18 +184,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             reloadOrgs();
     }
 
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-
-        // TODO This is now deprecated, should look at switching to child spinner view via Toolbar
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        homeAdapter = new HomeDropdownListAdapter(this, orgs, avatars);
-        actionBar.setListNavigationCallbacks(homeAdapter, this);
-    }
-
     private void setOrg(User org) {
         Log.d(TAG, "setOrg : " + org.getLogin());
 
@@ -168,6 +195,9 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             return;
 
         this.org = org;
+
+        avatars.bind((ImageView) findViewById(R.id.avatar), org);
+        ((TextView) findViewById(R.id.user_name)).setText(org.getLogin());
 
         boolean isDefaultUser = AccountUtils.isUser(this, org);
         boolean changed = this.isDefaultUser != isDefaultUser;
@@ -196,6 +226,15 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
+    public void onBackPressed() {
+        if (navigationDrawer.isDrawerOpen(GravityCompat.START)) {
+            navigationDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.m_search:
@@ -207,28 +246,29 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
-    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        if (homeAdapter.isOrgPosition(itemPosition)) {
-            homeAdapter.setSelected(itemPosition);
-            setOrg(orgs.get(itemPosition));
-        } else if (homeAdapter.getOrgCount() > 0) {
-            switch (homeAdapter.getAction(itemPosition)) {
-            case ACTION_GISTS:
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() < orgs.size()) {
+            setOrg(orgs.get(menuItem.getItemId()));
+            navigationDrawer.closeDrawer(GravityCompat.START);
+            return false;
+        }
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_gists:
+                navigationDrawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, GistsActivity.class));
                 break;
-            case ACTION_DASHBOARD:
+            case R.id.navigation_dashboard:
+                navigationDrawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, IssueDashboardActivity.class));
                 break;
-            case ACTION_BOOKMARKS:
+            case R.id.navigation_bookmarks:
+                navigationDrawer.closeDrawer(GravityCompat.START);
                 startActivity(FiltersViewActivity.createIntent());
                 break;
-            }
-            int orgSelected = homeAdapter.getSelected();
-            ActionBar actionBar = getSupportActionBar();
-            if (orgSelected < actionBar.getNavigationItemCount())
-                actionBar.setSelectedNavigationItem(orgSelected);
         }
-        return true;
+
+        return false;
     }
 
     @Override
@@ -241,20 +281,25 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     public void onLoadFinished(Loader<List<User>> listLoader, List<User> orgs) {
         this.orgs = orgs;
 
-        if (homeAdapter != null)
-            homeAdapter.setOrgs(orgs);
-        else
-            configureActionBar();
-
         int sharedPreferencesOrgId = sharedPreferences.getInt(PREF_ORG_ID, -1);
         int targetOrgId = org == null ? sharedPreferencesOrgId : org.getId();
 
-        ActionBar actionBar = getSupportActionBar();
-        for (int i = 0; i < orgs.size(); i++)
+        Menu menu = navigationView.getMenu();
+        menu.removeGroup(R.id.user_select);
+        for (int i = 0; i < orgs.size(); ++i) {
+            final MenuItem item = menu.add(R.id.user_select, i, Menu.NONE, orgs.get(i).getLogin());
+            avatars.bind(item, orgs.get(i));
             if (orgs.get(i).getId() == targetOrgId) {
-                actionBar.setSelectedNavigationItem(i);
-                break;
+                setOrg(orgs.get(i));
             }
+        }
+
+        // If the target org is invalid (e.g. first login), select the first one
+        if (targetOrgId == -1) {
+            setOrg(orgs.get(0));
+        }
+
+        menu.setGroupVisible(R.id.user_select, false);
     }
 
     @Override
@@ -277,6 +322,11 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
+    protected int getContentView() {
+        return R.layout.home;
+    }
+
+    @Override
     protected HomePagerAdapter createAdapter() {
         return new HomePagerAdapter(this, isDefaultUser);
     }
@@ -295,5 +345,19 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         default:
             return super.getIcon(position);
         }
+    }
+
+    private void swapNavigationMenu() {
+        Menu menu = navigationView.getMenu();
+        if (isUserNavVisible) {
+            menu.setGroupVisible(R.id.user_select, false);
+            menu.setGroupVisible(R.id.navigation_menu, true);
+            navigationView.setItemIconTintList(navigationIconTint);
+        } else {
+            menu.setGroupVisible(R.id.user_select, true);
+            menu.setGroupVisible(R.id.navigation_menu, false);
+            navigationView.setItemIconTintList(null);
+        }
+        isUserNavVisible = !isUserNavVisible;
     }
 }

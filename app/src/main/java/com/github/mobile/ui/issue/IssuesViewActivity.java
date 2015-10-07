@@ -179,13 +179,13 @@ public class IssuesViewActivity extends PagerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.pager);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         issueNumbers = getIntArrayExtra(EXTRA_ISSUE_NUMBERS);
         pullRequests = getBooleanArrayExtra(EXTRA_PULL_REQUESTS);
         repoIds = getSerializableExtra(EXTRA_REPOSITORIES);
         repo = getSerializableExtra(EXTRA_REPOSITORY);
-
-        setContentView(R.layout.pager);
 
         if (repo != null) {
             ActionBar actionBar = getSupportActionBar();

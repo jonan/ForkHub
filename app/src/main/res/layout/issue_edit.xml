@@ -16,33 +16,41 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/actionbar_background_top" />
 
     <View
         android:id="@+id/v_header_separator"
         style="@style/HeaderSeparator"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@id/toolbar" />
 
     <ProgressBar
         android:id="@+id/pb_loading"
         style="@style/Spinner"
-        android:layout_centerInParent="true"
         android:layout_width="64dp"
-        android:layout_height="64dp" />
+        android:layout_height="64dp"
+        android:layout_centerInParent="true" />
 
     <ScrollView
         android:id="@+id/sv_issue_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/v_header_separator"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp" >
+            android:padding="10dp">
 
             <TextView
                 style="@style/HeaderTitleText"
@@ -68,7 +76,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_labels"
@@ -92,7 +100,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_assignee_avatar"
@@ -122,7 +130,7 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_milestone"
