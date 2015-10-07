@@ -65,6 +65,7 @@ public class RepositoryUtils {
                 || "features".equals(name) //
                 || "home".equals(name) //
                 || "inbox".equals(name) //
+                || "join".equals(name) //
                 || "languages".equals(name) //
                 || "login".equals(name) //
                 || "logout".equals(name) //
@@ -72,6 +73,8 @@ public class RepositoryUtils {
                 || "notifications".equals(name) //
                 || "organizations".equals(name) //
                 || "orgs".equals(name) //
+                || "plans".equals(name) //
+                || "pricing".equals(name) //
                 || "repositories".equals(name) //
                 || "search".equals(name) //
                 || "security".equals(name) //
