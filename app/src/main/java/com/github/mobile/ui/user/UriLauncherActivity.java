@@ -28,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,6 +48,7 @@ import com.github.mobile.ui.repo.RepositoryViewActivity;
 
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.List;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.Repository;
@@ -129,6 +131,18 @@ public class UriLauncherActivity extends Activity {
             startActivity(new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE));
             finish();
         } else {
+            // If we can't open the link look for another app that can (e.g. a browser)
+            Intent externalIntent = new Intent(Intent.ACTION_VIEW, data);
+            List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(externalIntent, 0);
+            for (ResolveInfo r : resolvers) {
+                if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
+                    externalIntent.setPackage(r.activityInfo.packageName);
+                    startActivity(externalIntent);
+                    finish();
+                    return;
+                }
+            }
+
             showParseError(data.toString());
         }
     }
