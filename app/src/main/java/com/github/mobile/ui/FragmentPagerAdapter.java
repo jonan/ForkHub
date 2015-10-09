@@ -16,7 +16,7 @@
 package com.github.mobile.ui;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 /**
@@ -25,14 +25,14 @@ import android.view.ViewGroup;
 public abstract class FragmentPagerAdapter extends
         android.support.v4.app.FragmentPagerAdapter implements FragmentProvider {
 
-    private final ActionBarActivity activity;
+    private final AppCompatActivity activity;
 
     private Fragment selected;
 
     /**
      * @param activity
      */
-    public FragmentPagerAdapter(ActionBarActivity activity) {
+    public FragmentPagerAdapter(AppCompatActivity activity) {
         super(activity.getSupportFragmentManager());
 
         this.activity = activity;

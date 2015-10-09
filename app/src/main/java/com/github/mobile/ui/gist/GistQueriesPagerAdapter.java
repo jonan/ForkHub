@@ -17,7 +17,7 @@ package com.github.mobile.ui.gist;
 
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
@@ -34,7 +34,7 @@ public class GistQueriesPagerAdapter extends FragmentPagerAdapter {
      *
      * @param activity
      */
-    public GistQueriesPagerAdapter(ActionBarActivity activity) {
+    public GistQueriesPagerAdapter(AppCompatActivity activity) {
         super(activity);
 
         resources = activity.getResources();

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -35,7 +35,7 @@ import roboguice.util.RoboContext;
  * <p>
  * Based on <a href="https://github.com/mccrajs">@mccrajs's</a> implementation <a href="https://github.com/metova/roboguice-appcompat/blob/master/src/com/metova/roboguice/appcompat/RoboActionBarActivity.java">here</a>.
  */
-public class RoboActionBarActivity extends ActionBarActivity implements RoboContext {
+public class RoboActionBarActivity extends AppCompatActivity implements RoboContext {
 
     protected EventManager eventManager;
     protected HashMap<Key<?>, Object> scopedObjects = new HashMap<>();

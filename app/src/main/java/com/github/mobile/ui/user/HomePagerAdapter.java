@@ -19,7 +19,7 @@ import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import com.github.mobile.R;
@@ -46,7 +46,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
      * @param activity
      * @param defaultUser
      */
-    public HomePagerAdapter(final ActionBarActivity activity,
+    public HomePagerAdapter(final AppCompatActivity activity,
             final boolean defaultUser) {
         super(activity);
 
