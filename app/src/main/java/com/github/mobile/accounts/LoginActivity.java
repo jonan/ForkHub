@@ -369,8 +369,10 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
                 onAuthenticationResult(true);
                 break;
             case RESULT_CANCELED:
-                Exception e = (Exception) data.getExtras().getSerializable(PARAM_EXCEPTION);
-                handleLoginException(e);
+                if (data != null) {
+                    Exception e = (Exception) data.getExtras().getSerializable(PARAM_EXCEPTION);
+                    handleLoginException(e);
+                }
                 break;
             }
         }
