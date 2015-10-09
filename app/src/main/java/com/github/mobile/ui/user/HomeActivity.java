@@ -295,7 +295,7 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         }
 
         // If the target org is invalid (e.g. first login), select the first one
-        if (targetOrgId == -1) {
+        if (targetOrgId == -1 && orgs.size() > 0) {
             setOrg(orgs.get(0));
         }
 
