@@ -15,6 +15,8 @@
  */
 package com.github.mobile;
 
+import android.os.Build;
+
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.OkUrlFactory;
 
@@ -50,6 +52,10 @@ public class DefaultClient extends GitHubClient {
      */
     @Override
     protected HttpURLConnection createConnection(String uri) throws IOException {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            return super.createConnection(uri);
+        }
+
         OkUrlFactory factory = new OkUrlFactory(new OkHttpClient());
         URL url = new URL(createUri(uri));
         return factory.open(url);
