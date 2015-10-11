@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -68,6 +69,13 @@ public class AvatarLoader {
      */
     @Inject
     public AvatarLoader(final Context context) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            this.context = null;
+            p = null;
+            cornerRadius = 0;
+            return;
+        }
+
         this.context = context;
         p = Picasso.with(context);
 
@@ -101,6 +109,10 @@ public class AvatarLoader {
      * @param user A User object that points to the desired user.
      */
     public void bind(final MenuItem item, final User user) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            return;
+        }
+
         if (user == null)
             return;
 
@@ -137,6 +149,10 @@ public class AvatarLoader {
      * @param userReference An AtomicReference that points to the desired user.
      */
     public void bind(final ActionBar actionBar, final AtomicReference<User> userReference) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            return;
+        }
+
         if (userReference == null)
             return;
 
@@ -201,6 +217,10 @@ public class AvatarLoader {
     }
 
     private void bind(final ImageView view, String url) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            return;
+        }
+
         if (url == null) {
             p.load(R.drawable.gravatar_icon).into(view);
             return;
