@@ -83,4 +83,8 @@
     <color name="issue_event_red">#BD2C00</color>
     <color name="issue_event_green">#6CC644</color>
 
+    <color name="color_primary">#3F51B5</color>
+    <color name="color_primary_dark">#1A237E</color>
+    <color name="color_accent">#64DD17</color>
+
 </resources>

@@ -16,14 +16,19 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.ForkHub.Base" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <style name="Theme.ForkHub.Base" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+
+        <item name="colorControlNormal">#50000000</item>
+
         <item name="android:windowBackground">@color/background</item>
+
         <item name="clickableBackground">@drawable/list_item_background</item>
     </style>
 
     <style name="Theme.GitHub" parent="@style/Theme.ForkHub.Base">
-        <item name="clickableBackground">@drawable/list_item_background</item>
     </style>
 
 </resources>

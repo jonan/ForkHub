@@ -22,16 +22,14 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/actionbar_background_top" />
+        style="@style/Toolbar" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/th_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/actionbar_background_top"
-        app:tabIndicatorColor="@android:color/white"
+        android:background="@color/color_primary"
+        app:tabIndicatorColor="@color/color_accent"
         app:tabMode="scrollable" />
 
     <com.github.mobile.ui.ViewPager
