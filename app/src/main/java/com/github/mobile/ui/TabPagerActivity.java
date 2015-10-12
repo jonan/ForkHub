@@ -16,20 +16,11 @@
 package com.github.mobile.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
-import android.widget.TabHost.TabContentFactory;
-import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
-import com.github.mobile.util.TypefaceUtils;
 
 /**
  * Activity with tabbed pages
@@ -37,7 +28,7 @@ import com.github.mobile.util.TypefaceUtils;
  * @param <V>
  */
 public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider>
-        extends PagerActivity implements OnTabChangeListener, TabContentFactory {
+        extends PagerActivity {
 
     /**
      * View pager
@@ -45,9 +36,9 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
     protected ViewPager pager;
 
     /**
-     * Tab host
+     * Tab layout
      */
-    protected TabHost host;
+    protected TabLayout tabLayout;
 
     /**
      * Pager adapter
@@ -58,17 +49,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
     public void onPageSelected(final int position) {
         super.onPageSelected(position);
 
-        host.setCurrentTab(position);
-    }
-
-    @Override
-    public void onTabChanged(String tabId) {
-        updateCurrentItem(host.getCurrentTab());
-    }
-
-    @Override
-    public View createTabContent(String tag) {
-        return ViewUtils.setGone(new View(getApplication()), true);
+        setCurrentItem(position);
     }
 
     /**
@@ -105,7 +86,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
      * @return this activity
      */
     protected TabPagerActivity<V> setGone(boolean gone) {
-        ViewUtils.setGone(host, gone);
+        ViewUtils.setGone(tabLayout, gone);
         ViewUtils.setGone(pager, gone);
         return this;
     }
@@ -133,13 +114,6 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
         return R.layout.pager_with_tabs;
     }
 
-    private void updateCurrentItem(final int newPosition) {
-        if (newPosition > -1 && newPosition < adapter.getCount()) {
-            pager.setItem(newPosition);
-            setCurrentItem(newPosition);
-        }
-    }
-
     private void createPager() {
         adapter = createAdapter();
         invalidateOptionsMenu();
@@ -153,43 +127,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
      * initial call to {@link #configureTabPager()}
      */
     protected void createTabs() {
-        if (host.getTabWidget().getTabCount() > 0) {
-            // Crash on Gingerbread if tab isn't set to zero since adding a
-            // new tab removes selection state on the old tab which will be
-            // null unless the current tab index is the same as the first
-            // tab index being added
-            host.setCurrentTab(0);
-            host.clearAllTabs();
-        }
-
-        LayoutInflater inflater = getLayoutInflater();
-        int count = adapter.getCount();
-        for (int i = 0; i < count; i++) {
-            TabSpec spec = host.newTabSpec("tab" + i);
-            spec.setContent(this);
-            View view = inflater.inflate(R.layout.tab, null);
-            TextView icon = (TextView) view.findViewById(R.id.tv_icon);
-            String iconText = getIcon(i);
-            if (!TextUtils.isEmpty(iconText))
-                icon.setText(getIcon(i));
-            else
-                ViewUtils.setGone(icon, true);
-            TypefaceUtils.setOcticons(icon);
-            ((TextView) view.findViewById(R.id.tv_tab)).setText(getTitle(i));
-
-            spec.setIndicator(view);
-            host.addTab(spec);
-
-            int background;
-            if (i == 0)
-                background = R.drawable.tab_selector_right;
-            else if (i == count - 1)
-                background = R.drawable.tab_selector_left;
-            else
-                background = R.drawable.tab_selector_left_right;
-            ((ImageView) view.findViewById(R.id.iv_tab))
-                    .setImageResource(background);
-        }
+        tabLayout.setupWithViewPager(pager);
     }
 
     /**
@@ -209,9 +147,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
         setContentView(getContentView());
         pager = (ViewPager) findViewById(R.id.vp_pages);
         pager.setOnPageChangeListener(this);
-        host = (TabHost) findViewById(R.id.th_tabs);
-        host.setup();
-        host.setOnTabChangedListener(this);
+        tabLayout = (TabLayout) findViewById(R.id.th_tabs);
     }
 
     @Override
