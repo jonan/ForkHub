@@ -39,8 +39,6 @@ import com.github.mobile.util.TypefaceUtils;
  */
 public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
 
-    private ProgressBar loadingBar;
-
     private SearchRepositoryListFragment repoFragment;
 
     private SearchUserListFragment userFragment;
@@ -50,8 +48,6 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        loadingBar = finder.find(R.id.pb_loading);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -89,11 +85,6 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     protected SearchPagerAdapter createAdapter() {
         return new SearchPagerAdapter(this);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.tabbed_progress_pager;
     }
 
     @Override
@@ -143,8 +134,6 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
 
     private void configurePager() {
         configureTabPager();
-        ViewUtils.setGone(loadingBar, true);
-        setGone(false);
     }
 
     private void findFragments() {
