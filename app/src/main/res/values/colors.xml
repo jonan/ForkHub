@@ -27,11 +27,6 @@
     <color name="text_icon">#A8A8A8</color>
     <color name="text_recent">#3797C7</color>
     <color name="text_description">#666666</color>
-    <color name="actionbar_background_top">#6E6E6E</color>
-    <color name="actionbar_background_bottom">#181818</color>
-    <color name="actionbar_background_end">#282828</color>
-    <color name="actionbar_background_start">#515252</color>
-    <color name="actionbar_text">#F4F2F1</color>
     <color name="pager_title_background_top_start">#1A4D6B</color>
     <color name="pager_title_background_top_end">#1A5373</color>
     <color name="pager_title_background_bottom">#155A7F</color>
@@ -40,6 +35,9 @@
     <color name="pager_title_text">#E0E6EA</color>
     <color name="pager_title_selected_text">#FFFFFF</color>
     <color name="pager_footer">#FFFFFF</color>
+    <color name="footer_text">#F4F2F1</color>
+    <color name="footer_background">#525252</color>
+    <color name="footer_background_selected">#282828</color>
     <color name="edit_text_background">#F8F8F8</color>
     <color name="edit_text_inner">#EDEDED</color>
     <color name="edit_text_outer">#959595</color>
@@ -75,7 +73,6 @@
     <color name="tab_selected_icon">#08D7FF</color>
     <color name="tab_text">#B3D5E8</color>
     <color name="tab_icon">#FAFAFA</color>
-    <color name="tab_text_shadow">#245066</color>
     <color name="issue_event_normal">#666666</color>
     <color name="issue_event_light">#999999</color>
     <color name="issue_event_dark">#333333</color>

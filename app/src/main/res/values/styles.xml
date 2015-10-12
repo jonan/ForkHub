@@ -194,15 +194,6 @@
         <item name="android:background">@color/background</item>
     </style>
 
-    <style name="DropdownItem">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-    </style>
-
     <style name="Spinner">
         <item name="android:indeterminate">true</item>
         <item name="android:indeterminateDrawable">@drawable/spinner</item>
@@ -215,24 +206,9 @@
         <item name="android:layout_height">64dp</item>
     </style>
 
-    <style name="HeaderSeparator">
-        <item name="android:layout_height">5dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/header_separator_background</item>
-    </style>
-
     <style name="FooterSeparator">
         <item name="android:layout_height">10dp</item>
         <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="TabText" parent="Global">
-        <item name="android:textColor">@color/tab_text_colors</item>
-        <item name="android:shadowColor">@color/tab_text_shadow</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">1</item>
-        <item name="android:textSize">11sp</item>
     </style>
 
     <style name="Toolbar" parent="Widget.AppCompat.Toolbar">

@@ -23,10 +23,6 @@
         android:id="@+id/toolbar"
         style="@style/Toolbar" />
 
-    <View
-        android:id="@+id/v_header_separator"
-        style="@style/HeaderSeparator" />
-
     <fragment
         android:id="@android:id/list"
         android:layout_width="match_parent"

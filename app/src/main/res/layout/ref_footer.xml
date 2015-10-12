@@ -29,7 +29,7 @@
         style="@style/PrimaryIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textColor="@color/actionbar_text" />
+        android:textColor="@color/footer_text" />
 
     <TextView
         android:id="@+id/tv_branch"
@@ -37,7 +37,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/tv_branch_icon"
         android:paddingBottom="0dp"
-        android:textColor="@color/actionbar_text"
+        android:textColor="@color/footer_text"
         android:textSize="15sp" />
 
 </RelativeLayout>
