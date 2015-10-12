@@ -15,15 +15,12 @@
  */
 package com.github.mobile.ui.comment;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.HONEYCOMB_MR1;
 import static com.github.mobile.Intents.EXTRA_COMMENT;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
@@ -52,20 +49,6 @@ public abstract class CreateCommentActivity extends
         super.onCreate(savedInstanceState);
 
         configureTabPager();
-
-        // prevent TabHost from stealing focus when using hardware keyboard
-        if (SDK_INT >= HONEYCOMB_MR1)
-            host.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-
-                @Override
-                public void onViewAttachedToWindow(View v) {
-                    host.getViewTreeObserver().removeOnTouchModeChangeListener(host);
-                }
-
-                @Override
-                public void onViewDetachedFromWindow(View v) {
-                }
-            });
     }
 
     @Override
@@ -113,18 +96,6 @@ public abstract class CreateCommentActivity extends
             return true;
         default:
             return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected String getTitle(final int position) {
-        switch (position) {
-        case 0:
-            return getString(R.string.write);
-        case 1:
-            return getString(R.string.preview);
-        default:
-            return super.getTitle(position);
         }
     }
 

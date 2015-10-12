@@ -15,9 +15,11 @@
  */
 package com.github.mobile.ui.comment;
 
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
@@ -33,6 +35,8 @@ public class CommentPreviewPagerAdapter extends FragmentPagerAdapter {
 
     private RenderedCommentFragment htmlFragment;
 
+    private final Resources resources;
+
     /**
      * Text to populate comment window.
      */
@@ -47,6 +51,7 @@ public class CommentPreviewPagerAdapter extends FragmentPagerAdapter {
         super(activity);
 
         this.repo = repo;
+        resources = activity.getResources();
     }
 
     @Override
@@ -61,6 +66,18 @@ public class CommentPreviewPagerAdapter extends FragmentPagerAdapter {
             return htmlFragment;
         default:
             return null;
+        }
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+        case 0:
+            return resources.getString(R.string.write);
+        case 1:
+            return resources.getString(R.string.preview);
+        default:
+            return super.getPageTitle(position);
         }
     }
 
