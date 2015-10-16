@@ -279,6 +279,16 @@ public class CommentListAdapter extends MultiTypeAdapter {
     }
 
     @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
+
+    @Override
     protected int[] getChildViewIds(int type) {
         if(type == 0)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
