@@ -1,4 +1,4 @@
-# ForkHub [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=jp.forkhub) [![Build Status](https://travis-ci.org/jonan/ForkHub.svg?branch=master)](https://travis-ci.org/jonan/ForkHub)
+# ForkHub [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=jp.forkhub)
 
 The official [GitHub Android App](https://github.com/github/android/) hasn't been updated in a while and has been accumulating a few bugs and missing features, so I've decided to fork it and keep improving it.
 
