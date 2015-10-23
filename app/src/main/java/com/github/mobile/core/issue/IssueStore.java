@@ -119,14 +119,11 @@ public class IssueStore extends ItemStore {
         try {
             issue = issueService.getIssue(repository, number);
             if (IssueUtils.isPullRequest(issue))
-                issue = IssueUtils.toIssue(pullService.getPullRequest(
-                    repository, number));
+                issue.setPullRequest(pullService.getPullRequest(repository, number));
         } catch (IOException e) {
-            if (e instanceof RequestException
-                    && 410 == ((RequestException) e).getStatus())
+            if (e instanceof RequestException && 410 == ((RequestException) e).getStatus())
                 try {
-                    issue = IssueUtils.toIssue(pullService.getPullRequest(
-                            repository, number));
+                    issue = IssueUtils.toIssue(pullService.getPullRequest(repository, number));
                 } catch (IOException e2) {
                     throw e;
                 }
