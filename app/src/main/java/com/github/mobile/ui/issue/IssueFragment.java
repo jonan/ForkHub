@@ -347,6 +347,7 @@ public class IssueFragment extends DialogFragment {
         if (!isUsable())
             return;
 
+        boolean isPullRequest = IssueUtils.isPullRequest(issue);
         titleText.setText(issue.getTitle());
 
         String body = issue.getBodyHtml();
@@ -360,7 +361,7 @@ public class IssueFragment extends DialogFragment {
                 getString(R.string.prefix_opened)).append(issue.getCreatedAt()));
         avatars.bind(creatorAvatar, issue.getUser());
 
-        if (IssueUtils.isPullRequest(issue) && issue.getPullRequest().getCommits() > 0) {
+        if (isPullRequest && issue.getPullRequest().getCommits() > 0) {
             ViewUtils.setGone(commitsView, false);
 
             TextView icon = (TextView) headerView.findViewById(R.id.tv_commit_icon);
@@ -376,7 +377,13 @@ public class IssueFragment extends DialogFragment {
         boolean open = STATE_OPEN.equals(issue.getState());
         if (!open) {
             StyledText text = new StyledText();
-            text.bold(getString(R.string.closed));
+            if (isPullRequest && issue.getPullRequest().isMerged()) {
+                text.bold(getString(R.string.merged));
+                stateText.setBackgroundResource(R.color.state_background_merged);
+            } else {
+                text.bold(getString(R.string.closed));
+                stateText.setBackgroundResource(R.color.state_background_closed);
+            }
             Date closedAt = issue.getClosedAt();
             if (closedAt != null)
                 text.append(' ').append(closedAt);
@@ -457,13 +464,12 @@ public class IssueFragment extends DialogFragment {
 
                 List<Object> allItems = new ArrayList<>();
 
-                List<String> excludedEvents = Arrays.asList(IssueEvent.TYPE_MENTIONED, IssueEvent.TYPE_SUBSCRIBED);
                 int start = 0;
                 for (Comment comment : fullIssue) {
                     for (int e = start; e < numEvents; e++) {
                         IssueEvent event = events.get(e);
                         if (comment.getCreatedAt().after(event.getCreatedAt())) {
-                            if (!excludedEvents.contains(event.getEvent()))
+                            if (shouldAddEvent(event, allItems))
                                 allItems.add(event);
                             start++;
                         } else {
@@ -476,7 +482,7 @@ public class IssueFragment extends DialogFragment {
                 // Adding the last events or if there are no comments
                 for (int e = start; e < numEvents; e++) {
                     IssueEvent event = events.get(e);
-                    if (!excludedEvents.contains(event.getEvent()))
+                    if (shouldAddEvent(event, allItems))
                         allItems.add(event);
                 }
 
@@ -672,5 +678,29 @@ public class IssueFragment extends DialogFragment {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    static private boolean shouldAddEvent(IssueEvent event, List<Object> allItems) {
+        // Exclude some events
+        List<String> excludedEvents = Arrays.asList(IssueEvent.TYPE_MENTIONED, IssueEvent.TYPE_SUBSCRIBED);
+        if (excludedEvents.contains(event.getEvent()))
+            return false;
+
+        // Don't show the close event after the merged event
+        if (!IssueEvent.TYPE_CLOSED.equals(event.getEvent()))
+            return true;
+
+        int currentSize = allItems.size();
+        if (currentSize == 0)
+            return true;
+
+        Object previousItem = allItems.get(currentSize-1);
+        if (!(previousItem instanceof IssueEvent))
+            return true;
+
+        if (IssueEvent.TYPE_MERGED.equals(((IssueEvent) previousItem).getEvent()))
+            return false;
+
+        return true;
     }
 }

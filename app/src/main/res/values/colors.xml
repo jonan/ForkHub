@@ -58,6 +58,7 @@
     <color name="sign_up_text">#666666</color>
     <color name="sign_up_text_link">#3797C7</color>
     <color name="state_background_closed">#BD2C00</color>
+    <color name="state_background_merged">#6E5494</color>
     <color name="state_text">#FFFFFF</color>
     <color name="diff_marker_bg">#EAF2F5</color>
     <color name="diff_marker_text">#999999</color>
