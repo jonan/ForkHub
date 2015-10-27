@@ -40,10 +40,10 @@ public class GistUriMatcher {
         List<String> segments = uri.getPathSegments();
         if (segments == null)
             return null;
-        if (segments.size() != 1)
+        if (segments.size() < 1 || segments.size() > 2)
             return null;
 
-        String gistId = segments.get(0);
+        String gistId = segments.get(segments.size()-1);
         if (TextUtils.isEmpty(gistId))
             return null;
 

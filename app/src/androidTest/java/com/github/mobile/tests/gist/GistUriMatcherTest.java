@@ -65,4 +65,14 @@ public class GistUriMatcherTest extends AndroidTestCase {
         assertNotNull(gist);
         assertEquals("abcd1234abcd1234abcd", gist.getId());
     }
+
+    /**
+     * Verify public Gist id with user
+     */
+    public void testPrivateGistWithUser() {
+        Gist gist = GistUriMatcher.getGist(Uri
+                .parse("https://gist.github.com/user/abcd1234abcd1234abcd"));
+        assertNotNull(gist);
+        assertEquals("abcd1234abcd1234abcd", gist.getId());
+    }
 }
