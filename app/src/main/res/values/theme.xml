@@ -16,12 +16,17 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.ForkHub.Base" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="Theme.ForkHub.Base" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
 
+        <item name="android:textColorPrimary">#FFFFFFFF</item>
+        <item name="android:textColorSecondary">#B3FFFFFF</item>
+
         <item name="colorControlNormal">#50000000</item>
+
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 
         <item name="android:windowBackground">@color/background</item>
 
