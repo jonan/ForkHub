@@ -1,5 +1,16 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+- Lots of visual improvements, including basic Material Design.
+- Improve information shown in Pull Requests.
+- Open Gist links containing the owners login.
+
+### Fixed
+- Properly detect all markup formats.
+- Froyo is supported again.
+
 ## [ForkHub v1.0.0] - 2015-09-18
 
 ### Fixed
@@ -49,6 +60,7 @@
 
 - Last official GitHub release
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.0.0...master
 [ForkHub v1.0.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...ForkHub-v1.0.0
 [ForkHub v0.9.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.1...ForkHub-v0.9.2
 [ForkHub v0.9.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.0...ForkHub-v0.9.1
