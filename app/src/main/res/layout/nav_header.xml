@@ -17,7 +17,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="110dp"
-    android:background="#E5E5E5">
+    android:background="@color/background_id">
 
     <RelativeLayout
         android:id="@+id/nav_header"
