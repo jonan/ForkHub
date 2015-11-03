@@ -78,6 +78,7 @@
     <string name="no_repositories">No Repositories</string>
     <string name="no_contributors">No contributors</string>
     <string name="no_issues">No Issues</string>
+    <string name="no_pull_requests">No Pull Requests</string>
     <string name="no_gists">No Gists</string>
     <string name="no_people">No People</string>
     <string name="no_followers">No Followers</string>
@@ -150,6 +151,7 @@
     <string name="pull_request_title">Pull Request #</string>
     <string name="gist_title">Gist\u0020</string>
     <string name="filter_issues_title">Filter Issues</string>
+    <string name="filter_pull_requests_title">Filter Pull Requests</string>
     <string name="create_comment_title">Create Comment</string>
     <string name="comment_hint">Enter a comment</string>
     <string name="show_more">Show More…</string>
@@ -232,6 +234,8 @@
     <string name="pull_request_commits">Commits: %d</string>
     <string name="open_issues">Open Issues</string>
     <string name="closed_issues">Closed Issues</string>
+    <string name="open_pull_requests">Open Pull Requests</string>
+    <string name="closed_pull_requests">Closed Pull Requests</string>
     <string name="confirm_bookmark_delete_title">Remove Bookmark</string>
     <string name="save">Save</string>
     <string name="apply">Apply</string>
@@ -287,6 +291,7 @@
     <string name="tab_code">code</string>
     <string name="tab_commits">commits</string>
     <string name="tab_issues">issues</string>
+    <string name="tab_pull_requests">pull requests</string>
     <string name="tab_watched">watched</string>
     <string name="tab_assigned">assigned</string>
     <string name="tab_created">created</string>

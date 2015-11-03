@@ -69,7 +69,7 @@ public class SearchIssueListFragment extends ItemListFragment<SearchIssue>
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(R.string.no_issues);
+        setEmptyText(repository.isHasIssues() ? R.string.no_issues : R.string.no_pull_requests);
     }
 
     /**

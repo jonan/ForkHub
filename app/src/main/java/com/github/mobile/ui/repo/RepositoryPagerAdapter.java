@@ -73,7 +73,7 @@ public class RepositoryPagerAdapter extends FragmentPagerAdapter {
         case 2:
             return resources.getString(R.string.tab_commits);
         case 3:
-            return resources.getString(R.string.tab_issues);
+            return hasIssues ? resources.getString(R.string.tab_issues) : resources.getString(R.string.tab_pull_requests);
         default:
             return null;
         }
@@ -99,7 +99,7 @@ public class RepositoryPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return hasIssues ? 4 : 3;
+        return 4;
     }
 
     /**

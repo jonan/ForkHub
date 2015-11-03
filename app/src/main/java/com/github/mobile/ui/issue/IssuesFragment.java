@@ -136,9 +136,9 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
 
     private void updateFilterSummary() {
         if (filter.isOpen())
-            state.setText(R.string.open_issues);
+            state.setText(repository.isHasIssues() ? R.string.open_issues : R.string.open_pull_requests);
         else
-            state.setText(R.string.closed_issues);
+            state.setText(repository.isHasIssues() ? R.string.closed_issues : R.string.closed_pull_requests);
 
         Collection<Label> filterLabels = filter.getLabels();
         if (filterLabels != null && !filterLabels.isEmpty()) {
@@ -167,7 +167,7 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(R.string.no_issues);
+        setEmptyText(repository.isHasIssues() ? R.string.no_issues : R.string.no_pull_requests);
     }
 
     @Override
@@ -185,6 +185,9 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
     @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
         inflater.inflate(R.menu.issues, optionsMenu);
+        if (!repository.isHasIssues()) {
+            optionsMenu.removeItem(R.id.create_issue);
+        }
     }
 
     @Override

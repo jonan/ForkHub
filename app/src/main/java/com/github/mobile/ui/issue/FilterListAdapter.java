@@ -64,9 +64,9 @@ public class FilterListAdapter extends SingleTypeAdapter<IssueFilter> {
         avatars.bind(imageView(0), filter.getRepository().getOwner());
         setText(1, filter.getRepository().generateId());
         if (filter.isOpen())
-            setText(2, R.string.open_issues);
+            setText(2, filter.getRepository().isHasIssues() ? R.string.open_issues : R.string.open_pull_requests);
         else
-            setText(2, R.string.closed_issues);
+            setText(2, filter.getRepository().isHasIssues() ? R.string.closed_issues : R.string.closed_pull_requests);
 
         Collection<Label> labels = filter.getLabels();
         if (labels != null && !labels.isEmpty()) {

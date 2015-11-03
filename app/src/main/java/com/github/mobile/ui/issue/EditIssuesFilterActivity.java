@@ -119,7 +119,8 @@ public class EditIssuesFilterActivity extends DialogFragmentActivity {
         final Repository repository = filter.getRepository();
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.filter_issues_title);
+        actionBar.setTitle(repository.isHasIssues() ?
+                R.string.filter_issues_title : R.string.filter_pull_requests_title);
         actionBar.setSubtitle(repository.generateId());
         avatars.bind(actionBar, repository.getOwner());
 
