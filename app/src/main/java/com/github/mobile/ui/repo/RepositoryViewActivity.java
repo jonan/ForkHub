@@ -17,6 +17,7 @@ package com.github.mobile.ui.repo;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_POSITION;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
 import static com.github.mobile.ui.repo.RepositoryPagerAdapter.ITEM_CODE;
@@ -63,6 +64,16 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
      */
     public static Intent createIntent(Repository repository) {
         return new Builder("repo.VIEW").repo(repository).toIntent();
+    }
+
+    /**
+     * Create intent for this activity and open the issues tab
+     *
+     * @param repository
+     * @return intent
+     */
+    public static Intent createIntentForIssues(Repository repository) {
+        return new Builder("repo.VIEW").repo(repository).add(EXTRA_POSITION, 3).toIntent();
     }
 
     private Repository repository;
@@ -157,6 +168,10 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
         ViewUtils.setGone(loadingBar, true);
         setGone(false);
         checkStarredRepositoryStatus();
+        int initialPosition = getIntExtra(EXTRA_POSITION);
+        if (initialPosition != -1) {
+            pager.setItem(initialPosition);
+        }
     }
 
     @Override

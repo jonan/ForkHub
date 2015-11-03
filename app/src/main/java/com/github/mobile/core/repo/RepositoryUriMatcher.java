@@ -53,4 +53,23 @@ public class RepositoryUriMatcher {
         repository.setOwner(new User().setLogin(repoOwner));
         return repository;
     }
+
+    /**
+     * Attempt to parse a {@link Repository} with issues or
+     * pull requests from the given {@link Uri}
+     *
+     * @param uri
+     * @return {@link Repository} or null if unparseable
+     */
+    public static Repository getRepositoryIssues(Uri uri) {
+        List<String> segments = uri.getPathSegments();
+        if (segments == null)
+            return null;
+        if (segments.size() < 3)
+            return null;
+        if (!"issues".equals(segments.get(2)) && !"pulls".equals(segments.get(2)))
+            return null;
+
+        return RepositoryUriMatcher.getRepository(uri);
+    }
 }

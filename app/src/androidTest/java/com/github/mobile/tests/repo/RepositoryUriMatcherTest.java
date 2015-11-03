@@ -57,7 +57,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
     }
 
     /**
-     * Verify URI with owner but no name
+     * Verify URI with owner and name
      */
     public void testHttpUriWithOwnerAndName() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
@@ -69,11 +69,35 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
     }
 
     /**
-     * Verify URI with owner but no name
+     * Verify URI with owner and name
      */
     public void testHttpsUriWithOwnerAndName() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
                 .parse("https://github.com/mojombo/jekyll"));
+        assertNotNull(repo);
+        assertEquals("jekyll", repo.getName());
+        assertNotNull(repo.getOwner());
+        assertEquals("mojombo", repo.getOwner().getLogin());
+    }
+
+    /**
+     * Verify URI with issues
+     */
+    public void testHttpsUriWithIssues() {
+        Repository repo = RepositoryUriMatcher.getRepository(Uri
+                .parse("https://github.com/mojombo/jekyll/issues"));
+        assertNotNull(repo);
+        assertEquals("jekyll", repo.getName());
+        assertNotNull(repo.getOwner());
+        assertEquals("mojombo", repo.getOwner().getLogin());
+    }
+
+    /**
+     * Verify URI with pulls
+     */
+    public void testHttpsUriWithPulls() {
+        Repository repo = RepositoryUriMatcher.getRepository(Uri
+                .parse("https://github.com/mojombo/jekyll/pulls"));
         assertNotNull(repo);
         assertEquals("jekyll", repo.getName());
         assertNotNull(repo.getOwner());

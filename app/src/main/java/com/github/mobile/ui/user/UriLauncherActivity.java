@@ -164,7 +164,12 @@ public class UriLauncherActivity extends Activity {
                 return IssuesViewActivity.createIntent(issue, issue.getRepository());
             }
 
-            Repository repository = RepositoryUriMatcher.getRepository(data);
+            Repository repository = RepositoryUriMatcher.getRepositoryIssues(data);
+            if (repository != null) {
+                return RepositoryViewActivity.createIntentForIssues(repository);
+            }
+
+            repository = RepositoryUriMatcher.getRepository(data);
             if (repository != null) {
                 return RepositoryViewActivity.createIntent(repository);
             }
