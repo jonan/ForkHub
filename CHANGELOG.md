@@ -6,6 +6,7 @@
 - Lots of visual improvements, including basic Material Design.
 - Improve information shown in Pull Requests.
 - Open Gist links containing the owners login.
+- New button to report an issue directly to ForkHub.
 
 ### Fixed
 - Properly detect all markup formats.

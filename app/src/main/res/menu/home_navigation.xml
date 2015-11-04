@@ -39,4 +39,13 @@
             android:title="@string/bookmarks" />
     </group>
 
+    <group
+        android:id="@+id/navigation_extra"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/navigation_report_issue"
+            android:icon="@drawable/menu_issue_open"
+            android:title="@string/report_issue" />
+    </group>
+
 </menu>

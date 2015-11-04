@@ -18,6 +18,7 @@ package com.github.mobile.ui.user;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -266,6 +267,11 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
                 navigationDrawer.closeDrawer(GravityCompat.START);
                 startActivity(FiltersViewActivity.createIntent());
                 break;
+            case R.id.navigation_report_issue:
+                navigationDrawer.closeDrawer(GravityCompat.START);
+                UriLauncherActivity.launchUri(this,
+                        Uri.parse("https://github.com/jonan/ForkHub/issues"));
+                break;
         }
 
         return false;
@@ -352,10 +358,12 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         if (isUserNavVisible) {
             menu.setGroupVisible(R.id.user_select, false);
             menu.setGroupVisible(R.id.navigation_menu, true);
+            menu.setGroupVisible(R.id.navigation_extra, true);
             navigationView.setItemIconTintList(navigationIconTint);
         } else {
             menu.setGroupVisible(R.id.user_select, true);
             menu.setGroupVisible(R.id.navigation_menu, false);
+            menu.setGroupVisible(R.id.navigation_extra, false);
             navigationView.setItemIconTintList(null);
         }
         isUserNavVisible = !isUserNavVisible;
