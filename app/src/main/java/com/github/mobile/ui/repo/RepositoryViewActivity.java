@@ -115,6 +115,7 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
                     super.onSuccess(fullRepository);
 
                     repository = fullRepository;
+                    getIntent().putExtra(EXTRA_REPOSITORY, repository);
                     configurePager();
                 }
 
