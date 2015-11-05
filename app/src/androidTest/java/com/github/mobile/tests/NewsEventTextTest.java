@@ -65,7 +65,8 @@ import org.eclipse.egit.github.core.event.TeamAddPayload;
  */
 public class NewsEventTextTest extends InstrumentationTestCase {
 
-    private NewsListAdapter adapter;
+    private NewsListAdapter adapterWithRepoName;
+    private NewsListAdapter adapterWithoutRepoName;
 
     private TextView text;
 
@@ -84,8 +85,10 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         repo = new EventRepository().setName("user/repo");
 
         Context context = getInstrumentation().getTargetContext();
-        adapter = new NewsListAdapter(LayoutInflater.from(context),
+        adapterWithRepoName = new NewsListAdapter(LayoutInflater.from(context),
                 new AvatarLoader(context));
+        adapterWithoutRepoName = new NewsListAdapter(LayoutInflater.from(context),
+                new Event[0], new AvatarLoader(context), false);
     }
 
     private Event createEvent(String type) {
@@ -103,9 +106,17 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         assertEquals(expected, actual.toString());
     }
 
-    private void updateView(Event event) {
-        adapter.setItems(new Object[] { event });
-        View view = adapter.getView(0, null, null);
+    private void updateViewWithRepoName(Event event) {
+        adapterWithRepoName.setItems(new Object[] { event });
+        View view = adapterWithRepoName.getView(0, null, null);
+        assertNotNull(view);
+        text = (TextView) view.findViewById(R.id.tv_event);
+        assertNotNull(text);
+    }
+
+    private void updateViewWithoutRepoName(Event event) {
+        adapterWithoutRepoName.setItems(new Object[] { event });
+        View view = adapterWithoutRepoName.getView(0, null, null);
         assertNotNull(view);
         text = (TextView) view.findViewById(R.id.tv_event);
         assertNotNull(text);
@@ -118,9 +129,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
     public void testCommitCommentEvent() {
         Event event = createEvent(TYPE_COMMIT_COMMENT);
         event.setPayload(new CommitCommentPayload());
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user commented on user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user commented");
     }
 
     /**
@@ -132,9 +145,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         CreatePayload payload = new CreatePayload();
         payload.setRefType("repository");
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user created repository user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user created repository");
     }
 
     /**
@@ -147,9 +162,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setRefType("branch");
         payload.setRef("b1");
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user created branch b1 at user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user created branch b1");
     }
 
     /**
@@ -162,9 +179,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setRefType("branch");
         payload.setRef("b1");
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user deleted branch b1 at user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user deleted branch b1");
     }
 
     /**
@@ -176,8 +195,10 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         FollowPayload payload = new FollowPayload();
         payload.setTarget(new User().setLogin("user2"));
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
+        verify("user started following user2");
+        updateViewWithoutRepoName(event);
         verify("user started following user2");
     }
 
@@ -191,8 +212,10 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setAction("create");
         payload.setGist(new Gist().setId("1"));
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
+        verify("user created Gist 1");
+        updateViewWithoutRepoName(event);
         verify("user created Gist 1");
     }
 
@@ -202,9 +225,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
     @UiThreadTest
     public void testWiki() {
         Event event = createEvent(TYPE_GOLLUM);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user updated the wiki in user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user updated the wiki");
     }
 
     /**
@@ -216,9 +241,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         IssueCommentPayload payload = new IssueCommentPayload();
         payload.setIssue(new Issue().setNumber(5));
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user commented on issue 5 on user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user commented on issue 5");
     }
 
     /**
@@ -231,9 +258,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setAction("closed");
         payload.setIssue(new Issue().setNumber(8));
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user closed issue 8 on user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user closed issue 8");
     }
 
     /**
@@ -244,9 +273,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         Event event = createEvent(TYPE_MEMBER);
         event.setPayload(new MemberPayload().setMember(new User()
                 .setLogin("person")));
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user added person as a collaborator to user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user added person as a collaborator");
     }
 
     /**
@@ -255,9 +286,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
     @UiThreadTest
     public void testOpenSourced() {
         Event event = createEvent(TYPE_PUBLIC);
-        updateView(event);
 
-        verify("user open sourced repository user/repo");
+        updateViewWithRepoName(event);
+        verify("user open sourced user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user open sourced repository");
     }
 
     /**
@@ -266,9 +299,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
     @UiThreadTest
     public void testWatch() {
         Event event = createEvent(TYPE_WATCH);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user starred user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user starred repository");
     }
 
     /**
@@ -281,9 +316,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setNumber(30);
         payload.setAction("merged");
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user merged pull request 30 on user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user merged pull request 30");
     }
 
     /**
@@ -295,9 +332,11 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         PushPayload payload = new PushPayload();
         payload.setRef("refs/heads/master");
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
         verify("user pushed to master at user/repo");
+        updateViewWithoutRepoName(event);
+        verify("user pushed to master");
     }
 
     /**
@@ -310,8 +349,10 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         payload.setTeam(new Team().setName("t1"));
         payload.setUser(new User().setLogin("u2"));
         event.setPayload(payload);
-        updateView(event);
 
+        updateViewWithRepoName(event);
+        verify("user added u2 to team t1");
+        updateViewWithoutRepoName(event);
         verify("user added u2 to team t1");
     }
 }

@@ -447,10 +447,12 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
     private void formatFork(Event event, StyledText main,
                             StyledText details) {
         boldActor(main, event);
-        main.append(" forked repository");
+        main.append(" forked ");
+
         if (showRepoName) {
-            main.append(' ');
             boldRepo(main, event);
+        } else {
+            main.append("repository");
         }
     }
 
@@ -545,10 +547,12 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
     private void formatPublic(Event event, StyledText main,
                               StyledText details) {
         boldActor(main, event);
-        main.append(" open sourced repository ");
+        main.append(" open sourced ");
 
         if (showRepoName) {
             boldRepo(main, event);
+        } else {
+            main.append("repository");
         }
     }
 
@@ -559,6 +563,8 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
 
         if (showRepoName) {
             boldRepo(main, event);
+        } else {
+            main.append("repository");
         }
     }
 
