@@ -5,12 +5,14 @@
 ### Added
 - Lots of visual improvements, including basic Material Design.
 - Improve information shown in Pull Requests.
-- Open Gist links containing the owners login.
+- Open Gist links containing the owner's login.
 - New button to report an issue directly to ForkHub.
+- Use OkHttp as HTTP client.
 
 ### Fixed
 - Properly detect all markup formats.
 - Froyo is supported again.
+- Some minor bug fixes.
 
 ## [ForkHub v1.0.0] - 2015-09-18
 
