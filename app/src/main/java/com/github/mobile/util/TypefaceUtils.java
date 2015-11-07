@@ -41,6 +41,7 @@ public class TypefaceUtils {
     public static final String ICON_ARROW_UP = "\uf03d";
     public static final String ICON_BEAKER = "\uf0dd";
     public static final String ICON_BELL = "\uf0de";
+    public static final String ICON_BOLD = "\uf0e2";
     public static final String ICON_BOOK = "\uf007";
     public static final String ICON_BOOKMARK = "\uf07b";
     public static final String ICON_BRIEFCASE = "\uf0d3";
@@ -114,6 +115,7 @@ public class TypefaceUtils {
     public static final String ICON_INFO = "\uf059";
     public static final String ICON_ISSUE_CLOSED = "\uf028";
     public static final String ICON_ISSUE_OPENED = "\uf026";
+    public static final String ICON_ITALIC = "\uf0e4";
     public static final String ICON_ISSUE_REOPENED = "\uf027";
     public static final String ICON_JERSEY = "\uf019";
     public static final String ICON_KEY = "\uf049";
@@ -163,8 +165,6 @@ public class TypefaceUtils {
     public static final String ICON_ROCKET = "\uf033";
     public static final String ICON_RSS = "\uf034";
     public static final String ICON_RUBY = "\uf047";
-    public static final String ICON_SCREEN_FULL = "\uf066";
-    public static final String ICON_SCREEN_NORMAL = "\uf067";
     public static final String ICON_SEARCH = "\uf02e";
     public static final String ICON_SERVER = "\uf097";
     public static final String ICON_SETTINGS = "\uf07c";
@@ -176,8 +176,10 @@ public class TypefaceUtils {
     public static final String ICON_STOP = "\uf08f";
     public static final String ICON_SYNC = "\uf087";
     public static final String ICON_TAG = "\uf015";
+    public static final String ICON_TASKLIST = "\uf0e5";
     public static final String ICON_TELESCOPE = "\uf088";
     public static final String ICON_TERMINAL = "\uf0c8";
+    public static final String ICON_TEXT_SIZE = "\uf0e3";
     public static final String ICON_THREE_BARS = "\uf05e";
     public static final String ICON_THUMBSDOWN = "\uf0db";
     public static final String ICON_THUMBSUP = "\uf0da";
