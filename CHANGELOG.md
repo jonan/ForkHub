@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Fixed
+- Some code formats where not being properly colored.
 - Update all icons (Octicons v3.2.0).
 
 ## [ForkHub v1.1.0] - 2015-11-06
