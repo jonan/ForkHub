@@ -105,6 +105,7 @@
     <string name="issue_event_merged">merged commit %1$s</string>
     <string name="issue_event_referenced">referenced this issue from commit %1$s</string>
     <string name="issue_event_closed">closed this</string>
+    <string name="issue_event_closed_from_commit">closed this from commit %1$s</string>
     <string name="issue_event_reopened">reopened this</string>
     <string name="issue_event_rename">changed the title</string>
     <string name="issue_event_lock">locked and limited conversation to collaborators</string>

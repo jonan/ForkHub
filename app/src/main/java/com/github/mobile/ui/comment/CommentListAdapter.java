@@ -142,7 +142,11 @@ public class CommentListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case IssueEvent.TYPE_CLOSED:
-            message += resources.getString(R.string.issue_event_closed);
+            if (event.getCommitId() == null) {
+                message += resources.getString(R.string.issue_event_closed);
+            } else {
+                message += String.format(resources.getString(R.string.issue_event_closed_from_commit), "<b>" + event.getCommitId().substring(0,7) + "</b>");
+            }
             setText(0, TypefaceUtils.ICON_CIRCLE_SLASH);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
             break;
