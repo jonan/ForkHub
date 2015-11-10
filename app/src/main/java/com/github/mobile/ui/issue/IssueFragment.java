@@ -686,6 +686,10 @@ public class IssueFragment extends DialogFragment {
         if (excludedEvents.contains(event.getEvent()))
             return false;
 
+        // Don't show references to nonexistent commits
+        if (IssueEvent.TYPE_REFERENCED.equals(event.getEvent()) && event.getCommitId() == null)
+            return false;
+
         // Don't show the close event after the merged event
         if (!IssueEvent.TYPE_CLOSED.equals(event.getEvent()))
             return true;

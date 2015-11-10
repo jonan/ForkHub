@@ -5,6 +5,7 @@
 ### Fixed
 - Some code formats where not being properly colored.
 - Update all icons (Octicons v3.2.0).
+- Don't show references to nonexistent commits in issues.
 
 ## [ForkHub v1.1.0] - 2015-11-06
 
