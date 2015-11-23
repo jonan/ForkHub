@@ -48,7 +48,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:design:23.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.6.0'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.1.0.201509280440-r'
