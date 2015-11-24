@@ -8,6 +8,7 @@
 - Don't show references to nonexistent commits in issues.
 - If an issue is closed from a commit, show the commit in the event.
 - Fix bug when a repository has two files with same name but different case.
+- Some minor bug fixes.
 
 ## [ForkHub v1.1.0] - 2015-11-06
 

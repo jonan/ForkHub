@@ -34,6 +34,7 @@ import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IssueEvent;
+import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for a list of {@link Comment} objects
@@ -96,14 +97,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected void updateEvent(final IssueEvent event) {
         String eventString = event.getEvent();
 
-        String message;
+        User actor;
         if (eventString.equals(IssueEvent.TYPE_ASSIGNED) || eventString.equals(IssueEvent.TYPE_UNASSIGNED)) {
-            message = String.format("<b>%s</b> ", event.getAssignee().getLogin());
-            avatars.bind(imageView(2), event.getAssignee());
+            actor = event.getAssignee();
         } else {
-            message = String.format("<b>%s</b> ", event.getActor().getLogin());
-            avatars.bind(imageView(2), event.getActor());
+            actor = event.getActor();
         }
+
+        String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.getLogin());
+        avatars.bind(imageView(2), actor);
 
         switch (eventString) {
         case IssueEvent.TYPE_ASSIGNED:
