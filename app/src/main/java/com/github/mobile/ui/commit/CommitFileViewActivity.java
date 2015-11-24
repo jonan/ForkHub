@@ -51,7 +51,6 @@ import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.CommitFile;
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.util.EncodingUtils;
 
@@ -64,8 +63,6 @@ public class CommitFileViewActivity extends BaseActivity implements
     private static final String TAG = "CommitFileViewActivity";
 
     private static final String ARG_TEXT = "text";
-
-    private static final String ARG_REPO = "repo";
 
     /**
      * Create intent to show file in commit
@@ -215,9 +212,7 @@ public class CommitFileViewActivity extends BaseActivity implements
     @Override
     public Loader<CharSequence> onCreateLoader(int loader, Bundle args) {
         final String raw = args.getString(ARG_TEXT);
-        final IRepositoryIdProvider repo = (IRepositoryIdProvider) args
-                .getSerializable(ARG_REPO);
-        return new MarkdownLoader(this, repo, raw, imageGetter, false);
+        return new MarkdownLoader(this, null, raw, imageGetter, false);
     }
 
     @Override
@@ -256,7 +251,6 @@ public class CommitFileViewActivity extends BaseActivity implements
                 EncodingUtils.fromBase64(blob.getContent()));
         Bundle args = new Bundle();
         args.putCharSequence(ARG_TEXT, markdown);
-        args.putSerializable(ARG_REPO, repo);
         getSupportLoaderManager().restartLoader(0, args, this);
     }
 

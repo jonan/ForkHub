@@ -15,7 +15,7 @@
  */
 package com.github.mobile.ui;
 
-import static org.eclipse.egit.github.core.service.MarkdownService.MODE_GFM;
+import static org.eclipse.egit.github.core.service.MarkdownService.MODE_MARKDOWN;
 import android.accounts.Account;
 import android.content.Context;
 import android.text.Html.ImageGetter;
@@ -77,7 +77,7 @@ public class MarkdownLoader extends AuthenticatedUserLoader<CharSequence> {
             if (repository != null)
                 html = service.getRepositoryHtml(repository, raw);
             else
-                html = service.getHtml(raw, MODE_GFM);
+                html = service.getHtml(raw, MODE_MARKDOWN);
 
             if (encode)
                 return HtmlUtils.encode(html, imageGetter);
