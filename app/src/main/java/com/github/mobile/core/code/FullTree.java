@@ -82,14 +82,12 @@ public class FullTree {
         /**
          * Sub folders
          */
-        public final Map<String, Folder> folders = new TreeMap<String, Folder>(
-                CASE_INSENSITIVE_ORDER);
+        public final Map<String, Folder> folders = new TreeMap<String, Folder>();
 
         /**
          * Files
          */
-        public final Map<String, Entry> files = new TreeMap<String, Entry>(
-                CASE_INSENSITIVE_ORDER);
+        public final Map<String, Entry> files = new TreeMap<String, Entry>();
 
         private Folder() {
             super();
