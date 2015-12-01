@@ -68,6 +68,7 @@ public class RepositoryUtils {
                 || "join".equals(name) //
                 || "languages".equals(name) //
                 || "login".equals(name) //
+                || "logos".equals(name) //
                 || "logout".equals(name) //
                 || "new".equals(name) //
                 || "notifications".equals(name) //
