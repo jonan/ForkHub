@@ -15,8 +15,6 @@
  */
 package com.github.mobile.ui.commit;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-
 import java.util.Comparator;
 
 import org.eclipse.egit.github.core.CommitFile;
@@ -38,6 +36,6 @@ public class CommitFileComparator implements Comparator<CommitFile> {
         if (rSlash != -1)
             rPath = rPath.substring(rSlash + 1);
 
-        return CASE_INSENSITIVE_ORDER.compare(lPath, rPath);
+        return lPath.compareTo(rPath);
     }
 }

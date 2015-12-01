@@ -15,7 +15,6 @@
  */
 package com.github.mobile.ui.ref;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import android.accounts.Account;
 import android.util.Log;
 
@@ -74,8 +73,7 @@ public class RefDialog {
             @Override
             public List<Reference> run(Account account) throws Exception {
                 List<Reference> allRefs = service.getReferences(repository);
-                Map<String, Reference> loadedRefs = new TreeMap<String, Reference>(
-                        CASE_INSENSITIVE_ORDER);
+                Map<String, Reference> loadedRefs = new TreeMap<String, Reference>();
                 for (Reference ref : allRefs)
                     if (RefUtils.isValid(ref))
                         loadedRefs.put(ref.getRef(), ref);

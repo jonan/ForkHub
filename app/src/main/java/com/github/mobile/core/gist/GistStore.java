@@ -15,8 +15,6 @@
  */
 package com.github.mobile.core.gist;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-
 import com.github.mobile.core.ItemStore;
 
 import java.io.IOException;
@@ -66,8 +64,7 @@ public class GistStore extends ItemStore {
         if (files == null || files.size() < 2)
             return files;
 
-        Map<String, GistFile> sorted = new TreeMap<String, GistFile>(
-                CASE_INSENSITIVE_ORDER);
+        Map<String, GistFile> sorted = new TreeMap<String, GistFile>();
         sorted.putAll(files);
         return sorted;
     }

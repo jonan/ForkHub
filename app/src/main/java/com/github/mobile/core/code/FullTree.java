@@ -15,7 +15,6 @@
  */
 package com.github.mobile.core.code;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import static org.eclipse.egit.github.core.TreeEntry.TYPE_BLOB;
 import static org.eclipse.egit.github.core.TreeEntry.TYPE_TREE;
 import android.text.TextUtils;
@@ -70,7 +69,7 @@ public class FullTree {
 
         @Override
         public int compareTo(Entry another) {
-            return CASE_INSENSITIVE_ORDER.compare(name, another.name);
+            return name.compareTo(another.name);
         }
     }
 
