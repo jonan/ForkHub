@@ -17,6 +17,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -47,29 +48,39 @@
             android:paddingRight="15dp"
             android:paddingTop="5dp">
 
-            <TextView
-                style="@style/HeaderTitleText"
-                android:text="@string/username_or_email" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/TextInputLayout"
+                android:text="@string/username_or_email" >
 
-            <AutoCompleteTextView
-                android:id="@+id/et_login"
-                style="@style/LoginEditText"
-                android:completionThreshold="1"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:nextFocusDown="@+id/et_password" />
+                <AutoCompleteTextView
+                    android:id="@+id/et_login"
+                    style="@style/LoginEditText"
+                    android:completionThreshold="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@+id/et_password"
+                    android:hint="@string/username_or_email" />
 
-            <TextView
-                style="@style/HeaderTitleText"
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:paddingTop="10dp"
-                android:text="@string/password" />
+                android:text="@string/password"
+                android:layout_width="match_parent"
+                app:hintTextAppearance="@style/TextInputLayout"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/et_password"
-                style="@style/LoginEditText"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:typeface="monospace" />
+                <EditText
+                    android:id="@+id/et_password"
+                    style="@style/LoginEditText"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:typeface="monospace"
+                    android:hint="@string/password" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/cb_show_password"
