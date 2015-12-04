@@ -4,6 +4,7 @@
 
 ### Fixed
 - Some code formats where not being properly colored.
+- Show release events in the news feed.
 - Update all icons (Octicons v3.2.0).
 - Don't show references to nonexistent commits in issues.
 - If an issue is closed from a commit, show the commit in the event.

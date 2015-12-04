@@ -32,6 +32,7 @@ import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
+import static org.eclipse.egit.github.core.event.Event.TYPE_RELEASE;
 import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
 import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
 import android.text.TextUtils;
@@ -55,6 +56,7 @@ import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.Download;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.PullRequest;
+import org.eclipse.egit.github.core.Release;
 import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.event.CommitCommentPayload;
@@ -72,6 +74,7 @@ import org.eclipse.egit.github.core.event.MemberPayload;
 import org.eclipse.egit.github.core.event.PullRequestPayload;
 import org.eclipse.egit.github.core.event.PullRequestReviewCommentPayload;
 import org.eclipse.egit.github.core.event.PushPayload;
+import org.eclipse.egit.github.core.event.ReleasePayload;
 import org.eclipse.egit.github.core.event.TeamAddPayload;
 
 /**
@@ -117,6 +120,8 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
                 || TYPE_PULL_REQUEST.equals(type) //
                 || TYPE_PULL_REQUEST_REVIEW_COMMENT.equals(type) //
                 || TYPE_PUSH.equals(type) //
+                || (TYPE_RELEASE.equals(type) //
+                && ((ReleasePayload) payload).getRelease() != null) //
                 || TYPE_TEAM_ADD.equals(type) //
                 || TYPE_WATCH.equals(type);
     }
@@ -343,6 +348,10 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
         case TYPE_PUSH:
             icon = TypefaceUtils.ICON_GIT_COMMIT;
             formatPush(event, main, details);
+            break;
+        case TYPE_RELEASE:
+            icon = TypefaceUtils.ICON_CLOUD_DOWNLOAD;
+            formatRelease(event, main, details);
             break;
         case TYPE_TEAM_ADD:
             icon = TypefaceUtils.ICON_PERSON;
@@ -667,6 +676,23 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
                 if (appended == max)
                     break;
             }
+        }
+    }
+
+    private void formatRelease(Event event, StyledText main,
+                               StyledText details) {
+        boldActor(main, event);
+
+        ReleasePayload payload = (ReleasePayload) event.getPayload();
+
+        main.append(" released ");
+
+        Release release = payload.getRelease();
+        main.bold(release.getName());
+
+        if (showRepoName) {
+            main.append(" at ");
+            boldRepo(main, event);
         }
     }
 
