@@ -1,4 +1,6 @@
-# ForkHub [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=jp.forkhub)
+# ForkHub
+
+[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=jp.forkhub) [![F-Droid](https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png)](https://f-droid.org/repository/browse/?fdid=jp.forkhub)
 
 The official [GitHub Android App](https://github.com/github/android/) hasn't been updated in a while and has been accumulating a few bugs and missing features, so I've decided to fork it and keep improving it.
 
