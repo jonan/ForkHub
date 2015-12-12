@@ -21,7 +21,7 @@
     android:layout_marginTop="5dp"
     android:background="@drawable/milestone_background"
     android:orientation="horizontal"
-    android:padding=".5dp"
+    android:padding="0.5dp"
     android:weightSum="1.0" >
 
     <View
