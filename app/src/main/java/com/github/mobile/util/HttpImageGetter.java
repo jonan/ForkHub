@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -37,9 +38,7 @@ import com.google.inject.Inject;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -85,8 +84,6 @@ public class HttpImageGetter implements ImageGetter {
     private final Map<Object, CharSequence> fullHtmlCache = new HashMap<Object, CharSequence>();
 
     private final ContentsService service;
-
-    private final OkHttpClient client = new OkHttpClient();
 
     /**
      * Create image getter for context
@@ -271,8 +268,13 @@ public class HttpImageGetter implements ImageGetter {
             // Ignore and attempt request over regular HTTP request
         }
 
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            return loading.getDrawable(source);
+        }
+
         try {
             Request request = new Request.Builder().url(source).build();
+            OkHttpClient client = new OkHttpClient();
             Response response = client.newCall(request).execute();
 
             Bitmap bitmap = ImageUtils.getBitmap(response.body().bytes(), width, MAX_VALUE);
