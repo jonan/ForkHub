@@ -15,6 +15,7 @@
   limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -47,29 +48,37 @@
             android:paddingRight="15dp"
             android:paddingTop="5dp">
 
-            <TextView
-                style="@style/HeaderTitleText"
-                android:text="@string/username_or_email" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/TextInputLayout">
 
-            <AutoCompleteTextView
-                android:id="@+id/et_login"
-                style="@style/LoginEditText"
-                android:completionThreshold="1"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:nextFocusDown="@+id/et_password" />
+                <AutoCompleteTextView
+                    android:id="@+id/et_login"
+                    style="@style/LoginEditText"
+                    android:completionThreshold="1"
+                    android:hint="@string/username_or_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@+id/et_password" />
 
-            <TextView
-                style="@style/HeaderTitleText"
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="@string/password" />
+                app:hintTextAppearance="@style/TextInputLayout">
 
-            <EditText
-                android:id="@+id/et_password"
-                style="@style/LoginEditText"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:typeface="monospace" />
+                <EditText
+                    android:id="@+id/et_password"
+                    style="@style/LoginEditText"
+                    android:hint="@string/password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:typeface="monospace" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/cb_show_password"
