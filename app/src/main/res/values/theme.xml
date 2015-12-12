@@ -29,6 +29,8 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="panelBackground">@color/color_primary_dark</item>
 
+        <item name="android:colorBackground">@color/color_primary_dark</item>
+
         <item name="android:windowBackground">@color/background</item>
 
         <item name="clickableBackground">@drawable/list_item_background</item>

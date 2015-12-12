@@ -9,6 +9,7 @@
 - If an issue is closed from a commit, show the commit in the event.
 - Fix bug with files with same name but different case.
 - Some minor bug fixes.
+- Some minor UI fixes and improvements.
 
 ## [ForkHub v1.1.0] - 2015-11-06
 

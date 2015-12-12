@@ -60,8 +60,7 @@
                     android:hint="@string/username_or_email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:nextFocusDown="@+id/et_password"
-                    android:popupBackground="@color/color_primary_dark" />
+                    android:nextFocusDown="@+id/et_password" />
 
             </android.support.design.widget.TextInputLayout>
 
