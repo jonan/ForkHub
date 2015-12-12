@@ -75,8 +75,18 @@
         <item name="android:inputType">text|textAutoCorrect|textCapSentences</item>
     </style>
 
-    <style name="LoginEditText.Base" parent="Global">
+    <style name="TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_primary_dark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MaterialEditText" parent="Global">
         <item name="android:textColor">@color/text</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="LoginEditText" parent="MaterialEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:autoText">false</item>
@@ -86,7 +96,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textCursorDrawable">@null</item>
     </style>
-    <style name="LoginEditText" parent="LoginEditText.Base"/>
+
     <style name="TextIcon">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -219,8 +229,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?attr/colorPrimary</item>
     </style>
-    <style name="TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textSize">14sp</item>
-    </style>
+
 </resources>

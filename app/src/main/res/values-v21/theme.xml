@@ -19,7 +19,5 @@
     <style name="Theme.GitHub" parent="@style/Theme.ForkHub.Base">
         <item name="clickableBackground">?android:attr/selectableItemBackground</item>
     </style>
-    <style name="LoginEditText" parent="LoginEditText.Base">
-        <item name="android:backgroundTint">@color/text</item>
-    </style>
+
 </resources>
