@@ -29,17 +29,6 @@ public class WebView extends android.webkit.WebView {
      * @param context
      * @param attrs
      * @param defStyle
-     * @param privateBrowsing
-     */
-    public WebView(final Context context, final AttributeSet attrs,
-            final int defStyle, final boolean privateBrowsing) {
-        super(context, attrs, defStyle, privateBrowsing);
-    }
-
-    /**
-     * @param context
-     * @param attrs
-     * @param defStyle
      */
     public WebView(final Context context, final AttributeSet attrs,
             final int defStyle) {
