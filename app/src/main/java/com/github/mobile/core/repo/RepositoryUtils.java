@@ -80,10 +80,12 @@ public class RepositoryUtils {
                 || "search".equals(name) //
                 || "security".equals(name) //
                 || "settings".equals(name) //
+                || "showcases".equals(name) //
                 || "stars".equals(name) //
                 || "styleguide".equals(name) //
                 || "timeline".equals(name) //
                 || "training".equals(name) //
+                || "trending".equals(name) //
                 || "users".equals(name) //
                 || "watching".equals(name))
             return false;
