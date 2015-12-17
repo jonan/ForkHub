@@ -51,46 +51,48 @@ public class RepositoryUtils {
         if (TextUtils.isEmpty(name))
             return false;
 
-        if ("about".equals(name) //
-                || "account".equals(name) //
-                || "admin".equals(name) //
-                || "api".equals(name) //
-                || "blog".equals(name) //
-                || "camo".equals(name) //
-                || "contact".equals(name) //
-                || "dashboard".equals(name) //
-                || "downloads".equals(name) //
-                || "edu".equals(name) //
-                || "explore".equals(name) //
-                || "features".equals(name) //
-                || "home".equals(name) //
-                || "inbox".equals(name) //
-                || "join".equals(name) //
-                || "languages".equals(name) //
-                || "login".equals(name) //
-                || "logos".equals(name) //
-                || "logout".equals(name) //
-                || "new".equals(name) //
-                || "notifications".equals(name) //
-                || "organizations".equals(name) //
-                || "orgs".equals(name) //
-                || "plans".equals(name) //
-                || "pricing".equals(name) //
-                || "repositories".equals(name) //
-                || "search".equals(name) //
-                || "security".equals(name) //
-                || "settings".equals(name) //
-                || "showcases".equals(name) //
-                || "stars".equals(name) //
-                || "styleguide".equals(name) //
-                || "timeline".equals(name) //
-                || "training".equals(name) //
-                || "trending".equals(name) //
-                || "users".equals(name) //
-                || "watching".equals(name))
-            return false;
-        else
-            return true;
+        switch (name) {
+            case "about":
+            case "account":
+            case "admin":
+            case "api":
+            case "blog":
+            case "camo":
+            case "contact":
+            case "dashboard":
+            case "downloads":
+            case "edu":
+            case "explore":
+            case "features":
+            case "home":
+            case "inbox":
+            case "join":
+            case "languages":
+            case "login":
+            case "logos":
+            case "logout":
+            case "new":
+            case "notifications":
+            case "organizations":
+            case "orgs":
+            case "plans":
+            case "pricing":
+            case "repositories":
+            case "search":
+            case "security":
+            case "settings":
+            case "showcases":
+            case "stars":
+            case "styleguide":
+            case "timeline":
+            case "training":
+            case "trending":
+            case "users":
+            case "watching":
+                return false;
+        }
+
+        return true;
     }
 
     /**
@@ -103,10 +105,12 @@ public class RepositoryUtils {
         if (TextUtils.isEmpty(name))
             return false;
 
-        if ("followers".equals(name) //
-                || "following".equals(name))
-            return false;
-        else
-            return true;
+        switch (name) {
+            case "followers":
+            case "following":
+                return false;
+        }
+
+        return true;
     }
 }
