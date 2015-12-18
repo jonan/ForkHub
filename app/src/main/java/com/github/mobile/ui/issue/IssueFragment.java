@@ -551,13 +551,6 @@ public class IssueFragment extends DialogFragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        updateStateItem(issue);
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
         inflater.inflate(R.menu.issue_view, optionsMenu);
         MenuItem editItem = optionsMenu.findItem(R.id.m_edit);

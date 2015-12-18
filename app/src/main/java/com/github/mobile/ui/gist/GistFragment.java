@@ -108,6 +108,8 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
 
     private boolean loadFinished;
 
+    private MenuItem starItem;
+
     @Inject
     private AvatarLoader avatars;
 
@@ -219,23 +221,21 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
     @Override
     public void onCreateOptionsMenu(Menu options, MenuInflater inflater) {
         inflater.inflate(R.menu.gist_view, options);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
 
         boolean owner = isOwner();
         if (!owner) {
-            menu.removeItem(R.id.m_delete);
-            MenuItem starItem = menu.findItem(R.id.m_star);
-            starItem.setEnabled(loadFinished && !owner);
-            if (starred)
-                starItem.setTitle(R.string.unstar);
-            else
-                starItem.setTitle(R.string.star);
-        } else
-            menu.removeItem(R.id.m_star);
+            options.removeItem(R.id.m_delete);
+        }
+
+        starItem = options.findItem(R.id.m_star);
+        refreshStarOptionsMenu();
+    }
+
+    private void refreshStarOptionsMenu() {
+        if (starItem != null) {
+            starItem.setEnabled(loadFinished);
+            starItem.setTitle(starred ? R.string.unstar : R.string.star);
+        }
     }
 
     @Override
@@ -275,6 +275,7 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
                 super.onSuccess(gist);
 
                 starred = true;
+                refreshStarOptionsMenu();
             }
 
             @Override
@@ -308,6 +309,7 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
                 super.onSuccess(gist);
 
                 starred = false;
+                refreshStarOptionsMenu();
             }
 
             protected void onException(Exception e) throws RuntimeException {
@@ -401,6 +403,7 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
                 gist = fullGist.getGist();
                 comments = fullGist;
                 updateList(fullGist.getGist(), fullGist);
+                refreshStarOptionsMenu();
             }
 
         }.execute();
