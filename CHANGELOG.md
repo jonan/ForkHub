@@ -7,7 +7,8 @@
 - Update all icons (Octicons v3.2.0).
 - Don't show references to nonexistent commits in issues.
 - If an issue is closed from a commit, show the commit in the event.
-- Fix bug with files with same name but different case.
+- Improve rendering of some markdown files.
+- Fix bug that hid files with same name but different case.
 - Some minor bug fixes.
 - Some minor UI fixes and improvements.
 
