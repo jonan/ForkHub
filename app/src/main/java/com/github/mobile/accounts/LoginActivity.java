@@ -40,6 +40,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -246,6 +247,19 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         loginText.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 getEmailAddresses()));
+
+
+	String versionName;
+	try {
+	    versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+	} catch (PackageManager.NameNotFoundException exc) {
+	    versionName = null;
+	}
+
+	TextView version = (TextView) findViewById(R.id.app_version);
+	version.setText(versionName);
+
+
     }
 
     @Override
