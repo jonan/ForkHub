@@ -44,7 +44,7 @@ public class CreateCommentActivityTest extends
         super.setUp();
 
         setActivityIntent(CreateCommentActivity.createIntent(new Gist().setId(
-                "123").setUser(new User().setLogin("abc"))));
+                "123").setOwner(new User().setLogin("abc"))));
     }
 
     /**

@@ -17,6 +17,7 @@ package com.github.mobile.ui.search;
 
 import static android.app.SearchManager.QUERY;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
@@ -60,8 +61,8 @@ public class SearchRepositoryListFragment extends
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         query = getStringExtra(QUERY);
     }

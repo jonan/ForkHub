@@ -146,7 +146,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
 
         setContentView(getContentView());
         pager = (ViewPager) findViewById(R.id.vp_pages);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         tabLayout = (TabLayout) findViewById(R.id.th_tabs);
     }
 

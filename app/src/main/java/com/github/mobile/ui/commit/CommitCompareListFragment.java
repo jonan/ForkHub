@@ -19,7 +19,7 @@ import static com.github.mobile.Intents.EXTRA_BASE;
 import static com.github.mobile.Intents.EXTRA_HEAD;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import android.accounts.Account;
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -80,8 +80,8 @@ public class CommitCompareListFragment extends DialogFragment implements
     private RepositoryCommitCompare compare;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         repository = getSerializableExtra(EXTRA_REPOSITORY);
         base = getStringExtra(EXTRA_BASE);

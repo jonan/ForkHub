@@ -131,9 +131,9 @@ public class RoboActionBarActivity extends AppCompatActivity implements RoboCont
     }
 
     @Override
-    public void onSupportContentChanged() {
+    public void onContentChanged() {
 
-        super.onSupportContentChanged();
+        super.onContentChanged();
         RoboGuice.getInjector( this ).injectViewMembers( this );
         eventManager.fire( new OnContentChangedEvent() );
     }

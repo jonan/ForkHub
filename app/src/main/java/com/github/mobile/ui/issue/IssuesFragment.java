@@ -25,6 +25,7 @@ import static com.github.mobile.RequestCodes.ISSUE_CREATE;
 import static com.github.mobile.RequestCodes.ISSUE_FILTER_EDIT;
 import static com.github.mobile.RequestCodes.ISSUE_VIEW;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -95,8 +96,8 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
     private AvatarLoader avatars;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         filter = getSerializableExtra(EXTRA_ISSUE_FILTER);
         repository = getSerializableExtra(EXTRA_REPOSITORY);
