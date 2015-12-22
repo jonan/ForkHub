@@ -19,7 +19,7 @@ import static com.github.mobile.Intents.EXTRA_GIST_FILE;
 import static com.github.mobile.Intents.EXTRA_GIST_ID;
 import static com.github.mobile.util.PreferenceUtils.WRAP;
 import android.accounts.Account;
-import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -70,8 +70,8 @@ public class GistFileFragment extends DialogFragment implements
     private MenuItem wrapItem;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         gistId = getStringExtra(EXTRA_GIST_ID);
     }
@@ -94,10 +94,6 @@ public class GistFileFragment extends DialogFragment implements
         super.onDestroy();
 
         codePrefs.unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     @Override

@@ -19,7 +19,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.RequestCodes.COMMIT_VIEW;
 import static com.github.mobile.RequestCodes.REF_UPDATE;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -97,8 +97,8 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
     private String ref;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         repository = getSerializableExtra(EXTRA_REPOSITORY);
     }

@@ -105,8 +105,8 @@ public class RoboActionBarAccountAuthenticatorActivity extends ActionBarAccountA
     }
 
     @Override
-    public void onSupportContentChanged() {
-        super.onSupportContentChanged();
+    public void onContentChanged() {
+        super.onContentChanged();
         RoboGuice.getInjector(this).injectViewMembers(this);
         eventManager.fire(new OnContentChangedEvent());
     }

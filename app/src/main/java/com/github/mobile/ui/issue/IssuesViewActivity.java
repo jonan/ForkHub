@@ -224,7 +224,7 @@ public class IssuesViewActivity extends PagerActivity {
             adapter = new IssuesPagerAdapter(this, repoIds, issueNumbers, store, isCollaborator);
         pager.setAdapter(adapter);
 
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         pager.scheduleSetItem(initialPosition, this);
         onPageSelected(initialPosition);
     }

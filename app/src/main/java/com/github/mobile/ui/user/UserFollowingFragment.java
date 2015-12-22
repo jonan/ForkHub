@@ -16,7 +16,7 @@
 package com.github.mobile.ui.user;
 
 import static com.github.mobile.Intents.EXTRA_USER;
-import android.app.Activity;
+import android.content.Context;
 
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.UserPager;
@@ -32,8 +32,8 @@ public class UserFollowingFragment extends FollowingFragment {
     private User user;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         user = getSerializableExtra(EXTRA_USER);
     }

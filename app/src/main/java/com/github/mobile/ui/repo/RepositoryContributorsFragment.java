@@ -16,7 +16,7 @@
 package com.github.mobile.ui.repo;
 
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -59,8 +59,8 @@ public class RepositoryContributorsFragment extends ItemListFragment<Contributor
     private Repository repo;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         repo = getSerializableExtra(EXTRA_REPOSITORY);
     }

@@ -18,7 +18,7 @@ package com.github.mobile.ui.repo;
 import static com.github.mobile.Intents.EXTRA_USER;
 import static com.github.mobile.RequestCodes.REPOSITORY_VIEW;
 import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -48,8 +48,8 @@ public class UserRepositoryListFragment extends PagedItemFragment<Repository> {
     private User user;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         user = getSerializableExtra(EXTRA_USER);
     }

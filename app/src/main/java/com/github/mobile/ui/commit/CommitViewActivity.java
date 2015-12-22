@@ -118,7 +118,7 @@ public class CommitViewActivity extends PagerActivity {
 
         adapter = new CommitPagerAdapter(this, repository, ids);
         pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         pager.scheduleSetItem(initialPosition, this);
         onPageSelected(initialPosition);
 
