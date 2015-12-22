@@ -15,24 +15,23 @@
  */
 package com.github.mobile.ui.search;
 
-import static android.app.SearchManager.QUERY;
-import static android.content.Intent.ACTION_SEARCH;
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import com.github.mobile.R;
+import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.ui.user.HomeActivity;
+import com.github.mobile.util.ToastUtils;
+import com.github.mobile.util.TypefaceUtils;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.ui.user.HomeActivity;
-import com.github.mobile.util.ToastUtils;
-import com.github.mobile.util.TypefaceUtils;
+import static android.app.SearchManager.QUERY;
+import static android.content.Intent.ACTION_SEARCH;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 /**
  * Activity to view search results

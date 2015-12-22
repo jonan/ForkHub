@@ -247,7 +247,7 @@
     <string name="confirm_comment_delete_message">이 댓글을 지우시겠습니까?</string>
     <string name="confirm_comment_delete_title">댓글 지우기</string>
     <string name="contributors">기여자</string>
-    <string name="copy_hash"></string>
+    <string name="copy_hash"/>
     <string name="deleting_comment">댓글 지우는 중...</string>
     <string name="editing_comment">댓글 수정하는 중...</string>
     <string name="enter_otp_code_message">회원님의 계정에 대해 이중인증이 켜져 있습니다. 본인 확인을 위해, 인증코드를 입력하세요.</string>
