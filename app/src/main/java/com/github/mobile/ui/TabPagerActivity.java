@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui;
 
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
-
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
 
 /**
  * Activity with tabbed pages

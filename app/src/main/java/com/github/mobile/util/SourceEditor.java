@@ -15,8 +15,11 @@
  */
 package com.github.mobile.util;
 
-import static org.eclipse.egit.github.core.Blob.ENCODING_BASE64;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.CHARSET_UTF8;
+import com.github.mobile.ui.user.UriLauncherActivity;
+
+import org.eclipse.egit.github.core.Blob;
+import org.eclipse.egit.github.core.util.EncodingUtils;
+
 import android.net.Uri;
 import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
@@ -24,12 +27,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.github.mobile.ui.user.UriLauncherActivity;
-
 import java.io.UnsupportedEncodingException;
 
-import org.eclipse.egit.github.core.Blob;
-import org.eclipse.egit.github.core.util.EncodingUtils;
+import static org.eclipse.egit.github.core.Blob.ENCODING_BASE64;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.CHARSET_UTF8;
 
 /**
  * Utilities for displaying source code in a {@link WebView}

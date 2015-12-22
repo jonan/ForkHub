@@ -15,14 +15,14 @@
  */
 package com.github.mobile.core.commit;
 
-import android.net.Uri;
-
 import com.github.mobile.core.repo.RepositoryUtils;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
+
+import android.net.Uri;
+
+import java.util.List;
 
 /**
  * Parses a {@link CommitMatch} from a {@link Uri}

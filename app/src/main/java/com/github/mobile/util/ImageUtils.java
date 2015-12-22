@@ -15,9 +15,6 @@
  */
 package com.github.mobile.util;
 
-import static android.graphics.Bitmap.Config.ARGB_8888;
-import static android.graphics.Color.WHITE;
-import static android.graphics.PorterDuff.Mode.DST_IN;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
@@ -32,6 +29,10 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+
+import static android.graphics.Bitmap.Config.ARGB_8888;
+import static android.graphics.Color.WHITE;
+import static android.graphics.PorterDuff.Mode.DST_IN;
 
 /**
  * Image utilities

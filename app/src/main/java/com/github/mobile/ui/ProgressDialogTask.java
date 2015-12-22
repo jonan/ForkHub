@@ -15,10 +15,10 @@
  */
 package com.github.mobile.ui;
 
+import com.github.mobile.accounts.AuthenticatedUserTask;
+
 import android.app.AlertDialog;
 import android.content.Context;
-
-import com.github.mobile.accounts.AuthenticatedUserTask;
 
 import java.util.concurrent.Executor;
 

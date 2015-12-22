@@ -15,11 +15,11 @@
  */
 package com.github.mobile.persistence;
 
+import com.google.inject.Inject;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.google.inject.Inject;
 
 /**
  * Helper class to create & upgrade database cache tables

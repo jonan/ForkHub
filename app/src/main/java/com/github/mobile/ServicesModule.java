@@ -15,11 +15,10 @@
  */
 package com.github.mobile;
 
-import com.github.mobile.core.search.SearchUserService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
-import java.io.IOException;
+import com.github.mobile.core.search.SearchUserService;
 
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.GitHubClient;
@@ -38,6 +37,8 @@ import org.eclipse.egit.github.core.service.PullRequestService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.service.UserService;
 import org.eclipse.egit.github.core.service.WatcherService;
+
+import java.io.IOException;
 
 /**
  * Provide GitHub-API related services

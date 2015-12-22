@@ -15,19 +15,20 @@
  */
 package com.github.mobile.tests.gist;
 
-import android.support.v4.view.ViewPager;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.gist.GistFilesViewActivity;
-import com.google.inject.Inject;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.GistFile;
+
+import android.support.v4.view.ViewPager;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import roboguice.RoboGuice;
 

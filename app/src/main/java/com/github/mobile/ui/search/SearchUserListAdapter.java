@@ -15,13 +15,13 @@
  */
 package com.github.mobile.ui.search;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.core.search.SearchUser;
 import com.github.mobile.util.AvatarLoader;
+
+import android.content.Context;
+import android.view.LayoutInflater;
 
 /**
  * Adapter for a list of searched users

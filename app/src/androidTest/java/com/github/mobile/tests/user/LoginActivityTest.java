@@ -15,14 +15,14 @@
  */
 package com.github.mobile.tests.user;
 
-import android.accounts.AccountManager;
-import android.view.View;
-import android.widget.EditText;
-
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.LoginActivity;
 import com.github.mobile.tests.ActivityTest;
+
+import android.accounts.AccountManager;
+import android.view.View;
+import android.widget.EditText;
 
 /**
  * Tests of {@link LoginActivity}

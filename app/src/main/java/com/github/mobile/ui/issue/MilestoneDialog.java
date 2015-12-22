@@ -15,25 +15,26 @@
  */
 package com.github.mobile.ui.issue;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
-import android.accounts.Account;
-import android.util.Log;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+import org.eclipse.egit.github.core.Milestone;
+import org.eclipse.egit.github.core.service.MilestoneService;
+
+import android.accounts.Account;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.Milestone;
-import org.eclipse.egit.github.core.service.MilestoneService;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 /**
  * Dialog helper to display a list of milestones to select one from

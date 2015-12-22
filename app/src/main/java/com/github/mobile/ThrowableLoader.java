@@ -15,12 +15,12 @@
  */
 package com.github.mobile;
 
+import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.accounts.AuthenticatedUserLoader;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.util.Log;
-
-import com.github.mobile.accounts.AccountUtils;
-import com.github.mobile.accounts.AuthenticatedUserLoader;
 
 /**
  * Loader that support throwing an exception when loading in the background

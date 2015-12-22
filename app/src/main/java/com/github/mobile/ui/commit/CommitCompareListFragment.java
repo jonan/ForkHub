@@ -15,9 +15,22 @@
  */
 package com.github.mobile.ui.commit;
 
-import static com.github.mobile.Intents.EXTRA_BASE;
-import static com.github.mobile.Intents.EXTRA_HEAD;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import com.google.inject.Inject;
+
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+import com.github.mobile.core.commit.CommitCompareTask;
+import com.github.mobile.core.commit.CommitUtils;
+import com.github.mobile.ui.DialogFragment;
+import com.github.mobile.ui.HeaderFooterListAdapter;
+import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.CommitFile;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryCommit;
+import org.eclipse.egit.github.core.RepositoryCommitCompare;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.os.Bundle;
@@ -34,25 +47,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.core.commit.CommitCompareTask;
-import com.github.mobile.core.commit.CommitUtils;
-import com.github.mobile.ui.DialogFragment;
-import com.github.mobile.ui.HeaderFooterListAdapter;
-import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.egit.github.core.CommitFile;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryCommit;
-import org.eclipse.egit.github.core.RepositoryCommitCompare;
+import static com.github.mobile.Intents.EXTRA_BASE;
+import static com.github.mobile.Intents.EXTRA_HEAD;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 
 /**
  * Fragment to display a list of commits being compared

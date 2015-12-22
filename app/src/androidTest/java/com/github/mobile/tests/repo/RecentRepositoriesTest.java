@@ -15,12 +15,13 @@
  */
 package com.github.mobile.tests.repo;
 
-import static com.github.mobile.ui.repo.RecentRepositories.MAX_SIZE;
-import android.test.AndroidTestCase;
-
 import com.github.mobile.ui.repo.RecentRepositories;
 
 import org.eclipse.egit.github.core.User;
+
+import android.test.AndroidTestCase;
+
+import static com.github.mobile.ui.repo.RecentRepositories.MAX_SIZE;
 
 /**
  * Unit tests of {@link RecentRepositories}

@@ -15,16 +15,10 @@
  */
 package com.github.mobile.core.code;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.core.ref.RefUtils;
-import com.google.inject.Inject;
-
-import java.io.IOException;
 
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.Reference;
@@ -33,6 +27,13 @@ import org.eclipse.egit.github.core.Tag;
 import org.eclipse.egit.github.core.Tree;
 import org.eclipse.egit.github.core.service.DataService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Task to load the tree for a repository's default branch

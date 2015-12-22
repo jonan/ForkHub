@@ -15,29 +15,6 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.kevinsawicki.wishlist.ViewUpdater.FORMAT_INT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_DELETE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_DOWNLOAD;
-import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
-import static org.eclipse.egit.github.core.event.Event.TYPE_FORK;
-import static org.eclipse.egit.github.core.event.Event.TYPE_FORK_APPLY;
-import static org.eclipse.egit.github.core.event.Event.TYPE_GIST;
-import static org.eclipse.egit.github.core.event.Event.TYPE_GOLLUM;
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
-import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
-import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -46,8 +23,6 @@ import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TimeUtils;
 import com.github.mobile.util.TypefaceUtils;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Commit;
@@ -73,6 +48,32 @@ import org.eclipse.egit.github.core.event.PullRequestPayload;
 import org.eclipse.egit.github.core.event.PullRequestReviewCommentPayload;
 import org.eclipse.egit.github.core.event.PushPayload;
 import org.eclipse.egit.github.core.event.TeamAddPayload;
+
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import java.util.List;
+
+import static com.github.kevinsawicki.wishlist.ViewUpdater.FORMAT_INT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_DELETE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_DOWNLOAD;
+import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
+import static org.eclipse.egit.github.core.event.Event.TYPE_FORK;
+import static org.eclipse.egit.github.core.event.Event.TYPE_FORK_APPLY;
+import static org.eclipse.egit.github.core.event.Event.TYPE_GIST;
+import static org.eclipse.egit.github.core.event.Event.TYPE_GOLLUM;
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
+import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
+import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
 
 /**
  * Adapter for a list of news events

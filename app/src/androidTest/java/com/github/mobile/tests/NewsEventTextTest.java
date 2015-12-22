@@ -15,32 +15,9 @@
  */
 package com.github.mobile.tests;
 
-import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_DELETE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
-import static org.eclipse.egit.github.core.event.Event.TYPE_GIST;
-import static org.eclipse.egit.github.core.event.Event.TYPE_GOLLUM;
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
-import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
-import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
-import android.content.Context;
-import android.test.InstrumentationTestCase;
-import android.test.UiThreadTest;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.user.NewsListAdapter;
 import com.github.mobile.util.AvatarLoader;
-
-import java.util.Date;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.Issue;
@@ -59,6 +36,30 @@ import org.eclipse.egit.github.core.event.MemberPayload;
 import org.eclipse.egit.github.core.event.PullRequestPayload;
 import org.eclipse.egit.github.core.event.PushPayload;
 import org.eclipse.egit.github.core.event.TeamAddPayload;
+
+import android.content.Context;
+import android.test.InstrumentationTestCase;
+import android.test.UiThreadTest;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.Date;
+
+import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_DELETE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
+import static org.eclipse.egit.github.core.event.Event.TYPE_GIST;
+import static org.eclipse.egit.github.core.event.Event.TYPE_GOLLUM;
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
+import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
+import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
 
 /**
  * Tests of the news text rendering

@@ -15,10 +15,10 @@
  */
 package com.github.mobile.core.issue;
 
-import android.text.TextUtils;
-
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.PullRequest;
+
+import android.text.TextUtils;
 
 /**
  * Utilities for working with {@link Issue} models

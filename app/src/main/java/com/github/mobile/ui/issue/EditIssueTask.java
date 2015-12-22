@@ -15,16 +15,17 @@
  */
 package com.github.mobile.ui.issue;
 
-import android.accounts.Account;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
+
+import android.accounts.Account;
 
 /**
  * Task to edit an entire issue

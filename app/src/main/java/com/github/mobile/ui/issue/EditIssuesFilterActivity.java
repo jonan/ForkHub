@@ -15,8 +15,22 @@
  */
 package com.github.mobile.ui.issue;
 
-import static android.view.View.GONE;
-import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
+import com.google.inject.Inject;
+
+import com.github.mobile.Intents.Builder;
+import com.github.mobile.R;
+import com.github.mobile.core.issue.IssueFilter;
+import com.github.mobile.ui.DialogFragmentActivity;
+import com.github.mobile.util.AvatarLoader;
+
+import org.eclipse.egit.github.core.Label;
+import org.eclipse.egit.github.core.Milestone;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.CollaboratorService;
+import org.eclipse.egit.github.core.service.LabelService;
+import org.eclipse.egit.github.core.service.MilestoneService;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -30,22 +44,10 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.github.mobile.Intents.Builder;
-import com.github.mobile.R;
-import com.github.mobile.core.issue.IssueFilter;
-import com.github.mobile.ui.DialogFragmentActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
 import java.util.Set;
 
-import org.eclipse.egit.github.core.Label;
-import org.eclipse.egit.github.core.Milestone;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.CollaboratorService;
-import org.eclipse.egit.github.core.service.LabelService;
-import org.eclipse.egit.github.core.service.MilestoneService;
+import static android.view.View.GONE;
+import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
 
 /**
  * Activity to create or edit an issues filter for a repository

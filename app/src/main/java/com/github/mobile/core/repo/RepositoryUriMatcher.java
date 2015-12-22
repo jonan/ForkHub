@@ -15,12 +15,12 @@
  */
 package com.github.mobile.core.repo;
 
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+
 import android.net.Uri;
 
 import java.util.List;
-
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Parses a {@link Repository} from a {@link Uri}

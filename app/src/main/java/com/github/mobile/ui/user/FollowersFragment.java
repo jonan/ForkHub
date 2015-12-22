@@ -15,9 +15,9 @@
  */
 package com.github.mobile.ui.user;
 
-import android.os.Bundle;
-
 import com.github.mobile.R;
+
+import android.os.Bundle;
 
 
 /**

@@ -15,17 +15,17 @@
  */
 package com.github.mobile.tests.commit;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.ui.commit.DiffStyler;
+
+import org.eclipse.egit.github.core.CommitFile;
+
+import android.test.AndroidTestCase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.egit.github.core.CommitFile;
 
 /**
  * Tests of {@link DiffStyler}

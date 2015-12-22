@@ -15,21 +15,23 @@
  */
 package com.github.mobile.ui.issue;
 
-import static com.github.mobile.RequestCodes.ISSUE_CLOSE;
-import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
-import android.accounts.Account;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
+
+import android.accounts.Account;
+
+import static com.github.mobile.RequestCodes.ISSUE_CLOSE;
+import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 /**
  * Task to close or reopen an issue

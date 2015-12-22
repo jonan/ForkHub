@@ -15,16 +15,17 @@
  */
 package com.github.mobile.core.repo;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.ProgressDialogTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.service.WatcherService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Task to star a repository

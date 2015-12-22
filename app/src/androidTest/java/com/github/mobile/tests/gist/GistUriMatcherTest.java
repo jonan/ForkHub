@@ -15,12 +15,12 @@
  */
 package com.github.mobile.tests.gist;
 
-import android.net.Uri;
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.gist.GistUriMatcher;
 
 import org.eclipse.egit.github.core.Gist;
+
+import android.net.Uri;
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link GistUriMatcher}

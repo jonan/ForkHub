@@ -15,8 +15,9 @@
  */
 package com.github.mobile.util;
 
-import static java.util.Locale.US;
 import android.text.TextUtils;
+
+import static java.util.Locale.US;
 
 /**
  * Utilities for dealing with Markdown files

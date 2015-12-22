@@ -15,43 +15,7 @@
  */
 package com.github.mobile.ui.issue;
 
-import static android.app.Activity.RESULT_OK;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static com.github.mobile.Intents.EXTRA_COMMENT;
-import static com.github.mobile.Intents.EXTRA_ISSUE;
-import static com.github.mobile.Intents.EXTRA_ISSUE_NUMBER;
-import static com.github.mobile.Intents.EXTRA_IS_COLLABORATOR;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
-import static com.github.mobile.Intents.EXTRA_USER;
-import static com.github.mobile.RequestCodes.COMMENT_CREATE;
-import static com.github.mobile.RequestCodes.COMMENT_EDIT;
-import static com.github.mobile.RequestCodes.COMMENT_DELETE;
-import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
-import static com.github.mobile.RequestCodes.ISSUE_CLOSE;
-import static com.github.mobile.RequestCodes.ISSUE_EDIT;
-import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
-import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
-import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -72,13 +36,6 @@ import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
@@ -89,6 +46,51 @@ import org.eclipse.egit.github.core.PullRequest;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import static android.app.Activity.RESULT_OK;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.github.mobile.Intents.EXTRA_COMMENT;
+import static com.github.mobile.Intents.EXTRA_ISSUE;
+import static com.github.mobile.Intents.EXTRA_ISSUE_NUMBER;
+import static com.github.mobile.Intents.EXTRA_IS_COLLABORATOR;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
+import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.COMMENT_CREATE;
+import static com.github.mobile.RequestCodes.COMMENT_DELETE;
+import static com.github.mobile.RequestCodes.COMMENT_EDIT;
+import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
+import static com.github.mobile.RequestCodes.ISSUE_CLOSE;
+import static com.github.mobile.RequestCodes.ISSUE_EDIT;
+import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
+import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
+import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 /**
  * Fragment to display an issue

@@ -15,18 +15,7 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_USER;
-import static com.github.mobile.RequestCodes.REPOSITORY_VIEW;
-import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
-import static java.util.Locale.US;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewFinder;
@@ -40,14 +29,27 @@ import com.github.mobile.ui.user.OrganizationSelectionListener;
 import com.github.mobile.ui.user.OrganizationSelectionProvider;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
+import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.REPOSITORY_VIEW;
+import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
+import static java.util.Locale.US;
 
 /**
  * Fragment to display a list of {@link Repository} instances

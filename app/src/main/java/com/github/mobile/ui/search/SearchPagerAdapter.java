@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui.search;
 
+import com.github.mobile.R;
+import com.github.mobile.ui.FragmentPagerAdapter;
+
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-
-import com.github.mobile.R;
-import com.github.mobile.ui.FragmentPagerAdapter;
 
 /**
  * Adapter to view various pages of search screen

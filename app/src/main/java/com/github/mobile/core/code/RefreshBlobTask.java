@@ -15,15 +15,16 @@
  */
 package com.github.mobile.core.code;
 
-import android.accounts.Account;
-import android.content.Context;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.DataService;
+
+import android.accounts.Account;
+import android.content.Context;
 
 /**
  * Task to refresh a blob

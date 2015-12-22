@@ -15,9 +15,9 @@
  */
 package com.github.mobile.core.ref;
 
-import android.text.TextUtils;
-
 import org.eclipse.egit.github.core.Reference;
+
+import android.text.TextUtils;
 
 /**
  * Utilities for working with {@link Reference}s

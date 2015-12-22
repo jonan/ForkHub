@@ -15,10 +15,10 @@
  */
 package com.github.mobile.ui;
 
-import android.os.Bundle;
-
 import com.github.kevinsawicki.wishlist.ViewFinder;
 import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
+
+import android.os.Bundle;
 
 import java.io.Serializable;
 

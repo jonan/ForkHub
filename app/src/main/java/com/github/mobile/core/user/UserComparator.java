@@ -15,14 +15,15 @@
  */
 package com.github.mobile.core.user;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.GitHubAccount;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.User;
 
 import java.util.Comparator;
 
-import org.eclipse.egit.github.core.User;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 /**
  * Sorts users and orgs in alphabetical order with special handling to put

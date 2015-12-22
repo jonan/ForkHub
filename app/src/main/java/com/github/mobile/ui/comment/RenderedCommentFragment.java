@@ -15,6 +15,18 @@
  */
 package com.github.mobile.ui.comment;
 
+import com.google.inject.Inject;
+
+import com.github.kevinsawicki.wishlist.Keyboard;
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+import com.github.mobile.ui.DialogFragment;
+import com.github.mobile.ui.MarkdownLoader;
+import com.github.mobile.util.HttpImageGetter;
+import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -24,18 +36,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.kevinsawicki.wishlist.Keyboard;
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.ui.DialogFragment;
-import com.github.mobile.ui.MarkdownLoader;
-import com.github.mobile.util.HttpImageGetter;
-import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
 import java.io.Serializable;
-
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
 
 /**
  * Fragment to display rendered comment fragment

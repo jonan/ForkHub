@@ -15,15 +15,15 @@
  */
 package com.github.mobile.core;
 
+import org.eclipse.egit.github.core.client.NoSuchPageException;
+import org.eclipse.egit.github.core.client.PageIterator;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.egit.github.core.client.NoSuchPageException;
-import org.eclipse.egit.github.core.client.PageIterator;
 
 /**
  * Generic resource pager for elements with an id that can be paged

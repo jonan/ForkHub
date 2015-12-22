@@ -15,6 +15,16 @@
  */
 package com.github.mobile.util;
 
+import com.google.inject.Inject;
+
+import com.github.mobile.R;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
+import org.eclipse.egit.github.core.CommitUser;
+import org.eclipse.egit.github.core.Contributor;
+import org.eclipse.egit.github.core.User;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -26,19 +36,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.github.mobile.R;
-import com.google.inject.Inject;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.eclipse.egit.github.core.CommitUser;
-import org.eclipse.egit.github.core.Contributor;
-import org.eclipse.egit.github.core.User;
 
 import roboguice.util.RoboAsyncTask;
 

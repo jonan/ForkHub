@@ -17,13 +17,13 @@ package com.github.mobile.core.commit;
 
 import com.github.mobile.core.ItemStore;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.service.CommitService;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Store of commits

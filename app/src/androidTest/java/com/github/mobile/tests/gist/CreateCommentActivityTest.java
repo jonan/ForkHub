@@ -15,16 +15,17 @@
  */
 package com.github.mobile.tests.gist;
 
-import static android.view.KeyEvent.KEYCODE_DEL;
-import android.view.View;
-import android.widget.EditText;
-
 import com.github.mobile.R;
 import com.github.mobile.tests.ActivityTest;
 import com.github.mobile.ui.gist.CreateCommentActivity;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.User;
+
+import android.view.View;
+import android.widget.EditText;
+
+import static android.view.KeyEvent.KEYCODE_DEL;
 
 /**
  * Tests of {@link CreateCommentActivity}

@@ -15,25 +15,27 @@
  */
 package com.github.mobile.ui.gist;
 
-import static com.github.mobile.RequestCodes.GIST_CREATE;
-import static com.github.mobile.RequestCodes.GIST_VIEW;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.service.GistService;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
+
+import static com.github.mobile.RequestCodes.GIST_CREATE;
+import static com.github.mobile.RequestCodes.GIST_VIEW;
 
 /**
  * Fragment to display a list of Gists

@@ -15,7 +15,6 @@
  */
 package com.github.mobile.ui;
 
-import static android.app.Activity.RESULT_CANCELED;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -23,7 +22,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+
 import roboguice.fragment.RoboDialogFragment;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 /**
  * Base dialog fragment helper

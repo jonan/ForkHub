@@ -15,11 +15,12 @@
  */
 package com.github.mobile.accounts;
 
-import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
-import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static android.util.Log.DEBUG;
-import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
-import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
+import com.github.mobile.R;
+import com.github.mobile.ui.LightAlertDialog;
+
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.client.RequestException;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
@@ -37,16 +38,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.github.mobile.R;
-import com.github.mobile.ui.LightAlertDialog;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.RequestException;
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static android.util.Log.DEBUG;
+import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
+import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 
 /**
  * Helpers for accessing {@link AccountManager}
@@ -103,10 +104,8 @@ public class AccountUtils {
             return false;
 
         String login = user.getLogin();
-        if (login == null)
-            return false;
+        return login != null && login.equals(getLogin(context));
 
-        return login.equals(getLogin(context));
     }
 
     /**

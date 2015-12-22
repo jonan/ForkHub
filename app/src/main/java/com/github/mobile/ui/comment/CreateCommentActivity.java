@@ -15,20 +15,22 @@
  */
 package com.github.mobile.ui.comment;
 
-import static com.github.mobile.Intents.EXTRA_COMMENT;
+import com.google.inject.Inject;
+
+import com.github.mobile.R;
+import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.TypefaceUtils;
+
+import org.eclipse.egit.github.core.Comment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.github.mobile.R;
-import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
-
-import org.eclipse.egit.github.core.Comment;
+import static com.github.mobile.Intents.EXTRA_COMMENT;
 
 /**
  * Base activity for creating comments

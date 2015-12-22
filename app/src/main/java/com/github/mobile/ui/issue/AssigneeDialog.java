@@ -15,23 +15,24 @@
  */
 package com.github.mobile.ui.issue;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-import android.accounts.Account;
-import android.util.Log;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.CollaboratorService;
+
+import android.accounts.Account;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.CollaboratorService;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 /**
  * Dialog helper to display a list of assignees to select one from

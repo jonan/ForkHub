@@ -15,16 +15,16 @@
  */
 package com.github.mobile.core.issue;
 
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
-import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
-
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.EventPayload;
 import org.eclipse.egit.github.core.event.IssueCommentPayload;
 import org.eclipse.egit.github.core.event.IssuesPayload;
 import org.eclipse.egit.github.core.event.PullRequestPayload;
+
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
+import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
 
 /**
  * Helper to find an issue to open for an event

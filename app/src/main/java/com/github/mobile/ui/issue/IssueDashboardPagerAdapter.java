@@ -15,6 +15,18 @@
  */
 package com.github.mobile.ui.issue;
 
+import com.github.mobile.R;
+import com.github.mobile.ui.FragmentStatePagerAdapter;
+
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.github.mobile.ui.issue.DashboardIssueFragment.ARG_FILTER;
 import static org.eclipse.egit.github.core.service.IssueService.DIRECTION_DESCENDING;
 import static org.eclipse.egit.github.core.service.IssueService.FIELD_DIRECTION;
@@ -25,17 +37,6 @@ import static org.eclipse.egit.github.core.service.IssueService.FILTER_CREATED;
 import static org.eclipse.egit.github.core.service.IssueService.FILTER_MENTIONED;
 import static org.eclipse.egit.github.core.service.IssueService.FILTER_SUBSCRIBED;
 import static org.eclipse.egit.github.core.service.IssueService.SORT_UPDATED;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-
-import com.github.mobile.R;
-import com.github.mobile.ui.FragmentStatePagerAdapter;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Pager adapter for the issues dashboard

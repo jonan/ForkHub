@@ -15,19 +15,20 @@
  */
 package com.github.mobile.ui.user;
 
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.UserService;
+
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
 
 /**
  * Fragment to page over users

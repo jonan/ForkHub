@@ -15,13 +15,14 @@
  */
 package com.github.mobile.util;
 
+import android.text.format.DateUtils;
+
+import java.util.Date;
+
 import static android.text.format.DateUtils.FORMAT_NUMERIC_DATE;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.DateUtils.FORMAT_SHOW_YEAR;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
-import android.text.format.DateUtils;
-
-import java.util.Date;
 
 /**
  * Utilities for dealing with dates and times

@@ -15,15 +15,21 @@
  */
 package com.github.mobile.persistence;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.assistedinject.Assisted;
+
+import com.github.mobile.accounts.GitHubAccount;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.RepositoryService;
+import org.eclipse.egit.github.core.service.WatcherService;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-
-import com.github.mobile.accounts.GitHubAccount;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.assistedinject.Assisted;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,11 +37,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.RepositoryService;
-import org.eclipse.egit.github.core.service.WatcherService;
 
 /**
  * Cache of repositories under a given organization

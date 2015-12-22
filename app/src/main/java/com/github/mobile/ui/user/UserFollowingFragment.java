@@ -15,14 +15,15 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.mobile.Intents.EXTRA_USER;
-import android.content.Context;
-
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.UserPager;
 
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.PageIterator;
+
+import android.content.Context;
+
+import static com.github.mobile.Intents.EXTRA_USER;
 
 /**
  * Fragment to display the users being followed by a specific user

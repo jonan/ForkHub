@@ -15,12 +15,12 @@
  */
 package com.github.mobile.tests.issue;
 
-import android.net.Uri;
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.issue.IssueUriMatcher;
 
 import org.eclipse.egit.github.core.RepositoryIssue;
+
+import android.net.Uri;
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link IssueUriMatcher}

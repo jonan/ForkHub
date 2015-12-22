@@ -15,9 +15,19 @@
  */
 package com.github.mobile.ui.gist;
 
-import static com.github.mobile.Intents.EXTRA_GIST_FILE;
-import static com.github.mobile.Intents.EXTRA_GIST_ID;
-import static com.github.mobile.util.PreferenceUtils.WRAP;
+import com.google.inject.Inject;
+
+import com.github.mobile.R;
+import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.core.gist.GistStore;
+import com.github.mobile.ui.DialogFragment;
+import com.github.mobile.util.PreferenceUtils;
+import com.github.mobile.util.SourceEditor;
+import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.GistFile;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,20 +41,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import com.github.mobile.R;
-import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.github.mobile.core.gist.GistStore;
-import com.github.mobile.ui.DialogFragment;
-import com.github.mobile.util.PreferenceUtils;
-import com.github.mobile.util.SourceEditor;
-import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
 import java.io.IOException;
 import java.util.Map;
 
-import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.GistFile;
+import static com.github.mobile.Intents.EXTRA_GIST_FILE;
+import static com.github.mobile.Intents.EXTRA_GIST_ID;
+import static com.github.mobile.util.PreferenceUtils.WRAP;
 
 /**
  * Fragment to display the content of a file in a Gist

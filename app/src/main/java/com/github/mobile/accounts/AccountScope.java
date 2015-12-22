@@ -15,13 +15,13 @@
  */
 package com.github.mobile.accounts;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.OutOfScopeException;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

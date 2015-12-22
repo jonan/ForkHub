@@ -15,11 +15,12 @@
  */
 package com.github.mobile.ui;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 /**
  * {@link ViewPager} extension with support for horizontally scrolling an

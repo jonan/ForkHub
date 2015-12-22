@@ -15,11 +15,6 @@
  */
 package com.github.mobile.ui.commit;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.core.commit.CommitUtils;
@@ -27,9 +22,14 @@ import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
 
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.RepositoryCommit;
+
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.Collection;
 
 /**
  * Adapter to display commits

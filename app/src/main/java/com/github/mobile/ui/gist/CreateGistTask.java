@@ -15,20 +15,21 @@
  */
 package com.github.mobile.ui.gist;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
-import java.util.Collections;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.GistFile;
 import org.eclipse.egit.github.core.service.GistService;
+
+import android.accounts.Account;
+import android.app.Activity;
+import android.util.Log;
+
+import java.util.Collections;
 
 /**
  * Task to create a {@link Gist}

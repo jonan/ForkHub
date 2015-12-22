@@ -15,21 +15,21 @@
  */
 package com.github.mobile.core.commit;
 
-import android.text.TextUtils;
-import android.widget.ImageView;
-
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
-
-import java.text.NumberFormat;
-import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.CommitUser;
 import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.User;
+
+import android.text.TextUtils;
+import android.widget.ImageView;
+
+import java.text.NumberFormat;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Utilities for working with commits

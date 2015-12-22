@@ -15,9 +15,9 @@
  */
 package com.github.mobile.core.repo;
 
-import android.text.TextUtils;
-
 import org.eclipse.egit.github.core.Repository;
+
+import android.text.TextUtils;
 
 /**
  * Utilities for working with {@link Repository} objects

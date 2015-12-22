@@ -15,8 +15,13 @@
  */
 package com.github.mobile.ui.gist;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import com.github.mobile.R;
+import com.github.mobile.ui.BaseActivity;
+import com.github.mobile.ui.TextWatcherAdapter;
+import com.github.mobile.util.ShareUtils;
+
+import org.eclipse.egit.github.core.Gist;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -27,12 +32,8 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.github.mobile.R;
-import com.github.mobile.ui.BaseActivity;
-import com.github.mobile.ui.TextWatcherAdapter;
-import com.github.mobile.util.ShareUtils;
-
-import org.eclipse.egit.github.core.Gist;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 /**
  * Activity to share a text selection as a public or private Gist

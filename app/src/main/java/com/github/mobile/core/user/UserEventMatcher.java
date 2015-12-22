@@ -15,12 +15,12 @@
  */
 package com.github.mobile.core.user;
 
-import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
-
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.EventPayload;
 import org.eclipse.egit.github.core.event.FollowPayload;
+
+import static org.eclipse.egit.github.core.event.Event.TYPE_FOLLOW;
 
 /**
  * Matches a {@link User} in an {@link Event}

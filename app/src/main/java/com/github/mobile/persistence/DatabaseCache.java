@@ -15,14 +15,14 @@
  */
 package com.github.mobile.persistence;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import java.io.IOException;
 import java.util.ArrayList;

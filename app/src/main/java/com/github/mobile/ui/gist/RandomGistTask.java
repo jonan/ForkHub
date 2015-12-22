@@ -15,22 +15,24 @@
  */
 package com.github.mobile.ui.gist;
 
-import static com.github.mobile.RequestCodes.GIST_VIEW;
-import android.accounts.Account;
-import android.app.Activity;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
-import java.util.Collection;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.GistService;
+
+import android.accounts.Account;
+import android.app.Activity;
+import android.util.Log;
+
+import java.util.Collection;
+
+import static com.github.mobile.RequestCodes.GIST_VIEW;
 
 /**
  * Task to open a random Gist

@@ -15,15 +15,15 @@
  */
 package com.github.mobile.ui;
 
+import com.github.mobile.ThrowableLoader;
+import com.github.mobile.core.ResourcePager;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
-
-import com.github.mobile.ThrowableLoader;
-import com.github.mobile.core.ResourcePager;
 
 import java.io.IOException;
 import java.util.List;

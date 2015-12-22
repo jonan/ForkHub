@@ -15,9 +15,9 @@
  */
 package com.github.mobile.ui.commit;
 
-import java.util.Comparator;
-
 import org.eclipse.egit.github.core.CommitFile;
+
+import java.util.Comparator;
 
 /**
  * Comparator for commit files

@@ -16,12 +16,6 @@
 package com.github.mobile.ui.comment;
 
 
-import android.app.Activity;
-import android.content.res.Resources;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ui.issue.IssueFragment;
@@ -30,11 +24,17 @@ import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
 import com.github.mobile.util.TypefaceUtils;
 
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.content.res.Resources;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+
+import java.util.Collection;
 
 /**
  * Adapter for a list of {@link Comment} objects

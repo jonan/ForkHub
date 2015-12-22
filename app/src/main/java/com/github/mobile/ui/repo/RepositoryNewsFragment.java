@@ -15,9 +15,6 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.content.Context;
-
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.UserEventMatcher.UserPair;
 import com.github.mobile.ui.NewsFragment;
@@ -30,6 +27,10 @@ import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.event.Event;
+
+import android.content.Context;
+
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 
 /**
  * Fragment to display a news feed for a specific repository

@@ -15,10 +15,11 @@
  */
 package com.github.mobile.ui;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 import android.app.AlertDialog;
 import android.content.Context;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 /**
  * Alert dialog using the Holo Light theme

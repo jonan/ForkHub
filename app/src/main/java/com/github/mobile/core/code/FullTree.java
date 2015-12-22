@@ -15,20 +15,21 @@
  */
 package com.github.mobile.core.code;
 
-import static org.eclipse.egit.github.core.TreeEntry.TYPE_BLOB;
-import static org.eclipse.egit.github.core.TreeEntry.TYPE_TREE;
-import android.text.TextUtils;
-
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.core.ref.RefUtils;
+
+import org.eclipse.egit.github.core.Reference;
+import org.eclipse.egit.github.core.Tree;
+import org.eclipse.egit.github.core.TreeEntry;
+
+import android.text.TextUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.eclipse.egit.github.core.Reference;
-import org.eclipse.egit.github.core.Tree;
-import org.eclipse.egit.github.core.TreeEntry;
+import static org.eclipse.egit.github.core.TreeEntry.TYPE_BLOB;
+import static org.eclipse.egit.github.core.TreeEntry.TYPE_TREE;
 
 /**
  * {@link Tree} with additional information

@@ -15,13 +15,13 @@
  */
 package com.github.mobile.tests.issue;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.issue.IssueFilter;
 
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
+
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link IssueFilter}

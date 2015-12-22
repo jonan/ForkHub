@@ -15,19 +15,7 @@
  */
 package com.github.mobile.ui;
 
-import static android.content.Intent.ACTION_VIEW;
-import static android.content.Intent.CATEGORY_BROWSABLE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
-import static org.eclipse.egit.github.core.event.Event.TYPE_DOWNLOAD;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewFinder;
@@ -44,9 +32,6 @@ import com.github.mobile.ui.issue.IssuesViewActivity;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.ui.user.NewsListAdapter;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.CommitComment;
@@ -60,6 +45,23 @@ import org.eclipse.egit.github.core.event.DownloadPayload;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.PushPayload;
 import org.eclipse.egit.github.core.service.EventService;
+
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+
+import java.util.List;
+
+import static android.content.Intent.ACTION_VIEW;
+import static android.content.Intent.CATEGORY_BROWSABLE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
+import static org.eclipse.egit.github.core.event.Event.TYPE_DOWNLOAD;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
 
 /**
  * Base news fragment class with utilities for subclasses to built on

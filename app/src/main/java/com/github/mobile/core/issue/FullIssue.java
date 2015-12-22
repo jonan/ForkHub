@@ -15,13 +15,13 @@
  */
 package com.github.mobile.core.issue;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.IssueEvent;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Issue model with comments

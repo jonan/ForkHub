@@ -15,9 +15,8 @@
  */
 package com.github.mobile.ui;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.FROYO;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+import com.github.mobile.R;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -25,7 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.mobile.R;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.FROYO;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 
 /**

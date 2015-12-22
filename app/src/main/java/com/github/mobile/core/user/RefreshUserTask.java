@@ -15,15 +15,16 @@
  */
 package com.github.mobile.core.user;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.UserService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Task to refresh a user

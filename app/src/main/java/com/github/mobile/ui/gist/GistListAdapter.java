@@ -15,21 +15,21 @@
  */
 package com.github.mobile.ui.gist;
 
-import android.app.Activity;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
 
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.Collection;
 
 /**
  * Adapter to display a list of {@link Gist} objects

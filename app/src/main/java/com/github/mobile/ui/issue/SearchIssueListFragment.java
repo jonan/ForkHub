@@ -15,30 +15,32 @@
  */
 package com.github.mobile.ui.issue;
 
-import static android.app.SearchManager.APP_DATA;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.SearchIssue;
+import org.eclipse.egit.github.core.service.IssueService;
+
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.SearchIssue;
-import org.eclipse.egit.github.core.service.IssueService;
+import static android.app.SearchManager.APP_DATA;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 /**
  * Fragment to display a list of {@link SearchIssue} instances

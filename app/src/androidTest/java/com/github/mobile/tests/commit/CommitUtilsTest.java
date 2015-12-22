@@ -15,17 +15,17 @@
  */
 package com.github.mobile.tests.commit;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.commit.CommitUtils;
-
-import java.util.Date;
 
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.CommitUser;
 import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.User;
+
+import android.test.AndroidTestCase;
+
+import java.util.Date;
 
 /**
  * Test of {@link CommitUtils}

@@ -15,8 +15,6 @@
  */
 package com.github.mobile.tests.issue;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.issue.IssueStore;
 
 import org.eclipse.egit.github.core.Repository;
@@ -24,6 +22,8 @@ import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.PullRequestService;
+
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link IssueStore}

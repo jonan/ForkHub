@@ -15,14 +15,14 @@
  */
 package com.github.mobile.tests.repo;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.repo.RepositoryEventMatcher;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.ForkPayload;
+
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link RepositoryEventMatcher}

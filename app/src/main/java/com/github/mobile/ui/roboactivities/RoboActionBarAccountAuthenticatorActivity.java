@@ -1,11 +1,11 @@
 package com.github.mobile.ui.roboactivities;
 
+import com.google.inject.Key;
+
 import android.accounts.AccountAuthenticatorActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import com.google.inject.Key;
 
 import java.util.HashMap;
 import java.util.Map;

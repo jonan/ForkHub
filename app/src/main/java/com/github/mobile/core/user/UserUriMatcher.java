@@ -15,13 +15,13 @@
  */
 package com.github.mobile.core.user;
 
-import android.net.Uri;
-
 import com.github.mobile.core.repo.RepositoryUtils;
 
-import java.util.List;
-
 import org.eclipse.egit.github.core.User;
+
+import android.net.Uri;
+
+import java.util.List;
 
 /**
  * Parses a {@link User} from a {@link Uri}

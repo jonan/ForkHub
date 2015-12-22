@@ -15,23 +15,24 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.util.Log;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import com.github.mobile.R;
 import com.github.mobile.accounts.AuthenticatedUserLoader;
 import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+
+import org.eclipse.egit.github.core.User;
+
+import android.accounts.Account;
+import android.app.Activity;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.egit.github.core.User;
 
 /**
  * Load of a {@link List} or {@link User} organizations

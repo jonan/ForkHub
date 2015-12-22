@@ -15,11 +15,6 @@
  */
 package com.github.mobile.ui.issue;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.util.AvatarLoader;
@@ -27,6 +22,11 @@ import com.github.mobile.util.TypefaceUtils;
 
 import org.eclipse.egit.github.core.SearchIssue;
 import org.eclipse.egit.github.core.User;
+
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Adapter for a list of searched for issues

@@ -15,17 +15,17 @@
  */
 package com.github.mobile.tests.commit;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.commit.FullCommit;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.RepositoryCommit;
+
+import android.test.AndroidTestCase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Tests of {@link FullCommit}

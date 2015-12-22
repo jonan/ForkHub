@@ -15,20 +15,20 @@
  */
 package com.github.mobile.ui.issue;
 
-import android.view.LayoutInflater;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.util.AvatarLoader;
 
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.User;
+
+import android.view.LayoutInflater;
+import android.widget.TextView;
+
+import java.util.Collection;
 
 /**
  * Adapter to display a list of {@link IssueFilter} objects

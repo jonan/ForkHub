@@ -1,10 +1,6 @@
 package com.github.mobile.ui.issue;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.AsyncLoader;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
@@ -13,12 +9,18 @@ import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
+
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 /**
  * Fragment to display a list of {@link IssueFilter} objects

@@ -15,11 +15,13 @@
  */
 package com.github.mobile.ui.commit;
 
+import com.github.mobile.R;
+
+import org.eclipse.egit.github.core.CommitFile;
+
 import android.content.res.Resources;
 import android.text.TextUtils;
 import android.widget.TextView;
-
-import com.github.mobile.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,8 +29,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.egit.github.core.CommitFile;
 
 /**
  * Styler for the file diffs introduced in a commit
