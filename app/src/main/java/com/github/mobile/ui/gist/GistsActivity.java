@@ -39,7 +39,6 @@ public class GistsActivity extends TabPagerActivity<GistQueriesPagerAdapter> {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.gists_title);
-        actionBar.setIcon(R.drawable.action_gist);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         configureTabPager();
