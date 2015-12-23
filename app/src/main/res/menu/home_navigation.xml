@@ -27,15 +27,15 @@
         <item
             android:id="@+id/navigation_gists"
             android:checked="true"
-            android:icon="@drawable/dropdown_gist"
+            android:icon="@drawable/ic_code_black_24dp"
             android:title="@string/gists" />
         <item
             android:id="@+id/navigation_dashboard"
-            android:icon="@drawable/dropdown_dashboard"
+            android:icon="@drawable/ic_gauge_black_24dp"
             android:title="@string/issue_dashboard" />
         <item
             android:id="@+id/navigation_bookmarks"
-            android:icon="@drawable/dropdown_bookmark"
+            android:icon="@drawable/ic_bookmark_black_24dp"
             android:title="@string/bookmarks" />
     </group>
 
