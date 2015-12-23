@@ -21,6 +21,8 @@ import static com.github.mobile.Intents.EXTRA_POSITION;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
 import static com.github.mobile.ui.repo.RepositoryPagerAdapter.ITEM_CODE;
+
+import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -147,14 +149,15 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
     }
 
     @Override
-    public boolean onSearchRequested() {
-        if (pager.getCurrentItem() == 1) {
-            Bundle args = new Bundle();
-            args.putSerializable(EXTRA_REPOSITORY, repository);
-            startSearch(null, false, args, false);
-            return true;
-        } else
-            return false;
+    public void startActivity(Intent intent) {
+        // Inject extra information into search intents
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(EXTRA_REPOSITORY, repository);
+            intent.putExtra(SearchManager.APP_DATA, bundle);
+        }
+
+        super.startActivity(intent);
     }
 
     @Override

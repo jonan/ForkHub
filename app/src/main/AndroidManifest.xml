@@ -87,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name=".ui.search.SearchResultsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/search_title"
             android:launchMode="singleTop">

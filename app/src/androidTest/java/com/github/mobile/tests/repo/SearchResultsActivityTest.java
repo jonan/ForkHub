@@ -20,19 +20,19 @@ import static android.content.Intent.ACTION_SEARCH;
 import android.content.Intent;
 
 import com.github.mobile.tests.ActivityTest;
-import com.github.mobile.ui.search.SearchActivity;
+import com.github.mobile.ui.search.SearchResultsActivity;
 
 /**
- * Tests of {@link SearchActivity}
+ * Tests of {@link SearchResultsActivity}
  */
-public class SearchActivityTest extends
-        ActivityTest<SearchActivity> {
+public class SearchResultsActivityTest extends
+        ActivityTest<SearchResultsActivity> {
 
     /**
      * Create test
      */
-    public SearchActivityTest() {
-        super(SearchActivity.class);
+    public SearchResultsActivityTest() {
+        super(SearchResultsActivity.class);
     }
 
     @Override

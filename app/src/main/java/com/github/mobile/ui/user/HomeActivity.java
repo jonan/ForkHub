@@ -15,6 +15,7 @@
  */
 package com.github.mobile.ui.user;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -24,8 +25,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -223,6 +226,11 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     public boolean onCreateOptionsMenu(Menu optionMenu) {
         getMenuInflater().inflate(R.menu.home, optionMenu);
 
+        // Set up searching
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(optionMenu.findItem(R.id.m_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return super.onCreateOptionsMenu(optionMenu);
     }
 
@@ -232,17 +240,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             navigationDrawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.m_search:
-            onSearchRequested();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
         }
     }
 

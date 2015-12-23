@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2012 GitHub Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,17 +14,18 @@
   limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/m_search"
         android:icon="@drawable/ic_search_white_24dp"
-        app:showAsAction="ifRoom"
-        android:title="@string/find_repositories"/>
+        android:title="@string/find_repositories"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/m_clear"
         android:icon="@drawable/menu_delete_history"
-        app:showAsAction="never"
-        android:title="@string/clear_search_history"/>
+        android:title="@string/clear_search_history"
+        app:showAsAction="never" />
 
 </menu>

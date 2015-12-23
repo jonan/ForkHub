@@ -37,7 +37,7 @@ import com.github.mobile.util.TypefaceUtils;
 /**
  * Activity to view search results
  */
-public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
+public class SearchResultsActivity extends TabPagerActivity<SearchPagerAdapter> {
 
     private SearchRepositoryListFragment repoFragment;
 
