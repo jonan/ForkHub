@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.1.1] - 2015-12-24
 
 ### Fixed
 - Some code formats where not being properly colored.
@@ -76,7 +76,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.0...master
+[ForkHub v1.1.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.0...ForkHub-v1.1.1
 [ForkHub v1.1.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.0.0...ForkHub-v1.1.0
 [ForkHub v1.0.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...ForkHub-v1.0.0
 [ForkHub v0.9.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.1...ForkHub-v0.9.2
