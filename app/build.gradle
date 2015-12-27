@@ -13,8 +13,8 @@ android {
         applicationId 'jp.forkhub'
         minSdkVersion 8
         targetSdkVersion 23
-        versionCode 2100
-        versionName '1.1.0'
+        versionCode 2110
+        versionName '1.1.1'
     }
 
     packagingOptions {
@@ -51,7 +51,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.0'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.1.0.201509280440-r'
+    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.2.0-SNAPSHOT'
     compile('com.google.inject.extensions:guice-assistedinject:3.0') {
         exclude group: 'com.google.inject'
     }

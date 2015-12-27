@@ -15,46 +15,6 @@
  */
 package com.github.mobile.ui.user;
 
-import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.core.issue.IssueUtils;
-import com.github.mobile.ui.StyledText;
-import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.TimeUtils;
-import com.github.mobile.util.TypefaceUtils;
-
-import org.eclipse.egit.github.core.Comment;
-import org.eclipse.egit.github.core.Commit;
-import org.eclipse.egit.github.core.CommitComment;
-import org.eclipse.egit.github.core.Download;
-import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.PullRequest;
-import org.eclipse.egit.github.core.Team;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.event.CommitCommentPayload;
-import org.eclipse.egit.github.core.event.CreatePayload;
-import org.eclipse.egit.github.core.event.DeletePayload;
-import org.eclipse.egit.github.core.event.DownloadPayload;
-import org.eclipse.egit.github.core.event.Event;
-import org.eclipse.egit.github.core.event.EventPayload;
-import org.eclipse.egit.github.core.event.EventRepository;
-import org.eclipse.egit.github.core.event.FollowPayload;
-import org.eclipse.egit.github.core.event.GistPayload;
-import org.eclipse.egit.github.core.event.IssueCommentPayload;
-import org.eclipse.egit.github.core.event.IssuesPayload;
-import org.eclipse.egit.github.core.event.MemberPayload;
-import org.eclipse.egit.github.core.event.PullRequestPayload;
-import org.eclipse.egit.github.core.event.PullRequestReviewCommentPayload;
-import org.eclipse.egit.github.core.event.PushPayload;
-import org.eclipse.egit.github.core.event.TeamAddPayload;
-
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import java.util.List;
-
 import static com.github.kevinsawicki.wishlist.ViewUpdater.FORMAT_INT;
 import static org.eclipse.egit.github.core.event.Event.TYPE_COMMIT_COMMENT;
 import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
@@ -72,8 +32,50 @@ import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PUSH;
+import static org.eclipse.egit.github.core.event.Event.TYPE_RELEASE;
 import static org.eclipse.egit.github.core.event.Event.TYPE_TEAM_ADD;
 import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+import com.github.mobile.core.issue.IssueUtils;
+import com.github.mobile.ui.StyledText;
+import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.TimeUtils;
+import com.github.mobile.util.TypefaceUtils;
+
+import java.util.List;
+
+import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.Commit;
+import org.eclipse.egit.github.core.CommitComment;
+import org.eclipse.egit.github.core.Download;
+import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.PullRequest;
+import org.eclipse.egit.github.core.Release;
+import org.eclipse.egit.github.core.Team;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.event.CommitCommentPayload;
+import org.eclipse.egit.github.core.event.CreatePayload;
+import org.eclipse.egit.github.core.event.DeletePayload;
+import org.eclipse.egit.github.core.event.DownloadPayload;
+import org.eclipse.egit.github.core.event.Event;
+import org.eclipse.egit.github.core.event.EventPayload;
+import org.eclipse.egit.github.core.event.EventRepository;
+import org.eclipse.egit.github.core.event.FollowPayload;
+import org.eclipse.egit.github.core.event.GistPayload;
+import org.eclipse.egit.github.core.event.IssueCommentPayload;
+import org.eclipse.egit.github.core.event.IssuesPayload;
+import org.eclipse.egit.github.core.event.MemberPayload;
+import org.eclipse.egit.github.core.event.PullRequestPayload;
+import org.eclipse.egit.github.core.event.PullRequestReviewCommentPayload;
+import org.eclipse.egit.github.core.event.PushPayload;
+import org.eclipse.egit.github.core.event.ReleasePayload;
+import org.eclipse.egit.github.core.event.TeamAddPayload;
 
 /**
  * Adapter for a list of news events
@@ -118,6 +120,8 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
                 || TYPE_PULL_REQUEST.equals(type) //
                 || TYPE_PULL_REQUEST_REVIEW_COMMENT.equals(type) //
                 || TYPE_PUSH.equals(type) //
+                || (TYPE_RELEASE.equals(type) //
+                && ((ReleasePayload) payload).getRelease() != null) //
                 || TYPE_TEAM_ADD.equals(type) //
                 || TYPE_WATCH.equals(type);
     }
@@ -344,6 +348,10 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
         case TYPE_PUSH:
             icon = TypefaceUtils.ICON_GIT_COMMIT;
             formatPush(event, main, details);
+            break;
+        case TYPE_RELEASE:
+            icon = TypefaceUtils.ICON_CLOUD_DOWNLOAD;
+            formatRelease(event, main, details);
             break;
         case TYPE_TEAM_ADD:
             icon = TypefaceUtils.ICON_PERSON;
@@ -668,6 +676,23 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
                 if (appended == max)
                     break;
             }
+        }
+    }
+
+    private void formatRelease(Event event, StyledText main,
+                               StyledText details) {
+        boldActor(main, event);
+
+        ReleasePayload payload = (ReleasePayload) event.getPayload();
+
+        main.append(" released ");
+
+        Release release = payload.getRelease();
+        main.bold(release.getName());
+
+        if (showRepoName) {
+            main.append(" at ");
+            boldRepo(main, event);
         }
     }
 
