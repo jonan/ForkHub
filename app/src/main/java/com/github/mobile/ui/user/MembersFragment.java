@@ -15,11 +15,7 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.mobile.Intents.EXTRA_USER;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -27,12 +23,18 @@ import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.OrganizationService;
+
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
+
+import static com.github.mobile.Intents.EXTRA_USER;
 
 /**
  * Fragment to display the members of an org.

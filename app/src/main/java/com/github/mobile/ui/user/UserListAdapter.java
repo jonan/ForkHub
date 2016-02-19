@@ -15,13 +15,13 @@
  */
 package com.github.mobile.ui.user;
 
-import android.view.LayoutInflater;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.util.AvatarLoader;
 
 import org.eclipse.egit.github.core.User;
+
+import android.view.LayoutInflater;
 
 /**
  * List adapter for a list of users

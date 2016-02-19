@@ -15,11 +15,12 @@
  */
 package com.github.mobile.tests.util;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+import com.github.mobile.util.HtmlUtils;
+
 import android.test.AndroidTestCase;
 
-import com.github.mobile.util.HtmlUtils;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 /**
  * Unit tests of HTML conversions done when rendering markdown

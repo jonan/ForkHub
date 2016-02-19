@@ -15,14 +15,14 @@
  */
 package com.github.mobile.core.commit;
 
+import org.eclipse.egit.github.core.CommitComment;
+import org.eclipse.egit.github.core.CommitFile;
+
 import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.egit.github.core.CommitComment;
-import org.eclipse.egit.github.core.CommitFile;
 
 /**
  * Commit file with comments

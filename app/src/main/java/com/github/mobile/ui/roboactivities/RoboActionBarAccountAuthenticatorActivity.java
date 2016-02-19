@@ -1,11 +1,11 @@
 package com.github.mobile.ui.roboactivities;
 
+import com.google.inject.Key;
+
 import android.accounts.AccountAuthenticatorActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import com.google.inject.Key;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,8 +105,8 @@ public class RoboActionBarAccountAuthenticatorActivity extends ActionBarAccountA
     }
 
     @Override
-    public void onSupportContentChanged() {
-        super.onSupportContentChanged();
+    public void onContentChanged() {
+        super.onContentChanged();
         RoboGuice.getInjector(this).injectViewMembers(this);
         eventManager.fire(new OnContentChangedEvent());
     }

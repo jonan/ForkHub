@@ -15,18 +15,19 @@
  */
 package com.github.mobile;
 
-import static org.eclipse.egit.github.core.RepositoryId.createFromUrl;
-import android.content.Intent;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.GistFile;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.User;
+
+import android.content.Intent;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import static org.eclipse.egit.github.core.RepositoryId.createFromUrl;
 
 /**
  * Helper for creating intents

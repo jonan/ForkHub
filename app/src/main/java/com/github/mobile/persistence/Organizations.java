@@ -15,20 +15,20 @@
  */
 package com.github.mobile.persistence;
 
+import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.OrganizationService;
+import org.eclipse.egit.github.core.service.UserService;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import com.google.inject.Inject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.OrganizationService;
-import org.eclipse.egit.github.core.service.UserService;
 
 /**
  * Cache of organization under an account

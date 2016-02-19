@@ -15,16 +15,16 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.TypefaceUtils;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Adapter for a list of repositories

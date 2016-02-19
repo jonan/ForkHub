@@ -15,14 +15,14 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.util.AvatarLoader;
 
 import org.eclipse.egit.github.core.Contributor;
+
+import android.content.Context;
+import android.view.LayoutInflater;
 
 /**
  * List adapter for a list of contributors

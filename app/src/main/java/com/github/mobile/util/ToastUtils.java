@@ -15,13 +15,13 @@
  */
 package com.github.mobile.util;
 
-import android.app.Activity;
-import android.text.TextUtils;
-import android.widget.Toast;
-
 import com.github.kevinsawicki.wishlist.Toaster;
 
 import org.eclipse.egit.github.core.client.RequestException;
+
+import android.app.Activity;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 /**
  * Utilities for displaying toast notifications

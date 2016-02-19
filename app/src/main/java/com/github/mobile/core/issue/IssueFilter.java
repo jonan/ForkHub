@@ -15,17 +15,10 @@
  */
 package com.github.mobile.core.issue;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-import static org.eclipse.egit.github.core.service.IssueService.DIRECTION_DESCENDING;
-import static org.eclipse.egit.github.core.service.IssueService.FIELD_DIRECTION;
-import static org.eclipse.egit.github.core.service.IssueService.FIELD_SORT;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_ASSIGNEE;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_LABELS;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_MILESTONE;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_STATE;
-import static org.eclipse.egit.github.core.service.IssueService.SORT_CREATED;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
+import org.eclipse.egit.github.core.Label;
+import org.eclipse.egit.github.core.Milestone;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,10 +31,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.eclipse.egit.github.core.Label;
-import org.eclipse.egit.github.core.Milestone;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import static org.eclipse.egit.github.core.service.IssueService.DIRECTION_DESCENDING;
+import static org.eclipse.egit.github.core.service.IssueService.FIELD_DIRECTION;
+import static org.eclipse.egit.github.core.service.IssueService.FIELD_SORT;
+import static org.eclipse.egit.github.core.service.IssueService.FILTER_ASSIGNEE;
+import static org.eclipse.egit.github.core.service.IssueService.FILTER_LABELS;
+import static org.eclipse.egit.github.core.service.IssueService.FILTER_MILESTONE;
+import static org.eclipse.egit.github.core.service.IssueService.FILTER_STATE;
+import static org.eclipse.egit.github.core.service.IssueService.SORT_CREATED;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 /**
  * Issue filter containing at least one valid query

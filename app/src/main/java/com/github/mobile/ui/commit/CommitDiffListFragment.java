@@ -15,13 +15,31 @@
  */
 package com.github.mobile.ui.commit;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.DialogInterface.BUTTON_NEGATIVE;
-import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
-import static com.github.mobile.Intents.EXTRA_BASE;
-import static com.github.mobile.Intents.EXTRA_COMMENT;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static com.github.mobile.RequestCodes.COMMENT_CREATE;
+import com.google.inject.Inject;
+
+import com.github.kevinsawicki.wishlist.ViewFinder;
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+import com.github.mobile.core.commit.CommitStore;
+import com.github.mobile.core.commit.CommitUtils;
+import com.github.mobile.core.commit.FullCommit;
+import com.github.mobile.core.commit.FullCommitFile;
+import com.github.mobile.core.commit.RefreshCommitTask;
+import com.github.mobile.ui.DialogFragment;
+import com.github.mobile.ui.HeaderFooterListAdapter;
+import com.github.mobile.ui.LightAlertDialog;
+import com.github.mobile.ui.StyledText;
+import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.HttpImageGetter;
+import com.github.mobile.util.ShareUtils;
+import com.github.mobile.util.ToastUtils;
+
+import org.eclipse.egit.github.core.Commit;
+import org.eclipse.egit.github.core.CommitComment;
+import org.eclipse.egit.github.core.CommitFile;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryCommit;
+
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -47,33 +65,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.kevinsawicki.wishlist.ViewFinder;
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.core.commit.CommitStore;
-import com.github.mobile.core.commit.CommitUtils;
-import com.github.mobile.core.commit.FullCommit;
-import com.github.mobile.core.commit.FullCommitFile;
-import com.github.mobile.core.commit.RefreshCommitTask;
-import com.github.mobile.ui.DialogFragment;
-import com.github.mobile.ui.HeaderFooterListAdapter;
-import com.github.mobile.ui.LightAlertDialog;
-import com.github.mobile.ui.StyledText;
-import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.HttpImageGetter;
-import com.github.mobile.util.ShareUtils;
-import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Commit;
-import org.eclipse.egit.github.core.CommitComment;
-import org.eclipse.egit.github.core.CommitFile;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryCommit;
+import static android.app.Activity.RESULT_OK;
+import static android.content.DialogInterface.BUTTON_NEGATIVE;
+import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
+import static com.github.mobile.Intents.EXTRA_BASE;
+import static com.github.mobile.Intents.EXTRA_COMMENT;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.RequestCodes.COMMENT_CREATE;
 
 /**
  * Fragment to display commit details with diff output

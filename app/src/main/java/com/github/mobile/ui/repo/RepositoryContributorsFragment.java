@@ -15,12 +15,7 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -30,14 +25,21 @@ import com.github.mobile.core.user.RefreshUserTask;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Contributor;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.RepositoryService;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
+
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 
 /**
  * Fragment to display a list of contributors for a specific repository
@@ -59,8 +61,8 @@ public class RepositoryContributorsFragment extends ItemListFragment<Contributor
     private Repository repo;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         repo = getSerializableExtra(EXTRA_REPOSITORY);
     }

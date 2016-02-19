@@ -15,6 +15,12 @@
  */
 package com.github.mobile.ui;
 
+import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+import com.github.mobile.ThrowableLoader;
+import com.github.mobile.util.ToastUtils;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -32,12 +38,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
-import com.github.mobile.ThrowableLoader;
-import com.github.mobile.util.ToastUtils;
 
 import java.util.Collections;
 import java.util.List;

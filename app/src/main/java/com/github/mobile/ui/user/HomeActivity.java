@@ -15,6 +15,24 @@
  */
 package com.github.mobile.ui.user;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+import com.github.mobile.R;
+import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.core.user.UserComparator;
+import com.github.mobile.persistence.AccountDataManager;
+import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.ui.gist.GistsActivity;
+import com.github.mobile.ui.issue.FiltersViewActivity;
+import com.github.mobile.ui.issue.IssueDashboardActivity;
+import com.github.mobile.ui.repo.OrganizationLoader;
+import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.util.PreferenceUtils;
+import com.github.mobile.util.TypefaceUtils;
+
+import org.eclipse.egit.github.core.User;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -35,27 +53,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.mobile.R;
-import com.github.mobile.accounts.AccountUtils;
-import com.github.mobile.core.user.UserComparator;
-import com.github.mobile.persistence.AccountDataManager;
-import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.ui.gist.GistsActivity;
-import com.github.mobile.ui.issue.FiltersViewActivity;
-import com.github.mobile.ui.issue.IssueDashboardActivity;
-import com.github.mobile.ui.repo.OrganizationLoader;
-import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.PreferenceUtils;
-import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.eclipse.egit.github.core.User;
 
 /**
  * Home screen activity

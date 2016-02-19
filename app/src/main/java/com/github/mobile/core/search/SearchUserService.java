@@ -15,11 +15,10 @@
  */
 package com.github.mobile.core.search;
 
-import static org.eclipse.egit.github.core.client.IGitHubConstants.CHARSET_UTF8;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.PARAM_START_PAGE;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_USER;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_LEGACY;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_SEARCH;
+import org.eclipse.egit.github.core.IResourceProvider;
+import org.eclipse.egit.github.core.client.GitHubClient;
+import org.eclipse.egit.github.core.client.PagedRequest;
+import org.eclipse.egit.github.core.service.UserService;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -27,10 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.egit.github.core.IResourceProvider;
-import org.eclipse.egit.github.core.client.GitHubClient;
-import org.eclipse.egit.github.core.client.PagedRequest;
-import org.eclipse.egit.github.core.service.UserService;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.CHARSET_UTF8;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.PARAM_START_PAGE;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_LEGACY;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_SEARCH;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_USER;
 
 public class SearchUserService extends UserService {
 

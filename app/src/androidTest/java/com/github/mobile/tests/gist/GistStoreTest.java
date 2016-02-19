@@ -15,12 +15,12 @@
  */
 package com.github.mobile.tests.gist;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.gist.GistStore;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.service.GistService;
+
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link GistStore}

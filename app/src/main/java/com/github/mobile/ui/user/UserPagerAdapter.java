@@ -15,13 +15,13 @@
  */
 package com.github.mobile.ui.user;
 
-import android.content.res.Resources;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.repo.UserRepositoryListFragment;
+
+import android.content.res.Resources;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Pager adapter for a user's different views

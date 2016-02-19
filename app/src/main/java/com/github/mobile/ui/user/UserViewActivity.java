@@ -15,16 +15,7 @@
  */
 package com.github.mobile.ui.user;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.Intents.EXTRA_USER;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.Intents.Builder;
@@ -37,9 +28,20 @@ import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.User;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_USER;
 
 /**
  * Activity to view a user's various pages

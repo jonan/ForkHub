@@ -15,19 +15,20 @@
  */
 package com.github.mobile.ui.commit;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.service.CommitService;
+
+import android.accounts.Account;
+import android.app.Activity;
+import android.util.Log;
 
 /**
  * Task to comment on a commit

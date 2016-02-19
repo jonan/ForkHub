@@ -15,19 +15,21 @@
  */
 package com.github.mobile.ui.issue;
 
-import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
-import android.accounts.Account;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
+
+import android.accounts.Account;
+
+import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
 
 /**
  * Task to edit the assignee

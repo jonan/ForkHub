@@ -15,25 +15,7 @@
  */
 package com.github.mobile.ui.issue;
 
-import static android.app.Activity.RESULT_OK;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static com.github.mobile.Intents.EXTRA_ISSUE;
-import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static com.github.mobile.RequestCodes.ISSUE_CREATE;
-import static com.github.mobile.RequestCodes.ISSUE_FILTER_EDIT;
-import static com.github.mobile.RequestCodes.ISSUE_VIEW;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -46,10 +28,6 @@ import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
-
-import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
@@ -58,6 +36,31 @@ import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.IssueService;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.Collection;
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.github.mobile.Intents.EXTRA_ISSUE;
+import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.RequestCodes.ISSUE_CREATE;
+import static com.github.mobile.RequestCodes.ISSUE_FILTER_EDIT;
+import static com.github.mobile.RequestCodes.ISSUE_VIEW;
 
 /**
  * Fragment to display a list of issues
@@ -95,8 +98,8 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
     private AvatarLoader avatars;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         filter = getSerializableExtra(EXTRA_ISSUE_FILTER);
         repository = getSerializableExtra(EXTRA_REPOSITORY);

@@ -15,22 +15,24 @@
  */
 package com.github.mobile.ui.issue;
 
-import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
-import android.accounts.Account;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
-import com.google.inject.Inject;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.service.LabelService;
+
+import android.accounts.Account;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 
 /**
  * Task to edit labels

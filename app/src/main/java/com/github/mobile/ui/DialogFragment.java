@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui;
 
+import com.github.kevinsawicki.wishlist.ViewFinder;
+import com.github.mobile.ui.roboactivities.RoboSupportFragment;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-
-import com.github.kevinsawicki.wishlist.ViewFinder;
-import com.github.mobile.ui.roboactivities.RoboSupportFragment;
 
 import java.io.Serializable;
 

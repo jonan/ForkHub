@@ -15,20 +15,21 @@
  */
 package com.github.mobile.sync;
 
-import android.content.SyncResult;
-import android.database.SQLException;
-import android.util.Log;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 import com.github.mobile.persistence.DatabaseCache;
 import com.github.mobile.persistence.OrganizationRepositories;
 import com.github.mobile.persistence.Organizations;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+
+import org.eclipse.egit.github.core.User;
+
+import android.content.SyncResult;
+import android.database.SQLException;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.eclipse.egit.github.core.User;
 
 /**
  * A cancelable sync operation to synchronize data for a given account

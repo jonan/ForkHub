@@ -15,14 +15,14 @@
  */
 package com.github.mobile.tests.user;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.test.AndroidTestCase;
-
 import com.github.mobile.accounts.GitHubAccount;
 import com.github.mobile.core.user.UserComparator;
 
 import org.eclipse.egit.github.core.User;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.test.AndroidTestCase;
 
 /**
  * Unit tests of {@link UserComparator}

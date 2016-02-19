@@ -15,16 +15,18 @@
  */
 package com.github.mobile.accounts;
 
-import static android.util.Log.DEBUG;
+import com.google.inject.Provider;
+
+import com.github.mobile.DefaultClient;
+
+import org.eclipse.egit.github.core.client.GitHubClient;
+
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.github.mobile.DefaultClient;
-import com.google.inject.Provider;
-
 import java.net.HttpURLConnection;
 
-import org.eclipse.egit.github.core.client.GitHubClient;
+import static android.util.Log.DEBUG;
 
 /**
  * {@link GitHubClient} extensions that integrates with the Android account

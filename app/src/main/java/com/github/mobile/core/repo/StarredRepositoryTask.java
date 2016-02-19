@@ -15,15 +15,16 @@
  */
 package com.github.mobile.core.repo;
 
+import com.google.inject.Inject;
+
+import com.github.mobile.accounts.AuthenticatedUserTask;
+
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.service.WatcherService;
 
 import android.accounts.Account;
 import android.content.Context;
 import android.util.Log;
-
-import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.google.inject.Inject;
 
 /**
  * Task to check repository starring status

@@ -15,12 +15,8 @@
  */
 package com.github.mobile.persistence;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Log;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import com.github.mobile.RequestFuture;
 import com.github.mobile.RequestReader;
@@ -28,8 +24,16 @@ import com.github.mobile.RequestWriter;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.persistence.OrganizationRepositories.Factory;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,9 +44,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Manager cache for an account

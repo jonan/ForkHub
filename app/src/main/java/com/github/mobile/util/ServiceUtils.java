@@ -15,14 +15,15 @@
  */
 package com.github.mobile.util;
 
-import static android.content.Context.WINDOW_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+
+import static android.content.Context.WINDOW_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 /**
  * Helpers for dealing with system services

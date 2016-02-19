@@ -15,14 +15,15 @@
  */
 package com.github.mobile.ui.user;
 
-import static com.github.mobile.Intents.EXTRA_USER;
-import android.os.Bundle;
-
 import com.github.mobile.core.user.UserEventMatcher.UserPair;
 import com.github.mobile.ui.NewsFragment;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
+
+import android.os.Bundle;
+
+import static com.github.mobile.Intents.EXTRA_USER;
 
 /**
  * Fragment to display a news feed for a given user/org

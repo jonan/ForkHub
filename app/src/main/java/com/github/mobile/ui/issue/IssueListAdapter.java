@@ -15,14 +15,6 @@
  */
 package com.github.mobile.ui.issue;
 
-import static android.graphics.Paint.STRIKE_THRU_TEXT_FLAG;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
-import android.graphics.Color;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -30,10 +22,19 @@ import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
 
+import org.eclipse.egit.github.core.Label;
+
+import android.graphics.Color;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Label;
+import static android.graphics.Paint.STRIKE_THRU_TEXT_FLAG;
+import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
 
 /**
  * Base list adapter to display issues

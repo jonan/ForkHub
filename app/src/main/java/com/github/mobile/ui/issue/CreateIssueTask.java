@@ -15,19 +15,20 @@
  */
 package com.github.mobile.ui.issue;
 
-import android.accounts.Account;
-import android.app.Activity;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.service.IssueService;
+
+import android.accounts.Account;
+import android.app.Activity;
+import android.util.Log;
 
 /**
  * Task to create an {@link Issue}

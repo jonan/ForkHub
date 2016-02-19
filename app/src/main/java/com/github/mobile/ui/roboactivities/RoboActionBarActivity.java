@@ -1,5 +1,9 @@
 package com.github.mobile.ui.roboactivities;
 
+import com.google.inject.Key;
+
+import com.github.mobile.R;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,9 +11,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import com.github.mobile.R;
-import com.google.inject.Key;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -131,9 +132,9 @@ public class RoboActionBarActivity extends AppCompatActivity implements RoboCont
     }
 
     @Override
-    public void onSupportContentChanged() {
+    public void onContentChanged() {
 
-        super.onSupportContentChanged();
+        super.onContentChanged();
         RoboGuice.getInjector( this ).injectViewMembers( this );
         eventManager.fire( new OnContentChangedEvent() );
     }

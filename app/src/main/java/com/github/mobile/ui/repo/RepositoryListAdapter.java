@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.util.TypefaceUtils;
+
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 
 /**
  * Adapter for a list of repositories

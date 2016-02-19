@@ -15,13 +15,7 @@
  */
 package com.github.mobile.ui.search;
 
-import static android.app.SearchManager.QUERY;
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.content.Loader;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -29,17 +23,26 @@ import com.github.mobile.ThrowableLoader;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.SearchRepository;
+import org.eclipse.egit.github.core.service.RepositoryService;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ListView;
 
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.SearchRepository;
-import org.eclipse.egit.github.core.service.RepositoryService;
+import static android.app.SearchManager.QUERY;
 
 /**
  * Fragment to display a list of {@link SearchRepository} instances
@@ -60,8 +63,8 @@ public class SearchRepositoryListFragment extends
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         query = getStringExtra(QUERY);
     }

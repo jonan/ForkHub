@@ -15,8 +15,6 @@
  */
 package com.github.mobile.accounts;
 
-import static android.accounts.AccountManager.KEY_AUTHTOKEN;
-import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
@@ -25,6 +23,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.io.IOException;
+
+import static android.accounts.AccountManager.KEY_AUTHTOKEN;
+import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
 
 /**
  * GitHub account model

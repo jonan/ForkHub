@@ -15,15 +15,6 @@
  */
 package com.github.mobile.ui.commit;
 
-import static com.github.mobile.Intents.EXTRA_BASE;
-import static com.github.mobile.Intents.EXTRA_PATH;
-import static com.github.mobile.Intents.EXTRA_POSITION;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
-
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.commit.CommitUtils;
@@ -31,6 +22,16 @@ import com.github.mobile.ui.comment.CommentPreviewPagerAdapter;
 
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.Repository;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
+
+import static com.github.mobile.Intents.EXTRA_BASE;
+import static com.github.mobile.Intents.EXTRA_PATH;
+import static com.github.mobile.Intents.EXTRA_POSITION;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 
 /**
  * Activity to create a comment on a commit

@@ -15,17 +15,17 @@
  */
 package com.github.mobile.ui.search;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.repo.RepositoryListAdapter;
 import com.github.mobile.util.TypefaceUtils;
 
 import org.eclipse.egit.github.core.SearchRepository;
+
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Adapter for a list of searched for repositories

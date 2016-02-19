@@ -15,11 +15,11 @@
  */
 package com.github.mobile.tests.ref;
 
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.ref.RefUtils;
 
 import org.eclipse.egit.github.core.Reference;
+
+import android.test.AndroidTestCase;
 
 /**
  * Tests of {@link RefUtils}

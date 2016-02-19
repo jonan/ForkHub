@@ -15,22 +15,23 @@
  */
 package com.github.mobile.core.commit;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Commit;
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.service.CommitService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.util.Log;
+
+import java.util.List;
 
 /**
  * Task to load a commit by SHA-1 id

@@ -15,10 +15,11 @@
  */
 package com.github.mobile.ui;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 import android.content.Context;
 import android.util.AttributeSet;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 /**
  * Web view extension with scrolling fixes

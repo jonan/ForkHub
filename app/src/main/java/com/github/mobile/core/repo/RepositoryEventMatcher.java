@@ -15,19 +15,20 @@
  */
 package com.github.mobile.core.repo;
 
-import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
-import static org.eclipse.egit.github.core.event.Event.TYPE_FORK;
-import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
-import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
-import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
-import android.text.TextUtils;
-
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.EventPayload;
 import org.eclipse.egit.github.core.event.EventRepository;
 import org.eclipse.egit.github.core.event.ForkPayload;
+
+import android.text.TextUtils;
+
+import static org.eclipse.egit.github.core.event.Event.TYPE_CREATE;
+import static org.eclipse.egit.github.core.event.Event.TYPE_FORK;
+import static org.eclipse.egit.github.core.event.Event.TYPE_MEMBER;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PUBLIC;
+import static org.eclipse.egit.github.core.event.Event.TYPE_WATCH;
 
 /**
  * Helper to find a {@link RepositoryEventMatcher} to open for an event

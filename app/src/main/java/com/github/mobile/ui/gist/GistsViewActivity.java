@@ -15,16 +15,7 @@
  */
 package com.github.mobile.ui.gist;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.Intents.EXTRA_GIST;
-import static com.github.mobile.Intents.EXTRA_GIST_ID;
-import static com.github.mobile.Intents.EXTRA_GIST_IDS;
-import static com.github.mobile.Intents.EXTRA_POSITION;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
+import com.google.inject.Inject;
 
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
@@ -36,12 +27,23 @@ import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.user.UriLauncherActivity;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.Gist;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Gist;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_GIST;
+import static com.github.mobile.Intents.EXTRA_GIST_ID;
+import static com.github.mobile.Intents.EXTRA_GIST_IDS;
+import static com.github.mobile.Intents.EXTRA_POSITION;
 
 /**
  * Activity to display a collection of Gists in a pager
@@ -121,7 +123,7 @@ public class GistsViewActivity extends PagerActivity implements
 
         adapter = new GistsPagerAdapter(this, gists);
         pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         pager.scheduleSetItem(initialPosition, this);
         onPageSelected(initialPosition);
     }

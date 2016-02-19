@@ -15,29 +15,7 @@
  */
 package com.github.mobile.ui.gist;
 
-import static android.app.Activity.RESULT_OK;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static com.github.mobile.Intents.EXTRA_COMMENT;
-import static com.github.mobile.Intents.EXTRA_GIST_ID;
-import static com.github.mobile.RequestCodes.COMMENT_CREATE;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -57,17 +35,41 @@ import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
+
+import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.GistFile;
+import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.egit.github.core.Comment;
-import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.GistFile;
-import org.eclipse.egit.github.core.User;
+import static android.app.Activity.RESULT_OK;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.github.mobile.Intents.EXTRA_COMMENT;
+import static com.github.mobile.Intents.EXTRA_GIST_ID;
+import static com.github.mobile.RequestCodes.COMMENT_CREATE;
 
 /**
  * Activity to display an existing Gist

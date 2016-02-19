@@ -15,16 +15,16 @@
  */
 package com.github.mobile.ui.issue;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueUtils;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
 
 import org.eclipse.egit.github.core.RepositoryIssue;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Adapter to display a list of dashboard issues

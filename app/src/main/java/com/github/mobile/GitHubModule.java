@@ -15,7 +15,11 @@
  */
 package com.github.mobile;
 
-import android.content.Context;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provider;
+import com.google.inject.Provides;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
+import com.google.inject.name.Named;
 
 import com.github.mobile.accounts.AccountClient;
 import com.github.mobile.accounts.AccountScope;
@@ -25,20 +29,17 @@ import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.persistence.OrganizationRepositories;
 import com.github.mobile.sync.SyncCampaign;
-import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
-import com.google.inject.Provides;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
-import com.google.inject.name.Named;
-
-import java.io.File;
-import java.lang.ref.WeakReference;
 
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.GistService;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.PullRequestService;
+
+import android.content.Context;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
 
 /**
  * Main module provide services and clients

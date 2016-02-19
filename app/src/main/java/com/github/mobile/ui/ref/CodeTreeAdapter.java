@@ -15,12 +15,6 @@
  */
 package com.github.mobile.ui.ref;
 
-import android.app.Activity;
-import android.content.Context;
-import android.text.format.Formatter;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.core.code.FullTree.Entry;
@@ -28,6 +22,12 @@ import com.github.mobile.core.code.FullTree.Folder;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.util.ServiceUtils;
 import com.github.mobile.util.TypefaceUtils;
+
+import android.app.Activity;
+import android.content.Context;
+import android.text.format.Formatter;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Adapter to display a source code tree

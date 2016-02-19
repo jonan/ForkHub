@@ -15,12 +15,12 @@
  */
 package com.github.mobile.core.gist;
 
+import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.Gist;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import org.eclipse.egit.github.core.Comment;
-import org.eclipse.egit.github.core.Gist;
 
 /**
  * Gist model with comments and starred status

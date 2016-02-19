@@ -15,16 +15,16 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.code.RepositoryCodeFragment;
 import com.github.mobile.ui.commit.CommitListFragment;
 import com.github.mobile.ui.issue.IssuesFragment;
+
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Adapter to view a repository's various pages

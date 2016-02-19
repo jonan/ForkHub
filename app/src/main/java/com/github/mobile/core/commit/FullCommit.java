@@ -15,6 +15,10 @@
  */
 package com.github.mobile.core.commit;
 
+import org.eclipse.egit.github.core.CommitComment;
+import org.eclipse.egit.github.core.CommitFile;
+import org.eclipse.egit.github.core.RepositoryCommit;
+
 import android.text.TextUtils;
 
 import java.io.Serializable;
@@ -23,10 +27,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import org.eclipse.egit.github.core.CommitComment;
-import org.eclipse.egit.github.core.CommitFile;
-import org.eclipse.egit.github.core.RepositoryCommit;
 
 /**
  * Commit model with comments

@@ -15,27 +15,29 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_USER;
-import static com.github.mobile.RequestCodes.REPOSITORY_VIEW;
-import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.ui.PagedItemFragment;
-import com.google.inject.Inject;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.RepositoryService;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
+
+import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.REPOSITORY_VIEW;
+import static com.github.mobile.ResultCodes.RESOURCE_CHANGED;
 
 /**
  * Fragment to display a list of repositories for a {@link User}
@@ -48,8 +50,8 @@ public class UserRepositoryListFragment extends PagedItemFragment<Repository> {
     private User user;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         user = getSerializableExtra(EXTRA_USER);
     }

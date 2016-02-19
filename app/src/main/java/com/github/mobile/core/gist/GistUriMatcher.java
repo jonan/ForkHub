@@ -15,13 +15,13 @@
  */
 package com.github.mobile.core.gist;
 
+import org.eclipse.egit.github.core.Gist;
+
 import android.net.Uri;
 import android.text.TextUtils;
 
 import java.util.List;
 import java.util.regex.Pattern;
-
-import org.eclipse.egit.github.core.Gist;
 
 /**
  * Parses a {@link Gist} from a {@link Uri}

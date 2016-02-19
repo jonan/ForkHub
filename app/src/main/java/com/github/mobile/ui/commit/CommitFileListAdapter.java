@@ -15,11 +15,6 @@
  */
 package com.github.mobile.ui.commit;
 
-import static com.github.kevinsawicki.wishlist.ViewUpdater.FORMAT_INT;
-import android.content.res.Resources;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -29,10 +24,16 @@ import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
 
-import java.util.List;
-
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
+
+import android.content.res.Resources;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+
+import java.util.List;
+
+import static com.github.kevinsawicki.wishlist.ViewUpdater.FORMAT_INT;
 
 /**
  * Adapter to display a list of files changed in commits

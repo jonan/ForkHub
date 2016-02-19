@@ -15,11 +15,18 @@
  */
 package com.github.mobile.util;
 
-import static android.util.Base64.DEFAULT;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static java.lang.Integer.MAX_VALUE;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_DEFAULT;
+import com.google.inject.Inject;
+
+import com.github.mobile.R;
+import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.eclipse.egit.github.core.RepositoryContents;
+import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.service.ContentsService;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -32,21 +39,16 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.widget.TextView;
 
-import com.github.mobile.R;
-import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.google.inject.Inject;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.egit.github.core.RepositoryContents;
-import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.service.ContentsService;
+import static android.util.Base64.DEFAULT;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static java.lang.Integer.MAX_VALUE;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_DEFAULT;
 
 /**
  * Getter for an image

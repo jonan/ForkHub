@@ -15,15 +15,7 @@
  */
 package com.github.mobile.ui.commit;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.Intents.EXTRA_BASES;
-import static com.github.mobile.Intents.EXTRA_POSITION;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
+import com.google.inject.Inject;
 
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
@@ -33,12 +25,22 @@ import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
-
-import java.util.Collection;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
+
+import java.util.Collection;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_BASES;
+import static com.github.mobile.Intents.EXTRA_POSITION;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 
 /**
  * Activity to display a commit
@@ -118,7 +120,7 @@ public class CommitViewActivity extends PagerActivity {
 
         adapter = new CommitPagerAdapter(this, repository, ids);
         pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         pager.scheduleSetItem(initialPosition, this);
         onPageSelected(initialPosition);
 

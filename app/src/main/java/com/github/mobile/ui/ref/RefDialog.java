@@ -15,23 +15,23 @@
  */
 package com.github.mobile.ui.ref;
 
-import android.accounts.Account;
-import android.util.Log;
-
 import com.github.mobile.R;
 import com.github.mobile.core.ref.RefUtils;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+import org.eclipse.egit.github.core.Reference;
+import org.eclipse.egit.github.core.service.DataService;
+
+import android.accounts.Account;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.Reference;
-import org.eclipse.egit.github.core.service.DataService;
 
 /**
  * Dialog to select a branch or tag

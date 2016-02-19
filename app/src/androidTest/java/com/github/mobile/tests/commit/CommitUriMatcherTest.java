@@ -15,11 +15,11 @@
  */
 package com.github.mobile.tests.commit;
 
-import android.net.Uri;
-import android.test.AndroidTestCase;
-
 import com.github.mobile.core.commit.CommitMatch;
 import com.github.mobile.core.commit.CommitUriMatcher;
+
+import android.net.Uri;
+import android.test.AndroidTestCase;
 
 /**
  * Tests of {@link CommitUriMatcher}

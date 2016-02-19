@@ -18,10 +18,6 @@ package com.github.mobile.core.issue;
 import com.github.mobile.core.ItemStore;
 import com.github.mobile.util.HtmlUtils;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.RepositoryId;
@@ -29,6 +25,10 @@ import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.client.RequestException;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.PullRequestService;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Store of loaded issues

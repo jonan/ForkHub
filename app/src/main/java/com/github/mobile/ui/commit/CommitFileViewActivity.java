@@ -15,23 +15,7 @@
  */
 package com.github.mobile.ui.commit;
 
-import static com.github.mobile.Intents.EXTRA_BASE;
-import static com.github.mobile.Intents.EXTRA_HEAD;
-import static com.github.mobile.Intents.EXTRA_PATH;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static com.github.mobile.util.PreferenceUtils.RENDER_MARKDOWN;
-import static com.github.mobile.util.PreferenceUtils.WRAP;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.webkit.WebView;
-import android.widget.ProgressBar;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.Intents.Builder;
@@ -47,12 +31,30 @@ import com.github.mobile.util.PreferenceUtils;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.SourceEditor;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Blob;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.util.EncodingUtils;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.webkit.WebView;
+import android.widget.ProgressBar;
+
+import static com.github.mobile.Intents.EXTRA_BASE;
+import static com.github.mobile.Intents.EXTRA_HEAD;
+import static com.github.mobile.Intents.EXTRA_PATH;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.util.PreferenceUtils.RENDER_MARKDOWN;
+import static com.github.mobile.util.PreferenceUtils.WRAP;
 
 /**
  * Activity to display the contents of a file in a commit

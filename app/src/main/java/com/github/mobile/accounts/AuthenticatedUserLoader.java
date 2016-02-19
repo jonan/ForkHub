@@ -15,14 +15,15 @@
  */
 package com.github.mobile.accounts;
 
+import com.google.inject.Inject;
+
+import com.github.kevinsawicki.wishlist.AsyncLoader;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountsException;
 import android.app.Activity;
 import android.content.Context;
-
-import com.github.kevinsawicki.wishlist.AsyncLoader;
-import com.google.inject.Inject;
 
 import java.io.IOException;
 

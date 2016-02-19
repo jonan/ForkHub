@@ -15,11 +15,8 @@
  */
 package com.github.mobile.util;
 
-import static android.graphics.Paint.Style.FILL;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
-import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-import static android.text.Spanned.SPAN_MARK_MARK;
+import org.xml.sax.XMLReader;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -36,7 +33,11 @@ import android.text.style.TypefaceSpan;
 
 import java.util.LinkedList;
 
-import org.xml.sax.XMLReader;
+import static android.graphics.Paint.Style.FILL;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+import static android.text.Spanned.SPAN_MARK_MARK;
 
 /**
  * HTML Utilities

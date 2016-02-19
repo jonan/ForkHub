@@ -15,26 +15,27 @@
  */
 package com.github.mobile.core.issue;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
-import com.google.inject.Inject;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.service.IssueService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Task to load and store an {@link Issue}

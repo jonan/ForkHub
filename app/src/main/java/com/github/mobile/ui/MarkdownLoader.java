@@ -15,20 +15,22 @@
  */
 package com.github.mobile.ui;
 
-import static org.eclipse.egit.github.core.service.MarkdownService.MODE_MARKDOWN;
+import com.google.inject.Inject;
+
+import com.github.mobile.accounts.AuthenticatedUserLoader;
+import com.github.mobile.util.HtmlUtils;
+
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+import org.eclipse.egit.github.core.service.MarkdownService;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.text.Html.ImageGetter;
 import android.util.Log;
 
-import com.github.mobile.accounts.AuthenticatedUserLoader;
-import com.github.mobile.util.HtmlUtils;
-import com.google.inject.Inject;
-
 import java.io.IOException;
 
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.service.MarkdownService;
+import static org.eclipse.egit.github.core.service.MarkdownService.MODE_MARKDOWN;
 
 /**
  * Markdown loader

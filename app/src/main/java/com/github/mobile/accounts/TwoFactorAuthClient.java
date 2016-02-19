@@ -15,11 +15,13 @@
  */
 package com.github.mobile.accounts;
 
-import android.text.TextUtils;
 import com.github.mobile.DefaultClient;
+
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
 import org.eclipse.egit.github.core.client.GitHubResponse;
+
+import android.text.TextUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

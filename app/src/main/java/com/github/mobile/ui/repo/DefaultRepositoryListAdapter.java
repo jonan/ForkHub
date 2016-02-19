@@ -15,22 +15,22 @@
  */
 package com.github.mobile.ui.repo;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.TypefaceUtils;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for the default account's repositories

@@ -15,15 +15,7 @@
  */
 package com.github.mobile.ui.gist;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.Intents.EXTRA_GIST_ID;
-import static com.github.mobile.Intents.EXTRA_POSITION;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
+import com.google.inject.Inject;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.Intents.Builder;
@@ -36,11 +28,21 @@ import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
-import com.google.inject.Inject;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.User;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_GIST_ID;
+import static com.github.mobile.Intents.EXTRA_POSITION;
 
 /**
  * Activity to page through the content of all the files in a Gist

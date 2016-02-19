@@ -15,16 +15,16 @@
  */
 package com.github.mobile.core.issue;
 
-import android.net.Uri;
-import android.text.TextUtils;
-
 import com.github.mobile.core.repo.RepositoryUtils;
-
-import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.User;
+
+import android.net.Uri;
+import android.text.TextUtils;
+
+import java.util.List;
 
 /**
  * Parses a {@link RepositoryIssue} from a {@link Uri}

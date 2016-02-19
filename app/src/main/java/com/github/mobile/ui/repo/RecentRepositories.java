@@ -15,12 +15,14 @@
  */
 package com.github.mobile.ui.repo;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
-import android.content.Context;
-import android.os.AsyncTask;
-
 import com.github.mobile.RequestReader;
 import com.github.mobile.RequestWriter;
+
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
+
+import android.content.Context;
+import android.os.AsyncTask;
 
 import java.io.File;
 import java.io.Serializable;
@@ -28,8 +30,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 /**
  * Model class for the repositories recently selected under an organization

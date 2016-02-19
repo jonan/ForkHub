@@ -15,14 +15,15 @@
  */
 package com.github.mobile.tests.gist;
 
-import static android.content.Intent.EXTRA_TEXT;
+import com.github.mobile.R;
+import com.github.mobile.tests.ActivityTest;
+import com.github.mobile.ui.gist.CreateGistActivity;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.mobile.R;
-import com.github.mobile.tests.ActivityTest;
-import com.github.mobile.ui.gist.CreateGistActivity;
+import static android.content.Intent.EXTRA_TEXT;
 
 /**
  * Tests of {@link CreateGistActivity}

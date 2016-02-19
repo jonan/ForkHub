@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui;
 
+import com.github.mobile.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-
-import com.github.mobile.R;
 
 /**
  * Helper for showing more items are being loaded at the bottom of a list via a

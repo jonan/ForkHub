@@ -15,7 +15,8 @@
  */
 package com.github.mobile.ui;
 
-import static android.graphics.Typeface.BOLD;
+import com.github.mobile.util.TimeUtils;
+
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -26,10 +27,10 @@ import android.text.style.URLSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.github.mobile.util.TimeUtils;
-
 import java.util.Date;
 import java.util.Locale;
+
+import static android.graphics.Typeface.BOLD;
 
 /**
  * Helpers on top of {@link SpannableStringBuilder}

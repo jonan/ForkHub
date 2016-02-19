@@ -15,14 +15,14 @@
  */
 package com.github.mobile.ui.comment;
 
-import android.content.res.Resources;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
+
+import android.content.res.Resources;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Pager of a raw and rendered comment text

@@ -15,7 +15,6 @@
  */
 package com.github.mobile.util;
 
-import static java.util.Locale.US;
 import android.text.TextUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -23,6 +22,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+
+import static java.util.Locale.US;
 
 /**
  * Helper to get a gravatar hash for an email

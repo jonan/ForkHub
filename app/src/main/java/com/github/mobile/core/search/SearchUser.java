@@ -15,10 +15,10 @@
  */
 package com.github.mobile.core.search;
 
+import org.eclipse.egit.github.core.util.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.eclipse.egit.github.core.util.DateUtils;
 
 /**
  * GitHub v2 user model class.

@@ -15,24 +15,6 @@
  */
 package com.github.mobile.ui.user;
 
-import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static android.content.Intent.ACTION_VIEW;
-import static android.content.Intent.CATEGORY_BROWSABLE;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_DEFAULT;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_GISTS;
-import static org.eclipse.egit.github.core.client.IGitHubConstants.PROTOCOL_HTTPS;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.TextUtils;
-
 import com.github.mobile.R;
 import com.github.mobile.core.commit.CommitMatch;
 import com.github.mobile.core.commit.CommitUriMatcher;
@@ -46,14 +28,33 @@ import com.github.mobile.ui.gist.GistsViewActivity;
 import com.github.mobile.ui.issue.IssuesViewActivity;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 
-import java.net.URI;
-import java.text.MessageFormat;
-import java.util.List;
-
 import org.eclipse.egit.github.core.Gist;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.User;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+
+import java.net.URI;
+import java.text.MessageFormat;
+import java.util.List;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static android.content.Intent.ACTION_VIEW;
+import static android.content.Intent.CATEGORY_BROWSABLE;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_DEFAULT;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.HOST_GISTS;
+import static org.eclipse.egit.github.core.client.IGitHubConstants.PROTOCOL_HTTPS;
 
 /**
  * Activity to launch other activities based on the intent's data {@link URI}

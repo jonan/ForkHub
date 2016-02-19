@@ -15,6 +15,11 @@
  */
 package com.github.mobile.sync;
 
+import com.google.inject.Inject;
+
+import com.github.mobile.accounts.AccountScope;
+import com.github.mobile.sync.SyncCampaign.Factory;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
@@ -22,10 +27,6 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
-
-import com.github.mobile.accounts.AccountScope;
-import com.github.mobile.sync.SyncCampaign.Factory;
-import com.google.inject.Inject;
 
 import roboguice.inject.ContextScope;
 import roboguice.inject.ContextSingleton;

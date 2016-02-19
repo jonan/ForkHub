@@ -15,12 +15,12 @@
  */
 package com.github.mobile.ui;
 
+import com.github.kevinsawicki.wishlist.ViewUtils;
+import com.github.mobile.R;
+
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
-
-import com.github.kevinsawicki.wishlist.ViewUtils;
-import com.github.mobile.R;
 
 /**
  * Activity with tabbed pages
@@ -146,7 +146,7 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
 
         setContentView(getContentView());
         pager = (ViewPager) findViewById(R.id.vp_pages);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         tabLayout = (TabLayout) findViewById(R.id.th_tabs);
     }
 

@@ -15,10 +15,11 @@
  */
 package com.github.mobile.accounts;
 
-import static android.accounts.AccountManager.ACTION_AUTHENTICATOR_INTENT;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
+import static android.accounts.AccountManager.ACTION_AUTHENTICATOR_INTENT;
 
 /**
  * Authenticator service that returns a subclass of AbstractAccountAuthenticator

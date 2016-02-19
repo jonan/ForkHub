@@ -15,12 +15,12 @@
  */
 package com.github.mobile;
 
-import android.os.Build;
-
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.OkUrlFactory;
 
 import org.eclipse.egit.github.core.client.GitHubClient;
+
+import android.os.Build;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

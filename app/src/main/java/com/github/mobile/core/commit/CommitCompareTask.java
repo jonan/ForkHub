@@ -15,16 +15,17 @@
  */
 package com.github.mobile.core.commit;
 
-import android.accounts.Account;
-import android.content.Context;
-import android.util.Log;
+import com.google.inject.Inject;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommitCompare;
 import org.eclipse.egit.github.core.service.CommitService;
+
+import android.accounts.Account;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Task to compare two commits

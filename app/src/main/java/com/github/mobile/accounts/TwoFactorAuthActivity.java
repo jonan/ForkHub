@@ -15,12 +15,16 @@
  */
 package com.github.mobile.accounts;
 
-import static android.content.DialogInterface.OnCancelListener;
-import static android.view.KeyEvent.ACTION_DOWN;
-import static android.view.KeyEvent.KEYCODE_ENTER;
-import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
-import static com.github.mobile.accounts.LoginActivity.configureSyncFor;
+import com.github.kevinsawicki.wishlist.ViewFinder;
+import com.github.mobile.R;
+import com.github.mobile.ui.LightProgressDialog;
+import com.github.mobile.ui.TextWatcherAdapter;
+import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
+
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.OAuthService;
+import org.eclipse.egit.github.core.service.UserService;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
@@ -41,19 +45,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.github.kevinsawicki.wishlist.ViewFinder;
-import com.github.mobile.R;
-import com.github.mobile.ui.LightProgressDialog;
-import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
-import com.github.mobile.ui.TextWatcherAdapter;
-
 import java.io.IOException;
 
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.OAuthService;
-import org.eclipse.egit.github.core.service.UserService;
-
 import roboguice.util.RoboAsyncTask;
+
+import static android.content.DialogInterface.OnCancelListener;
+import static android.view.KeyEvent.ACTION_DOWN;
+import static android.view.KeyEvent.KEYCODE_ENTER;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static com.github.mobile.accounts.AccountConstants.ACCOUNT_TYPE;
+import static com.github.mobile.accounts.LoginActivity.configureSyncFor;
 
 /**
  * Activity to enter two-factor authentication OTP code
