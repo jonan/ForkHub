@@ -48,10 +48,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:design:23.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.4'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.2.0-SNAPSHOT'
+    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.2.0.201601211800-r'
     compile('com.google.inject.extensions:guice-assistedinject:3.0') {
         exclude group: 'com.google.inject'
     }

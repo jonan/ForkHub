@@ -21,6 +21,7 @@
     <string name="error_issues_load">이슈 가져오기 실패</string>
     <string name="error_repos_load">저장소 가져오기 실패</string>
     <string name="error_repo_load">저장소 가져오기 실패</string>
+    <string name="error_contributors_load">기여자 가져오기 실패</string>
     <string name="error_gist_load">Gist 가져오기 실패</string>
     <string name="error_news_load">소식 가져오기 실패</string>
     <string name="error_followers_load">팔로워 가져오기 실패</string>
@@ -34,6 +35,20 @@
     <string name="error_labels_load">라벨 가져오기 실패</string>
     <string name="error_bookmarks_load">책갈피 가져오기 실패</string>
     <string name="error_members_load">멤버 가져오기 실패</string>
+    <string name="error_commits_load">커밋들 가져오기 실패</string>
+    <string name="error_commit_load">커밋 가져오기 실패</string>
+    <string name="error_file_load">파일 가져오기 실패</string>
+    <string name="error_code_load">코드 가져오기 실패</string>
+    <string name="error_refs_load">브랜치 불러오는 중 &amp; 태그 실패</string>
+    <string name="error_following_person">팔로잉 실패</string>
+    <string name="error_unfollowing_person">언팔로잉 실패</string>
+    <string name="error_checking_following_status">팔로잉 상태 체크 실패</string>
+    <string name="error_starring_repository">즐겨찾기 실패</string>
+    <string name="error_unstarring_repository">즐겨찾기 해제 실패</string>
+    <string name="error_forking_repository">포크 실패</string>
+    <string name="error_checking_starring_status">즐겨찾기인지 확인 실패</string>
+    <string name="error_rendering_markdown">마크다운 렌더링 실패</string>
+    <string name="error_users_search">유저 검색 실패</string>
     <!--  -->
 
 
@@ -52,18 +67,24 @@
     <string name="loading_collaborators">멤버 가져오는중…</string>
     <string name="loading_milestones">마일스톤 가져오는중…</string>
     <string name="loading_labels">라벨 가져오는중…</string>
+    <string name="loading_commits">커밋 가져오는중…</string>
+    <string name="loading_files_and_comments">파일 가져오는 중 &amp; 댓글…</string>
+    <string name="loading_refs">브랜치 가져오는 중 &amp; 태그…</string>
     <!--  -->
 
 
     <!-- Empty messages -->
     <string name="no_bookmarks">책갈피 없음</string>
     <string name="no_repositories">저장소 없음</string>
+    <string name="no_contributors">기여자 없음</string>
     <string name="no_issues">이슈없음</string>
+    <string name="no_pull_requests">병합요청 없음</string>
     <string name="no_gists">Gists 없음</string>
     <string name="no_people">없음</string>
     <string name="no_followers">팔로워 없음</string>
     <string name="no_members">멤버 없음</string>
     <string name="no_news">소식 없음</string>
+    <string name="no_commits">커밋 없음</string>
     <!--  -->
 
 
@@ -74,10 +95,31 @@
     <string name="updating_milestone">마일스톤 갱신중…</string>
     <!--  -->
 
+    <!-- Issue events texts -->
+    <string name="issue_event_label_assigned">이(가) 담당자로 지정됨</string>
+    <string name="issue_event_label_unassigned">이(가) 더이상 담당하지 않음</string>
+    <string name="issue_event_label_added">이(가) %1$s 라벨을 추가함</string>
+    <string name="issue_event_label_removed">이(가) %1$s 라벨을 지움</string>
+    <string name="issue_event_milestone_added">이(가) 마일스톤 %1$s 에 이 이슈를 추가함</string>
+    <string name="issue_event_milestone_removed">이(가) 마일스톤 %1$s 에서 이 이슈를 제거함</string>
+    <string name="issue_event_merged">이(가) 커밋 %1$s 을(를) 병합함</string>
+    <string name="issue_event_referenced">이(가) 커밋 %1$s 에서 이 이슈를 언급함</string>
+    <string name="issue_event_closed">이(가) 닫음</string>
+    <string name="issue_event_closed_from_commit">커밋 %1$s에 의하여 닫힘</string>
+    <string name="issue_event_reopened">이(가) 다시 열음</string>
+    <string name="issue_event_rename">이(가) 제목을 바꿈</string>
+    <string name="issue_event_lock">이(가) 이 대화를 잠그고 협업자로 한정함</string>
+    <string name="issue_event_unlock">이(가) 이 대화 잠금을 풀음</string>
+    <string name="issue_event_head_ref_deleted">이(가) 가지를 지움</string>
+    <string name="issue_event_head_ref_restored">이(가) 가지를 되살림</string>
+    <!--  -->
+
     <string name="app_name">ForkHub</string>
     <string name="news">소식</string>
     <string name="issues">이슈</string>
     <string name="gists">Gists</string>
+    <string name="commits">커밋</string>
+    <string name="global_search">GitHub 검색</string>
     <string name="find_repositories">저장소 찾기</string>
     <string name="find_issues">이슈 찾기</string>
     <string name="search_title">검색…</string>
@@ -105,14 +147,18 @@
     <string name="refresh">새로고침</string>
     <string name="dashboard_issues_title">이슈 대쉬보드</string>
     <string name="bookmarks">책갈피</string>
+    <string name="report_issue">이슈 보고하기</string>
     <string name="gists_title">Gists</string>
     <string name="issue_title">Issue #</string>
+    <string name="pull_request_title">병합 요청 #</string>
     <string name="gist_title">Gist\u0020</string>
     <string name="filter_issues_title">이슈 필터</string>
+    <string name="filter_pull_requests_title">병합요청 필터</string>
     <string name="create_comment_title">댓글 작성</string>
     <string name="comment_hint">내용을 입력해주세요</string>
     <string name="show_more">더보기…</string>
     <string name="repositories">저장소</string>
+    <string name="contributors">기여자</string>
     <string name="issues_title">이슈</string>
     <string name="edit_labels">라벨 수정</string>
     <string name="milestone_prefix">마일스톤:</string>
@@ -122,14 +168,15 @@
     <string name="gist_description_hint">안드로이드 앱을 통해 생성한 Gist</string>
     <string name="title">제목</string>
     <string name="edit">수정</string>
-    <string name="star">즐겨찾기</string>
     <string name="starring_gist">Gist 즐겨찾기 등록중…</string>
-    <string name="unstar">즐겨찾기 해제</string>
     <string name="unstarring_gist">Gist 즐겨찾기 해제중…</string>
     <string name="accounts_label">계정</string>
     <string name="select_assignee">담당자 선택</string>
     <string name="select_milestone">마일스톤 선택</string>
     <string name="select_labels">라벨 선택</string>
+    <string name="select_ref">가지나 꼬리표 선택</string>
+    <string name="enter_otp_code_title">인증코드</string>
+    <string name="enter_otp_code_message">회원님의 계정에 대해 이중인증이 켜져 있습니다. 본인 확인을 위해, 인증코드를 입력하세요.</string>
     <string name="no_milestone">마일스톤 없음</string>
     <string name="unassigned">담당자 없음</string>
     <string name="assigned">이(가) 담당함</string>
@@ -138,12 +185,19 @@
     <string name="confirm_gist_delete_message">Gist를 정말로 삭제하시겠습니까?</string>
     <string name="deleting_gist">Gist 삭제중…</string>
     <string name="creating_comment">댓글 등록중…</string>
+    <string name="editing_comment">댓글 수정하는 중...</string>
+    <string name="deleting_comment">댓글 지우는 중...</string>
+    <string name="confirm_comment_delete_title">댓글 지우기</string>
+    <string name="confirm_comment_delete_message">이 댓글을 지우시겠습니까?</string>
     <string name="confirm_bookmark_delete_message">정말로 책갈피에서 삭제하시겠습니까?</string>
     <string name="issue_dashboard">이슈 대쉬보드</string>
     <string name="new_issue">신규 이슈</string>
     <string name="anonymous">익명</string>
     <string name="message_filter_saved">책갈피에 이슈 필터가 저장됨</string>
+    <string name="recently_viewed">최근 열림</string>
     <string name="recent">최근</string>
+    <string name="recent_remove">최근 삭제됨</string>
+    <string name="recent_list_remove">최근 사용된 것 들 중에서 삭제하기</string>
     <string name="section_issue_status">상태:</string>
     <string name="status_open">열림</string>
     <string name="status_closed">종결됨</string>
@@ -154,26 +208,38 @@
     <string name="section_issue_labels">라벨:</string>
     <string name="log_in">로그인</string>
     <string name="signup_link">GitHub 에 처음 이십니까? &lt;a href=\"https://github.com/join\">여기를 클릭하여&lt;/a> 가입하세요</string>
+    <string name="signup_link_two_factor_auth">무엇을 해야할지 잘 모르시나요? &lt;a href=\"https://help.github.com/articles/about-two-factor-authentication\">도움을 얻으세요.&lt;/a></string>
     <string name="connection_failed">GitHub에 연결할 수 없습니다</string>
+    <string name="code_authentication_failed">인증 실패! 인증 코드가 올바르지 않음.</string>
     <string name="invalid_login_or_password">계정 또는 비밀번호를 확인해주세요</string>
     <string name="invalid_password">비밀번호를 확인해주세요</string>
     <string name="password">비밀번호</string>
-    <string name="login_or_email">로그인계정 또는 이메일주소</string>
+    <string name="username_or_email">계정 또는 이메일</string>
     <string name="followers">팔로워</string>
     <string name="following">팔로잉</string>
     <string name="followers_self">팔로워</string>
     <string name="following_self">팔로잉</string>
+    <string name="follow">팔로우</string>
+    <string name="unfollow">언팔로우</string>
+    <string name="star">즐겨찾기</string>
+    <string name="unstar">즐겨찾기 해제</string>
+    <string name="fork">포크</string>
     <string name="members">멤버</string>
     <string name="closing_issue">이슈 종결처리중…</string>
     <string name="reopening_issue">이슈 다시 여는중…</string>
     <string name="avatar">아바타</string>
     <string name="creating_issue">이슈 생성중…</string>
+
+
     <string name="prefix_created">created\u0020</string>
     <string name="prefix_updated">updated\u0020</string>
     <string name="prefix_opened">opened\u0020</string>
     <string name="clear">비우기</string>
+    <string name="pull_request_commits">커밋 : %d</string>
     <string name="open_issues">미처리된 이슈</string>
     <string name="closed_issues">종결된 이슈</string>
+    <string name="open_pull_requests">병합요청 열기</string>
+    <string name="closed_pull_requests">병합요청 닫기</string>
     <string name="confirm_bookmark_delete_title">책갈피 삭제</string>
     <string name="save">저장</string>
     <string name="apply">적용</string>
@@ -186,17 +252,17 @@
     <string name="issue_confirm_close_title">이슈 닫기</string>
     <string name="issue_confirm_reopen_title">이슈 다시 열기</string>
     <string name="closed">종결됨</string>
+    <string name="merged">합쳐짐</string>
     <string name="no_description_given">설명없음</string>
     <string name="close">종결</string>
     <string name="reopen">다시열기</string>
     <string name="title_invalid_github_url">GitHub URL이 잘못됨</string>
     <string name="message_invalid_github_url">이 어플리케이션에서는 해당 URL을 열 수 없음\n{0}</string>
-    <string name="recently_viewed">최근 열람</string>
     <string name="cancel">취소</string>
     <string name="authenticator_conflict_title">앱 충돌</string>
     <string name="authenticator_conflict_message">다른 앱에서 Github 인증이 설정되었습니다.\n\nGitHub 앱을 사용하기 전에 계정 동기화 설정에서 &amp;다른 앱을 지우고 석제해야합니다.</string>
     <string name="opening_repository">불러오는중 {0}…</string>
-	<string name="commit_compare_title">커밋 비교</string>
+    <string name="commit_compare_title">커밋 비교</string>
     <string name="commit_prefix">커밋\u0020</string>
     <string name="parent_prefix">부모\u0020</string>
     <string name="authored">작성된</string>
@@ -208,10 +274,11 @@
     <string name="enable_wrapping">감추기 가능</string>
     <string name="disable_wrapping">감추기 불가능</string>
     <string name="code">코드</string>
-    <string name="following_user">팔로윙…</string>
+    <string name="following_user">팔로잉…</string>
     <string name="unfollowing_user">언팔로우중...</string>
     <string name="starring_repository">즐겨찾기…</string>
     <string name="unstarring_repository">즐겨찾기 해제…</string>
+    <string name="forking_repository">포크중…</string>
     <string name="navigate_to">이동하기</string>
     <string name="navigate_to_user">%s 로 이동</string>
     <string name="contributions">%d 커밋</string>
@@ -220,14 +287,15 @@
     <string name="tab_repositories">저장소</string>
     <string name="tab_users">유저</string>
     <string name="tab_news">소식</string>
-    <string name="tab_following_self">팔로윙</string>
+    <string name="tab_following_self">팔로잉</string>
     <string name="tab_followers_self">팔로워</string>
-    <string name="tab_following">팔로윙</string>
+    <string name="tab_following">팔로잉</string>
     <string name="tab_followers">팔로워</string>
     <string name="tab_members">멤버</string>
     <string name="tab_code">코드</string>
     <string name="tab_commits">커밋</string>
     <string name="tab_issues">이슈</string>
+    <string name="tab_pull_requests">병합 요청</string>
     <string name="tab_watched">보는중</string>
     <string name="tab_assigned">담당중</string>
     <string name="tab_created">생성됨</string>
@@ -242,53 +310,7 @@
     <string name="preview">미리보기</string>
     <string name="show_raw_markdown">원본 마크다운 보여주기</string>
     <string name="render_markdown">마크다운 표현</string>
-    <string name="code_authentication_failed">인증 실패! 인증 코드가 올바르지 않음.</string>
-    <string name="commits">커밋</string>
-    <string name="confirm_comment_delete_message">이 댓글을 지우시겠습니까?</string>
-    <string name="confirm_comment_delete_title">댓글 지우기</string>
-    <string name="contributors">기여자</string>
-    <string name="copy_hash"/>
-    <string name="deleting_comment">댓글 지우는 중...</string>
-    <string name="editing_comment">댓글 수정하는 중...</string>
-    <string name="enter_otp_code_message">회원님의 계정에 대해 이중인증이 켜져 있습니다. 본인 확인을 위해, 인증코드를 입력하세요.</string>
-    <string name="enter_otp_code_title">인증코드</string>
-    <string name="error_forking_repository">포크 실패</string>
-    <string name="error_following_person">팔로우 실패</string>
-    <string name="error_file_load">파일 가져오기 실패</string>
-    <string name="error_contributors_load">기여자 가져오기 실패</string>
-    <string name="error_commit_load">커밋 가져오기 실패</string>
-    <string name="error_commits_load">커밋 가져오기 실패</string>
-    <string name="error_code_load">코드 가져오기 실패</string>
-    <string name="error_rendering_markdown">마크다운 렌더링 실패더더</string>
-    <string name="fork">포크</string>
-    <string name="forking_repository">포크하는 중...</string>
-    <string name="global_search">GitHub 검색</string>
+    <string name="copy_hash">해쉬 복사</string>
     <string name="toast_msg_copied">클립보드로 복사됨</string>
-    <string name="unfollow">언팔로우</string>
-    <string name="username_or_email">계정 또는 이메일</string>
-    <string name="select_ref">가지나 꼬리표 선택</string>
-    <string name="signup_link_two_factor_auth">무엇을 해야할지 잘 모르시나요? &lt;a href=\"https://help.github.com/articles/about-two-factor-authentication\">도움을 얻으세요.&lt;/a></string>
-    <string name="no_commits">커밋 없음</string>
-    <string name="no_contributors">기여자 없음</string>
-    <string name="loading_commits">커밋 가져오는중...</string>
-    <string name="issue_event_label_assigned">이(가) 담당자로 지정됨</string>
-    <string name="issue_event_label_unassigned">이(가) 더이상 담당하지 않음</string>
-    <string name="issue_event_head_ref_deleted">이(가) 가지를 지움</string>
-    <string name="issue_event_head_ref_restored">이(가) 가지를 되살림</string>
-    <string name="issue_event_label_added">이(가) %1$s 라벨을 추가함</string>
-    <string name="issue_event_closed">이(가) 닫음</string>
-    <string name="issue_event_label_removed">이(가) %1$s 라벨을 지움</string>
-    <string name="issue_event_reopened">이(가) 다시 열음</string>
-    <string name="issue_event_unlock">이(가) 이 대화 잠금을 풀음</string>
-    <string name="issue_event_rename">이(가) 제목을 바꿈</string>
-    <string name="issue_event_referenced">이(가) 커밋 %1$s 에서 이 이슈를 언급함</string>
-    <string name="issue_event_milestone_removed">이(가) 마일스톤 %1$s 에서 이 이슈를 제거함</string>
-    <string name="issue_event_milestone_added">이(가) 마일스톤 %1$s 에 이 이슈를 추가함</string>
-    <string name="issue_event_merged">이(가) 커밋 %1$s 을(를) 병합함</string>
-    <string name="issue_event_lock">이(가) 이 대화를 잠그고 협업자로 한정함</string>
-    <string name="error_starring_repository">즐겨찾기 실패</string>
-    <string name="error_unfollowing_person">언팔로우 실패</string>
-    <string name="error_unstarring_repository">즐겨찾기 해제 실패</string>
-    <string name="error_users_search">유저 검색 실패</string>
-    <string name="follow">팔로우</string>
+
 </resources>

@@ -1,12 +1,13 @@
 # ForkHub
 
-[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=jp.forkhub) [![F-Droid](https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png)](https://f-droid.org/repository/browse/?fdid=jp.forkhub)
+<a href="https://play.google.com/store/apps/details?id=jp.forkhub" target="_blank">
+  <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
+</a>
+<a href="https://f-droid.org/repository/browse/?fdid=jp.forkhub" target="_blank">
+  <img src="https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png" height="60"/>
+</a>
 
-The official [GitHub Android App](https://github.com/github/android/) hasn't been updated in a while and has been accumulating a few bugs and missing features, so I've decided to fork it and keep improving it.
-
-I'll start by merging bug fixes that have been lying around for months, and once I'm comfortable again with the state of the app, I'd like to start adding new features.
-
-You can see a comprehensive list of changes made to the original app in the [change log](https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md).
+ForkHub started off as a fork of the official Android app from GitHub, and has since seen lots of improvements. You can see a comprehensive list of changes in the [change log](https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md).
 
 [![Download from Google Play](https://cloud.githubusercontent.com/assets/3838734/3855877/4cf2a2dc-1eec-11e4-9634-2a1adf8f1c39.jpg)](https://play.google.com/store/apps/details?id=jp.forkhub)
 

@@ -24,13 +24,19 @@
         android:id="@+id/toolbar"
         style="@style/Toolbar" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/th_tabs"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
-        app:tabIndicatorColor="@color/color_accent"
-        app:tabMode="scrollable" />
+        android:background="@color/color_primary">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/th_tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:tabIndicatorColor="@color/color_accent"
+            app:tabMode="scrollable" />
+    </FrameLayout>
 
     <com.github.mobile.ui.ViewPager
         android:id="@+id/vp_pages"
