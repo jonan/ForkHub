@@ -17,6 +17,7 @@ package com.github.mobile.ui.comment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -25,6 +26,7 @@ import android.view.View;
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ui.issue.IssueFragment;
+import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
@@ -40,6 +42,8 @@ import org.eclipse.egit.github.core.User;
  * Adapter for a list of {@link Comment} objects
  */
 public class CommentListAdapter extends MultiTypeAdapter {
+
+    private final Context context;
 
     private final Resources resources;
 
@@ -78,6 +82,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
             boolean isCollaborator, String loggedUser) {
         super(activity.getLayoutInflater());
 
+        this.context = activity;
         this.resources = activity.getResources();
         this.avatars = avatars;
         this.imageGetter = imageGetter;
@@ -196,6 +201,13 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected void updateComment(final Comment comment) {
         imageGetter.bind(textView(0), comment.getBodyHtml(), comment.getId());
         avatars.bind(imageView(3), comment.getUser());
+        imageView(3).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                context.startActivity(UserViewActivity.createIntent(comment.getUser()));
+            }
+        });
 
         setText(1, comment.getUser().getLogin());
         setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));

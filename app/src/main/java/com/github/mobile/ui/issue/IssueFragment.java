@@ -67,6 +67,7 @@ import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.comment.CommentListAdapter;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
+import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.ShareUtils;
@@ -360,6 +361,13 @@ public class IssueFragment extends DialogFragment {
         createdDateText.setText(new StyledText().append(
                 getString(R.string.prefix_opened)).append(issue.getCreatedAt()));
         avatars.bind(creatorAvatar, issue.getUser());
+        creatorAvatar.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(UserViewActivity.createIntent(issue.getUser()));
+            }
+        });
 
         if (isPullRequest && issue.getPullRequest().getCommits() > 0) {
             ViewUtils.setGone(commitsView, false);
@@ -391,7 +399,7 @@ public class IssueFragment extends DialogFragment {
         }
         ViewUtils.setGone(stateText, open);
 
-        User assignee = issue.getAssignee();
+        final User assignee = issue.getAssignee();
         if (assignee != null) {
             StyledText name = new StyledText();
             name.bold(assignee.getLogin());
