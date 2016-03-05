@@ -24,7 +24,7 @@ import com.github.mobile.ui.ProgressDialogTask;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.service.WatcherService;
+import org.eclipse.egit.github.core.service.StargazerService;
 
 /**
  * Task to unstar a repository
@@ -34,7 +34,7 @@ public class UnstarRepositoryTask extends ProgressDialogTask<Void> {
     private static final String TAG = "UnstarRepositoryTask";
 
     @Inject
-    private WatcherService service;
+    private StargazerService service;
 
     private final IRepositoryIdProvider repo;
 
@@ -63,7 +63,7 @@ public class UnstarRepositoryTask extends ProgressDialogTask<Void> {
 
     @Override
     protected Void run(Account account) throws Exception {
-        service.unwatch(repo);
+        service.unstar(repo);
 
         return null;
     }

@@ -35,7 +35,6 @@ import java.util.TreeSet;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.RepositoryService;
-import org.eclipse.egit.github.core.service.WatcherService;
 
 /**
  * Cache of repositories under a given organization
@@ -61,8 +60,6 @@ public class OrganizationRepositories implements
 
     private final RepositoryService repos;
 
-    private final WatcherService watcher;
-
     private final Provider<GitHubAccount> accountProvider;
 
     /**
@@ -70,16 +67,13 @@ public class OrganizationRepositories implements
      *
      * @param orgs
      * @param repos
-     * @param watcher
      * @param accountProvider
      */
     @Inject
-    public OrganizationRepositories(@Assisted User orgs,
-            RepositoryService repos, WatcherService watcher,
+    public OrganizationRepositories(@Assisted User orgs, RepositoryService repos,
             Provider<GitHubAccount> accountProvider) {
         this.org = orgs;
         this.repos = repos;
-        this.watcher = watcher;
         this.accountProvider = accountProvider;
     }
 

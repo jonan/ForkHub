@@ -24,7 +24,7 @@ import com.github.mobile.ui.ProgressDialogTask;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.service.WatcherService;
+import org.eclipse.egit.github.core.service.StargazerService;
 
 /**
  * Task to star a repository
@@ -34,7 +34,7 @@ public class StarRepositoryTask extends ProgressDialogTask<Void> {
     private static final String TAG = "StarRepositoryTask";
 
     @Inject
-    private WatcherService service;
+    private StargazerService service;
 
     private final IRepositoryIdProvider repo;
 
@@ -63,7 +63,7 @@ public class StarRepositoryTask extends ProgressDialogTask<Void> {
 
     @Override
     protected Void run(Account account) throws Exception {
-        service.watch(repo);
+        service.star(repo);
 
         return null;
     }

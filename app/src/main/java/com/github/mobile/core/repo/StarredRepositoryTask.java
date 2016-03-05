@@ -16,7 +16,7 @@
 package com.github.mobile.core.repo;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.service.WatcherService;
+import org.eclipse.egit.github.core.service.StargazerService;
 
 import android.accounts.Account;
 import android.content.Context;
@@ -33,7 +33,7 @@ public class StarredRepositoryTask extends AuthenticatedUserTask<Boolean> {
     private static final String TAG = "StarringRepositoryTask";
 
     @Inject
-    private WatcherService service;
+    private StargazerService service;
 
     private final IRepositoryIdProvider repo;
 
@@ -51,7 +51,7 @@ public class StarredRepositoryTask extends AuthenticatedUserTask<Boolean> {
 
     @Override
     protected Boolean run(Account account) throws Exception {
-        return service.isWatching(repo);
+        return service.isStarring(repo);
     }
 
     @Override

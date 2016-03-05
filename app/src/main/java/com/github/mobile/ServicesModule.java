@@ -36,8 +36,8 @@ import org.eclipse.egit.github.core.service.MilestoneService;
 import org.eclipse.egit.github.core.service.OrganizationService;
 import org.eclipse.egit.github.core.service.PullRequestService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.eclipse.egit.github.core.service.StargazerService;
 import org.eclipse.egit.github.core.service.UserService;
-import org.eclipse.egit.github.core.service.WatcherService;
 
 /**
  * Provide GitHub-API related services
@@ -109,8 +109,8 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
-    WatcherService watcherService(GitHubClient client) {
-        return new WatcherService(client);
+    StargazerService stargazerService(GitHubClient client) {
+        return new StargazerService(client);
     }
 
     @Provides
