@@ -437,12 +437,6 @@ public class IssueFragment extends DialogFragment {
         } else
             milestoneArea.setVisibility(GONE);
 
-        String state = issue.getState();
-        if (state != null && state.length() > 0)
-            state = state.substring(0, 1).toUpperCase(Locale.US) + state.substring(1);
-        else
-            state = "";
-
         ViewUtils.setGone(progress, true);
         ViewUtils.setGone(list, false);
         updateStateItem(issue);
