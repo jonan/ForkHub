@@ -51,7 +51,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.2.0.201601211800-r'
+    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.3.0.201604071810-r'
     compile('com.google.inject.extensions:guice-assistedinject:3.0') {
         exclude group: 'com.google.inject'
     }
