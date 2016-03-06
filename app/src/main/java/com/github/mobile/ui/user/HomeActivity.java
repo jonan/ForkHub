@@ -124,7 +124,7 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         drawerToggle.syncState();
 
         navigationIconTint = navigationView.getItemIconTintList();
-        findViewById(R.id.nav_header).setOnClickListener(new View.OnClickListener() {
+        navigationView.getHeaderView(0).findViewById(R.id.nav_header).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 swapNavigationMenu();
@@ -197,8 +197,9 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
 
         this.org = org;
 
-        avatars.bind((ImageView) findViewById(R.id.avatar), org);
-        ((TextView) findViewById(R.id.user_name)).setText(org.getLogin());
+        View navigationHeader = navigationView.getHeaderView(0);
+        avatars.bind((ImageView) navigationHeader.findViewById(R.id.avatar), org);
+        ((TextView) navigationHeader.findViewById(R.id.user_name)).setText(org.getLogin());
 
         boolean isDefaultUser = AccountUtils.isUser(this, org);
         boolean changed = this.isDefaultUser != isDefaultUser;
