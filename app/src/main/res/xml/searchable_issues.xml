@@ -18,5 +18,4 @@
     android:hint="@string/find_issues"
     android:label="@string/app_name"
     android:searchSuggestAuthority="jp.forkhub.search.suggest.recent.issues"
-    android:searchSuggestSelection=" ?"
-    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" />
+    android:searchSuggestSelection=" ?" />
