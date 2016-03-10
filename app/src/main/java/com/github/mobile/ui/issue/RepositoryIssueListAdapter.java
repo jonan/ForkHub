@@ -15,6 +15,7 @@
  */
 package com.github.mobile.ui.issue;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -39,8 +40,8 @@ public class RepositoryIssueListAdapter extends IssueListAdapter<Issue> {
      * @param avatars
      */
     public RepositoryIssueListAdapter(LayoutInflater inflater,
-            Issue[] elements, AvatarLoader avatars) {
-        super(R.layout.repo_issue_item, inflater, elements, avatars);
+            Resources resources, Issue[] elements, AvatarLoader avatars) {
+        super(R.layout.repo_issue_item, inflater, resources, elements, avatars);
     }
 
     @Override
@@ -53,10 +54,9 @@ public class RepositoryIssueListAdapter extends IssueListAdapter<Issue> {
         view = super.initialize(view);
 
         numberPaintFlags = textView(view, 0).getPaintFlags();
-        setText(5, TypefaceUtils.ICON_GIT_PULL_REQUEST);
-        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
-        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
-        TypefaceUtils.setOcticons(textView(view, 5), commentIcon);
+        setText(4, TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        setText(5, TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
         return view;
     }
 
@@ -68,8 +68,9 @@ public class RepositoryIssueListAdapter extends IssueListAdapter<Issue> {
     @Override
     protected int[] getChildViewIds() {
         return new int[] { R.id.tv_issue_number, R.id.tv_issue_title, R.id.iv_avatar,
-                R.id.tv_issue_creation, R.id.tv_issue_comments,
-                R.id.tv_pull_request_icon, R.id.v_label0, R.id.v_label1, R.id.v_label2,
+                R.id.tv_issue_creation, R.id.tv_pull_request_icon,
+                R.id.tv_comment_icon, R.id.tv_issue_comments,
+                R.id.v_label0, R.id.v_label1, R.id.v_label2,
                 R.id.v_label3, R.id.v_label4, R.id.v_label5, R.id.v_label6, R.id.v_label7 };
     }
 
@@ -79,12 +80,21 @@ public class RepositoryIssueListAdapter extends IssueListAdapter<Issue> {
 
         avatars.bind(imageView(2), issue.getUser());
 
-        setGone(5, !IssueUtils.isPullRequest(issue));
-
         setText(1, issue.getTitle());
 
         updateReporter(issue.getUser().getLogin(), issue.getCreatedAt(), 3);
-        setNumber(4, issue.getComments());
-        updateLabels(issue.getLabels(), 6);
+
+        setGone(4, !IssueUtils.isPullRequest(issue));
+        setNumber(6, issue.getComments());
+
+        if (issue.getComments() > 0) {
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+        } else {
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_disabled));
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_disabled));
+        }
+
+        updateLabels(issue.getLabels(), 7);
     }
 }

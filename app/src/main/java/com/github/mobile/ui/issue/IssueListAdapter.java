@@ -17,6 +17,8 @@ package com.github.mobile.ui.issue;
 
 import static android.graphics.Paint.STRIKE_THRU_TEXT_FLAG;
 import static org.eclipse.egit.github.core.service.IssueService.STATE_CLOSED;
+
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -48,6 +50,11 @@ public abstract class IssueListAdapter<V> extends SingleTypeAdapter<V> {
     protected static final int MAX_LABELS = 8;
 
     /**
+     * Context resources
+     */
+    protected final Resources resources;
+
+    /**
      * Avatar loader
      */
     protected final AvatarLoader avatars;
@@ -69,9 +76,10 @@ public abstract class IssueListAdapter<V> extends SingleTypeAdapter<V> {
      * @param avatars
      */
     public IssueListAdapter(int viewId, LayoutInflater inflater,
-            Object[] elements, AvatarLoader avatars) {
+            Resources resources, Object[] elements, AvatarLoader avatars) {
         super(inflater, viewId);
 
+        this.resources = resources;
         this.avatars = avatars;
         numberView = (TextView) inflater.inflate(viewId, null).findViewById(
                 R.id.tv_issue_number);

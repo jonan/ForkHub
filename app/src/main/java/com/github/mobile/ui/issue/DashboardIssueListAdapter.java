@@ -15,6 +15,7 @@
  */
 package com.github.mobile.ui.issue;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -42,8 +43,8 @@ public class DashboardIssueListAdapter extends
      * @param elements
      */
     public DashboardIssueListAdapter(AvatarLoader avatars,
-            LayoutInflater inflater, RepositoryIssue[] elements) {
-        super(R.layout.dashboard_issue_item, inflater, elements, avatars);
+            Resources resources, LayoutInflater inflater, RepositoryIssue[] elements) {
+        super(R.layout.dashboard_issue_item, inflater, resources, elements, avatars);
     }
 
     @Override
@@ -61,10 +62,9 @@ public class DashboardIssueListAdapter extends
         view = super.initialize(view);
 
         numberPaintFlags = textView(view, 1).getPaintFlags();
-        setText(6, TypefaceUtils.ICON_GIT_PULL_REQUEST);
-        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
-        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
-        TypefaceUtils.setOcticons(textView(view, 6), commentIcon);
+        setText(5, TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        setText(6, TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 5), textView(view, 6));
         return view;
     }
 
@@ -72,7 +72,8 @@ public class DashboardIssueListAdapter extends
     protected int[] getChildViewIds() {
         return new int[] { R.id.tv_issue_repo_name, R.id.tv_issue_number,
                 R.id.tv_issue_title, R.id.iv_avatar, R.id.tv_issue_creation,
-                R.id.tv_issue_comments, R.id.tv_pull_request_icon, R.id.v_label0,
+                R.id.tv_pull_request_icon, R.id.tv_comment_icon,
+                R.id.tv_issue_comments, R.id.v_label0,
                 R.id.v_label1, R.id.v_label2, R.id.v_label3, R.id.v_label4,
                 R.id.v_label5, R.id.v_label6, R.id.v_label7 };
     }
@@ -90,12 +91,21 @@ public class DashboardIssueListAdapter extends
         else
             setText(0, null);
 
-        setGone(6, !IssueUtils.isPullRequest(issue));
-
         setText(2, issue.getTitle());
 
         updateReporter(issue.getUser().getLogin(), issue.getCreatedAt(), 4);
-        setNumber(5, issue.getComments());
-        updateLabels(issue.getLabels(), 7);
+
+        setGone(5, !IssueUtils.isPullRequest(issue));
+        setNumber(7, issue.getComments());
+
+        if (issue.getComments() > 0) {
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+            textView(7).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+        } else {
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_disabled));
+            textView(7).setTextColor(resources.getColor(R.color.text_icon_disabled));
+        }
+
+        updateLabels(issue.getLabels(), 8);
     }
 }

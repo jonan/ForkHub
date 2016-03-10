@@ -15,10 +15,10 @@
  */
 package com.github.mobile.ui.issue;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
@@ -41,8 +41,8 @@ public class SearchIssueListAdapter extends IssueListAdapter<SearchIssue> {
      * @param avatars
      */
     public SearchIssueListAdapter(LayoutInflater inflater,
-            SearchIssue[] elements, AvatarLoader avatars) {
-        super(R.layout.repo_issue_item, inflater, elements, avatars);
+            Resources resources, SearchIssue[] elements, AvatarLoader avatars) {
+        super(R.layout.repo_issue_item, inflater, resources, elements, avatars);
     }
 
     @Override
@@ -61,14 +61,11 @@ public class SearchIssueListAdapter extends IssueListAdapter<SearchIssue> {
 
         numberPaintFlags = textView(view, 0).getPaintFlags();
 
-        TextView pullRequestIcon = (TextView) view.findViewById(R.id.tv_pull_request_icon);
-        pullRequestIcon.setText(TypefaceUtils.ICON_GIT_PULL_REQUEST);
-        ViewUtils.setGone(pullRequestIcon, true);
+        setText(4, TypefaceUtils.ICON_GIT_PULL_REQUEST);
+        setText(5, TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
 
-        TextView commentIcon = (TextView) view.findViewById(R.id.tv_comment_icon);
-        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
-
-        TypefaceUtils.setOcticons(pullRequestIcon, commentIcon);
+        setGone(4, true);
 
         for (int i = 0; i < MAX_LABELS; i++)
             ViewUtils.setGone(view.findViewById(R.id.v_label0 + i), true);
@@ -79,7 +76,8 @@ public class SearchIssueListAdapter extends IssueListAdapter<SearchIssue> {
     @Override
     protected int[] getChildViewIds() {
         return new int[] { R.id.tv_issue_number, R.id.tv_issue_title, R.id.iv_avatar,
-                R.id.tv_issue_creation, R.id.tv_issue_comments };
+                R.id.tv_issue_creation, R.id.tv_pull_request_icon,
+                R.id.tv_comment_icon, R.id.tv_issue_comments, };
     }
 
     @Override
@@ -97,6 +95,15 @@ public class SearchIssueListAdapter extends IssueListAdapter<SearchIssue> {
         setText(1, issue.getTitle());
 
         updateReporter(issue.getUser(), issue.getCreatedAt(), 3);
-        setNumber(4, issue.getComments());
+
+        setNumber(6, issue.getComments());
+
+        if (issue.getComments() > 0) {
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+        } else {
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_disabled));
+            textView(6).setTextColor(resources.getColor(R.color.text_icon_disabled));
+        }
     }
 }

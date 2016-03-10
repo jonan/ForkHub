@@ -118,6 +118,7 @@ public class SearchIssueListFragment extends ItemListFragment<SearchIssue>
     protected SingleTypeAdapter<SearchIssue> createAdapter(
             List<SearchIssue> items) {
         return new SearchIssueListAdapter(getActivity().getLayoutInflater(),
+                getActivity().getResources(),
                 items.toArray(new SearchIssue[items.size()]), avatars);
     }
 

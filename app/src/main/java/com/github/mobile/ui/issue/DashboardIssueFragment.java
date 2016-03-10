@@ -119,8 +119,8 @@ public class DashboardIssueFragment extends PagedItemFragment<RepositoryIssue> {
     @Override
     protected SingleTypeAdapter<RepositoryIssue> createAdapter(
             List<RepositoryIssue> items) {
-        return new DashboardIssueListAdapter(avatars, getActivity()
-                .getLayoutInflater(), items.toArray(new RepositoryIssue[items
-                .size()]));
+        return new DashboardIssueListAdapter(avatars, getActivity().getResources(),
+                getActivity().getLayoutInflater(),
+                items.toArray(new RepositoryIssue[items.size()]));
     }
 }

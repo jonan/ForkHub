@@ -282,6 +282,7 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
     protected SingleTypeAdapter<Issue> createAdapter(List<Issue> items) {
         return new RepositoryIssueListAdapter(
                 getActivity().getLayoutInflater(),
+                getActivity().getResources(),
                 items.toArray(new Issue[items.size()]), avatars);
     }
 }

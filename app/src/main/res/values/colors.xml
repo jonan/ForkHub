@@ -25,6 +25,8 @@
     <color name="text">#1E1E1E</color>
     <color name="text_light">#AEAEAE</color>
     <color name="text_icon">#A8A8A8</color>
+    <color name="text_icon_highlighted">#767676</color>
+    <color name="text_icon_disabled">#EEEEEE</color>
     <color name="text_recent">#3797C7</color>
     <color name="text_description">#666666</color>
     <color name="pager_title_background_top_start">#1A4D6B</color>
