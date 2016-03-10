@@ -369,19 +369,6 @@ public class IssueFragment extends DialogFragment {
             }
         });
 
-        if (isPullRequest && issue.getPullRequest().getCommits() > 0) {
-            ViewUtils.setGone(commitsView, false);
-
-            TextView icon = (TextView) headerView.findViewById(R.id.tv_commit_icon);
-            TypefaceUtils.setOcticons(icon);
-            icon.setText(TypefaceUtils.ICON_GIT_COMMIT);
-
-            String commits = getString(R.string.pull_request_commits,
-                    issue.getPullRequest().getCommits());
-            ((TextView) headerView.findViewById(R.id.tv_pull_request_commits)).setText(commits);
-        } else
-            ViewUtils.setGone(commitsView, true);
-
         boolean open = STATE_OPEN.equals(issue.getState());
         if (!open) {
             StyledText text = new StyledText();
@@ -398,6 +385,36 @@ public class IssueFragment extends DialogFragment {
             stateText.setText(text);
         }
         ViewUtils.setGone(stateText, open);
+
+        if (isPullRequest && issue.getPullRequest().getCommits() > 0) {
+            ViewUtils.setGone(commitsView, false);
+
+            TextView icon = (TextView) headerView.findViewById(R.id.tv_commit_icon);
+            TypefaceUtils.setOcticons(icon);
+            icon.setText(TypefaceUtils.ICON_GIT_COMMIT);
+
+            String commits = getString(R.string.pull_request_commits,
+                    issue.getPullRequest().getCommits());
+            ((TextView) headerView.findViewById(R.id.tv_pull_request_commits)).setText(commits);
+
+            ViewUtils.setGone(headerView.findViewById(R.id.ll_mergeable), !open);
+
+            TextView mergeableIcon = (TextView) headerView.findViewById(R.id.tv_mergeable_icon);
+            TypefaceUtils.setOcticons(mergeableIcon);
+            TextView mergeableText = (TextView) headerView.findViewById(R.id.tv_mergeable_text);
+
+            if (issue.getPullRequest().isMergeable()) {
+                mergeableIcon.setText(TypefaceUtils.ICON_CHECK);
+                mergeableIcon.setTextColor(getResources().getColor(R.color.issue_event_green));
+                mergeableText.setText(R.string.pull_request_mergeable_text);
+            } else {
+                mergeableIcon.setText(TypefaceUtils.ICON_ALERT);
+                mergeableIcon.setTextColor(getResources().getColor(R.color.text_icon));
+                mergeableText.setText(R.string.pull_request_not_mergeable_text);
+            }
+        } else {
+            ViewUtils.setGone(commitsView, true);
+        }
 
         final User assignee = issue.getAssignee();
         if (assignee != null) {

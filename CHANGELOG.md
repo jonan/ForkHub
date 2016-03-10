@@ -4,6 +4,7 @@
 
 ### Added
 - Avatars in the issue view are now clickable.
+- Show if a pull request is mergeable or not.
 
 ### Fixed
 - Some minor UI fixes and improvements.

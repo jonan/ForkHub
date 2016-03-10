@@ -234,6 +234,8 @@
     <string name="prefix_opened">opened\u0020</string>
     <string name="clear">Clear</string>
     <string name="pull_request_commits">Commits: %d</string>
+    <string name="pull_request_mergeable_text">This branch has no conflicts with the base branch</string>
+    <string name="pull_request_not_mergeable_text">This branch has conflicts that must be resolved</string>
     <string name="open_issues">Open Issues</string>
     <string name="closed_issues">Closed Issues</string>
     <string name="open_pull_requests">Open Pull Requests</string>
