@@ -19,15 +19,18 @@ import static android.app.SearchManager.QUERY;
 import static android.content.Intent.ACTION_SEARCH;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 
-import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.HomeActivity;
@@ -59,15 +62,18 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     public boolean onCreateOptionsMenu(Menu options) {
         getMenuInflater().inflate(R.menu.search, options);
-        return true;
+
+        // Set up searching
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(options.findItem(R.id.m_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
+
+        return super.onCreateOptionsMenu(options);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.m_search:
-            onSearchRequested();
-            return true;
         case R.id.m_clear:
             RepositorySearchSuggestionsProvider.clear(this);
             ToastUtils.show(this, R.string.search_history_cleared);
