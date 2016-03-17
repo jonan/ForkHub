@@ -15,32 +15,28 @@
   limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/m_comment"
         android:icon="@drawable/action_comment"
-        app:showAsAction="ifRoom"
-        android:title="@string/comment"/>
+        android:title="@string/comment"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/m_edit"
-        android:icon="@drawable/menu_edit"
-        app:showAsAction="never"
-        android:title="@string/edit"/>
+        android:title="@string/edit"
+        app:showAsAction="never" />
     <item
         android:id="@+id/m_state"
-        android:icon="@drawable/menu_issue_close"
-        app:showAsAction="never"
-        android:title="@string/close"/>
+        android:title="@string/close"
+        app:showAsAction="never" />
     <item
         android:id="@+id/m_share"
-        android:icon="@drawable/menu_share"
-        app:showAsAction="never"
-        android:title="@string/share"/>
+        android:title="@string/share"
+        app:showAsAction="never" />
     <item
         android:id="@+id/m_refresh"
-        android:icon="@drawable/menu_refresh"
-        app:showAsAction="never"
-        android:title="@string/refresh"/>
+        android:title="@string/refresh"
+        app:showAsAction="never" />
 
 </menu>
