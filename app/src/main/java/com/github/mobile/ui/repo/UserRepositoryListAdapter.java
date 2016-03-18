@@ -47,7 +47,11 @@ public class UserRepositoryListAdapter extends
             Repository[] elements, User user) {
         super(R.layout.user_repo_item, inflater, elements);
 
-        login = user.getLogin();
+        if (user != null) {
+            login = user.getLogin();
+        } else {
+            login = "";
+        }
     }
 
     @Override

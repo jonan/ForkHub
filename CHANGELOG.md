@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Show starred repositories in the home and user activities.
 - Avatars in the issue view are now clickable.
 - Show if a pull request is mergeable or not.
 
