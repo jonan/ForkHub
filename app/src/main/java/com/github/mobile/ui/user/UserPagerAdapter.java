@@ -21,7 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
-import com.github.mobile.ui.repo.UserRepositoryListFragment;
+import com.github.mobile.ui.repo.UserOwnedRepositoryListFragment;
+import com.github.mobile.ui.repo.UserStarredRepositoryListFragment;
 
 /**
  * Pager adapter for a user's different views
@@ -45,10 +46,12 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 0:
             return new UserCreatedNewsFragment();
         case 1:
-            return new UserRepositoryListFragment();
+            return new UserOwnedRepositoryListFragment();
         case 2:
-            return new UserFollowersFragment();
+            return new UserStarredRepositoryListFragment();
         case 3:
+            return new UserFollowersFragment();
+        case 4:
             return new UserFollowingFragment();
         default:
             return null;
@@ -57,7 +60,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -68,8 +71,10 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 1:
             return resources.getString(R.string.tab_repositories);
         case 2:
-            return resources.getString(R.string.tab_followers);
+            return resources.getString(R.string.tab_stars);
         case 3:
+            return resources.getString(R.string.tab_followers);
+        case 4:
             return resources.getString(R.string.tab_following);
         default:
             return null;

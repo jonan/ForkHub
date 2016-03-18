@@ -26,26 +26,19 @@ import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.core.ResourcePager;
 import com.github.mobile.ui.PagedItemFragment;
-import com.google.inject.Inject;
 
 import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.PageIterator;
-import org.eclipse.egit.github.core.service.RepositoryService;
 
 /**
  * Fragment to display a list of repositories for a {@link User}
  */
-public class UserRepositoryListFragment extends PagedItemFragment<Repository> {
+public abstract class UserRepositoryListFragment extends PagedItemFragment<Repository> {
 
-    @Inject
-    private RepositoryService service;
-
-    private User user;
+    protected User user;
 
     @Override
     public void onAttach(Context context) {
@@ -59,22 +52,6 @@ public class UserRepositoryListFragment extends PagedItemFragment<Repository> {
         super.onActivityCreated(savedInstanceState);
 
         setEmptyText(R.string.no_repositories);
-    }
-
-    @Override
-    protected ResourcePager<Repository> createPager() {
-        return new ResourcePager<Repository>() {
-
-            @Override
-            protected Object getId(Repository resource) {
-                return resource.getId();
-            }
-
-            @Override
-            public PageIterator<Repository> createIterator(int page, int size) {
-                return service.pageRepositories(user.getLogin(), page, size);
-            }
-        };
     }
 
     @Override
