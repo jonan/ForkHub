@@ -27,7 +27,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/create_issue"
-        android:icon="@drawable/action_create"
+        android:icon="@drawable/action_add"
         android:title="@string/create"
         app:showAsAction="ifRoom" />
     <item

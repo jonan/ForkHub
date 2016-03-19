@@ -23,7 +23,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/m_create"
-        android:icon="@drawable/action_create"
+        android:icon="@drawable/action_add"
         android:title="@string/create_gist"
         app:showAsAction="ifRoom" />
 
