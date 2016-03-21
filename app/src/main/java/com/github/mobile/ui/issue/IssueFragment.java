@@ -562,11 +562,9 @@ public class IssueFragment extends DialogFragment {
     private void updateStateItem(Issue issue) {
         if (issue != null && stateItem != null)
             if (STATE_OPEN.equals(issue.getState()))
-                stateItem.setTitle(R.string.close).setIcon(
-                        R.drawable.menu_issue_close);
+                stateItem.setTitle(R.string.close);
             else
-                stateItem.setTitle(R.string.reopen).setIcon(
-                        R.drawable.menu_issue_open);
+                stateItem.setTitle(R.string.reopen);
     }
 
     @Override
