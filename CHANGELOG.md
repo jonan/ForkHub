@@ -4,6 +4,7 @@
 
 ### Added
 - Show starred repositories in the home and user activities.
+- Load issue templates for new issues when available.
 - Avatars in the issue view are now clickable.
 - Show if a pull request is mergeable or not.
 

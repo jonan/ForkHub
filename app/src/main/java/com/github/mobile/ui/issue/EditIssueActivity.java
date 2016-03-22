@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,7 @@ import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
@@ -178,8 +180,23 @@ public class EditIssueActivity extends DialogFragmentActivity {
             else
                 actionBar.setTitle(getString(R.string.issue_title)
                         + issue.getNumber());
-        else
+        else {
             actionBar.setTitle(R.string.new_issue);
+            new GetIssueTemplateTask(this, repository) {
+
+                @Override
+                protected void onSuccess(RepositoryContents repositoryContents) throws Exception {
+                    super.onSuccess(repositoryContents);
+
+                    if (repositoryContents == null) {
+                        return;
+                    }
+
+                    byte[] content = Base64.decode(repositoryContents.getContent(), Base64.DEFAULT);
+                    bodyText.setText(new String(content));
+                }
+            }.execute();
+        }
         actionBar.setSubtitle(repository.generateId());
         avatars.bind(actionBar, (User) intent.getSerializableExtra(EXTRA_USER));
 
