@@ -13,93 +13,94 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.issue;
+package com.github.mobile.core.issue;
 
-import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
+import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import android.accounts.Account;
 
 import com.github.mobile.R;
-import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
+import com.github.mobile.ui.issue.LabelsDialog;
 import com.google.inject.Inject;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.CollaboratorService;
+import org.eclipse.egit.github.core.Label;
+import org.eclipse.egit.github.core.service.LabelService;
 
 /**
- * Task to edit the assignee
+ * Task to edit labels
  */
-public class EditAssigneeTask extends ProgressDialogTask<Issue> {
-
-    @Inject
-    private CollaboratorService service;
+public class EditLabelsTask extends ProgressDialogTask<Issue> {
 
     @Inject
     private IssueStore store;
 
-    private final AssigneeDialog assigneeDialog;
+    @Inject
+    private LabelService service;
+
+    private final LabelsDialog labelsDialog;
 
     private final IRepositoryIdProvider repositoryId;
 
     private final int issueNumber;
 
-    private User assignee;
+    private Label[] labels;
 
     /**
-     * Create task to edit a milestone
+     * Create task to edit labels
      *
      * @param activity
      * @param repositoryId
      * @param issueNumber
      */
-    public EditAssigneeTask(final DialogFragmentActivity activity,
+    public EditLabelsTask(final DialogFragmentActivity activity,
             final IRepositoryIdProvider repositoryId, final int issueNumber) {
         super(activity);
 
         this.repositoryId = repositoryId;
         this.issueNumber = issueNumber;
-        assigneeDialog = new AssigneeDialog(activity, ISSUE_ASSIGNEE_UPDATE,
+        labelsDialog = new LabelsDialog(activity, ISSUE_LABELS_UPDATE,
                 repositoryId, service);
     }
 
     /**
-     * Prompt for assignee selection
+     * Prompt for labels selection
      *
-     * @param assignee
-     *            current assignee
+     * @param labels
+     *            current labels
      * @return this task
      */
-    public EditAssigneeTask prompt(User assignee) {
-        assigneeDialog.show(assignee);
+    public EditLabelsTask prompt(List<Label> labels) {
+        labelsDialog.show(labels);
         return this;
     }
 
     /**
-     * Edit issue to have given assignee
+     * Edit issue to have given labels
      *
-     * @param user
+     * @param labels
      * @return this task
      */
-    public EditAssigneeTask edit(User user) {
-        showIndeterminate(R.string.updating_assignee);
+    public EditLabelsTask edit(Label[] labels) {
+        showIndeterminate(R.string.updating_labels);
 
-        this.assignee = user;
+        this.labels = labels;
 
         execute();
         return this;
     }
 
     @Override
-    protected Issue run(Account account) throws Exception {
+    public Issue run(Account account) throws Exception {
         Issue editedIssue = new Issue();
-        if (assignee != null)
-            editedIssue.setAssignee(assignee);
-        else
-            editedIssue.setAssignee(new User().setLogin(""));
         editedIssue.setNumber(issueNumber);
+        if (labels != null && labels.length > 0)
+            editedIssue.setLabels(Arrays.asList(labels));
         return store.editIssue(repositoryId, editedIssue);
     }
 }

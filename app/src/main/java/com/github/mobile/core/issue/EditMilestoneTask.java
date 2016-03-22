@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.issue;
+package com.github.mobile.core.issue;
 
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import android.accounts.Account;
 
 import com.github.mobile.R;
-import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.ProgressDialogTask;
+import com.github.mobile.ui.issue.MilestoneDialog;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;

@@ -13,76 +13,77 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.issue;
+package com.github.mobile.core.issue;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.R;
-import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
+import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.service.IssueService;
 
 /**
- * Task to create an {@link Issue}
+ * Task to delete a comment on an issue in a repository
  */
-public class CreateIssueTask extends ProgressDialogTask<Issue> {
+public class DeleteCommentTask extends ProgressDialogTask<Comment> {
 
-    private static final String TAG = "CreateIssueTask";
+    private static final String TAG = "DeleteCommentTask";
+
+    private final IRepositoryIdProvider repository;
+
+    private final Comment comment;
 
     @Inject
     private IssueService service;
 
-    @Inject
-    private IssueStore store;
-
-    private final IRepositoryIdProvider repository;
-
-    private final Issue issue;
-
     /**
-     * Create task to create an {@link Issue}
+     * Delete task for deleting a comment on the given issue in the given
+     * repository
      *
-     * @param activity
+     * @param context
      * @param repository
-     * @param issue
+     * @param comment
      */
-    public CreateIssueTask(final Activity activity,
-            final IRepositoryIdProvider repository, final Issue issue) {
-        super(activity);
+    public DeleteCommentTask(final Context context,
+            final IRepositoryIdProvider repository,
+            final Comment comment) {
+        super(context);
 
         this.repository = repository;
-        this.issue = issue;
+        this.comment = comment;
+    }
+
+    @Override
+    protected Comment run(Account account) throws Exception {
+        service.deleteComment(repository, comment.getId());
+        return comment;
     }
 
     /**
-     * Create issue
+     * Delete comment
      *
      * @return this task
      */
-    public CreateIssueTask create() {
-        showIndeterminate(R.string.creating_issue);
+    public DeleteCommentTask start() {
+        showIndeterminate(R.string.deleting_comment);
 
         execute();
         return this;
     }
 
     @Override
-    public Issue run(Account account) throws Exception {
-        return store.addIssue(service.createIssue(repository, issue));
-    }
-
-    @Override
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.e(TAG, "Exception creating issue", e);
+        Log.d(TAG, "Exception deleting comment on issue", e);
+
         ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }

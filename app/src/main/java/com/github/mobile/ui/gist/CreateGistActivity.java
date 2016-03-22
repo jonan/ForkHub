@@ -28,6 +28,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.github.mobile.R;
+import com.github.mobile.core.gist.CreateGistTask;
 import com.github.mobile.ui.BaseActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.util.ShareUtils;

@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.OnLoadListener;
+import com.github.mobile.core.gist.DeleteGistTask;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.FragmentProvider;

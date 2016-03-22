@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.gist;
+package com.github.mobile.core.gist;
 
 import android.accounts.Account;
 import android.app.Activity;

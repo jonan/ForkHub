@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.issue;
+package com.github.mobile.core.gist;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.R;
@@ -27,70 +26,61 @@ import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Comment;
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.service.IssueService;
+import org.eclipse.egit.github.core.Gist;
+import org.eclipse.egit.github.core.service.GistService;
 
 /**
- * Task to comment on an issue in a repository
+ * Task to comment on a {@link Gist}
  */
 public class CreateCommentTask extends ProgressDialogTask<Comment> {
 
     private static final String TAG = "CreateCommentTask";
 
-    private final IRepositoryIdProvider repository;
+    @Inject
+    private GistService service;
 
-    private final int issueNumber;
+    private final String id;
 
     private final String comment;
 
-    @Inject
-    private IssueService service;
-
     /**
-     * Create task for creating a comment on the given issue in the given
-     * repository
+     * Create task to create a comment
      *
-     * @param context
-     * @param repository
-     * @param issueNumber
+     * @param activity
+     * @param gistId
      * @param comment
      */
-    public CreateCommentTask(final Context context,
-            final IRepositoryIdProvider repository, final int issueNumber,
-            final String comment) {
-        super(context);
+    protected CreateCommentTask(Activity activity, String gistId, String comment) {
+        super(activity);
 
-        this.repository = repository;
-        this.issueNumber = issueNumber;
+        this.id = gistId;
         this.comment = comment;
     }
 
-    @Override
-    protected Comment run(Account account) throws Exception {
-        Comment created = service.createComment(repository, issueNumber,
-                comment);
-        String formatted = HtmlUtils.format(created.getBodyHtml()).toString();
-        created.setBodyHtml(formatted);
-        return created;
-    }
-
     /**
-     * Create comment
+     * Execute the task and create the comment
      *
      * @return this task
      */
     public CreateCommentTask start() {
         showIndeterminate(R.string.creating_comment);
-
         execute();
         return this;
+    }
+
+    @Override
+    public Comment run(Account account) throws Exception {
+        Comment created = service.createComment(id, comment);
+        String formatted = HtmlUtils.format(created.getBodyHtml()).toString();
+        created.setBodyHtml(formatted);
+        return created;
     }
 
     @Override
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.d(TAG, "Exception creating comment on issue", e);
+        Log.d(TAG, "Exception creating comment on gist", e);
 
         ToastUtils.show((Activity) getContext(), e.getMessage());
     }

@@ -22,6 +22,7 @@ import android.support.v7.app.ActionBar;
 
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
+import com.github.mobile.core.gist.CreateCommentTask;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Gist;

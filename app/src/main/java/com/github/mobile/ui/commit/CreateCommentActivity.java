@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.commit.CommitUtils;
+import com.github.mobile.core.commit.CreateCommentTask;
 import com.github.mobile.ui.comment.CommentPreviewPagerAdapter;
 
 import org.eclipse.egit.github.core.CommitComment;

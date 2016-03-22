@@ -13,45 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.gist;
+package com.github.mobile.core.gist;
 
-import static com.github.mobile.RequestCodes.GIST_VIEW;
+import static android.app.Activity.RESULT_OK;
 import android.accounts.Account;
 import android.app.Activity;
 import android.util.Log;
 
 import com.github.mobile.R;
-import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.GistService;
 
 /**
- * Task to open a random Gist
+ * Async task to delete a Gist
  */
-public class RandomGistTask extends ProgressDialogTask<Gist> {
+public class DeleteGistTask extends ProgressDialogTask<Gist> {
 
-    private static final String TAG = "RandomGistTask";
+    private static final String TAG = "DeleteGistTask";
+
+    private final String id;
 
     @Inject
     private GistService service;
-
-    @Inject
-    private GistStore store;
 
     /**
      * Create task
      *
      * @param context
+     * @param gistId
      */
-    public RandomGistTask(final Activity context) {
+    public DeleteGistTask(final Activity context, final String gistId) {
         super(context);
+
+        id = gistId;
     }
 
     /**
@@ -60,45 +58,31 @@ public class RandomGistTask extends ProgressDialogTask<Gist> {
      * This method must be called from the main thread.
      */
     public void start() {
-        showIndeterminate(R.string.random_gist);
+        showIndeterminate(R.string.deleting_gist);
 
         execute();
     }
 
     @Override
-    protected Gist run(Account account) throws Exception {
-        PageIterator<Gist> pages = service.pagePublicGists(1);
-        pages.next();
-        int randomPage = 1 + (int) (Math.random() * ((pages.getLastPage() - 1) + 1));
-
-        Collection<Gist> gists = service.pagePublicGists(randomPage, 1).next();
-
-        // Make at least two tries since page numbers are volatile
-        if (gists.isEmpty()) {
-            randomPage = 1 + (int) (Math.random() * ((pages.getLastPage() - 1) + 1));
-            gists = service.pagePublicGists(randomPage, 1).next();
-        }
-
-        if (gists.isEmpty())
-            throw new IllegalArgumentException(getContext().getString(
-                    R.string.no_gists_found));
-
-        return store.addGist(gists.iterator().next());
+    public Gist run(Account account) throws Exception {
+        service.deleteGist(id);
+        return null;
     }
 
     @Override
     protected void onSuccess(Gist gist) throws Exception {
         super.onSuccess(gist);
 
-        ((Activity) getContext()).startActivityForResult(
-                GistsViewActivity.createIntent(gist), GIST_VIEW);
+        Activity activity = (Activity) getContext();
+        activity.setResult(RESULT_OK);
+        activity.finish();
     }
 
     @Override
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.d(TAG, "Exception opening random Gist", e);
+        Log.d(TAG, "Exception deleting Gist", e);
         ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }

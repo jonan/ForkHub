@@ -26,6 +26,8 @@ import android.support.v7.app.ActionBar;
 
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
+import com.github.mobile.core.issue.CreateCommentTask;
+import com.github.mobile.core.issue.EditCommentTask;
 import com.github.mobile.ui.comment.CommentPreviewPagerAdapter;
 
 import org.eclipse.egit.github.core.Comment;
