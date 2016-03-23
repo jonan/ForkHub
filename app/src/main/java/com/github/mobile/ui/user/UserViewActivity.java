@@ -161,7 +161,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     protected UserPagerAdapter createAdapter() {
-        return new UserPagerAdapter(this);
+        return new UserPagerAdapter(this, User.TYPE_ORG.equals(user.getType()));
     }
 
     @Override
