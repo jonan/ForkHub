@@ -209,12 +209,12 @@ public class CommitUtils {
      * @param commit
      * @return count
      */
-    public static String getCommentCount(final RepositoryCommit commit) {
+    public static int getCommentCount(final RepositoryCommit commit) {
         final Commit rawCommit = commit.getCommit();
         if (rawCommit != null)
-            return FORMAT.format(rawCommit.getCommentCount());
+            return rawCommit.getCommentCount();
         else
-            return "0";
+            return 0;
     }
 
     /**

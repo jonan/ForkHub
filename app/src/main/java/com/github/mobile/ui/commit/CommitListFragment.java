@@ -192,7 +192,7 @@ public class CommitListFragment extends PagedItemFragment<RepositoryCommit>
     protected SingleTypeAdapter<RepositoryCommit> createAdapter(
             List<RepositoryCommit> items) {
         return new CommitListAdapter(R.layout.commit_item, getActivity()
-                .getLayoutInflater(), items, avatars);
+                .getLayoutInflater(), getResources(), items, avatars);
     }
 
     @Override
