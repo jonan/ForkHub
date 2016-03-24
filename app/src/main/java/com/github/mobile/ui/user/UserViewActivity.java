@@ -108,17 +108,21 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     public boolean onCreateOptionsMenu(Menu optionsMenu) {
-        getMenuInflater().inflate(R.menu.user_follow, optionsMenu);
+        if (!isOrganization()) {
+            getMenuInflater().inflate(R.menu.user_follow, optionsMenu);
+        }
 
         return super.onCreateOptionsMenu(optionsMenu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem followItem = menu.findItem(R.id.m_follow);
+        if (!isOrganization()) {
+            MenuItem followItem = menu.findItem(R.id.m_follow);
 
-        followItem.setVisible(followingStatusChecked);
-        followItem.setTitle(isFollowing ? R.string.unfollow : R.string.follow);
+            followItem.setVisible(followingStatusChecked);
+            followItem.setTitle(isFollowing ? R.string.unfollow : R.string.follow);
+        }
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -161,7 +165,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     protected UserPagerAdapter createAdapter() {
-        return new UserPagerAdapter(this);
+        return new UserPagerAdapter(this, isOrganization());
     }
 
     @Override
@@ -237,5 +241,9 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
                 invalidateOptionsMenu();
             }
         }.execute();
+    }
+
+    private boolean isOrganization() {
+        return User.TYPE_ORG.equals(user.getType());
     }
 }

@@ -29,15 +29,18 @@ import com.github.mobile.ui.repo.UserStarredRepositoryListFragment;
  */
 public class UserPagerAdapter extends FragmentPagerAdapter {
 
+    private final boolean isOrg;
+
     private final Resources resources;
 
     /**
      * @param activity
      */
-    public UserPagerAdapter(final AppCompatActivity activity) {
+    public UserPagerAdapter(final AppCompatActivity activity, final boolean isOrg) {
         super(activity);
 
         resources = activity.getResources();
+        this.isOrg = isOrg;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 1:
             return new UserOwnedRepositoryListFragment();
         case 2:
-            return new UserStarredRepositoryListFragment();
+            return isOrg ? new MembersFragment() : new UserStarredRepositoryListFragment();
         case 3:
             return new UserFollowersFragment();
         case 4:
@@ -60,7 +63,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return isOrg ? 3 : 5;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 1:
             return resources.getString(R.string.tab_repositories);
         case 2:
-            return resources.getString(R.string.tab_stars);
+            return resources.getString(isOrg ? R.string.tab_members : R.string.tab_stars);
         case 3:
             return resources.getString(R.string.tab_followers);
         case 4:
