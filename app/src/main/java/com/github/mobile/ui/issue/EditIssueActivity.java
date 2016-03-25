@@ -15,6 +15,8 @@
  */
 package com.github.mobile.ui.issue;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.github.mobile.Intents.EXTRA_ISSUE;
@@ -24,6 +26,7 @@ import static com.github.mobile.Intents.EXTRA_USER;
 import static com.github.mobile.RequestCodes.ISSUE_ASSIGNEE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
+
 import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +54,7 @@ import com.github.mobile.core.issue.IssueUtils;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.TextWatcherAdapter;
+import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
@@ -62,6 +66,7 @@ import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.LabelService;
@@ -176,6 +181,7 @@ public class EditIssueActivity extends DialogFragmentActivity {
                 intent.getStringExtra(EXTRA_REPOSITORY_NAME));
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         if (issue.getNumber() > 0)
             if (IssueUtils.isPullRequest(issue))
                 actionBar.setTitle(getString(R.string.pull_request_title)
@@ -362,6 +368,24 @@ public class EditIssueActivity extends DialogFragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home:
+            Repository repo = new Repository();
+            repo.setName(repository.getName());
+            repo.setOwner(new User().setLogin(repository.getOwner()));
+            // If we are editing an issue, open the original one
+            // and if we are creating a new one, open the repo.
+            if (issue.getNumber() > 0) {
+                Intent intent = IssuesViewActivity.createIntent(issue, repo);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP
+                        | FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            } else {
+                Intent intent = RepositoryViewActivity.createIntent(repo);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP
+                        | FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+            return true;
         case R.id.m_apply:
             issue.setTitle(titleText.getText().toString());
             issue.setBody(bodyText.getText().toString());
