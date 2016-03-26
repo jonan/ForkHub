@@ -70,7 +70,7 @@ public class FiltersViewActivity extends DialogFragmentActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         fragment = (FilterListFragment) getSupportFragmentManager()
-                .findFragmentById(android.R.id.list);
+                .findFragmentById(R.id.filter_list_fragment);
         fragment.getListView().setOnItemLongClickListener(this);
     }
 

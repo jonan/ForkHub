@@ -79,7 +79,7 @@ public class CommitCompareViewActivity extends DialogFragmentActivity {
         avatars.bind(actionBar, repository.getOwner());
 
         fragment = getSupportFragmentManager()
-                .findFragmentById(android.R.id.list);
+                .findFragmentById(R.id.commit_compare_list_fragment);
     }
 
     @Override
