@@ -11,6 +11,7 @@
 
 ### Fixed
 - Some minor UI fixes and improvements.
+- Update all icons (Octicons v3.5.0).
 
 ### Translations
 - Improve translations: KO.

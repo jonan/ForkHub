@@ -62,7 +62,6 @@ public class TypefaceUtils {
     public static final String ICON_CLOUD_DOWNLOAD = "\uf00b";
     public static final String ICON_CLOUD_UPLOAD = "\uf00c";
     public static final String ICON_CODE = "\uf05f";
-    public static final String ICON_COLOR_MODE = "\uf065";
     public static final String ICON_COMMENT = "\uf02b";
     public static final String ICON_COMMENT_DISCUSSION = "\uf04f";
     public static final String ICON_CREDIT_CARD = "\uf045";
@@ -128,6 +127,7 @@ public class TypefaceUtils {
     public static final String ICON_LIST_UNORDERED = "\uf061";
     public static final String ICON_LOCATION = "\uf060";
     public static final String ICON_LOCK = "\uf06a";
+    public static final String ICON_LOGO_GIST = "\uf0ad";
     public static final String ICON_LOGO_GITHUB = "\uf092";
     public static final String ICON_MAIL = "\uf03b";
     public static final String ICON_MAIL_READ = "\uf03c";
@@ -171,6 +171,7 @@ public class TypefaceUtils {
     public static final String ICON_SHIELD = "\uf0e1";
     public static final String ICON_SIGN_IN = "\uf036";
     public static final String ICON_SIGN_OUT = "\uf032";
+    public static final String ICON_SMILE = "\uf0e7";
     public static final String ICON_SQUIRREL = "\uf0b2";
     public static final String ICON_STAR = "\uf02a";
     public static final String ICON_STOP = "\uf08f";
@@ -191,6 +192,8 @@ public class TypefaceUtils {
     public static final String ICON_TRIANGLE_UP = "\uf0aa";
     public static final String ICON_UNFOLD = "\uf039";
     public static final String ICON_UNMUTE = "\uf0ba";
+    public static final String ICON_UNVERIFIED = "\uf0e8";
+    public static final String ICON_VERIFIED = "\uf0e6";
     public static final String ICON_VERSIONS = "\uf064";
     public static final String ICON_WATCH = "\uf0e0";
     public static final String ICON_X = "\uf081";
