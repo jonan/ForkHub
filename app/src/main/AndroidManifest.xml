@@ -188,6 +188,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.team.TeamViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="jp.forkhub.mobile.team.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.issue.IssuesViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>

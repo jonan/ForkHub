@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Jon Ander Peñalba
+ * Copyright 2012 GitHub Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.team;
+package com.github.mobile.ui.user;
 
+import static com.github.mobile.Intents.EXTRA_USER;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -23,30 +24,29 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
+import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.ui.user.OrganizationSelectionListener;
-import com.github.mobile.ui.user.OrganizationSelectionProvider;
+import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
-import org.eclipse.egit.github.core.Team;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.TeamService;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.mobile.Intents.EXTRA_USER;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.OrganizationService;
 
 /**
- * Fragment to display the teams of an organization
+ * Fragment to display the members of an org.
  */
-public class TeamListFragment extends ItemListFragment<Team> implements
+public class OrgMembersFragment extends ItemListFragment<User> implements
         OrganizationSelectionListener {
 
     private User org;
 
     @Inject
-    private TeamService service;
+    private OrganizationService service;
+
+    @Inject
+    private AvatarLoader avatars;
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -69,32 +69,27 @@ public class TeamListFragment extends ItemListFragment<Team> implements
         org = ((OrganizationSelectionProvider) getActivity()).addListener(this);
         if (org == null && savedInstanceState != null)
             org = (User) savedInstanceState.getSerializable(EXTRA_USER);
-        setEmptyText(R.string.no_teams);
+        setEmptyText(R.string.no_members);
 
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public Loader<List<Team>> onCreateLoader(int id, Bundle args) {
-        return new ThrowableLoader<List<Team>>(getActivity(), items) {
+    public Loader<List<User>> onCreateLoader(int id, Bundle args) {
+        return new ThrowableLoader<List<User>>(getActivity(), items) {
 
             @Override
-            public List<Team> loadData() throws Exception {
-                List<Team> teams = service.getTeams(org.getLogin());
-                // We need more information about each team
-                List<Team> fullTeams = new ArrayList<Team>(teams.size());
-                for (Team t : teams) {
-                    fullTeams.add(service.getTeam(t.getId()));
-                }
-                return fullTeams;
+            public List<User> loadData() throws Exception {
+                return service.getMembers(org.getLogin());
             }
         };
     }
 
     @Override
-    protected SingleTypeAdapter<Team> createAdapter(List<Team> items) {
-        Team[] teams = items.toArray(new Team[items.size()]);
-        return new TeamListAdapter(getActivity().getLayoutInflater(), teams);
+    protected SingleTypeAdapter<User> createAdapter(List<User> items) {
+        User[] users = items.toArray(new User[items.size()]);
+        return new UserListAdapter(getActivity().getLayoutInflater(), users,
+                avatars);
     }
 
     @Override
@@ -108,12 +103,13 @@ public class TeamListFragment extends ItemListFragment<Team> implements
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Team team = (Team) l.getItemAtPosition(position);
-        startActivity(TeamViewActivity.createIntent(team, org));
+        User user = (User) l.getItemAtPosition(position);
+        if (!AccountUtils.isUser(getActivity(), user))
+            startActivity(UserViewActivity.createIntent(user));
     }
 
     @Override
     protected int getErrorMessage(Exception exception) {
-        return R.string.error_teams_load;
+        return R.string.error_members_load;
     }
 }

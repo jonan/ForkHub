@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 GitHub Inc.
+ * Copyright 2016 Jon Ander Peñalba
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.user;
+package com.github.mobile.ui.team;
 
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
@@ -21,45 +21,30 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
-import com.github.mobile.ui.repo.UserOwnedRepositoryListFragment;
-import com.github.mobile.ui.repo.UserStarredRepositoryListFragment;
-import com.github.mobile.ui.team.TeamListFragment;
 
 /**
- * Pager adapter for a user's different views
+ * Pager adapter for a team's different views
  */
-public class UserPagerAdapter extends FragmentPagerAdapter {
-
-    private final boolean isOrg;
-
-    private final boolean isMember;
+public class TeamPagerAdapter extends FragmentPagerAdapter {
 
     private final Resources resources;
 
     /**
      * @param activity
      */
-    public UserPagerAdapter(final AppCompatActivity activity, final boolean isOrg, final boolean isMember) {
+    public TeamPagerAdapter(final AppCompatActivity activity) {
         super(activity);
 
         resources = activity.getResources();
-        this.isOrg = isOrg;
-        this.isMember = isMember;
     }
 
     @Override
     public Fragment getItem(final int position) {
         switch (position) {
         case 0:
-            return new UserCreatedNewsFragment();
+            return new TeamMembersFragment();
         case 1:
-            return new UserOwnedRepositoryListFragment();
-        case 2:
-            return isOrg ? new OrgMembersFragment() : new UserStarredRepositoryListFragment();
-        case 3:
-            return isOrg ? new TeamListFragment() : new UserFollowersFragment();
-        case 4:
-            return new UserFollowingFragment();
+            return new TeamRepositoryListFragment();
         default:
             return null;
         }
@@ -67,25 +52,16 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        if (isOrg) {
-            return isMember ? 4: 3;
-        }
-        return 5;
+        return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
         case 0:
-            return resources.getString(R.string.tab_news);
+            return resources.getString(R.string.tab_members);
         case 1:
             return resources.getString(R.string.tab_repositories);
-        case 2:
-            return resources.getString(isOrg ? R.string.tab_members : R.string.tab_stars);
-        case 3:
-            return resources.getString(isOrg ? R.string.tab_teams : R.string.tab_followers);
-        case 4:
-            return resources.getString(R.string.tab_following);
         default:
             return null;
         }

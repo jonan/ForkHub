@@ -26,6 +26,7 @@ import org.eclipse.egit.github.core.GistFile;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 
 /**
@@ -115,6 +116,11 @@ public class Intents {
      * {@link ArrayList} handle of {@link User} objects
      */
     public static final String EXTRA_USERS = INTENT_EXTRA_PREFIX + "USERS";
+
+    /**
+     * Team handle
+     */
+    public static final String EXTRA_TEAM = INTENT_EXTRA_PREFIX + "TEAM";
 
     /**
      * Boolean value which indicates if a user is a collaborator on the repo
@@ -270,6 +276,16 @@ public class Intents {
          */
         public Builder user(User user) {
             return add(EXTRA_USER, user);
+        }
+
+        /**
+         * Add team to intent being built up
+         *
+         * @param team
+         * @return this builder;
+         */
+        public Builder team(Team team) {
+            return add(EXTRA_TEAM, team);
         }
 
         /**

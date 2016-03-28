@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 GitHub Inc.
+ * Copyright 2016 Jon Ander Peñalba
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.user;
+package com.github.mobile.ui.team;
 
-import static com.github.mobile.Intents.EXTRA_USER;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -26,52 +26,48 @@ import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.user.UserListAdapter;
+import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
+import org.eclipse.egit.github.core.Team;
+import org.eclipse.egit.github.core.User;
+import org.eclipse.egit.github.core.service.TeamService;
+
 import java.util.List;
 
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.OrganizationService;
+import static com.github.mobile.Intents.EXTRA_TEAM;
+import static com.github.mobile.Intents.EXTRA_USER;
 
 /**
- * Fragment to display the members of an org.
+ * Fragment to display the members of a {@link Team}
  */
-public class MembersFragment extends ItemListFragment<User> implements
-        OrganizationSelectionListener {
-
-    private User org;
-
-    @Inject
-    private OrganizationService service;
+public class TeamMembersFragment extends ItemListFragment<User> {
 
     @Inject
     private AvatarLoader avatars;
 
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    @Inject
+    private TeamService service;
 
-        if (org != null)
-            outState.putSerializable(EXTRA_USER, org);
-    }
+    private Team team;
+
+    private User org;
 
     @Override
-    public void onDetach() {
-        OrganizationSelectionProvider selectionProvider = (OrganizationSelectionProvider) getActivity();
-        if (selectionProvider != null)
-            selectionProvider.removeListener(this);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        super.onDetach();
+        team = getSerializableExtra(EXTRA_TEAM);
+        org = getSerializableExtra(EXTRA_USER);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        org = ((OrganizationSelectionProvider) getActivity()).addListener(this);
-        if (org == null && savedInstanceState != null)
-            org = (User) savedInstanceState.getSerializable(EXTRA_USER);
-        setEmptyText(R.string.no_members);
-
         super.onActivityCreated(savedInstanceState);
+
+        setEmptyText(R.string.no_members);
     }
 
     @Override
@@ -80,7 +76,7 @@ public class MembersFragment extends ItemListFragment<User> implements
 
             @Override
             public List<User> loadData() throws Exception {
-                return service.getMembers(org.getLogin());
+                return service.getMembers(team.getId());
             }
         };
     }
@@ -90,15 +86,6 @@ public class MembersFragment extends ItemListFragment<User> implements
         User[] users = items.toArray(new User[items.size()]);
         return new UserListAdapter(getActivity().getLayoutInflater(), users,
                 avatars);
-    }
-
-    @Override
-    public void onOrganizationSelected(User organization) {
-        int previousOrgId = org != null ? org.getId() : -1;
-        org = organization;
-        // Only hard refresh if view already created and org is changing
-        if (previousOrgId != org.getId())
-            refreshWithProgress();
     }
 
     @Override

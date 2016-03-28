@@ -67,7 +67,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
             return new RepositoryListFragment();
         case 2:
             return defaultUser ? new StarredRepositoryListFragment()
-                    : new MembersFragment();
+                    : new OrgMembersFragment();
         case 3:
             return defaultUser ? new MyFollowersFragment() : new TeamListFragment();
         case 4:
