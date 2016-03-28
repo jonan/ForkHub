@@ -12,6 +12,7 @@
 ### Fixed
 - Some minor UI fixes and improvements.
 - Update all icons (Octicons v3.5.0).
+- Private repositories of organizations are now shown.
 
 ### Translations
 - Improve translations: KO.
