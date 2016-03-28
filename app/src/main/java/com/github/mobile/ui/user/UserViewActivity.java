@@ -79,7 +79,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(user.getLogin());
 
-        if (!TextUtils.isEmpty(user.getAvatarUrl()))
+        if (!TextUtils.isEmpty(user.getAvatarUrl()) && !TextUtils.isEmpty(user.getType()))
             configurePager();
         else {
             ViewUtils.setGone(loadingBar, false);
@@ -91,6 +91,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
                     super.onSuccess(fullUser);
 
                     user = fullUser;
+                    getIntent().putExtra(EXTRA_USER, user);
                     configurePager();
                 }
 
