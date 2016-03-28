@@ -13,6 +13,7 @@
 - Some minor UI fixes and improvements.
 - Update all icons (Octicons v3.5.0).
 - Private repositories of organizations are now shown.
+- Improve the source viewer for many languages (CodeMirror 5.13.0).
 
 ### Translations
 - Improve translations: KO.
