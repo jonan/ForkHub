@@ -42,6 +42,9 @@ public class UserOwnedRepositoryListFragment extends UserRepositoryListFragment 
 
             @Override
             public PageIterator<Repository> createIterator(int page, int size) {
+                if (User.TYPE_ORG.equals(user.getType())) {
+                    return service.pageOrgRepositories(user.getLogin(), page, size);
+                }
                 return service.pageRepositories(user.getLogin(), page, size);
             }
         };
