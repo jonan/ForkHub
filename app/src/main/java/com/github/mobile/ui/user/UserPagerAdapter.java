@@ -32,16 +32,19 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     private final boolean isOrg;
 
+    private final boolean isMember;
+
     private final Resources resources;
 
     /**
      * @param activity
      */
-    public UserPagerAdapter(final AppCompatActivity activity, final boolean isOrg) {
+    public UserPagerAdapter(final AppCompatActivity activity, final boolean isOrg, final boolean isMember) {
         super(activity);
 
         resources = activity.getResources();
         this.isOrg = isOrg;
+        this.isMember = isMember;
     }
 
     @Override
@@ -64,7 +67,10 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return isOrg ? 4 : 5;
+        if (isOrg) {
+            return isMember ? 4: 3;
+        }
+        return 5;
     }
 
     @Override
