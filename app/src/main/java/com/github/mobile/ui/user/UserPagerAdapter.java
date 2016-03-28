@@ -23,6 +23,7 @@ import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.repo.UserOwnedRepositoryListFragment;
 import com.github.mobile.ui.repo.UserStarredRepositoryListFragment;
+import com.github.mobile.ui.team.TeamListFragment;
 
 /**
  * Pager adapter for a user's different views
@@ -53,7 +54,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 2:
             return isOrg ? new MembersFragment() : new UserStarredRepositoryListFragment();
         case 3:
-            return new UserFollowersFragment();
+            return isOrg ? new TeamListFragment() : new UserFollowersFragment();
         case 4:
             return new UserFollowingFragment();
         default:
@@ -63,7 +64,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return isOrg ? 3 : 5;
+        return isOrg ? 4 : 5;
     }
 
     @Override
@@ -76,7 +77,7 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
         case 2:
             return resources.getString(isOrg ? R.string.tab_members : R.string.tab_stars);
         case 3:
-            return resources.getString(R.string.tab_followers);
+            return resources.getString(isOrg ? R.string.tab_teams : R.string.tab_followers);
         case 4:
             return resources.getString(R.string.tab_following);
         default:
