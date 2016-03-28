@@ -4,8 +4,8 @@
 
 ### Added
 - Show starred repositories in the home and user activities.
+- New view for organizations that shows members and teams.
 - Load issue templates for new issues when available.
-- New view for organizations that were previously using the same as users.
 - Avatars in the issue view are now clickable.
 - Show if a pull request is mergeable or not.
 
