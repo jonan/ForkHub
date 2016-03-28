@@ -15,7 +15,6 @@
  */
 package com.github.mobile.ui.team;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
@@ -23,7 +22,8 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.ui.team.TeamListAdapter;
+import com.github.mobile.ui.user.OrganizationSelectionListener;
+import com.github.mobile.ui.user.OrganizationSelectionProvider;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Team;
@@ -38,25 +38,38 @@ import static com.github.mobile.Intents.EXTRA_USER;
 /**
  * Fragment to display the teams of an organization
  */
-public class TeamListFragment extends ItemListFragment<Team> {
+public class TeamListFragment extends ItemListFragment<Team> implements
+        OrganizationSelectionListener {
 
     private User org;
 
     @Inject
     private TeamService service;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-        org = getSerializableExtra(EXTRA_USER);
+        if (org != null)
+            outState.putSerializable(EXTRA_USER, org);
+    }
+
+    @Override
+    public void onDetach() {
+        OrganizationSelectionProvider selectionProvider = (OrganizationSelectionProvider) getActivity();
+        if (selectionProvider != null)
+            selectionProvider.removeListener(this);
+
+        super.onDetach();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+        org = ((OrganizationSelectionProvider) getActivity()).addListener(this);
+        if (org == null && savedInstanceState != null)
+            org = (User) savedInstanceState.getSerializable(EXTRA_USER);
         setEmptyText(R.string.no_teams);
+
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -80,6 +93,15 @@ public class TeamListFragment extends ItemListFragment<Team> {
     protected SingleTypeAdapter<Team> createAdapter(List<Team> items) {
         Team[] teams = items.toArray(new Team[items.size()]);
         return new TeamListAdapter(getActivity().getLayoutInflater(), teams);
+    }
+
+    @Override
+    public void onOrganizationSelected(User organization) {
+        int previousOrgId = org != null ? org.getId() : -1;
+        org = organization;
+        // Only hard refresh if view already created and org is changing
+        if (previousOrgId != org.getId())
+            refreshWithProgress();
     }
 
     @Override
