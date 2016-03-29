@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- New app icon in proper resolutions.
 - Show starred repositories in the home and user activities.
 - New view for organizations that shows members and teams.
 - Load issue templates for new issues when available.
