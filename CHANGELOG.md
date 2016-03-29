@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.0] - 2016-03-29
 
 ### Added
 - New app icon in proper resolutions.
@@ -95,7 +95,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...master
+[ForkHub v1.2.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...ForkHub-v1.2.0
 [ForkHub v1.1.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.0...ForkHub-v1.1.1
 [ForkHub v1.1.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.0.0...ForkHub-v1.1.0
 [ForkHub v1.0.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...ForkHub-v1.0.0
