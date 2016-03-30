@@ -15,6 +15,7 @@
  */
 package com.github.mobile;
 
+import com.github.mobile.api.service.NotificationService;
 import com.github.mobile.core.search.SearchUserService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -40,6 +41,8 @@ import org.eclipse.egit.github.core.service.StargazerService;
 import org.eclipse.egit.github.core.service.TeamService;
 import org.eclipse.egit.github.core.service.UserService;
 
+import retrofit2.Retrofit;
+
 /**
  * Provide GitHub-API related services
  */
@@ -47,6 +50,11 @@ public class ServicesModule extends AbstractModule {
 
     @Override
     protected void configure() {
+    }
+
+    @Provides
+    NotificationService notificationService(Retrofit retrofit) {
+        return retrofit.create(NotificationService.class);
     }
 
     @Provides

@@ -23,6 +23,7 @@
     <string name="error_repo_load">Loading repository failed</string>
     <string name="error_contributors_load">Loading contributors failed</string>
     <string name="error_gist_load">Loading Gist failed</string>
+    <string name="error_notifications_load">Loading notifications failed</string>
     <string name="error_news_load">Loading news failed</string>
     <string name="error_followers_load">Loading followers failed</string>
     <string name="error_people_load">Loading people failed</string>
@@ -75,6 +76,7 @@
 
 
     <!-- Empty messages -->
+    <string name="no_notifications">No Notifications</string>
     <string name="no_bookmarks">No Bookmarks</string>
     <string name="no_repositories">No Repositories</string>
     <string name="no_contributors">No contributors</string>
@@ -120,6 +122,7 @@
     <!--  -->
 
     <string name="app_name">ForkHub</string>
+    <string name="notifications">Notifications</string>
     <string name="news">News</string>
     <string name="issues">Issues</string>
     <string name="gists">Gists</string>
