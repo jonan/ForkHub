@@ -34,27 +34,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.github.mobile.R;
-import com.github.mobile.core.commit.CommitMatch;
 import com.github.mobile.core.commit.CommitUriMatcher;
 import com.github.mobile.core.gist.GistUriMatcher;
 import com.github.mobile.core.issue.IssueUriMatcher;
 import com.github.mobile.core.repo.RepositoryUriMatcher;
 import com.github.mobile.core.user.UserUriMatcher;
-import com.github.mobile.ui.LightAlertDialog;
-import com.github.mobile.ui.commit.CommitViewActivity;
-import com.github.mobile.ui.gist.GistsViewActivity;
-import com.github.mobile.ui.issue.IssuesViewActivity;
-import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.ui.user.UserViewActivity;
 
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.List;
-
-import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Activity to launch other activities based on the intent's data {@link URI}
@@ -149,35 +137,35 @@ public class UriLauncherActivity extends Activity {
     }
 
     static private Intent getIntentForURI(Uri data) {
+        List<String> segments = data.getPathSegments();
+        if (segments == null)
+            return null;
+
+        Intent intent;
         if (HOST_GISTS.equals(data.getHost())) {
-            Gist gist = GistUriMatcher.getGist(data);
-            if (gist != null) {
-                return GistsViewActivity.createIntent(gist);
+            intent = GistUriMatcher.getGistIntent(segments);
+            if (intent != null) {
+                return intent;
             }
         } else if (HOST_DEFAULT.equals(data.getHost())) {
-            CommitMatch commit = CommitUriMatcher.getCommit(data);
-            if (commit != null) {
-                return CommitViewActivity.createIntent(commit.repository, commit.commit);
+            intent = CommitUriMatcher.getCommitIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            RepositoryIssue issue = IssueUriMatcher.getIssue(data);
-            if (issue != null) {
-                return IssuesViewActivity.createIntent(issue, issue.getRepository());
+            intent = IssueUriMatcher.getIssueIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            Repository repository = RepositoryUriMatcher.getRepositoryIssues(data);
-            if (repository != null) {
-                return RepositoryViewActivity.createIntentForIssues(repository);
+            intent = RepositoryUriMatcher.getRepositoryIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            repository = RepositoryUriMatcher.getRepository(data);
-            if (repository != null) {
-                return RepositoryViewActivity.createIntent(repository);
-            }
-
-            User user = UserUriMatcher.getUser(data);
-            if (user != null) {
-                return UserViewActivity.createIntent(user);
+            intent = UserUriMatcher.getUserIntent(segments);
+            if (intent != null) {
+                return intent;
             }
         }
 

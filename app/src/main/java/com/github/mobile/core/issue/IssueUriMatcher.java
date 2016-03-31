@@ -15,47 +15,40 @@
  */
 package com.github.mobile.core.issue;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.text.TextUtils;
 
-import com.github.mobile.core.repo.RepositoryUtils;
+import com.github.mobile.core.repo.RepositoryUriMatcher;
+import com.github.mobile.ui.issue.IssuesViewActivity;
 
 import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.User;
 
 /**
- * Parses a {@link RepositoryIssue} from a {@link Uri}
+ * Parses a {@link RepositoryIssue} from a path
  */
 public class IssueUriMatcher {
 
     /**
-     * Parse a {@link RepositoryIssue} from a non-null {@link Uri}
+     * Get an intent for an exact {@link RepositoryIssue} match
      *
-     * @param uri
-     * @return {@link RepositoryIssue} or null if none found in given
-     *         {@link Uri}
+     * @param pathSegments
+     * @return {@link Intent} or null if path is not valid
      */
-    public static RepositoryIssue getIssue(Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 4)
-            return null;
-        if (!"issues".equals(segments.get(2)) && !"pull".equals(segments.get(2)))
+    public static Intent getIssueIntent(List<String> pathSegments) {
+        if (pathSegments.size() != 4)
             return null;
 
-        String repoOwner = segments.get(0);
-        if (!RepositoryUtils.isValidOwner(repoOwner))
+        Repository repo = RepositoryUriMatcher.getRepository(pathSegments);
+        if (repo == null)
             return null;
 
-        String repoName = segments.get(1);
-        if (!RepositoryUtils.isValidRepo(repoName))
+        if (!"issues".equals(pathSegments.get(2)) && !"pull".equals(pathSegments.get(2)))
             return null;
 
-        String number = segments.get(3);
+        String number = pathSegments.get(3);
         if (TextUtils.isEmpty(number))
             return null;
 
@@ -68,12 +61,10 @@ public class IssueUriMatcher {
         if (issueNumber < 1)
             return null;
 
-        Repository repo = new Repository();
-        repo.setName(repoName);
-        repo.setOwner(new User().setLogin(repoOwner));
         RepositoryIssue issue = new RepositoryIssue();
         issue.setRepository(repo);
         issue.setNumber(issueNumber);
-        return issue;
+
+        return IssuesViewActivity.createIntent(issue, repo);
     }
 }

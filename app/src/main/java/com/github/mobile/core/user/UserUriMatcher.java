@@ -15,36 +15,51 @@
  */
 package com.github.mobile.core.user;
 
-import android.net.Uri;
+import android.content.Intent;
 
 import com.github.mobile.core.repo.RepositoryUtils;
+import com.github.mobile.ui.user.UserViewActivity;
 
 import java.util.List;
 
 import org.eclipse.egit.github.core.User;
 
 /**
- * Parses a {@link User} from a {@link Uri}
+ * Parses a {@link User} from a path
  */
 public class UserUriMatcher {
 
     /**
-     * Attempt to parse a {@link User} from the given {@link Uri}
+     * Get the user for the given path
      *
-     * @param uri
-     * @return {@link User} or null if unparseable
+     * @param pathSegments
+     * @return {@link User} or null if path is not valid
      */
-    public static User getUser(Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 1)
+    public static User getUser(List<String> pathSegments) {
+        if (pathSegments.size() < 1)
             return null;
 
-        String login = segments.get(0);
+        String login = pathSegments.get(0);
         if (!RepositoryUtils.isValidOwner(login))
             return null;
 
         return new User().setLogin(login);
+    }
+
+    /**
+     * Get an intent for an exact {@link User} match
+     *
+     * @param pathSegments
+     * @return {@link Intent} or null if path is not valid
+     */
+    public static Intent getUserIntent(List<String> pathSegments) {
+        if (pathSegments.size() != 1)
+            return null;
+
+        User user = getUser(pathSegments);
+        if (user == null)
+            return null;
+
+        return UserViewActivity.createIntent(user);
     }
 }

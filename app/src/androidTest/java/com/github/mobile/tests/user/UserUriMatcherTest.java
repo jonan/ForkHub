@@ -31,17 +31,17 @@ public class UserUriMatcherTest extends AndroidTestCase {
      * Verify empty URI
      */
     public void testEmptyUri() {
-        assertNull(UserUriMatcher.getUser(Uri.parse("")));
+        assertNull(UserUriMatcher.getUser(Uri.parse("").getPathSegments()));
     }
 
     /**
      * Verify no name
      */
     public void testUriWithNoName() {
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com")));
-        assertNull(UserUriMatcher.getUser(Uri.parse("https://github.com")));
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com/")));
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com//")));
+        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com").getPathSegments()));
+        assertNull(UserUriMatcher.getUser(Uri.parse("https://github.com").getPathSegments()));
+        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com/").getPathSegments()));
+        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com//").getPathSegments()));
     }
 
     /**
@@ -49,7 +49,7 @@ public class UserUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpUriWithName() {
         User user = UserUriMatcher.getUser(Uri
-                .parse("http://github.com/defunkt"));
+                .parse("http://github.com/defunkt").getPathSegments());
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
     }
@@ -59,7 +59,7 @@ public class UserUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpsUriWithName() {
         User user = UserUriMatcher.getUser(Uri
-                .parse("https://github.com/mojombo"));
+                .parse("https://github.com/mojombo").getPathSegments());
         assertNotNull(user);
         assertEquals("mojombo", user.getLogin());
     }
@@ -69,7 +69,7 @@ public class UserUriMatcherTest extends AndroidTestCase {
      */
     public void testUriWithTrailingSlash() {
         User user = UserUriMatcher.getUser(Uri
-                .parse("http://github.com/defunkt/"));
+                .parse("http://github.com/defunkt/").getPathSegments());
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
     }
@@ -79,7 +79,7 @@ public class UserUriMatcherTest extends AndroidTestCase {
      */
     public void testUriWithTrailingSlashes() {
         User user = UserUriMatcher.getUser(Uri
-                .parse("http://github.com/defunkt//"));
+                .parse("http://github.com/defunkt//").getPathSegments());
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
     }
