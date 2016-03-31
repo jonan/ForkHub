@@ -116,24 +116,25 @@ public class UriLauncherActivity extends Activity {
             return;
         }
 
-        if (!intent.hasCategory(CATEGORY_BROWSABLE)) {
-            startActivity(new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE));
-            finish();
-        } else {
-            // If we can't open the link look for another app that can (e.g. a browser)
-            Intent externalIntent = new Intent(Intent.ACTION_VIEW, data);
-            List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(externalIntent, 0);
-            for (ResolveInfo r : resolvers) {
-                if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
-                    externalIntent.setPackage(r.activityInfo.packageName);
-                    startActivity(externalIntent);
-                    finish();
-                    return;
-                }
-            }
+        // If we can't open the link try to open it in a browser
 
-            showParseError(data.toString());
+        final Intent dummyIntent =
+                new Intent(Intent.ACTION_VIEW, Uri.parse("https://dummyintent.github.com/"))
+                        .addCategory(CATEGORY_BROWSABLE);
+
+        List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(dummyIntent, 0);
+        for (ResolveInfo r : resolvers) {
+            if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
+                final Intent externalIntent = new Intent(Intent.ACTION_VIEW, data)
+                        .addCategory(CATEGORY_BROWSABLE)
+                        .setPackage(r.activityInfo.packageName);
+                startActivity(externalIntent);
+                finish();
+                return;
+            }
         }
+
+        showParseError(data.toString());
     }
 
     static private Intent getIntentForURI(Uri data) {
