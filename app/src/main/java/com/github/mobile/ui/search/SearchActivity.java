@@ -15,27 +15,30 @@
  */
 package com.github.mobile.ui.search;
 
-import static android.app.SearchManager.QUERY;
-import static android.content.Intent.ACTION_SEARCH;
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import com.github.mobile.R;
+import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.ui.user.HomeActivity;
+import com.github.mobile.util.ToastUtils;
+import com.github.mobile.util.TypefaceUtils;
 
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
-import com.github.mobile.R;
-import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.ui.user.HomeActivity;
-import com.github.mobile.util.ToastUtils;
-import com.github.mobile.util.TypefaceUtils;
+import static android.app.SearchManager.QUERY;
+import static android.content.Intent.ACTION_SEARCH;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 /**
  * Activity to view search results
@@ -46,7 +49,8 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
 
     private SearchUserListFragment userFragment;
 
-    private String query;
+    private SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,22 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         configurePager();
+
+        searchView = new SearchView(getSupportActionBar().getThemedContext());
+        searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
+
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
+
+        // Hide the magnifying glass icon
+        searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+        // Add the SearchView to the toolbar
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(searchView, layoutParams);
+
         handleIntent(getIntent());
     }
 
@@ -63,28 +83,23 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     public boolean onCreateOptionsMenu(Menu options) {
         getMenuInflater().inflate(R.menu.search, options);
 
-        // Set up searching
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(options.findItem(R.id.m_search));
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
-
         return super.onCreateOptionsMenu(options);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.m_clear:
-            RepositorySearchSuggestionsProvider.clear(this);
-            ToastUtils.show(this, R.string.search_history_cleared);
-            return true;
-        case android.R.id.home:
-            Intent intent = new Intent(this, HomeActivity.class);
-            intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.m_clear:
+                RepositorySearchSuggestionsProvider.clear(this);
+                ToastUtils.show(this, R.string.search_history_cleared);
+                return true;
+            case android.R.id.home:
+                Intent intent = new Intent(this, HomeActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -96,12 +111,12 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     protected String getIcon(int position) {
         switch (position) {
-        case 0:
-            return TypefaceUtils.ICON_REPO;
-        case 1:
-            return TypefaceUtils.ICON_PERSON;
-        default:
-            return super.getIcon(position);
+            case 0:
+                return TypefaceUtils.ICON_REPO;
+            case 1:
+                return TypefaceUtils.ICON_PERSON;
+            default:
+                return super.getIcon(position);
         }
     }
 
@@ -111,20 +126,26 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
         handleIntent(intent);
     }
 
-    @Override
-    public boolean onSearchRequested() {
-        startSearch(query, true, null, false);
-        return true;
-    }
-
     private void handleIntent(Intent intent) {
-        if (ACTION_SEARCH.equals(intent.getAction()))
-            search(intent.getStringExtra(QUERY));
+        if (ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(QUERY);
+
+            // Update the SearchView's query
+            searchView.setQuery(query, false);
+
+            // Prevents the suggestions dropdown from showing after we submit
+            searchView.post(new Runnable() {
+                @Override public void run() {
+                    searchView.clearFocus();
+                }
+            });
+
+            search(query);
+        }
     }
 
     private void search(final String query) {
-        this.query = query;
-        getSupportActionBar().setTitle(query);
+        getIntent().putExtra(QUERY, query);
         RepositorySearchSuggestionsProvider.save(this, query);
 
         findFragments();
