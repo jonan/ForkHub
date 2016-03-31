@@ -41,6 +41,7 @@ import com.github.mobile.core.repo.StarForkHubTask;
 import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.gist.GistsActivity;
 import com.github.mobile.ui.issue.FiltersViewActivity;
 import com.github.mobile.ui.issue.IssueDashboardActivity;

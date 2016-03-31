@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.user;
+package com.github.mobile.ui;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static android.content.Intent.ACTION_VIEW;
@@ -45,6 +45,7 @@ import com.github.mobile.ui.commit.CommitViewActivity;
 import com.github.mobile.ui.gist.GistsViewActivity;
 import com.github.mobile.ui.issue.IssuesViewActivity;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
+import com.github.mobile.ui.user.UserViewActivity;
 
 import java.net.URI;
 import java.text.MessageFormat;

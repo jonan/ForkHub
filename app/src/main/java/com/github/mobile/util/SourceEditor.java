@@ -24,7 +24,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.github.mobile.ui.user.UriLauncherActivity;
+import com.github.mobile.ui.UriLauncherActivity;
 
 import java.io.UnsupportedEncodingException;
 
