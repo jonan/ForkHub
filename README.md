@@ -4,12 +4,10 @@
   <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
 </a>
 <a href="https://f-droid.org/repository/browse/?fdid=jp.forkhub" target="_blank">
-  <img src="https://f-droid.org/wiki/images/d/d3/F-Droid-button_bigger.png" height="60"/>
+  <img src="https://f-droid.org/wiki/images/5/55/F-Droid-button_get-it-on_bigger.png" height="60"/>
 </a>
 
 ForkHub started off as a fork of the official Android app from GitHub, and has since seen lots of improvements. You can see a comprehensive list of changes in the [change log](https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md).
-
-[![Download from Google Play](https://cloud.githubusercontent.com/assets/3838734/3855877/4cf2a2dc-1eec-11e4-9634-2a1adf8f1c39.jpg)](https://play.google.com/store/apps/details?id=jp.forkhub)
 
 Please see the [issues](https://github.com/jonan/ForkHub/issues) section to
 report any bugs or feature requests and to see the list of known issues.

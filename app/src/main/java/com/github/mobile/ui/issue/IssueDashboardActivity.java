@@ -39,7 +39,6 @@ public class IssueDashboardActivity extends
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.dashboard_issues_title);
-        actionBar.setIcon(R.drawable.action_dashboard);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         configureTabPager();

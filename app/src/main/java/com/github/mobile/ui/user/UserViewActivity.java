@@ -18,6 +18,8 @@ package com.github.mobile.ui.user;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_USER;
+
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -33,11 +35,14 @@ import com.github.mobile.core.user.FollowUserTask;
 import com.github.mobile.core.user.FollowingUserTask;
 import com.github.mobile.core.user.RefreshUserTask;
 import com.github.mobile.core.user.UnfollowUserTask;
+import com.github.mobile.core.user.UserComparator;
+import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.egit.github.core.User;
 
@@ -58,11 +63,21 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
     }
 
     @Inject
+    private AccountDataManager accountDataManager;
+
+    @Inject
+    private Provider<UserComparator> userComparatorProvider;
+
+    @Inject
     private AvatarLoader avatars;
 
     private User user;
 
     private ProgressBar loadingBar;
+
+    private boolean isOrganization;
+
+    private boolean isMember;
 
     private boolean isFollowing;
 
@@ -79,18 +94,29 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(user.getLogin());
 
-        if (!TextUtils.isEmpty(user.getAvatarUrl()))
+        if (!TextUtils.isEmpty(user.getAvatarUrl()) && User.TYPE_USER.equals(user.getType())) {
             configurePager();
-        else {
+        } else {
             ViewUtils.setGone(loadingBar, false);
             setGone(true);
             new RefreshUserTask(this, user.getLogin()) {
+                @Override
+                protected User run(Account account) throws Exception {
+                    isMember = false;
+                    for (User org : accountDataManager.getOrgs(false)) {
+                        if (user.getLogin().equals(org.getLogin())) {
+                            isMember = true;
+                        }
+                    }
+                    return super.run(account);
+                }
 
                 @Override
                 protected void onSuccess(User fullUser) throws Exception {
                     super.onSuccess(fullUser);
 
                     user = fullUser;
+                    getIntent().putExtra(EXTRA_USER, user);
                     configurePager();
                 }
 
@@ -108,17 +134,21 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     public boolean onCreateOptionsMenu(Menu optionsMenu) {
-        getMenuInflater().inflate(R.menu.user_follow, optionsMenu);
+        if (!isOrganization) {
+            getMenuInflater().inflate(R.menu.user_follow, optionsMenu);
+        }
 
         return super.onCreateOptionsMenu(optionsMenu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem followItem = menu.findItem(R.id.m_follow);
+        if (!isOrganization) {
+            MenuItem followItem = menu.findItem(R.id.m_follow);
 
-        followItem.setVisible(followingStatusChecked);
-        followItem.setTitle(isFollowing ? R.string.unfollow : R.string.follow);
+            followItem.setVisible(followingStatusChecked);
+            followItem.setTitle(isFollowing ? R.string.unfollow : R.string.follow);
+        }
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -142,6 +172,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     private void configurePager() {
         avatars.bind(getSupportActionBar(), user);
+        isOrganization = User.TYPE_ORG.equals(user.getType());
         configureTabPager();
         ViewUtils.setGone(loadingBar, true);
         setGone(false);
@@ -161,7 +192,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     protected UserPagerAdapter createAdapter() {
-        return new UserPagerAdapter(this);
+        return new UserPagerAdapter(this, isOrganization, isMember);
     }
 
     @Override

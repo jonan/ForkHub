@@ -1,13 +1,20 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.0] - 2016-03-29
 
 ### Added
+- New app icon in proper resolutions.
+- Show starred repositories in the home and user activities.
+- New view for organizations that shows members and teams.
+- Load issue templates for new issues when available.
 - Avatars in the issue view are now clickable.
 - Show if a pull request is mergeable or not.
 
 ### Fixed
 - Some minor UI fixes and improvements.
+- Update all icons (Octicons v3.5.0).
+- Private repositories of organizations are now shown.
+- Improve the source viewer for many languages (CodeMirror 5.13.0).
 
 ### Translations
 - Improve translations: KO.
@@ -88,7 +95,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...master
+[ForkHub v1.2.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...ForkHub-v1.2.0
 [ForkHub v1.1.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.0...ForkHub-v1.1.1
 [ForkHub v1.1.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.0.0...ForkHub-v1.1.0
 [ForkHub v1.0.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v0.9.2...ForkHub-v1.0.0

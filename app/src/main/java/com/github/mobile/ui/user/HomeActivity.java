@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.core.repo.StarForkHubTask;
 import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.TabPagerActivity;
@@ -306,6 +307,8 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         }
 
         menu.setGroupVisible(R.id.user_select, false);
+
+        new StarForkHubTask(this).execute();
     }
 
     @Override

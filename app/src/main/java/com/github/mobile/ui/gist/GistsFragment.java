@@ -108,6 +108,6 @@ public abstract class GistsFragment extends PagedItemFragment<Gist> {
 
     @Override
     protected SingleTypeAdapter<Gist> createAdapter(List<Gist> items) {
-        return new GistListAdapter(avatars, getActivity(), items);
+        return new GistListAdapter(avatars, getResources(), getActivity(), items);
     }
 }

@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 import com.github.mobile.R;
 import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.repo.RepositoryListFragment;
+import com.github.mobile.ui.repo.StarredRepositoryListFragment;
+import com.github.mobile.ui.team.TeamListFragment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -64,9 +66,11 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
         case 1:
             return new RepositoryListFragment();
         case 2:
-            return defaultUser ? new MyFollowersFragment()
-                    : new MembersFragment();
+            return defaultUser ? new StarredRepositoryListFragment()
+                    : new OrgMembersFragment();
         case 3:
+            return defaultUser ? new MyFollowersFragment() : new TeamListFragment();
+        case 4:
             return new MyFollowingFragment();
         default:
             return null;
@@ -112,7 +116,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return defaultUser ? 4 : 3;
+        return defaultUser ? 5 : 4;
     }
 
     @Override
@@ -123,9 +127,12 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
         case 1:
             return resources.getString(R.string.tab_repositories);
         case 2:
-            return resources.getString(defaultUser ? R.string.tab_followers_self
+            return resources.getString(defaultUser ? R.string.tab_stars
                     : R.string.tab_members);
         case 3:
+            return resources.getString(defaultUser ? R.string.tab_followers_self
+                    : R.string.tab_teams);
+        case 4:
             return resources.getString(R.string.tab_following_self);
         default:
             return null;

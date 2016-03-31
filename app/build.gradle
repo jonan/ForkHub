@@ -13,8 +13,8 @@ android {
         applicationId 'jp.forkhub'
         minSdkVersion 8
         targetSdkVersion 23
-        versionCode 2110
-        versionName '1.1.1'
+        versionCode 1020000
+        versionName '1.2.0'
     }
 
     packagingOptions {
@@ -46,7 +46,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:design:23.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
     compile 'org.roboguice:roboguice:2.0'

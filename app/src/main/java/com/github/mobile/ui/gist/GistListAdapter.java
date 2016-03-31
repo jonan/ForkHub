@@ -16,6 +16,7 @@
 package com.github.mobile.ui.gist;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -38,6 +39,8 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
 
     private final AvatarLoader avatars;
 
+    private final Resources resources;
+
     private String anonymous;
 
     /**
@@ -45,11 +48,12 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
      * @param activity
      * @param elements
      */
-    public GistListAdapter(AvatarLoader avatars, Activity activity,
-            Collection<Gist> elements) {
+    public GistListAdapter(AvatarLoader avatars, Resources resources,
+            Activity activity, Collection<Gist> elements) {
         super(activity, R.layout.gist_item);
 
         this.avatars = avatars;
+        this.resources = resources;
         setItems(elements);
     }
 
@@ -63,18 +67,17 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
     @Override
     protected int[] getChildViewIds() {
         return new int[] { R.id.tv_gist_id, R.id.tv_gist_title, R.id.tv_gist_author,
-                R.id.tv_gist_comments, R.id.tv_gist_files, R.id.iv_avatar };
+                R.id.tv_gist_files, R.id.tv_comment_icon, R.id.tv_gist_comments, R.id.iv_avatar };
     }
 
     @Override
     protected View initialize(View view) {
         view = super.initialize(view);
 
-        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
-        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
+        setText(4, TypefaceUtils.ICON_COMMENT);
         TextView fileIcon = (TextView) view .findViewById(R.id.tv_file_icon);
         fileIcon.setText(TypefaceUtils.ICON_FILE_TEXT);
-        TypefaceUtils.setOcticons(commentIcon, fileIcon);
+        TypefaceUtils.setOcticons(textView(view, 4), fileIcon);
 
         anonymous = view.getResources().getString(R.string.anonymous);
         return view;
@@ -91,7 +94,7 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
             setText(1, R.string.no_description_given);
 
         User owner = gist.getOwner();
-        avatars.bind(imageView(5), owner);
+        avatars.bind(imageView(6), owner);
 
         StyledText authorText = new StyledText();
         if (owner != null)
@@ -102,7 +105,15 @@ public class GistListAdapter extends SingleTypeAdapter<Gist> {
         authorText.append(gist.getCreatedAt());
         setText(2, authorText);
 
-        setNumber(3, gist.getComments());
-        setNumber(4, gist.getFiles().size());
+        setNumber(3, gist.getFiles().size());
+        setNumber(5, gist.getComments());
+
+        if (gist.getComments() > 0) {
+            textView(4).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+        } else {
+            textView(4).setTextColor(resources.getColor(R.color.text_icon_disabled));
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_disabled));
+        }
     }
 }

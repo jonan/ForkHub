@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.OnLoadListener;
+import com.github.mobile.core.gist.DeleteGistTask;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.FragmentProvider;
@@ -186,14 +187,12 @@ public class GistsViewActivity extends PagerActivity implements
         if (gist == null) {
             actionBar.setSubtitle(null);
             actionBar.setLogo(null);
-            actionBar.setIcon(R.drawable.app_icon);
         } else if (gist.getOwner() != null) {
             avatars.bind(actionBar, gist.getOwner());
             actionBar.setSubtitle(gist.getOwner().getLogin());
         } else {
             actionBar.setSubtitle(R.string.anonymous);
             actionBar.setLogo(null);
-            actionBar.setIcon(R.drawable.app_icon);
         }
         actionBar.setTitle(getString(R.string.gist_title) + gistId);
     }

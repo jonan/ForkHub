@@ -35,6 +35,7 @@
     <string name="error_labels_load">Loading labels failed</string>
     <string name="error_bookmarks_load">Loading bookmarks failed</string>
     <string name="error_members_load">Loading members failed</string>
+    <string name="error_teams_load">Loading teams failed</string>
     <string name="error_commits_load">Loading commits failed</string>
     <string name="error_commit_load">Loading commit failed</string>
     <string name="error_file_load">Loading file failed</string>
@@ -83,6 +84,7 @@
     <string name="no_people">No People</string>
     <string name="no_followers">No Followers</string>
     <string name="no_members">No Members</string>
+    <string name="no_teams">No Teams</string>
     <string name="no_news">No News</string>
     <string name="no_commits">No Commits</string>
     <!--  -->
@@ -177,6 +179,7 @@
     <string name="select_ref">Select Branch or Tag</string>
     <string name="enter_otp_code_title">Authentication Code</string>
     <string name="enter_otp_code_message">Two-factor authentication is enabled for your account. Enter your authentication code to verify your identity.</string>
+    <string name="star_forkhub_dialog_text">If you like this app, please show your appreciation by starring it.</string>
     <string name="no_milestone">No milestone</string>
     <string name="unassigned">No one is assigned</string>
     <string name="assigned">is assigned</string>
@@ -207,7 +210,7 @@
     <string name="none">None</string>
     <string name="section_issue_labels">Labels:</string>
     <string name="log_in">Log in</string>
-    <string name="signup_link">New to GitHub? &lt;a href=\"https://github.com/join\">Click here&lt;/a> to sign up</string>
+    <string name="signup_link">New to GitHub? &lt;a href=\"https://github.com/\">Click here&lt;/a> to sign up</string>
     <string name="signup_link_two_factor_auth">Not sure what to do? &lt;a href=\"https://help.github.com/articles/about-two-factor-authentication\">Get some help.&lt;/a></string>
     <string name="connection_failed">Unable to connect to GitHub</string>
     <string name="code_authentication_failed">Authentication failed! Incorrect verification code</string>
@@ -285,6 +288,7 @@
 
     <!-- Tab titles, should be as short as possible -->
     <string name="tab_repositories">repositories</string>
+    <string name="tab_stars">stars</string>
     <string name="tab_users">users</string>
     <string name="tab_news">news</string>
     <string name="tab_following_self">following</string>
@@ -292,6 +296,7 @@
     <string name="tab_following">following</string>
     <string name="tab_followers">followers</string>
     <string name="tab_members">members</string>
+    <string name="tab_teams">teams</string>
     <string name="tab_code">code</string>
     <string name="tab_commits">commits</string>
     <string name="tab_issues">issues</string>

@@ -19,12 +19,10 @@
 
     <item
         android:id="@+id/m_bookmark"
-        android:icon="@drawable/menu_bookmark"
         android:title="@string/bookmark"
         app:showAsAction="never" />
     <item
         android:id="@+id/m_filter"
-        android:icon="@drawable/menu_filter"
         android:title="@string/filter"
         app:showAsAction="never" />
     <item
@@ -36,11 +34,9 @@
         android:id="@+id/m_search"
         android:icon="@drawable/action_search"
         android:title="@string/find_issues"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/m_refresh"
-        android:icon="@drawable/menu_refresh"
         android:title="@string/refresh"
         app:showAsAction="never" />
 

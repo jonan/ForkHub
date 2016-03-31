@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.mobile.R;
+import com.github.mobile.core.gist.RandomGistTask;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.HomeActivity;
 import com.github.mobile.util.TypefaceUtils;
@@ -39,7 +40,6 @@ public class GistsActivity extends TabPagerActivity<GistQueriesPagerAdapter> {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.gists_title);
-        actionBar.setIcon(R.drawable.action_gist);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         configureTabPager();

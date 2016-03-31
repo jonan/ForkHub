@@ -15,17 +15,16 @@
   limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/m_random"
-        android:icon="@drawable/menu_random"
-        app:showAsAction="never"
-        android:title="@string/random"/>
+        android:title="@string/random"
+        app:showAsAction="never" />
     <item
         android:id="@+id/m_create"
         android:icon="@drawable/action_create"
-        app:showAsAction="ifRoom"
-        android:title="@string/create_gist"/>
+        android:title="@string/create_gist"
+        app:showAsAction="ifRoom" />
 
 </menu>

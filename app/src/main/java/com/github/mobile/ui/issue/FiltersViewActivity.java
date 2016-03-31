@@ -67,11 +67,10 @@ public class FiltersViewActivity extends DialogFragmentActivity implements
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.bookmarks);
-        actionBar.setIcon(R.drawable.action_bookmark);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         fragment = (FilterListFragment) getSupportFragmentManager()
-                .findFragmentById(android.R.id.list);
+                .findFragmentById(R.id.filter_list_fragment);
         fragment.getListView().setOnItemLongClickListener(this);
     }
 

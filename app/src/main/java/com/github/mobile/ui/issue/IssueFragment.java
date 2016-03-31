@@ -56,6 +56,11 @@ import android.widget.TextView;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.core.issue.DeleteCommentTask;
+import com.github.mobile.core.issue.EditAssigneeTask;
+import com.github.mobile.core.issue.EditLabelsTask;
+import com.github.mobile.core.issue.EditMilestoneTask;
+import com.github.mobile.core.issue.EditStateTask;
 import com.github.mobile.core.issue.FullIssue;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.core.issue.IssueUtils;
@@ -79,7 +84,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
@@ -562,11 +566,9 @@ public class IssueFragment extends DialogFragment {
     private void updateStateItem(Issue issue) {
         if (issue != null && stateItem != null)
             if (STATE_OPEN.equals(issue.getState()))
-                stateItem.setTitle(R.string.close).setIcon(
-                        R.drawable.menu_issue_close);
+                stateItem.setTitle(R.string.close);
             else
-                stateItem.setTitle(R.string.reopen).setIcon(
-                        R.drawable.menu_issue_open);
+                stateItem.setTitle(R.string.reopen);
     }
 
     @Override

@@ -15,10 +15,10 @@
  */
 package com.github.mobile.ui.commit;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -38,16 +38,19 @@ public class CommitListAdapter extends SingleTypeAdapter<RepositoryCommit> {
 
     private final AvatarLoader avatars;
 
+    private final Resources resources;
+
     /**
      * @param viewId
      * @param inflater
      * @param elements
      * @param avatars
      */
-    public CommitListAdapter(int viewId, LayoutInflater inflater,
+    public CommitListAdapter(int viewId, LayoutInflater inflater, Resources resources,
             Collection<RepositoryCommit> elements, AvatarLoader avatars) {
         super(inflater, viewId);
 
+        this.resources = resources;
         this.avatars = avatars;
         setItems(elements);
     }
@@ -64,16 +67,15 @@ public class CommitListAdapter extends SingleTypeAdapter<RepositoryCommit> {
     @Override
     protected int[] getChildViewIds() {
         return new int[] { R.id.tv_commit_id, R.id.tv_commit_author, R.id.iv_avatar,
-                R.id.tv_commit_message, R.id.tv_commit_comments };
+                R.id.tv_commit_message, R.id.tv_comment_icon, R.id.tv_commit_comments };
     }
 
     @Override
     protected View initialize(View view) {
         view = super.initialize(view);
 
-        TextView commentIcon = (TextView) view .findViewById(R.id.tv_comment_icon);
-        commentIcon.setText(TypefaceUtils.ICON_COMMENT);
-        TypefaceUtils.setOcticons(commentIcon);
+        setText(4, TypefaceUtils.ICON_COMMENT);
+        TypefaceUtils.setOcticons(textView(view, 4));
         return view;
     }
 
@@ -89,6 +91,16 @@ public class CommitListAdapter extends SingleTypeAdapter<RepositoryCommit> {
 
         CommitUtils.bindAuthor(item, avatars, imageView(2));
         setText(3, item.getCommit().getMessage());
-        setText(4, CommitUtils.getCommentCount(item));
+
+        int numComments = CommitUtils.getCommentCount(item);
+        setNumber(5, numComments);
+
+        if (numComments > 0) {
+            textView(4).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_highlighted));
+        } else {
+            textView(4).setTextColor(resources.getColor(R.color.text_icon_disabled));
+            textView(5).setTextColor(resources.getColor(R.color.text_icon_disabled));
+        }
     }
 }

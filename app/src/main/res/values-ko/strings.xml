@@ -207,7 +207,7 @@
     <string name="none">없음</string>
     <string name="section_issue_labels">라벨:</string>
     <string name="log_in">로그인</string>
-    <string name="signup_link">GitHub 에 처음 이십니까? &lt;a href=\"https://github.com/join\">여기를 클릭하여&lt;/a> 가입하세요</string>
+    <string name="signup_link">GitHub 에 처음 이십니까? &lt;a href=\"https://github.com/\">여기를 클릭하여&lt;/a> 가입하세요</string>
     <string name="signup_link_two_factor_auth">무엇을 해야할지 잘 모르시나요? &lt;a href=\"https://help.github.com/articles/about-two-factor-authentication\">도움을 얻으세요.&lt;/a></string>
     <string name="connection_failed">GitHub에 연결할 수 없습니다</string>
     <string name="code_authentication_failed">인증 실패! 인증 코드가 올바르지 않음.</string>

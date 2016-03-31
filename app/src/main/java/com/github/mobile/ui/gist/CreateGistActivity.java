@@ -28,6 +28,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.github.mobile.R;
+import com.github.mobile.core.gist.CreateGistTask;
 import com.github.mobile.ui.BaseActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.util.ShareUtils;
@@ -62,7 +63,6 @@ public class CreateGistActivity extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.new_gist);
-        actionBar.setIcon(R.drawable.action_gist);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         String text = ShareUtils.getBody(getIntent());
