@@ -94,7 +94,7 @@ public class IssueSearchActivity extends RoboActionBarActivity {
         avatars.bind(actionBar, repository.getOwner());
 
         issueFragment = (SearchIssueListFragment) getSupportFragmentManager()
-                .findFragmentById(android.R.id.list);
+                .findFragmentById(R.id.search_issue_list_fragment);
 
         handleIntent(getIntent());
     }
