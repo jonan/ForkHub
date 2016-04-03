@@ -15,50 +15,41 @@
  */
 package com.github.mobile.core.commit;
 
-import android.net.Uri;
+import android.content.Intent;
 
-import com.github.mobile.core.repo.RepositoryUtils;
+import com.github.mobile.core.repo.RepositoryUriMatcher;
+import com.github.mobile.ui.commit.CommitViewActivity;
 
 import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
 
 /**
- * Parses a {@link CommitMatch} from a {@link Uri}
+ * Parses commits from a path
  */
 public class CommitUriMatcher {
 
     /**
-     * Attempt to parse a {@link CommitMatch} from the given {@link Uri}
+     * Get an intent for an exact commit match
      *
-     * @param uri
-     * @return {@link CommitMatch} or null if unparseable
+     * @param pathSegments
+     * @return {@link Intent} or null if path is not valid
      */
-    public static CommitMatch getCommit(Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 4)
-            return null;
-        if (!"commit".equals(segments.get(2)))
+    public static Intent getCommitIntent(List<String> pathSegments) {
+        if (pathSegments.size() != 4)
             return null;
 
-        String repoOwner = segments.get(0);
-        if (!RepositoryUtils.isValidOwner(repoOwner))
+        Repository repo = RepositoryUriMatcher.getRepository(pathSegments);
+        if (repo == null)
             return null;
 
-        String repoName = segments.get(1);
-        if (!RepositoryUtils.isValidRepo(repoName))
+        if (!"commit".equals(pathSegments.get(2)))
             return null;
 
-        String commit = segments.get(3);
+        String commit = pathSegments.get(3);
         if (!CommitUtils.isValidCommit(commit))
             return null;
 
-        Repository repository = new Repository();
-        repository.setName(repoName);
-        repository.setOwner(new User().setLogin(repoOwner));
-        return new CommitMatch(repository, commit);
+        return CommitViewActivity.createIntent(repo, commit);
     }
 }

@@ -31,7 +31,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      * Verity empty uri
      */
     public void testEmptyUri() {
-        assertNull(RepositoryUriMatcher.getRepository(Uri.parse("")));
+        assertNull(RepositoryUriMatcher.getRepository(Uri.parse("").getPathSegments()));
     }
 
     /**
@@ -39,11 +39,11 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testUriWithNoOnwer() {
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com")));
+                .parse("http://github.com").getPathSegments()));
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com/")));
+                .parse("http://github.com/").getPathSegments()));
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com//")));
+                .parse("http://github.com//").getPathSegments()));
     }
 
     /**
@@ -51,9 +51,9 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testUriWithNoName() {
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com/defunkt")));
+                .parse("http://github.com/defunkt").getPathSegments()));
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com/defunkt/")));
+                .parse("http://github.com/defunkt/").getPathSegments()));
     }
 
     /**
@@ -61,7 +61,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpUriWithOwnerAndName() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com/defunkt/resque"));
+                .parse("http://github.com/defunkt/resque").getPathSegments());
         assertNotNull(repo);
         assertEquals("resque", repo.getName());
         assertNotNull(repo.getOwner());
@@ -73,7 +73,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpsUriWithOwnerAndName() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
-                .parse("https://github.com/mojombo/jekyll"));
+                .parse("https://github.com/mojombo/jekyll").getPathSegments());
         assertNotNull(repo);
         assertEquals("jekyll", repo.getName());
         assertNotNull(repo.getOwner());
@@ -85,7 +85,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpsUriWithIssues() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
-                .parse("https://github.com/mojombo/jekyll/issues"));
+                .parse("https://github.com/mojombo/jekyll/issues").getPathSegments());
         assertNotNull(repo);
         assertEquals("jekyll", repo.getName());
         assertNotNull(repo.getOwner());
@@ -97,7 +97,7 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testHttpsUriWithPulls() {
         Repository repo = RepositoryUriMatcher.getRepository(Uri
-                .parse("https://github.com/mojombo/jekyll/pulls"));
+                .parse("https://github.com/mojombo/jekyll/pulls").getPathSegments());
         assertNotNull(repo);
         assertEquals("jekyll", repo.getName());
         assertNotNull(repo.getOwner());
@@ -109,6 +109,6 @@ public class RepositoryUriMatcherTest extends AndroidTestCase {
      */
     public void testInvalidOwner() {
         assertNull(RepositoryUriMatcher.getRepository(Uri
-                .parse("http://github.com/blog/page1")));
+                .parse("http://github.com/blog/page1").getPathSegments()));
     }
 }

@@ -15,7 +15,10 @@
  */
 package com.github.mobile.core.repo;
 
-import android.net.Uri;
+import android.content.Intent;
+
+import com.github.mobile.core.user.UserUriMatcher;
+import com.github.mobile.ui.repo.RepositoryViewActivity;
 
 import java.util.List;
 
@@ -23,53 +26,54 @@ import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 
 /**
- * Parses a {@link Repository} from a {@link Uri}
+ * Parses a {@link Repository} from a path
  */
 public class RepositoryUriMatcher {
 
     /**
-     * Attempt to parse a {@link Repository} from the given {@link Uri}
+     * Get the repo for the given path
      *
-     * @param uri
-     * @return {@link Repository} or null if unparseable
+     * @param pathSegments
+     * @return {@link Repository} or null if path is not valid
      */
-    public static Repository getRepository(Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 2)
+    public static Repository getRepository(List<String> pathSegments) {
+        if (pathSegments.size() < 2)
             return null;
 
-        String repoOwner = segments.get(0);
-        if (!RepositoryUtils.isValidOwner(repoOwner))
+        User user = UserUriMatcher.getUser(pathSegments);
+        if (user == null)
             return null;
 
-        String repoName = segments.get(1);
+        String repoName = pathSegments.get(1);
         if (!RepositoryUtils.isValidRepo(repoName))
             return null;
 
         Repository repository = new Repository();
         repository.setName(repoName);
-        repository.setOwner(new User().setLogin(repoOwner));
+        repository.setOwner(user);
         return repository;
     }
 
     /**
-     * Attempt to parse a {@link Repository} with issues or
-     * pull requests from the given {@link Uri}
+     * Get an intent for an exact {@link Repository} match
      *
-     * @param uri
-     * @return {@link Repository} or null if unparseable
+     * @param pathSegments
+     * @return {@link Intent} or null if path is not valid
      */
-    public static Repository getRepositoryIssues(Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 3)
-            return null;
-        if (!"issues".equals(segments.get(2)) && !"pulls".equals(segments.get(2)))
+    public static Intent getRepositoryIntent(List<String> pathSegments) {
+        if (pathSegments.size() != 2 && pathSegments.size() != 3)
             return null;
 
-        return RepositoryUriMatcher.getRepository(uri);
+        Repository repo = getRepository(pathSegments);
+        if (repo == null)
+            return null;
+
+        if (pathSegments.size() == 2)
+            return RepositoryViewActivity.createIntent(repo);
+
+        if (!"issues".equals(pathSegments.get(2)) && !"pulls".equals(pathSegments.get(2)))
+            return null;
+
+        return RepositoryViewActivity.createIntentForIssues(repo);
     }
 }

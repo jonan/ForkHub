@@ -15,8 +15,10 @@
  */
 package com.github.mobile.core.gist;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.text.TextUtils;
+
+import com.github.mobile.ui.gist.GistsViewActivity;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -24,34 +26,31 @@ import java.util.regex.Pattern;
 import org.eclipse.egit.github.core.Gist;
 
 /**
- * Parses a {@link Gist} from a {@link Uri}
+ * Parses a {@link Gist} from a path
  */
 public class GistUriMatcher {
 
     private static final Pattern PATTERN = Pattern.compile("[a-f0-9]{20}");
 
     /**
-     * Parse a {@link Gist} from a non-null {@link Uri}
+     * Get an intent for an exact {@link Gist} match
      *
-     * @param uri
-     * @return {@link Gist} or null if none found in given {@link Uri}
+     * @param pathSegments
+     * @return {@link Intent} or null if path is not valid
      */
-    public static Gist getGist(final Uri uri) {
-        List<String> segments = uri.getPathSegments();
-        if (segments == null)
-            return null;
-        if (segments.size() < 1 || segments.size() > 2)
+    public static Intent getGistIntent(List<String> pathSegments) {
+        if (pathSegments.size() != 1 && pathSegments.size() != 2)
             return null;
 
-        String gistId = segments.get(segments.size()-1);
+        String gistId = pathSegments.get(pathSegments.size()-1);
         if (TextUtils.isEmpty(gistId))
             return null;
 
         if (TextUtils.isDigitsOnly(gistId))
-            return new Gist().setId(gistId);
+            return GistsViewActivity.createIntent(new Gist().setId(gistId));
 
         if (PATTERN.matcher(gistId).matches())
-            return new Gist().setId(gistId);
+            return GistsViewActivity.createIntent(new Gist().setId(gistId));
 
         return null;
     }

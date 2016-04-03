@@ -15,6 +15,12 @@
  */
 package com.github.mobile.ui.user;
 
+import static com.github.mobile.ui.user.UserViewActivity.TAB_ACTIVITY;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_FOLLOWEES;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_FOLLOWERS;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_REPOSITORIES;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_STARS;
+
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -50,15 +56,15 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(final int position) {
         switch (position) {
-        case 0:
+        case TAB_ACTIVITY:
             return new UserCreatedNewsFragment();
-        case 1:
+        case TAB_REPOSITORIES:
             return new UserOwnedRepositoryListFragment();
-        case 2:
+        case TAB_STARS:
             return isOrg ? new OrgMembersFragment() : new UserStarredRepositoryListFragment();
-        case 3:
+        case TAB_FOLLOWERS:
             return isOrg ? new TeamListFragment() : new UserFollowersFragment();
-        case 4:
+        case TAB_FOLLOWEES:
             return new UserFollowingFragment();
         default:
             return null;
@@ -76,15 +82,15 @@ public class UserPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-        case 0:
+        case TAB_ACTIVITY:
             return resources.getString(R.string.tab_news);
-        case 1:
+        case TAB_REPOSITORIES:
             return resources.getString(R.string.tab_repositories);
-        case 2:
+        case TAB_STARS:
             return resources.getString(isOrg ? R.string.tab_members : R.string.tab_stars);
-        case 3:
+        case TAB_FOLLOWERS:
             return resources.getString(isOrg ? R.string.tab_teams : R.string.tab_followers);
-        case 4:
+        case TAB_FOLLOWEES:
             return resources.getString(R.string.tab_following);
         default:
             return null;

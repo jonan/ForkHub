@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.ui.user;
+package com.github.mobile.ui;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static android.content.Intent.ACTION_VIEW;
@@ -34,26 +34,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.github.mobile.R;
-import com.github.mobile.core.commit.CommitMatch;
 import com.github.mobile.core.commit.CommitUriMatcher;
 import com.github.mobile.core.gist.GistUriMatcher;
 import com.github.mobile.core.issue.IssueUriMatcher;
 import com.github.mobile.core.repo.RepositoryUriMatcher;
 import com.github.mobile.core.user.UserUriMatcher;
-import com.github.mobile.ui.LightAlertDialog;
-import com.github.mobile.ui.commit.CommitViewActivity;
-import com.github.mobile.ui.gist.GistsViewActivity;
-import com.github.mobile.ui.issue.IssuesViewActivity;
-import com.github.mobile.ui.repo.RepositoryViewActivity;
 
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.List;
-
-import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Activity to launch other activities based on the intent's data {@link URI}
@@ -127,56 +116,57 @@ public class UriLauncherActivity extends Activity {
             return;
         }
 
-        if (!intent.hasCategory(CATEGORY_BROWSABLE)) {
-            startActivity(new Intent(ACTION_VIEW, data).addCategory(CATEGORY_BROWSABLE));
-            finish();
-        } else {
-            // If we can't open the link look for another app that can (e.g. a browser)
-            Intent externalIntent = new Intent(Intent.ACTION_VIEW, data);
-            List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(externalIntent, 0);
-            for (ResolveInfo r : resolvers) {
-                if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
-                    externalIntent.setPackage(r.activityInfo.packageName);
-                    startActivity(externalIntent);
-                    finish();
-                    return;
-                }
-            }
+        // If we can't open the link try to open it in a browser
 
-            showParseError(data.toString());
+        final Intent dummyIntent =
+                new Intent(Intent.ACTION_VIEW, Uri.parse("https://dummyintent.github.com/"))
+                        .addCategory(CATEGORY_BROWSABLE);
+
+        List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(dummyIntent, 0);
+        for (ResolveInfo r : resolvers) {
+            if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
+                final Intent externalIntent = new Intent(Intent.ACTION_VIEW, data)
+                        .addCategory(CATEGORY_BROWSABLE)
+                        .setPackage(r.activityInfo.packageName);
+                startActivity(externalIntent);
+                finish();
+                return;
+            }
         }
+
+        showParseError(data.toString());
     }
 
     static private Intent getIntentForURI(Uri data) {
+        List<String> segments = data.getPathSegments();
+        if (segments == null)
+            return null;
+
+        Intent intent;
         if (HOST_GISTS.equals(data.getHost())) {
-            Gist gist = GistUriMatcher.getGist(data);
-            if (gist != null) {
-                return GistsViewActivity.createIntent(gist);
+            intent = GistUriMatcher.getGistIntent(segments);
+            if (intent != null) {
+                return intent;
             }
         } else if (HOST_DEFAULT.equals(data.getHost())) {
-            CommitMatch commit = CommitUriMatcher.getCommit(data);
-            if (commit != null) {
-                return CommitViewActivity.createIntent(commit.repository, commit.commit);
+            intent = CommitUriMatcher.getCommitIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            RepositoryIssue issue = IssueUriMatcher.getIssue(data);
-            if (issue != null) {
-                return IssuesViewActivity.createIntent(issue, issue.getRepository());
+            intent = IssueUriMatcher.getIssueIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            Repository repository = RepositoryUriMatcher.getRepositoryIssues(data);
-            if (repository != null) {
-                return RepositoryViewActivity.createIntentForIssues(repository);
+            intent = RepositoryUriMatcher.getRepositoryIntent(segments);
+            if (intent != null) {
+                return intent;
             }
 
-            repository = RepositoryUriMatcher.getRepository(data);
-            if (repository != null) {
-                return RepositoryViewActivity.createIntent(repository);
-            }
-
-            User user = UserUriMatcher.getUser(data);
-            if (user != null) {
-                return UserViewActivity.createIntent(user);
+            intent = UserUriMatcher.getUserIntent(segments);
+            if (intent != null) {
+                return intent;
             }
         }
 
