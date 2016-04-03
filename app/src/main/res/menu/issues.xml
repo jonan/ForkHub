@@ -27,12 +27,12 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/create_issue"
-        android:icon="@drawable/action_create"
+        android:icon="@drawable/ic_add_white_24dp"
         android:title="@string/create"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/m_search"
-        android:icon="@drawable/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
         android:title="@string/find_issues"
         app:showAsAction="ifRoom" />
     <item
