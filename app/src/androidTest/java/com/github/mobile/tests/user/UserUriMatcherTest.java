@@ -15,6 +15,15 @@
  */
 package com.github.mobile.tests.user;
 
+import static com.github.mobile.Intents.EXTRA_POSITION;
+import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_FOLLOWEES;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_FOLLOWERS;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_MEMBERS;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_STARS;
+import static com.github.mobile.ui.user.UserViewActivity.TAB_TEAMS;
+
+import android.content.Intent;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
@@ -31,56 +40,146 @@ public class UserUriMatcherTest extends AndroidTestCase {
      * Verify empty URI
      */
     public void testEmptyUri() {
-        assertNull(UserUriMatcher.getUser(Uri.parse("").getPathSegments()));
+        assertNull(UserUriMatcher.getUserIntent(Uri.parse("").getPathSegments()));
     }
 
     /**
      * Verify no name
      */
     public void testUriWithNoName() {
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com").getPathSegments()));
-        assertNull(UserUriMatcher.getUser(Uri.parse("https://github.com").getPathSegments()));
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com/").getPathSegments()));
-        assertNull(UserUriMatcher.getUser(Uri.parse("http://github.com//").getPathSegments()));
+        assertNull(UserUriMatcher.getUserIntent(Uri.parse("http://github.com").getPathSegments()));
+        assertNull(UserUriMatcher.getUserIntent(Uri.parse("https://github.com").getPathSegments()));
+        assertNull(UserUriMatcher.getUserIntent(Uri.parse("http://github.com/").getPathSegments()));
+        assertNull(UserUriMatcher.getUserIntent(Uri.parse("http://github.com//").getPathSegments()));
     }
 
     /**
      * Verify URI with name
      */
     public void testHttpUriWithName() {
-        User user = UserUriMatcher.getUser(Uri
+        Intent intent = UserUriMatcher.getUserIntent(Uri
                 .parse("http://github.com/defunkt").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
+        assertEquals(-1, intent.getIntExtra(EXTRA_POSITION, -1));
     }
 
     /**
      * Verify URI with name
      */
     public void testHttpsUriWithName() {
-        User user = UserUriMatcher.getUser(Uri
+        Intent intent = UserUriMatcher.getUserIntent(Uri
                 .parse("https://github.com/mojombo").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
         assertNotNull(user);
         assertEquals("mojombo", user.getLogin());
+        assertEquals(-1, intent.getIntExtra(EXTRA_POSITION, -1));
     }
 
     /**
      * Verify URI with name
      */
     public void testUriWithTrailingSlash() {
-        User user = UserUriMatcher.getUser(Uri
+        Intent intent = UserUriMatcher.getUserIntent(Uri
                 .parse("http://github.com/defunkt/").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
+        assertEquals(-1, intent.getIntExtra(EXTRA_POSITION, -1));
     }
 
     /**
      * Verify URI with name
      */
     public void testUriWithTrailingSlashes() {
-        User user = UserUriMatcher.getUser(Uri
+        Intent intent = UserUriMatcher.getUserIntent(Uri
                 .parse("http://github.com/defunkt//").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
         assertNotNull(user);
         assertEquals("defunkt", user.getLogin());
+        assertEquals(-1, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI with stars
+     */
+    public void testUriWithStars() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/stars/mojombo").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(TAB_STARS, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI with followers
+     */
+    public void testUriWithFollowers() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/mojombo/followers").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(TAB_FOLLOWERS, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI with following
+     */
+    public void testUriWithFollowing() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/mojombo/following").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(TAB_FOLLOWEES, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI with org
+     */
+    public void testUriOrg() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/orgs/mojombo").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(-1, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI for org with people
+     */
+    public void testUriOrgWithPeople() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/orgs/mojombo/people").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(TAB_MEMBERS, intent.getIntExtra(EXTRA_POSITION, -1));
+    }
+
+    /**
+     * Verify URI for org with teams
+     */
+    public void testUriOrgWithTeams() {
+        Intent intent = UserUriMatcher.getUserIntent(Uri
+                .parse("https://github.com/orgs/mojombo/teams").getPathSegments());
+        assertNotNull(intent);
+        User user = (User) intent.getSerializableExtra(EXTRA_USER);
+        assertNotNull(user);
+        assertEquals("mojombo", user.getLogin());
+        assertEquals(TAB_TEAMS, intent.getIntExtra(EXTRA_POSITION, -1));
     }
 }
