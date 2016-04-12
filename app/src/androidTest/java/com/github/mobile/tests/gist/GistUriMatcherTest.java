@@ -15,12 +15,15 @@
  */
 package com.github.mobile.tests.gist;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
 import com.github.mobile.core.gist.GistUriMatcher;
 
 import org.eclipse.egit.github.core.Gist;
+
+import static com.github.mobile.Intents.EXTRA_GIST;
 
 /**
  * Unit tests of {@link GistUriMatcher}
@@ -31,28 +34,29 @@ public class GistUriMatcherTest extends AndroidTestCase {
      * Verify empty uri
      */
     public void testEmptyUri() {
-        assertNull(GistUriMatcher.getGist(Uri.parse("")));
+        assertNull(GistUriMatcher.getGistIntent(Uri.parse("").getPathSegments()));
     }
 
     /**
      * Verify invalid Gist ids in URIs
      */
     public void testNonGistId() {
-        assertNull(GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/TEST")));
-        assertNull(GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/abc%20")));
-        assertNull(GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/abcdefg")));
+        assertNull(GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/TEST").getPathSegments()));
+        assertNull(GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/abc%20").getPathSegments()));
+        assertNull(GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/abcdefg").getPathSegments()));
     }
 
     /**
      * Verify public Gist id
      */
     public void testPublicGist() {
-        Gist gist = GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/1234"));
-        assertNotNull(gist);
+        Intent intent = GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/1234").getPathSegments());
+        assertNotNull(intent);
+        Gist gist = (Gist) intent.getSerializableExtra(EXTRA_GIST);
         assertEquals("1234", gist.getId());
     }
 
@@ -60,9 +64,10 @@ public class GistUriMatcherTest extends AndroidTestCase {
      * Verify public Gist id
      */
     public void testPrivateGist() {
-        Gist gist = GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/abcd1234abcd1234abcd"));
-        assertNotNull(gist);
+        Intent intent = GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/abcd1234abcd1234abcd").getPathSegments());
+        assertNotNull(intent);
+        Gist gist = (Gist) intent.getSerializableExtra(EXTRA_GIST);
         assertEquals("abcd1234abcd1234abcd", gist.getId());
     }
 
@@ -70,9 +75,10 @@ public class GistUriMatcherTest extends AndroidTestCase {
      * Verify public Gist id with user
      */
     public void testPrivateGistWithUser() {
-        Gist gist = GistUriMatcher.getGist(Uri
-                .parse("https://gist.github.com/user/abcd1234abcd1234abcd"));
-        assertNotNull(gist);
+        Intent intent = GistUriMatcher.getGistIntent(Uri
+                .parse("https://gist.github.com/user/abcd1234abcd1234abcd").getPathSegments());
+        assertNotNull(intent);
+        Gist gist = (Gist) intent.getSerializableExtra(EXTRA_GIST);
         assertEquals("abcd1234abcd1234abcd", gist.getId());
     }
 }

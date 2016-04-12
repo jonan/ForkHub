@@ -38,7 +38,7 @@ import com.github.mobile.ui.FragmentProvider;
 import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.ui.user.UriLauncherActivity;
+import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 

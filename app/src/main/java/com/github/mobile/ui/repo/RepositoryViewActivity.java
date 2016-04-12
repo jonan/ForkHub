@@ -42,7 +42,7 @@ import com.github.mobile.core.repo.StarRepositoryTask;
 import com.github.mobile.core.repo.StarredRepositoryTask;
 import com.github.mobile.core.repo.UnstarRepositoryTask;
 import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.ui.user.UriLauncherActivity;
+import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ShareUtils;

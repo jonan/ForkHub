@@ -7,7 +7,7 @@ if (file('credentials.config').exists() ) {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId 'jp.forkhub'
@@ -46,7 +46,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
     compile 'org.roboguice:roboguice:2.0'

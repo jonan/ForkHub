@@ -17,6 +17,7 @@ package com.github.mobile.ui.user;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_POSITION;
 import static com.github.mobile.Intents.EXTRA_USER;
 
 import android.accounts.Account;
@@ -52,6 +53,15 @@ import org.eclipse.egit.github.core.User;
 public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         implements OrganizationSelectionProvider {
 
+    public static final int TAB_ACTIVITY = 0;
+    public static final int TAB_REPOSITORIES = 1;
+    public static final int TAB_STARS = 2;
+    public static final int TAB_FOLLOWERS = 3;
+    public static final int TAB_FOLLOWEES = 4;
+
+    public static final int TAB_MEMBERS = 2;
+    public static final int TAB_TEAMS = 3;
+
     /**
      * Create intent for this activity
      *
@@ -60,6 +70,16 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
      */
     public static Intent createIntent(User user) {
         return new Builder("user.VIEW").user(user).toIntent();
+    }
+    /**
+     * Create intent for this activity and open the given tab
+     *
+     * @param user
+     * @param tab
+     * @return intent
+     */
+    public static Intent createIntent(User user, int tab) {
+        return new Builder("user.VIEW").user(user).add(EXTRA_POSITION, tab).toIntent();
     }
 
     @Inject
@@ -177,6 +197,10 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         ViewUtils.setGone(loadingBar, true);
         setGone(false);
         checkFollowingUserStatus();
+        int initialPosition = getIntExtra(EXTRA_POSITION);
+        if (initialPosition > -1 && initialPosition < adapter.getCount()) {
+            pager.setItem(initialPosition);
+        }
     }
 
     @Override
@@ -203,13 +227,13 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
     @Override
     protected String getIcon(int position) {
         switch (position) {
-        case 0:
+        case TAB_ACTIVITY:
             return TypefaceUtils.ICON_RSS;
-        case 1:
+        case TAB_REPOSITORIES:
             return TypefaceUtils.ICON_REPO;
-        case 2:
+        case TAB_FOLLOWERS:
             return TypefaceUtils.ICON_EYE;
-        case 3:
+        case TAB_FOLLOWEES:
             return TypefaceUtils.ICON_BROADCAST;
         default:
             return super.getIcon(position);

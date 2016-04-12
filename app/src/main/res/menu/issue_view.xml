@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/m_comment"
-        android:icon="@drawable/action_comment"
+        android:icon="@drawable/ic_comment_white_24dp"
         android:title="@string/comment"
         app:showAsAction="ifRoom" />
     <item

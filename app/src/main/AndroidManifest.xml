@@ -240,7 +240,7 @@
             -->
         </activity>
         <activity
-            android:name=".ui.user.UriLauncherActivity"
+            android:name=".ui.UriLauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true">
             <intent-filter>

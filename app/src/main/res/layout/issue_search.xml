@@ -24,7 +24,7 @@
         style="@style/Toolbar" />
 
     <fragment
-        android:id="@android:id/list"
+        android:id="@+id/search_issue_list_fragment"
         class="com.github.mobile.ui.issue.SearchIssueListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
