@@ -228,15 +228,39 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu optionMenu) {
-        getMenuInflater().inflate(R.menu.home, optionMenu);
+    public boolean onCreateOptionsMenu(Menu optionsMenu) {
+        getMenuInflater().inflate(R.menu.home, optionsMenu);
 
         // Set up searching
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(optionMenu.findItem(R.id.m_search));
+        final MenuItem searchMenuItem = optionsMenu.findItem(R.id.m_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
 
-        return super.onCreateOptionsMenu(optionMenu);
+        // Collapse the action view when leaving the activity to view search results
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override public boolean onSuggestionSelect(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onSuggestionClick(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(optionsMenu);
     }
 
     @Override

@@ -195,9 +195,33 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
 
         // Set up searching
         Activity activity = getActivity();
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(optionsMenu.findItem(R.id.m_search));
+        final MenuItem searchMenuItem = optionsMenu.findItem(R.id.m_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
         SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
+
+        // Collapse the action view when leaving the activity to view search results
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override public boolean onSuggestionSelect(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onSuggestionClick(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+        });
     }
 
     @Override
