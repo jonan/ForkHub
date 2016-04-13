@@ -160,7 +160,9 @@
             <TextView
                 android:id="@+id/tv_commit_icon"
                 style="@style/PrimaryIcon"
-                android:layout_marginRight="10dp" />
+                android:layout_width="32dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tv_pull_request_commits"
@@ -179,7 +181,9 @@
             <TextView
                 android:id="@+id/tv_mergeable_icon"
                 style="@style/PrimaryIcon"
-                android:layout_marginRight="10dp" />
+                android:layout_width="32dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tv_mergeable_text"
