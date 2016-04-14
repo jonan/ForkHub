@@ -86,17 +86,17 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.m_clear:
-                RepositorySearchSuggestionsProvider.clear(this);
-                ToastUtils.show(this, R.string.search_history_cleared);
-                return true;
-            case android.R.id.home:
-                Intent intent = new Intent(this, HomeActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.m_clear:
+            RepositorySearchSuggestionsProvider.clear(this);
+            ToastUtils.show(this, R.string.search_history_cleared);
+            return true;
+        case android.R.id.home:
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -108,12 +108,12 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     @Override
     protected String getIcon(int position) {
         switch (position) {
-            case 0:
-                return TypefaceUtils.ICON_REPO;
-            case 1:
-                return TypefaceUtils.ICON_PERSON;
-            default:
-                return super.getIcon(position);
+        case 0:
+            return TypefaceUtils.ICON_REPO;
+        case 1:
+            return TypefaceUtils.ICON_PERSON;
+        default:
+            return super.getIcon(position);
         }
     }
 
