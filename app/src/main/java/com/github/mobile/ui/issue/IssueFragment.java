@@ -35,6 +35,7 @@ import static com.github.mobile.RequestCodes.ISSUE_LABELS_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import static com.github.mobile.RequestCodes.ISSUE_REOPEN;
 import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -91,6 +92,7 @@ import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.PullRequest;
+import org.eclipse.egit.github.core.PullRequestMarker;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.User;
@@ -579,9 +581,9 @@ public class IssueFragment extends DialogFragment {
         if (editItem != null && stateItem != null) {
             boolean canEdit;
             if (issue != null)
-                canEdit= isCollaborator || issue.getUser().getLogin().equals(loggedUser);
+                canEdit = isCollaborator || issue.getUser().getLogin().equals(loggedUser);
             else
-                canEdit= isCollaborator;
+                canEdit = isCollaborator;
 
             editItem.setVisible(canEdit);
             stateItem.setVisible(canEdit);
@@ -656,11 +658,19 @@ public class IssueFragment extends DialogFragment {
     private void openPullRequestCommits() {
         if (IssueUtils.isPullRequest(issue)) {
             PullRequest pullRequest = issue.getPullRequest();
+            PullRequestMarker base = pullRequest.getBase();
+            PullRequestMarker head = pullRequest.getHead();
 
-            String base = pullRequest.getBase().getSha();
-            String head = pullRequest.getHead().getSha();
-            Repository repo = pullRequest.getBase().getRepo();
-            startActivity(CommitCompareViewActivity.createIntent(repo, base, head));
+            if (base != null) {
+                String baseSha = base.getSha();
+                String headSha = head.getSha();
+                Repository repo = base.getRepo();
+                startActivity(CommitCompareViewActivity.createIntent(repo, baseSha, headSha));
+            } else {
+                String headSha = head.getSha();
+                Repository repo = head.getRepo();
+                startActivity(CommitCompareViewActivity.createIntent(repo, headSha));
+            }
         }
     }
 
@@ -668,15 +678,18 @@ public class IssueFragment extends DialogFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.m_edit:
-            if (issue != null)
-                startActivityForResult(EditIssueActivity.createIntent(issue,
-                                repositoryId.getOwner(), repositoryId.getName(), user),
-                        ISSUE_EDIT);
+            if (issue != null) {
+                Intent intent = EditIssueActivity.createIntent(issue,
+                        repositoryId.getOwner(), repositoryId.getName(), user);
+                startActivityForResult(intent, ISSUE_EDIT);
+            }
             return true;
         case R.id.m_comment:
-            if (issue != null)
-                startActivityForResult(CreateCommentActivity.createIntent(
-                        repositoryId, issueNumber, user), COMMENT_CREATE);
+            if (issue != null) {
+                Intent intent = CreateCommentActivity.createIntent(
+                        repositoryId, issueNumber, user);
+                startActivityForResult(intent, COMMENT_CREATE);
+            }
             return true;
         case R.id.m_refresh:
             refreshIssue();
@@ -712,7 +725,7 @@ public class IssueFragment extends DialogFragment {
         if (currentSize == 0)
             return true;
 
-        Object previousItem = allItems.get(currentSize-1);
+        Object previousItem = allItems.get(currentSize - 1);
         if (!(previousItem instanceof IssueEvent))
             return true;
 
