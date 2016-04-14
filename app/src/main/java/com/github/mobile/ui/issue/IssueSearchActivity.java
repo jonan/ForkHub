@@ -21,11 +21,16 @@ import static android.content.Intent.ACTION_SEARCH;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
@@ -50,6 +55,8 @@ public class IssueSearchActivity extends RoboActionBarActivity {
 
     private String query;
 
+    private SearchView searchView;
+
     @Override
     public boolean onCreateOptionsMenu(Menu options) {
         getMenuInflater().inflate(R.menu.search, options);
@@ -59,9 +66,6 @@ public class IssueSearchActivity extends RoboActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.m_search:
-            onSearchRequested();
-            return true;
         case R.id.m_clear:
             IssueSearchSuggestionsProvider.clear(this);
             ToastUtils.show(this, R.string.search_history_cleared);
@@ -96,6 +100,21 @@ public class IssueSearchActivity extends RoboActionBarActivity {
         issueFragment = (SearchIssueListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.search_issue_list_fragment);
 
+        searchView = new SearchView(getSupportActionBar().getThemedContext());
+        searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
+
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, IssueSearchActivity.class)));
+
+        // Hide the magnifying glass icon
+        searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+        // Add the SearchView to the toolbar
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(searchView, layoutParams);
+
         handleIntent(getIntent());
     }
 
@@ -107,20 +126,26 @@ public class IssueSearchActivity extends RoboActionBarActivity {
         issueFragment.refresh();
     }
 
-    @Override
-    public boolean onSearchRequested() {
-        startSearch(query, true, null, false);
-        return true;
-    }
-
     private void handleIntent(Intent intent) {
-        if (ACTION_SEARCH.equals(intent.getAction()))
-            search(intent.getStringExtra(QUERY));
+        if (ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(QUERY);
+
+            // Update the SearchView's query
+            searchView.setQuery(query, false);
+
+            // Prevents the suggestions dropdown from showing after we submit
+            searchView.post(new Runnable() {
+                @Override public void run() {
+                    searchView.clearFocus();
+                }
+            });
+
+            search(query);
+        }
     }
 
     private void search(final String query) {
         this.query = query;
-        getSupportActionBar().setTitle(query);
         IssueSearchSuggestionsProvider.save(this, query);
         issueFragment.setQuery(query);
     }
