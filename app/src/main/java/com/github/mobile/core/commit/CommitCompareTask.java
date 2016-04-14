@@ -17,6 +17,7 @@ package com.github.mobile.core.commit;
 
 import android.accounts.Account;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
@@ -25,6 +26,7 @@ import com.google.inject.Inject;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommitCompare;
 import org.eclipse.egit.github.core.service.CommitService;
+import org.eclipse.egit.github.core.service.RepositoryService;
 
 /**
  * Task to compare two commits
@@ -35,13 +37,16 @@ public class CommitCompareTask extends
     private static final String TAG = "CommitCompareTask";
 
     @Inject
-    private CommitService service;
+    private CommitService commitService;
+
+    @Inject
+    private RepositoryService repositoryService;
 
     private final IRepositoryIdProvider repository;
 
-    private final String base;
+    private String base;
 
-    private final String head;
+    private String head;
 
     /**
      * @param context
@@ -60,7 +65,10 @@ public class CommitCompareTask extends
 
     @Override
     protected RepositoryCommitCompare run(Account account) throws Exception {
-        return service.compare(repository, base, head);
+        if (TextUtils.isEmpty(base)) {
+            base = repositoryService.getRepository(repository).getDefaultBranch();
+        }
+        return commitService.compare(repository, base, head);
     }
 
     @Override

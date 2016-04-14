@@ -16,8 +16,10 @@
 package com.github.mobile.core.commit;
 
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.github.mobile.core.repo.RepositoryUriMatcher;
+import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.ui.commit.CommitViewActivity;
 
 import java.util.List;
@@ -43,13 +45,38 @@ public class CommitUriMatcher {
         if (repo == null)
             return null;
 
-        if (!"commit".equals(pathSegments.get(2)))
+        switch (pathSegments.get(2)) {
+        case "commit":
+            return getSingleCommitIntent(repo, pathSegments);
+        case "compare":
+            return getCommitCompareIntent(repo, pathSegments);
+        default:
+            return null;
+        }
+    }
+
+    private static Intent getSingleCommitIntent(Repository repo, List<String> pathSegments) {
+        String ref = pathSegments.get(3);
+        if (TextUtils.isEmpty(ref))
             return null;
 
-        String commit = pathSegments.get(3);
-        if (!CommitUtils.isValidCommit(commit))
+        return CommitViewActivity.createIntent(repo, ref);
+    }
+
+    private static Intent getCommitCompareIntent(Repository repo, List<String> pathSegments) {
+        String path = pathSegments.get(3);
+        if (TextUtils.isEmpty(path))
             return null;
 
-        return CommitViewActivity.createIntent(repo, commit);
+        String[] refs = path.split("\\.\\.\\.");
+
+        switch (refs.length) {
+        case 1:
+            return CommitCompareViewActivity.createIntent(repo, refs[0]);
+        case 2:
+            return CommitCompareViewActivity.createIntent(repo, refs[0], refs[1]);
+        default:
+            return null;
+        }
     }
 }

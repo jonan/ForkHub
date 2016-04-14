@@ -20,6 +20,7 @@ import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_BASE;
 import static com.github.mobile.Intents.EXTRA_HEAD;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,17 @@ public class CommitCompareViewActivity extends DialogFragmentActivity {
         builder.add(EXTRA_HEAD, head);
         builder.repo(repository);
         return builder.toIntent();
+    }
+
+    /**
+     * Create intent for this activity
+     *
+     * @param repository
+     * @param head
+     * @return intent
+     */
+    public static Intent createIntent(final Repository repository, final String head) {
+        return createIntent(repository, null, head);
     }
 
     private Repository repository;
