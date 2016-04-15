@@ -91,9 +91,9 @@ public class IssueSearchActivity extends RoboActionBarActivity {
             if (repository != null) {
                 actionBar.setSubtitle(repository.generateId());
                 actionBar.setDisplayHomeAsUpEnabled(true);
+                avatars.bind(actionBar, repository.getOwner());
             }
         }
-        avatars.bind(actionBar, repository.getOwner());
 
         issueFragment = (SearchIssueListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.search_issue_list_fragment);
