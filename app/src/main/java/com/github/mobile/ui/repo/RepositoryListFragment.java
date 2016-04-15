@@ -239,11 +239,11 @@ public class RepositoryListFragment extends ItemListFragment<Repository>
                 break;
         }
 
-        if (index >= repos.size())
-            return;
-
         if (current != null)
             adapter.registerNoSeparator(current);
+
+        if (index >= repos.size())
+            return;
 
         // Register header for first character
         current = repos.get(index);
@@ -251,7 +251,6 @@ public class RepositoryListFragment extends ItemListFragment<Repository>
         adapter.registerHeader(current,
                 Character.toString(start).toUpperCase(US));
 
-        char previousHeader = start;
         for (index = index + 1; index < repos.size(); index++) {
             current = repos.get(index);
             char repoStart = Character.toLowerCase(current.getName().charAt(0));
@@ -260,13 +259,11 @@ public class RepositoryListFragment extends ItemListFragment<Repository>
 
             // Don't include separator for the last element of the previous
             // character
-            if (previousHeader != repoStart)
-                adapter.registerNoSeparator(repos.get(index - 1));
+            adapter.registerNoSeparator(repos.get(index - 1));
 
             adapter.registerHeader(current, Character.toString(repoStart)
                     .toUpperCase(US));
-            previousHeader = repoStart;
-            start = repoStart++;
+            start = repoStart;
         }
 
         // Don't include separator for last element
