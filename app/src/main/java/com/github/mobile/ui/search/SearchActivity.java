@@ -142,7 +142,6 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
     }
 
     private void search(final String query) {
-        getIntent().putExtra(QUERY, query);
         RepositorySearchSuggestionsProvider.save(this, query);
 
         findFragments();
