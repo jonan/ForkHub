@@ -163,7 +163,7 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
     public void startActivity(Intent intent) {
         // Inject extra information into search intents
         // Search intents will probably come from the "Issues" fragment
-        if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(EXTRA_REPOSITORY, repository);
             intent.putExtra(SearchManager.APP_DATA, bundle);
