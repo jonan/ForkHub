@@ -53,8 +53,6 @@ public class IssueSearchActivity extends RoboActionBarActivity {
 
     private SearchIssueListFragment issueFragment;
 
-    private String query;
-
     private SearchView searchView;
 
     @Override
@@ -145,7 +143,6 @@ public class IssueSearchActivity extends RoboActionBarActivity {
     }
 
     private void search(final String query) {
-        this.query = query;
         IssueSearchSuggestionsProvider.save(this, query);
         issueFragment.setQuery(query);
     }
