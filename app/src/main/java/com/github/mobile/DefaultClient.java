@@ -31,7 +31,7 @@ import java.net.URL;
  */
 public class DefaultClient extends GitHubClient {
 
-    private static final String USER_AGENT = "ForkHub/1.1";
+    private static final String USER_AGENT = "ForkHub/1.2";
 
     /**
      * Create client
