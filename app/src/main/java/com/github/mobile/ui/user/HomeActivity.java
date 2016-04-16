@@ -15,6 +15,8 @@
  */
 package com.github.mobile.ui.user;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -24,8 +26,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -46,6 +50,7 @@ import com.github.mobile.ui.gist.GistsActivity;
 import com.github.mobile.ui.issue.FiltersViewActivity;
 import com.github.mobile.ui.issue.IssueDashboardActivity;
 import com.github.mobile.ui.repo.OrganizationLoader;
+import com.github.mobile.ui.search.SearchActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.PreferenceUtils;
 import com.github.mobile.util.TypefaceUtils;
@@ -223,10 +228,39 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu optionMenu) {
-        getMenuInflater().inflate(R.menu.home, optionMenu);
+    public boolean onCreateOptionsMenu(Menu optionsMenu) {
+        getMenuInflater().inflate(R.menu.home, optionsMenu);
 
-        return super.onCreateOptionsMenu(optionMenu);
+        // Set up searching
+        final MenuItem searchMenuItem = optionsMenu.findItem(R.id.m_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchActivity.class)));
+
+        // Collapse the action view when leaving the activity to view search results
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override public boolean onSuggestionSelect(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+
+            @Override public boolean onSuggestionClick(int position) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(optionsMenu);
     }
 
     @Override
@@ -235,17 +269,6 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
             navigationDrawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.m_search:
-            onSearchRequested();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
         }
     }
 
