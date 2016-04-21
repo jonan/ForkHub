@@ -31,10 +31,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.service.IssueService;
+import org.eclipse.egit.github.core.service.PullRequestService;
 
 /**
  * Task to load and store an {@link Issue}
@@ -44,7 +46,10 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
     private static final String TAG = "RefreshIssueTask";
 
     @Inject
-    private IssueService service;
+    private IssueService issueService;
+
+    @Inject
+    private PullRequestService pullService;
 
     @Inject
     private IssueStore store;
@@ -83,9 +88,15 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         bodyImageGetter.encode(issue.getId(), issue.getBodyHtml());
         List<Comment> comments;
         if (issue.getComments() > 0)
-            comments = service.getComments(repositoryId, issueNumber);
+            comments = issueService.getComments(repositoryId, issueNumber);
         else
             comments = Collections.emptyList();
+
+        List<CommitComment> reviews;
+        if (IssueUtils.isPullRequest(issue))
+            reviews = pullService.getComments(repositoryId, issueNumber);
+        else
+            reviews = Collections.emptyList();
 
         for (Comment comment : comments) {
             String formatted = HtmlUtils.format(comment.getBodyHtml())
@@ -95,13 +106,13 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         }
 
         String[] repo = repositoryId.generateId().split("/");
-        Iterator<Collection<IssueEvent>> eventsIterator = service.pageIssueEvents(repo[0], repo[1], issueNumber).iterator();
+        Iterator<Collection<IssueEvent>> eventsIterator = issueService.pageIssueEvents(repo[0], repo[1], issueNumber).iterator();
         List<IssueEvent> events = new ArrayList<>();
 
         while (eventsIterator.hasNext())
             events.addAll(eventsIterator.next());
 
-        return new FullIssue(issue, comments, events);
+        return new FullIssue(issue, sortAllComments(comments, reviews), events);
     }
 
     @Override
@@ -109,5 +120,32 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         super.onException(e);
 
         Log.d(TAG, "Exception loading issue", e);
+    }
+
+    private List<Comment> sortAllComments(List<Comment> comments, List<CommitComment> reviews) {
+        List<Comment> allComments = new ArrayList<>(comments.size() + reviews.size());
+
+        int numReviews = reviews.size();
+
+        int start = 0;
+        for (Comment comment : comments) {
+            for (int i = start; i < numReviews; i++) {
+                CommitComment review = reviews.get(i);
+                if (comment.getCreatedAt().after(review.getCreatedAt())) {
+                    allComments.add(review);
+                    start++;
+                } else {
+                    i = numReviews;
+                }
+            }
+            allComments.add(comment);
+        }
+
+        // Add the remaining reviews
+        for (int i = start; i < numReviews; i++) {
+            allComments.add(reviews.get(i));
+        }
+
+        return allComments;
     }
 }

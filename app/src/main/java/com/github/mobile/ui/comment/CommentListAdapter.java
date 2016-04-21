@@ -35,6 +35,7 @@ import com.github.mobile.util.TypefaceUtils;
 import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.User;
 
@@ -93,10 +94,15 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     @Override
     protected void update(int position, Object obj, int type) {
-        if(type == 0)
+        if (type == 0) {
             updateComment((Comment) obj);
-        else
-            updateEvent((IssueEvent) obj);
+        } else {
+            if (obj instanceof CommitComment) {
+                updateReview((CommitComment) obj);
+            } else {
+                updateEvent((IssueEvent) obj);
+            }
+        }
     }
 
     protected void updateEvent(final IssueEvent event) {
@@ -206,6 +212,19 @@ public class CommentListAdapter extends MultiTypeAdapter {
         setText(1, Html.fromHtml(message));
     }
 
+    protected void updateReview(final CommitComment review) {
+        User user = review.getUser();
+
+        String message = String.format("<b>%s</b> ", user == null ? "ghost" : user.getLogin());
+        avatars.bind(imageView(2), user);
+        message += resources.getString(R.string.issue_event_comment_diff);
+        setText(0, TypefaceUtils.ICON_CODE);
+        textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
+
+        message += " " + TimeUtils.getRelativeTime(review.getCreatedAt());
+        setText(1, Html.fromHtml(message));
+    }
+
     protected void updateComment(final Comment comment) {
         imageGetter.bind(textView(0), comment.getBodyHtml(), comment.getId());
         avatars.bind(imageView(3), comment.getUser());
@@ -258,7 +277,9 @@ public class CommentListAdapter extends MultiTypeAdapter {
         this.clear();
 
         for (Object item : items) {
-            if(item instanceof Comment)
+            if (item instanceof CommitComment)
+                this.addItem(1, item);
+            else if (item instanceof Comment)
                 this.addItem(0, item);
             else
                 this.addItem(1, item);
@@ -291,7 +312,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     @Override
     protected int getChildLayoutId(int type) {
-        if(type == 0)
+        if (type == 0)
             return R.layout.comment_item;
         else
             return R.layout.comment_event_item;
