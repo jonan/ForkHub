@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.1] - 2016-04-24
 
 ### Fixed
 - Improve how GitHub links are opened.
@@ -109,7 +109,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.0...master
+[ForkHub v1.2.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.0...ForkHub-v1.2.1
 [ForkHub v1.2.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...ForkHub-v1.2.0
 [ForkHub v1.1.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.0...ForkHub-v1.1.1
 [ForkHub v1.1.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.0.0...ForkHub-v1.1.0
