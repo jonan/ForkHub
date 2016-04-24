@@ -4,6 +4,15 @@
 
 ### Fixed
 - Improve how GitHub links are opened.
+- New UI for the search bar.
+- Use Material Design icons in the toolbar.
+- Add a new event to issues when someone comments the code.
+- Show who changed the assignee of an issue.
+- Some minor bug fixes.
+- Some minor UI fixes and improvements.
+
+### Translations
+- New translations: PL.
 
 ## [ForkHub v1.2.0] - 2016-03-29
 
