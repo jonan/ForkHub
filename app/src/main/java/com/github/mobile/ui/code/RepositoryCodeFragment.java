@@ -273,7 +273,8 @@ public class RepositoryCodeFragment extends DialogFragment implements
 
         if (folder.entry != null) {
             int textLightColor = getResources().getColor(R.color.text_light);
-            final String[] segments = folder.entry.getPath().split("/");
+            final String fullPath = repository.getName() + "/" + folder.entry.getPath();
+            final String[] segments = fullPath.split("/");
             StyledText text = new StyledText();
             for (int i = 0; i < segments.length - 1; i++) {
                 final int index = i;
