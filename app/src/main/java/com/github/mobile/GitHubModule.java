@@ -20,6 +20,7 @@ import android.content.Context;
 import com.github.mobile.accounts.AccountClient;
 import com.github.mobile.accounts.AccountScope;
 import com.github.mobile.accounts.GitHubAccount;
+import com.github.mobile.api.RequestConfiguration;
 import com.github.mobile.core.commit.CommitStore;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.core.issue.IssueStore;
@@ -39,6 +40,10 @@ import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.GistService;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.PullRequestService;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 /**
  * Main module provide services and clients
@@ -63,6 +68,19 @@ public class GitHubModule extends AbstractModule {
     @Provides
     GitHubClient client(Provider<GitHubAccount> accountProvider) {
         return new AccountClient(accountProvider);
+    }
+
+    @Provides
+    Retrofit retrofit(Provider<GitHubAccount> accountProvider) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new RequestConfiguration(accountProvider))
+                .build();
+
+        return new Retrofit.Builder()
+                .baseUrl("https://api.github.com/")
+                .client(client)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build();
     }
 
     @Provides
