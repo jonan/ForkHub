@@ -36,6 +36,15 @@
                 android:value="com.github.mobile.ui.search.SearchActivity" />
         </activity>
         <activity
+            android:name=".ui.notification.NotificationsListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="jp.forkhub.mobile.user.notification.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.gist.CreateGistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>

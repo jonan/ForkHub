@@ -18,6 +18,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/m_notifications"
+        android:icon="@drawable/ic_notifications_none_white_24dp"
+        android:title="Notifications"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/m_search"
         android:icon="@drawable/ic_search_white_24dp"
         android:title="@string/find_repositories"

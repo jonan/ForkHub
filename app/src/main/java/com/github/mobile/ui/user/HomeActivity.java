@@ -49,6 +49,7 @@ import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.gist.GistsActivity;
 import com.github.mobile.ui.issue.FiltersViewActivity;
 import com.github.mobile.ui.issue.IssueDashboardActivity;
+import com.github.mobile.ui.notification.NotificationsListActivity;
 import com.github.mobile.ui.repo.OrganizationLoader;
 import com.github.mobile.ui.search.SearchActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -261,6 +262,17 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
         });
 
         return super.onCreateOptionsMenu(optionsMenu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.m_notifications:
+            startActivity(NotificationsListActivity.createIntent());
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
