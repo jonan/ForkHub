@@ -67,6 +67,9 @@ public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
         case Subject.TYPE_COMMIT:
             setText(0, TypefaceUtils.ICON_GIT_COMMIT);
             break;
+        case Subject.TYPE_RELEASE:
+            setText(0, TypefaceUtils.ICON_TAG);
+            break;
         default:
             setText(0, "");
             break;
