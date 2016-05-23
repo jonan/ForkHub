@@ -285,9 +285,7 @@
     <string name="issue_event_head_ref_deleted">eliminó la rama</string>
     <string name="issue_event_head_ref_restored">restauró la rama</string>
     <string name="issue_event_label_added">añadió la etiqueta %1$s</string>
-    <string name="issue_event_label_assigned">fue asignado</string>
     <string name="issue_event_label_removed">eliminó la etiqueta %1$s</string>
-    <string name="issue_event_label_unassigned">fue desasignado</string>
     <string name="issue_event_lock">bloqueó y limitó la conversación a los colaboradores</string>
     <string name="issue_event_merged">mergeó el commit %1$s</string>
     <string name="issue_event_milestone_added">añadió esto al hito %1$s</string>

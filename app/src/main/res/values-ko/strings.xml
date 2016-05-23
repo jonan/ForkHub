@@ -96,8 +96,6 @@
     <!--  -->
 
     <!-- Issue events texts -->
-    <string name="issue_event_label_assigned">이(가) 담당자로 지정됨</string>
-    <string name="issue_event_label_unassigned">이(가) 더이상 담당하지 않음</string>
     <string name="issue_event_label_added">이(가) %1$s 라벨을 추가함</string>
     <string name="issue_event_label_removed">이(가) %1$s 라벨을 지움</string>
     <string name="issue_event_milestone_added">이(가) 마일스톤 %1$s 에 이 이슈를 추가함</string>
