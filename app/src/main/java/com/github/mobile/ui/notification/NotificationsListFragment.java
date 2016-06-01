@@ -94,7 +94,7 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
 
     @Override
     protected SingleTypeAdapter<Notification> createAdapter(List<Notification> items) {
-        return new NotificationsListAdapter(getActivity().getLayoutInflater(),
+        return new NotificationsListAdapter(getActivity(),
                 items.toArray(new Notification[items.size()]));
     }
 }

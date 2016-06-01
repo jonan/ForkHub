@@ -15,7 +15,8 @@
  */
 package com.github.mobile.ui.notification;
 
-import android.view.LayoutInflater;
+import android.app.Activity;
+import android.content.res.Resources;
 import android.view.View;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
@@ -29,14 +30,21 @@ import com.github.mobile.util.TypefaceUtils;
  */
 public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
 
+    private final int colorRead;
+    private final int colorUnread;
+
     /**
      * Create {@link Notification} list adapter
      *
-     * @param inflater
+     * @param activity
      * @param elements
      */
-    public NotificationsListAdapter(LayoutInflater inflater, Notification[] elements) {
-        super(inflater, R.layout.notification_item);
+    public NotificationsListAdapter(Activity activity, Notification[] elements) {
+        super(activity.getLayoutInflater(), R.layout.notification_item);
+
+        Resources resources = activity.getResources();
+        colorRead = resources.getColor(R.color.text_light);
+        colorUnread = resources.getColor(R.color.notification_unread);
 
         setItems(elements);
     }
@@ -57,6 +65,12 @@ public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
 
     @Override
     protected void update(int position, Notification notification) {
+        if (notification.is_unread) {
+            textView(0).setTextColor(colorUnread);
+        } else {
+            textView(0).setTextColor(colorRead);
+        }
+
         switch (notification.subject.type) {
         case Subject.TYPE_ISSUE:
             setText(0, TypefaceUtils.ICON_ISSUE_OPENED);
