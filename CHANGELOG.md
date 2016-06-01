@@ -2,8 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+- Add support for notifications.
+
 ### Fixed
 - Improve the source viewer for many languages (CodeMirror 5.15.2).
+- Some minor UI fixes and improvements.
 
 ## [ForkHub v1.2.1] - 2016-04-24
 
