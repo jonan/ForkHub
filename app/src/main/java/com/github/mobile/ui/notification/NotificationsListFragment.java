@@ -15,6 +15,7 @@
  */
 package com.github.mobile.ui.notification;
 
+import android.accounts.Account;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -24,6 +25,7 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
+import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.Notification;
 import com.github.mobile.api.model.Subject;
 import com.github.mobile.api.service.NotificationService;
@@ -32,6 +34,9 @@ import com.github.mobile.ui.UriLauncherActivity;
 import com.google.inject.Inject;
 
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * Fragment to display a list of {@link Notification} objects
@@ -73,7 +78,9 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Notification notification = (Notification) l.getItemAtPosition(position);
+        final Notification notification = (Notification) l.getItemAtPosition(position);
+
+        // Create an URL we can open
         String url = notification.subject.url.replace("://api.github.com/repos/", "://github.com/");
         switch (notification.subject.type) {
         case Subject.TYPE_ISSUE:
@@ -90,6 +97,17 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
         default:
             break;
         }
+
+        // Mark notification as read
+        new AuthenticatedUserTask<ResponseBody>(getActivity()) {
+
+            @Override
+            protected ResponseBody run(Account account) throws Exception {
+                Response<ResponseBody> r = service.markAsRead(notification.id).execute();
+                notification.is_unread = false;
+                return r.body();
+            }
+        }.execute();
     }
 
     @Override
