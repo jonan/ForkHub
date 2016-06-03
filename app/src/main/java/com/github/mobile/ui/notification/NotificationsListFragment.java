@@ -36,7 +36,6 @@ import com.google.inject.Inject;
 import java.util.List;
 
 import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 /**
  * Fragment to display a list of {@link Notification} objects
@@ -99,15 +98,20 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
         }
 
         // Mark notification as read
-        new AuthenticatedUserTask<ResponseBody>(getActivity()) {
+        if (notification.is_unread) {
+            new AuthenticatedUserTask<ResponseBody>(getActivity()) {
 
-            @Override
-            protected ResponseBody run(Account account) throws Exception {
-                Response<ResponseBody> r = service.markAsRead(notification.id).execute();
-                notification.is_unread = false;
-                return r.body();
-            }
-        }.execute();
+                @Override
+                protected ResponseBody run(Account account) throws Exception {
+                    return service.markAsRead(notification.id).execute().body();
+                }
+
+                @Override
+                protected void onSuccess(ResponseBody responseBody) throws Exception {
+                    notification.is_unread = false;
+                }
+            }.execute();
+        }
     }
 
     @Override
