@@ -335,6 +335,7 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
             formatAddMember(event, main, details);
             break;
         case TYPE_PUBLIC:
+            icon = TypefaceUtils.ICON_REPO;
             formatPublic(event, main, details);
             break;
         case TYPE_PULL_REQUEST:
@@ -556,13 +557,15 @@ public class NewsListAdapter extends SingleTypeAdapter<Event> {
     private void formatPublic(Event event, StyledText main,
                               StyledText details) {
         boldActor(main, event);
-        main.append(" open sourced ");
+        main.append(" made ");
 
         if (showRepoName) {
             boldRepo(main, event);
         } else {
             main.append("repository");
         }
+
+        main.append(" public");
     }
 
     private void formatWatch(Event event, StyledText main,
