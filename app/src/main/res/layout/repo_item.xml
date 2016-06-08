@@ -14,13 +14,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ListItem"
     android:gravity="center_vertical"
+    android:orientation="vertical"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:paddingTop="0dp" >
+    android:paddingTop="0dp">
 
     <LinearLayout
         android:id="@+id/ll_header"
@@ -30,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/background"
         android:orientation="vertical"
-        android:paddingTop="10dp" >
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/tv_header"
@@ -45,36 +46,14 @@
             android:background="@color/text_recent" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_repo_icon"
-        style="@style/PrimaryIcon"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/ll_header"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp" />
-
-    <LinearLayout
-        android:id="@+id/ll_details"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ll_header"
-        android:layout_toRightOf="@id/tv_repo_icon"
-        android:orientation="vertical"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp" >
-
-        <include layout="@layout/repo_details" />
-    </LinearLayout>
+    <include layout="@layout/user_repo_item" />
 
     <View
         android:id="@+id/v_separator"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/ll_details"
         android:layout_marginTop="5dp"
         android:background="@drawable/list_divider" />
 
-</RelativeLayout>
+</LinearLayout>
