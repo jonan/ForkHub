@@ -26,8 +26,8 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
-import com.github.mobile.core.search.SearchUser;
-import com.github.mobile.core.search.SearchUserService;
+import com.github.mobile.api.model.User;
+import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.user.RefreshUserTask;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.user.UserViewActivity;
@@ -36,17 +36,15 @@ import com.google.inject.Inject;
 
 import java.util.List;
 
-import org.eclipse.egit.github.core.User;
-
 /**
- * Fragment to display a list of {@link SearchUser} instances
+ * Fragment to display a list of {@link User} instances
  */
-public class SearchUserListFragment extends ItemListFragment<SearchUser> {
+public class SearchUserListFragment extends ItemListFragment<User> {
 
     private String query;
 
     @Inject
-    private SearchUserService service;
+    private SearchService service;
 
     @Inject
     private AvatarLoader avatars;
@@ -73,29 +71,29 @@ public class SearchUserListFragment extends ItemListFragment<SearchUser> {
     }
 
     @Override
-    public Loader<List<SearchUser>> onCreateLoader(int id, Bundle args) {
-        return new ThrowableLoader<List<SearchUser>>(getActivity(), items) {
+    public Loader<List<User>> onCreateLoader(int id, Bundle args) {
+        return new ThrowableLoader<List<User>>(getActivity(), items) {
 
             @Override
-            public List<SearchUser> loadData() throws Exception {
-                return service.searchUsers(query);
+            public List<User> loadData() throws Exception {
+                return service.searchUsers(query).execute().body().items;
             }
         };
     }
 
     @Override
-    protected SingleTypeAdapter<SearchUser> createAdapter(List<SearchUser> items) {
+    protected SingleTypeAdapter<User> createAdapter(List<User> items) {
         return new SearchUserListAdapter(getActivity(),
-                items.toArray(new SearchUser[items.size()]), avatars);
+                items.toArray(new User[items.size()]), avatars);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        final SearchUser result = (SearchUser) l.getItemAtPosition(position);
-        new RefreshUserTask(getActivity(), result.getLogin()) {
+        final User result = (User) l.getItemAtPosition(position);
+        new RefreshUserTask(getActivity(), result.login) {
 
             @Override
-            protected void onSuccess(User user) throws Exception {
+            protected void onSuccess(org.eclipse.egit.github.core.User user) throws Exception {
                 super.onSuccess(user);
 
                 if (!AccountUtils.isUser(getActivity(), user))

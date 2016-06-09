@@ -16,7 +16,7 @@
 package com.github.mobile;
 
 import com.github.mobile.api.service.NotificationService;
-import com.github.mobile.core.search.SearchUserService;
+import com.github.mobile.api.service.SearchService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
@@ -58,6 +58,11 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
+    SearchService searchService(Retrofit retrofit) {
+        return retrofit.create(SearchService.class);
+    }
+
+    @Provides
     IssueService issueService(GitHubClient client) {
         return new IssueService(client);
     }
@@ -70,11 +75,6 @@ public class ServicesModule extends AbstractModule {
     @Provides
     UserService userService(GitHubClient client) {
         return new UserService(client);
-    }
-
-    @Provides
-    SearchUserService searchUserService(GitHubClient client) {
-        return new SearchUserService(client);
     }
 
     @Provides

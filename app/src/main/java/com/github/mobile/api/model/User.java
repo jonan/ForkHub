@@ -21,7 +21,7 @@ public class User {
     public static final String TYPE_USER = "User";
     public static final String TYPE_ORGANIZATION = "Organization";
 
-    public int id;
+    public long id;
 
     public String login;
 
