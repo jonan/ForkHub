@@ -18,12 +18,12 @@ package com.github.mobile.core;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.egit.github.core.client.NoSuchPageException;
-import org.eclipse.egit.github.core.client.PageIterator;
 
 /**
  * Generic resource pager for elements with an id that can be paged
@@ -103,7 +103,7 @@ public abstract class ResourcePager<E> {
      */
     public boolean next() throws IOException {
         boolean emptyPage = false;
-        PageIterator<E> iterator = createIterator(page, -1);
+        Iterator<Collection<E>> iterator = createIterator(page, -1);
         try {
             for (int i = 0; i < count && iterator.hasNext(); i++) {
                 Collection<E> resourcePage = iterator.next();
@@ -169,6 +169,6 @@ public abstract class ResourcePager<E> {
      * @param size
      * @return iterator
      */
-    public abstract PageIterator<E> createIterator(final int page,
+    public abstract Iterator<Collection<E>> createIterator(final int page,
             final int size);
 }

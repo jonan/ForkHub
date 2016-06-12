@@ -23,5 +23,8 @@ import retrofit2.http.Query;
 
 public interface SearchService {
     @GET("search/users")
-    Call<SearchUserResult> searchUsers(@Query("q") String query);
+    Call<SearchUserResult> searchUsers(
+            @Query("q") String q,
+            @Query("page") int page,
+            @Query("per_page") int per_page);
 }
