@@ -16,40 +16,46 @@
 package com.github.mobile.ui.search;
 
 import static android.app.SearchManager.QUERY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.ThrowableLoader;
+import com.github.mobile.api.model.Repository;
+import com.github.mobile.api.service.SearchService;
+import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
-import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.google.inject.Inject;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.SearchRepository;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
 /**
- * Fragment to display a list of {@link SearchRepository} instances
+ * Fragment to display a list of {@link Repository} instances
  */
-public class SearchRepositoryListFragment extends
-        ItemListFragment<SearchRepository> {
+public class SearchRepositoryListFragment extends PagedItemFragment<Repository> {
+    private static final int RESULTS_PER_PAGE = 30;
 
     @Inject
     private RepositoryService service;
+
+    @Inject
+    private SearchService searchService;
 
     private String query;
 
@@ -75,27 +81,66 @@ public class SearchRepositoryListFragment extends
     }
 
     @Override
+    public void refreshWithProgress() {
+        query = getStringExtra(QUERY);
+
+        super.refreshWithProgress();
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        final SearchRepository result = (SearchRepository) l
-                .getItemAtPosition(position);
-        new RefreshRepositoryTask(getActivity(), result) {
+        final Repository result = (Repository) l.getItemAtPosition(position);
+        final SearchRepository searchRepository = new SearchRepository(result.owner.login, result.name);
+        new RefreshRepositoryTask(getActivity(), searchRepository) {
 
             @Override
             public void execute() {
                 showIndeterminate(MessageFormat.format(
                         getString(R.string.opening_repository),
-                        result.generateId()));
+                        searchRepository.generateId()));
 
                 super.execute();
             }
 
             @Override
-            protected void onSuccess(Repository repository) throws Exception {
+            protected void onSuccess(org.eclipse.egit.github.core.Repository repository) throws Exception {
                 super.onSuccess(repository);
 
                 startActivity(RepositoryViewActivity.createIntent(repository));
             }
         }.execute();
+    }
+
+    @Override
+    protected ResourcePager<Repository> createPager() {
+        return new ResourcePager<Repository>() {
+
+            @Override
+            protected Object getId(Repository resource) {
+                return resource.id;
+            }
+
+            @Override
+            public Iterator<Collection<Repository>> createIterator(int page, int size) {
+                return new com.github.mobile.api.PageIterator<Repository>(page, RESULTS_PER_PAGE) {
+
+                    @Override
+                    protected Collection<Repository> getPage(int page) {
+                        if (openRepositoryMatch(query)) {
+                            return Collections.emptyList();
+                        }
+
+                        try {
+                            return searchService.searchRepositories(query, page, size).execute().body().items;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        return Collections.emptyList();
+                    }
+                };
+            }
+        };
     }
 
     /**
@@ -113,7 +158,7 @@ public class SearchRepositoryListFragment extends
         if (repoId == null)
             return false;
 
-        Repository repo;
+        org.eclipse.egit.github.core.Repository repo;
         try {
             repo = service.getRepository(repoId);
         } catch (IOException e) {
@@ -128,17 +173,8 @@ public class SearchRepositoryListFragment extends
     }
 
     @Override
-    public Loader<List<SearchRepository>> onCreateLoader(int id, Bundle args) {
-        return new ThrowableLoader<List<SearchRepository>>(getActivity(), items) {
-
-            @Override
-            public List<SearchRepository> loadData() throws Exception {
-                if (openRepositoryMatch(query))
-                    return Collections.emptyList();
-                else
-                    return service.searchRepositories(query);
-            }
-        };
+    protected int getLoadingMessage() {
+        return R.string.loading_repositories;
     }
 
     @Override
@@ -147,10 +183,10 @@ public class SearchRepositoryListFragment extends
     }
 
     @Override
-    protected SingleTypeAdapter<SearchRepository> createAdapter(
-            List<SearchRepository> items) {
+    protected SingleTypeAdapter<Repository> createAdapter(
+            List<Repository> items) {
         return new SearchRepositoryListAdapter(getActivity()
-                .getLayoutInflater(), items.toArray(new SearchRepository[items
+                .getLayoutInflater(), items.toArray(new Repository[items
                 .size()]));
     }
 }

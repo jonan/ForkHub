@@ -18,7 +18,7 @@ package com.github.mobile.api.model;
 import com.squareup.moshi.Json;
 
 public class Repository {
-    public int id;
+    public long id;
 
     public User owner;
 
@@ -59,6 +59,8 @@ public class Repository {
     public boolean has_pages;
 
     public int forks_count;
+
+    public String mirror_url;
 
     public int open_issues_count;
 

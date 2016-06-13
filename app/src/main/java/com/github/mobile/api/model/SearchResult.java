@@ -19,11 +19,11 @@ import com.squareup.moshi.Json;
 
 import java.util.List;
 
-public class SearchUserResult {
+public class SearchResult<V> {
     public int total_count;
 
     @Json(name = "incomplete_results")
-    public boolean is_incomplete;
+    public boolean has_incomplete_results;
 
-    public List<User> items;
+    public List<V> items;
 }

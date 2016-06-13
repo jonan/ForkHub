@@ -33,8 +33,8 @@ import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
                             e.printStackTrace();
                         }
 
-                        return new ArrayList<User>();
+                        return Collections.emptyList();
                     }
                 };
             }

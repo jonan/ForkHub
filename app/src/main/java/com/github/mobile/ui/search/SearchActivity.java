@@ -150,7 +150,7 @@ public class SearchActivity extends TabPagerActivity<SearchPagerAdapter> {
             repoFragment.setListShown(false);
             userFragment.setListShown(false);
 
-            repoFragment.refresh();
+            repoFragment.refreshWithProgress();
             userFragment.refreshWithProgress();
         }
     }
