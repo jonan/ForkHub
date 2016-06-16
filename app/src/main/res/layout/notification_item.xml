@@ -39,6 +39,11 @@
             style="@style/ListTitleText"
             android:layout_width="match_parent" />
 
+        <TextView
+            android:id="@+id/tv_event_date"
+            style="@style/ListSubtitleText"
+            android:singleLine="true" />
+
     </LinearLayout>
 
 </LinearLayout>

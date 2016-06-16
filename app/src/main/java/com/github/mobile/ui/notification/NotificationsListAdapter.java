@@ -23,6 +23,7 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.api.model.Notification;
 import com.github.mobile.api.model.Subject;
+import com.github.mobile.util.TimeUtils;
 import com.github.mobile.util.TypefaceUtils;
 
 /**
@@ -30,8 +31,11 @@ import com.github.mobile.util.TypefaceUtils;
  */
 public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
 
-    private final int colorRead;
-    private final int colorUnread;
+    private final int colorIconRead;
+    private final int colorIconUnread;
+
+    private final int colorTextRead;
+    private final int colorTextUnread;
 
     /**
      * Create {@link Notification} list adapter
@@ -43,16 +47,20 @@ public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
         super(activity.getLayoutInflater(), R.layout.notification_item);
 
         Resources resources = activity.getResources();
-        colorRead = resources.getColor(R.color.text_light);
-        colorUnread = resources.getColor(R.color.notification_unread);
+
+        colorIconRead = resources.getColor(R.color.text_light);
+        colorIconUnread = resources.getColor(R.color.notification_unread);
+
+        colorTextRead = resources.getColor(R.color.text_light);
+        colorTextUnread = resources.getColor(R.color.text);
 
         setItems(elements);
     }
 
     @Override
     protected int[] getChildViewIds() {
-        return new int[] {R.id.tv_type_icon,
-                R.id.tv_issue_repo_name, R.id.tv_issue_title};
+        return new int[] { R.id.tv_type_icon, R.id.tv_issue_repo_name,
+                R.id.tv_issue_title, R.id.tv_event_date };
     }
 
     @Override
@@ -66,9 +74,11 @@ public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
     @Override
     protected void update(int position, Notification notification) {
         if (notification.is_unread) {
-            textView(0).setTextColor(colorUnread);
+            textView(0).setTextColor(colorIconUnread);
+            textView(2).setTextColor(colorTextUnread);
         } else {
-            textView(0).setTextColor(colorRead);
+            textView(0).setTextColor(colorIconRead);
+            textView(2).setTextColor(colorTextRead);
         }
 
         switch (notification.subject.type) {
@@ -91,5 +101,6 @@ public class NotificationsListAdapter extends SingleTypeAdapter<Notification> {
 
         setText(1, notification.repository.full_name);
         setText(2, notification.subject.title);
+        setText(3, TimeUtils.getRelativeTime(notification.updated_at));
     }
 }

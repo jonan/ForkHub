@@ -20,6 +20,7 @@ import android.content.Context;
 import com.github.mobile.accounts.AccountClient;
 import com.github.mobile.accounts.AccountScope;
 import com.github.mobile.accounts.GitHubAccount;
+import com.github.mobile.api.DateAdapter;
 import com.github.mobile.api.RequestConfiguration;
 import com.github.mobile.core.commit.CommitStore;
 import com.github.mobile.core.gist.GistStore;
@@ -31,6 +32,7 @@ import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Named;
+import com.squareup.moshi.Moshi;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -76,10 +78,14 @@ public class GitHubModule extends AbstractModule {
                 .addInterceptor(new RequestConfiguration(accountProvider))
                 .build();
 
+        Moshi converter = new Moshi.Builder()
+                .add(new DateAdapter())
+                .build();
+
         return new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .client(client)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(converter))
                 .build();
     }
 

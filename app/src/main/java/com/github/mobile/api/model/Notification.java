@@ -17,6 +17,8 @@ package com.github.mobile.api.model;
 
 import com.squareup.moshi.Json;
 
+import java.util.Date;
+
 public class Notification {
     public static final String REASON_SUBSCRIBED = "subscribed";
     public static final String REASON_MANUAL = "manual";
@@ -38,7 +40,7 @@ public class Notification {
     @Json(name = "unread")
     public boolean is_unread;
 
-    public String updated_at;
+    public Date updated_at;
 
-    public String last_read_at;
+    public Date last_read_at;
 }
