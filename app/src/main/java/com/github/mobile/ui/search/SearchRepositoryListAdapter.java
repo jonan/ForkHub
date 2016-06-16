@@ -15,23 +15,21 @@
  */
 package com.github.mobile.ui.search;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.github.mobile.R;
+import com.github.mobile.api.model.Repository;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.repo.RepositoryListAdapter;
 import com.github.mobile.util.TypefaceUtils;
-
-import org.eclipse.egit.github.core.SearchRepository;
 
 /**
  * Adapter for a list of searched for repositories
  */
 public class SearchRepositoryListAdapter extends
-        RepositoryListAdapter<SearchRepository> {
+        RepositoryListAdapter<Repository> {
 
     /**
      * Create list adapter for searched for repositories
@@ -40,15 +38,13 @@ public class SearchRepositoryListAdapter extends
      * @param elements
      */
     public SearchRepositoryListAdapter(LayoutInflater inflater,
-            SearchRepository[] elements) {
+            Repository[] elements) {
         super(R.layout.user_repo_item, inflater, elements);
     }
 
     @Override
     public long getItemId(final int position) {
-        final String id = getItem(position).getId();
-        return !TextUtils.isEmpty(id) ? id.hashCode() : super
-                .getItemId(position);
+        return getItem(position).id;
     }
 
     @Override
@@ -71,14 +67,14 @@ public class SearchRepositoryListAdapter extends
     }
 
     @Override
-    protected void update(int position, SearchRepository repository) {
+    protected void update(int position, Repository repository) {
         StyledText name = new StyledText();
-        name.append(repository.getOwner()).append('/');
-        name.bold(repository.getName());
+        name.append(repository.owner.login).append('/');
+        name.bold(repository.name);
         setText(5, name);
 
-        updateDetails(repository.getDescription(), repository.getLanguage(),
-                repository.getWatchers(), repository.getForks(),
-                repository.isPrivate(), repository.isFork(), null);
+        updateDetails(repository.description, repository.language,
+                repository.stargazers_count, repository.forks_count,
+                repository.is_private, repository.is_fork, repository.mirror_url);
     }
 }

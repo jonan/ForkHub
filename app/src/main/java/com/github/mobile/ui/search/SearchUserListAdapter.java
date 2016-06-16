@@ -20,13 +20,13 @@ import android.view.LayoutInflater;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.core.search.SearchUser;
+import com.github.mobile.api.model.User;
 import com.github.mobile.util.AvatarLoader;
 
 /**
  * Adapter for a list of searched users
  */
-public class SearchUserListAdapter extends SingleTypeAdapter<SearchUser> {
+public class SearchUserListAdapter extends SingleTypeAdapter<User> {
 
     private final AvatarLoader avatars;
 
@@ -38,7 +38,7 @@ public class SearchUserListAdapter extends SingleTypeAdapter<SearchUser> {
      * @param avatars
      */
     public SearchUserListAdapter(final Context context,
-            final SearchUser[] elements, final AvatarLoader avatars) {
+            final User[] elements, final AvatarLoader avatars) {
         super(LayoutInflater.from(context), R.layout.user_item);
 
         this.avatars = avatars;
@@ -47,8 +47,7 @@ public class SearchUserListAdapter extends SingleTypeAdapter<SearchUser> {
 
     @Override
     public long getItemId(final int position) {
-        String userId = getItem(position).getId();
-        return Long.parseLong(userId.replace("user-", ""));
+        return getItem(position).id;
     }
 
     @Override
@@ -57,7 +56,8 @@ public class SearchUserListAdapter extends SingleTypeAdapter<SearchUser> {
     }
 
     @Override
-    protected void update(final int position, final SearchUser user) {
-        setText(1, user.getLogin());
+    protected void update(final int position, final User user) {
+        avatars.bind(imageView(0), user);
+        setText(1, user.login);
     }
 }

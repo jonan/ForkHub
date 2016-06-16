@@ -200,6 +200,16 @@ public class AvatarLoader {
      * Bind view to image at URL
      *
      * @param view The ImageView that is to display the user's avatar.
+     * @param user A User object that points to the desired user.
+     */
+    public void bind(final ImageView view, final com.github.mobile.api.model.User user) {
+        bind(view, user.avatar_url);
+    }
+
+    /**
+     * Bind view to image at URL
+     *
+     * @param view The ImageView that is to display the user's avatar.
      * @param user A CommitUser object that points to the desired user.
      */
     public void bind(final ImageView view, final CommitUser user) {
