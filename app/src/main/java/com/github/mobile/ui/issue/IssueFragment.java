@@ -57,6 +57,7 @@ import android.widget.TextView;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.core.issue.DeleteCommentTask;
 import com.github.mobile.core.issue.EditAssigneeTask;
 import com.github.mobile.core.issue.EditLabelsTask;
@@ -88,7 +89,6 @@ import java.util.List;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.PullRequest;
@@ -484,7 +484,7 @@ public class IssueFragment extends DialogFragment {
 
                 issue = fullIssue.getIssue();
 
-                List<IssueEvent> events = (List<IssueEvent>) fullIssue.getEvents();
+                List<TimelineEvent> events = (List<TimelineEvent>) fullIssue.getEvents();
                 int numEvents = events.size();
 
                 List<Object> allItems = new ArrayList<>();
@@ -492,13 +492,14 @@ public class IssueFragment extends DialogFragment {
                 int start = 0;
                 for (Comment comment : fullIssue) {
                     for (int e = start; e < numEvents; e++) {
-                        IssueEvent event = events.get(e);
-                        if (comment.getCreatedAt().after(event.getCreatedAt())) {
-                            if (shouldAddEvent(event, allItems))
+                        TimelineEvent event = events.get(e);
+                        if (shouldAddEvent(event, allItems)) {
+                            if (comment.getCreatedAt().after(event.created_at)) {
                                 allItems.add(event);
-                            start++;
-                        } else {
-                            e = numEvents;
+                                start = e + 1;
+                            } else {
+                                e = numEvents;
+                            }
                         }
                     }
                     allItems.add(comment);
@@ -506,7 +507,7 @@ public class IssueFragment extends DialogFragment {
 
                 // Adding the last events or if there are no comments
                 for (int e = start; e < numEvents; e++) {
-                    IssueEvent event = events.get(e);
+                    TimelineEvent event = events.get(e);
                     if (shouldAddEvent(event, allItems))
                         allItems.add(event);
                 }
@@ -707,18 +708,25 @@ public class IssueFragment extends DialogFragment {
         }
     }
 
-    static private boolean shouldAddEvent(IssueEvent event, List<Object> allItems) {
+    static private boolean shouldAddEvent(TimelineEvent event, List<Object> allItems) {
         // Exclude some events
-        List<String> excludedEvents = Arrays.asList(IssueEvent.TYPE_MENTIONED, IssueEvent.TYPE_SUBSCRIBED);
-        if (excludedEvents.contains(event.getEvent()))
+        List<String> excludedEvents = Arrays.asList(
+                TimelineEvent.EVENT_MENTIONED,
+                TimelineEvent.EVENT_SUBSCRIBED,
+                TimelineEvent.EVENT_UNSUBSCRIBED,
+                TimelineEvent.EVENT_COMMITTED,
+                TimelineEvent.EVENT_CROSS_REFERENCED,
+                TimelineEvent.EVENT_COMMENTED);
+
+        if (excludedEvents.contains(event.event))
             return false;
 
         // Don't show references to nonexistent commits
-        if (IssueEvent.TYPE_REFERENCED.equals(event.getEvent()) && event.getCommitId() == null)
+        if (TimelineEvent.EVENT_REFERENCED.equals(event.event) && event.commit_id == null)
             return false;
 
         // Don't show the close event after the merged event
-        if (!IssueEvent.TYPE_CLOSED.equals(event.getEvent()))
+        if (!TimelineEvent.EVENT_CLOSED.equals(event.event))
             return true;
 
         int currentSize = allItems.size();
@@ -726,10 +734,10 @@ public class IssueFragment extends DialogFragment {
             return true;
 
         Object previousItem = allItems.get(currentSize - 1);
-        if (!(previousItem instanceof IssueEvent))
+        if (!(previousItem instanceof TimelineEvent))
             return true;
 
-        if (IssueEvent.TYPE_MERGED.equals(((IssueEvent) previousItem).getEvent()))
+        if (TimelineEvent.EVENT_MERGED.equals(((TimelineEvent) previousItem).event))
             return false;
 
         return true;

@@ -20,21 +20,19 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.IssueEvent;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.PullRequestService;
 
@@ -53,6 +51,9 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
 
     @Inject
     private IssueStore store;
+
+    @Inject
+    private com.github.mobile.api.service.IssueService newIssueService;
 
     private final IRepositoryIdProvider repositoryId;
 
@@ -106,13 +107,9 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         }
 
         String[] repo = repositoryId.generateId().split("/");
-        Iterator<Collection<IssueEvent>> eventsIterator = issueService.pageIssueEvents(repo[0], repo[1], issueNumber).iterator();
-        List<IssueEvent> events = new ArrayList<>();
+        List<TimelineEvent> timelineEvents = newIssueService.getTimeline(repo[0], repo[1], issueNumber).execute().body();
 
-        while (eventsIterator.hasNext())
-            events.addAll(eventsIterator.next());
-
-        return new FullIssue(issue, sortAllComments(comments, reviews), events);
+        return new FullIssue(issue, sortAllComments(comments, reviews), timelineEvents);
     }
 
     @Override

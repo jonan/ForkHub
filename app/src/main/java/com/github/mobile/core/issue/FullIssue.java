@@ -15,13 +15,14 @@
  */
 package com.github.mobile.core.issue;
 
+import com.github.mobile.api.model.TimelineEvent;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.IssueEvent;
 
 /**
  * Issue model with comments
@@ -32,7 +33,7 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
 
     private final Issue issue;
 
-    private Collection<IssueEvent> events;
+    private Collection<TimelineEvent> events;
 
     /**
      * Create wrapper for issue, comments and events
@@ -41,7 +42,7 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
      * @param comments
      * @param events
      */
-    public FullIssue(final Issue issue, final Collection<Comment> comments, final Collection<IssueEvent> events) {
+    public FullIssue(final Issue issue, final Collection<Comment> comments, final Collection<TimelineEvent> events) {
         super(comments);
 
         this.events = events;
@@ -65,7 +66,7 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
     /**
      * @return events
      */
-    public Collection<IssueEvent> getEvents() {
+    public Collection<TimelineEvent> getEvents() {
         return events;
     }
 }

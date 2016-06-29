@@ -63,6 +63,11 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
+    com.github.mobile.api.service.IssueService issueService(Retrofit retrofit) {
+        return retrofit.create(com.github.mobile.api.service.IssueService.class);
+    }
+
+    @Provides
     IssueService issueService(GitHubClient client) {
         return new IssueService(client);
     }
