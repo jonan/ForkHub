@@ -725,10 +725,6 @@ public class IssueFragment extends DialogFragment {
         if (TimelineEvent.EVENT_REFERENCED.equals(event.event) && event.commit_id == null)
             return false;
 
-        // Don't show the close event after the merged event
-        if (!TimelineEvent.EVENT_CLOSED.equals(event.event))
-            return true;
-
         int currentSize = allItems.size();
         if (currentSize == 0)
             return true;
@@ -737,7 +733,17 @@ public class IssueFragment extends DialogFragment {
         if (!(previousItem instanceof TimelineEvent))
             return true;
 
-        if (TimelineEvent.EVENT_MERGED.equals(((TimelineEvent) previousItem).event))
+        // Remove referenced event before a merge
+        if (TimelineEvent.EVENT_MERGED.equals(event.event) &&
+                TimelineEvent.EVENT_REFERENCED.equals(((TimelineEvent) previousItem).event) &&
+                event.commit_id.equals(((TimelineEvent) previousItem).commit_id)) {
+            allItems.remove(currentSize - 1);
+            return true;
+        }
+
+        // Don't show the close event after the merged event
+        if (TimelineEvent.EVENT_CLOSED.equals(event.event) &&
+                TimelineEvent.EVENT_MERGED.equals(((TimelineEvent) previousItem).event))
             return false;
 
         return true;
