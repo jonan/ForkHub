@@ -29,7 +29,8 @@ import okhttp3.Response;
 
 public class RequestConfiguration implements okhttp3.Interceptor {
 
-    private static final String USER_AGENT = "ForkHub/1.2";
+    private static final String HEADER_USER_AGENT = "ForkHub/2.0";
+    private static final String HEADER_ACCEPT = "application/vnd.github.v3.html+json";
 
     private final Provider<GitHubAccount> accountProvider;
 
@@ -53,7 +54,8 @@ public class RequestConfiguration implements okhttp3.Interceptor {
 
         Request newRequest = originalRequest.newBuilder()
                 .header("Authorization", credentials)
-                .header("User-Agent", USER_AGENT)
+                .header("User-Agent", HEADER_USER_AGENT)
+                .addHeader("Accept", HEADER_ACCEPT)
                 .build();
 
         return chain.proceed(newRequest);
