@@ -225,8 +225,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     protected void updateComment(final Comment comment) {
         imageGetter.bind(textView(0), comment.getBodyHtml(), comment.getId());
-        avatars.bind(imageView(3), comment.getUser());
-        imageView(3).setOnClickListener(new View.OnClickListener() {
+        avatars.bind(imageView(4), comment.getUser());
+        imageView(4).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -235,30 +235,31 @@ public class CommentListAdapter extends MultiTypeAdapter {
         });
 
         setText(1, comment.getUser().getLogin());
-        setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+        setText(2, TimeUtils.getRelativeTime(comment.getCreatedAt()));
+        setGone(3, !comment.getUpdatedAt().after(comment.getCreatedAt()));
 
         boolean canEdit = isCollaborator || comment.getUser().getLogin().equals(user);
 
         if (issueFragment != null && canEdit) {
             // Edit button
-            setGone(4, false);
-            view(4).setOnClickListener(new View.OnClickListener() {
+            setGone(5, false);
+            view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     issueFragment.editComment(comment);
                 }
             });
             // Delete button
-            setGone(5, false);
-            view(5).setOnClickListener(new View.OnClickListener() {
+            setGone(6, false);
+            view(6).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     issueFragment.deleteComment(comment);
                 }
             });
         } else {
-            setGone(4, true);
             setGone(5, true);
+            setGone(6, true);
         }
     }
 
@@ -293,9 +294,9 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         if (type == 0) {
             textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
-            TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
-            setText(view, 4, TypefaceUtils.ICON_PENCIL);
-            setText(view, 5, TypefaceUtils.ICON_X);
+            TypefaceUtils.setOcticons(textView(view, 5), textView(view, 6));
+            setText(view, 5, TypefaceUtils.ICON_PENCIL);
+            setText(view, 6, TypefaceUtils.ICON_X);
         } else {
             TypefaceUtils.setOcticons(textView(view, 0));
         }
@@ -330,7 +331,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected int[] getChildViewIds(int type) {
         if(type == 0)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
-                    R.id.tv_comment_date, R.id.iv_avatar, R.id.iv_comment_edit, R.id.iv_comment_delete };
+                    R.id.tv_comment_date, R.id.tv_comment_edited, R.id.iv_avatar,
+                    R.id.iv_comment_edit, R.id.iv_comment_delete };
         else
             return new int[]{R.id.tv_event_icon, R.id.tv_event, R.id.iv_avatar};
     }
