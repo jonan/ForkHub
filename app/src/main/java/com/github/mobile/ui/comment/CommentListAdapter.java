@@ -177,7 +177,9 @@ public class CommentListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
             break;
         case TimelineEvent.EVENT_RENAMED:
-            message += resources.getString(R.string.issue_event_rename);
+            message += String.format(resources.getString(R.string.issue_event_rename),
+                    "<b>" + event.rename.from + "</b>",
+                    "<b>" + event.rename.to + "</b>");
             setText(0, TypefaceUtils.ICON_PENCIL);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;

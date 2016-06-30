@@ -105,7 +105,6 @@
     <string name="issue_event_closed">이(가) 닫음</string>
     <string name="issue_event_closed_from_commit">커밋 %1$s에 의하여 닫힘</string>
     <string name="issue_event_reopened">이(가) 다시 열음</string>
-    <string name="issue_event_rename">이(가) 제목을 바꿈</string>
     <string name="issue_event_lock">이(가) 이 대화를 잠그고 협업자로 한정함</string>
     <string name="issue_event_unlock">이(가) 이 대화 잠금을 풀음</string>
     <string name="issue_event_head_ref_deleted">이(가) 가지를 지움</string>

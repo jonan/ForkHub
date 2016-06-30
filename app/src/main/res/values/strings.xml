@@ -113,7 +113,7 @@
     <string name="issue_event_closed">closed this</string>
     <string name="issue_event_closed_from_commit">closed this from commit %1$s</string>
     <string name="issue_event_reopened">reopened this</string>
-    <string name="issue_event_rename">changed the title</string>
+    <string name="issue_event_rename">changed the title from %1$s to %2$s</string>
     <string name="issue_event_lock">locked and limited conversation to collaborators</string>
     <string name="issue_event_unlock">unlocked this conversation</string>
     <string name="issue_event_head_ref_deleted">deleted the branch</string>
