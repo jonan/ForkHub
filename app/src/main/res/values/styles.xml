@@ -106,6 +106,7 @@
 
     <style name="ListIcon" parent="TextIcon">
         <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="EventIcon" parent="TextIcon">
