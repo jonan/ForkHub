@@ -20,12 +20,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public abstract class PageIterator<V> implements Iterator<Collection<V>> {
-    protected int nextPage;
-    protected int size;
+    private int nextPage;
+    private int itemsPerPage;
 
-    public PageIterator(int page, int size) {
-        nextPage = page;
-        this.size = size;
+    public PageIterator(int page, int itemsPerPage) {
+        this.nextPage = page;
+        this.itemsPerPage = itemsPerPage;
     }
 
     @Override
@@ -39,9 +39,9 @@ public abstract class PageIterator<V> implements Iterator<Collection<V>> {
             throw new NoSuchElementException();
         }
 
-        Collection<V> resources = getPage(nextPage);
+        Collection<V> resources = getPage(nextPage, itemsPerPage);
 
-        if (resources.size() < size) {
+        if (resources.size() > 0) {
             nextPage = -1;
         } else {
             ++nextPage;
@@ -55,5 +55,5 @@ public abstract class PageIterator<V> implements Iterator<Collection<V>> {
         throw new UnsupportedOperationException("Remove not supported");
     }
 
-    protected abstract Collection<V> getPage(int page);
+    protected abstract Collection<V> getPage(int page, int itemsPerPage);
 }

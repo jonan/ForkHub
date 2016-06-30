@@ -99,9 +99,9 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
                 return new com.github.mobile.api.PageIterator<User>(page, RESULTS_PER_PAGE) {
 
                     @Override
-                    protected Collection<User> getPage(int page) {
+                    protected Collection<User> getPage(int page, int itemsPerPage) {
                         try {
-                            return service.searchUsers(query, page, size).execute().body().items;
+                            return service.searchUsers(query, page, itemsPerPage).execute().body().items;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

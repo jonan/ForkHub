@@ -113,7 +113,7 @@
     <string name="issue_event_closed">closed this</string>
     <string name="issue_event_closed_from_commit">closed this from commit %1$s</string>
     <string name="issue_event_reopened">reopened this</string>
-    <string name="issue_event_rename">changed the title</string>
+    <string name="issue_event_rename">changed the title from %1$s to %2$s</string>
     <string name="issue_event_lock">locked and limited conversation to collaborators</string>
     <string name="issue_event_unlock">unlocked this conversation</string>
     <string name="issue_event_head_ref_deleted">deleted the branch</string>
@@ -268,6 +268,7 @@
     <string name="title_invalid_github_url">Invalid GitHub URL</string>
     <string name="message_invalid_github_url">The following URL could not be opened by this application:\n{0}</string>
     <string name="cancel">Cancel</string>
+    <string name="edited">(edited)</string>
     <string name="authenticator_conflict_title">App Conflict</string>
     <string name="authenticator_conflict_message">Another installed app is already configured for GitHub authentication.\n\nYou must remove the other app from the Accounts &amp; sync settings and uninstall it before the GitHub app can be used.</string>
     <string name="opening_repository">Opening {0}…</string>

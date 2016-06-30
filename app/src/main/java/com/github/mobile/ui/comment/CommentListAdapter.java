@@ -25,6 +25,8 @@ import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.api.model.TimelineEvent;
+import com.github.mobile.api.model.User;
 import com.github.mobile.ui.issue.IssueFragment;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -36,8 +38,6 @@ import java.util.Collection;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.CommitComment;
-import org.eclipse.egit.github.core.IssueEvent;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Adapter for a list of {@link Comment} objects
@@ -100,123 +100,123 @@ public class CommentListAdapter extends MultiTypeAdapter {
             if (obj instanceof CommitComment) {
                 updateReview((CommitComment) obj);
             } else {
-                updateEvent((IssueEvent) obj);
+                updateEvent((TimelineEvent) obj);
             }
         }
     }
 
-    protected void updateEvent(final IssueEvent event) {
-        String eventString = event.getEvent();
+    protected void updateEvent(final TimelineEvent event) {
+        String eventString = event.event;
 
         User actor;
-        if (eventString.equals(IssueEvent.TYPE_ASSIGNED) || eventString.equals(IssueEvent.TYPE_UNASSIGNED)) {
-            actor = event.getAssignee();
+        if (eventString.equals(TimelineEvent.EVENT_ASSIGNED) || eventString.equals(TimelineEvent.EVENT_UNASSIGNED)) {
+            actor = event.assignee;
         } else {
-            actor = event.getActor();
+            actor = event.actor;
         }
 
-        String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.getLogin());
+        String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.login);
         avatars.bind(imageView(2), actor);
 
         switch (eventString) {
-        case IssueEvent.TYPE_ASSIGNED:
+        case TimelineEvent.EVENT_ASSIGNED:
             int assignedTextResource = R.string.issue_event_label_assigned;
-            if (event.getAssigner().getId() == event.getAssignee().getId()) {
+            if (event.actor.id == event.assignee.id) {
                 assignedTextResource = R.string.issue_event_label_self_assigned;
             }
-            message += String.format(resources.getString(assignedTextResource), "<b>" + event.getAssigner().getLogin() + "</b>");
+            message += String.format(resources.getString(assignedTextResource), "<b>" + event.actor.login + "</b>");
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_UNASSIGNED:
+        case TimelineEvent.EVENT_UNASSIGNED:
             int unassignedTextResource = R.string.issue_event_label_unassigned;
-            if (event.getAssigner().getId() == event.getAssignee().getId()) {
+            if (event.actor.id == event.assignee.id) {
                 unassignedTextResource = R.string.issue_event_label_self_unassigned;
             }
-            message += String.format(resources.getString(unassignedTextResource), "<b>" + event.getAssigner().getLogin() + "</b>");
+            message += String.format(resources.getString(unassignedTextResource), "<b>" + event.actor.login + "</b>");
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_LABELED:
-            message += String.format(resources.getString(R.string.issue_event_label_added), "<b>" + event.getLabel().getName() + "</b>");
+        case TimelineEvent.EVENT_LABELED:
+            message += String.format(resources.getString(R.string.issue_event_label_added), "<b>" + event.label.name + "</b>");
             setText(0, TypefaceUtils.ICON_TAG);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_UNLABELED:
-            message += String.format(resources.getString(R.string.issue_event_label_removed), "<b>" + event.getLabel().getName() + "</b>");
+        case TimelineEvent.EVENT_UNLABELED:
+            message += String.format(resources.getString(R.string.issue_event_label_removed), "<b>" + event.label.name + "</b>");
             setText(0, TypefaceUtils.ICON_TAG);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_REFERENCED:
-            message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + event.getCommitId().substring(0,7) + "</b>");
+        case TimelineEvent.EVENT_REFERENCED:
+            message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + event.commit_id.substring(0,7) + "</b>");
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_MILESTONED:
-            message += String.format(resources.getString(R.string.issue_event_milestone_added), "<b>" + event.getMilestone().getTitle() + "</b>");
+        case TimelineEvent.EVENT_MILESTONED:
+            message += String.format(resources.getString(R.string.issue_event_milestone_added), "<b>" + event.milestone.title + "</b>");
             setText(0, TypefaceUtils.ICON_MILESTONE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_DEMILESTONED:
-            message += String.format(resources.getString(R.string.issue_event_milestone_removed), "<b>" + event.getMilestone().getTitle() + "</b>");
+        case TimelineEvent.EVENT_DEMILESTONED:
+            message += String.format(resources.getString(R.string.issue_event_milestone_removed), "<b>" + event.milestone.title + "</b>");
             setText(0, TypefaceUtils.ICON_MILESTONE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_CLOSED:
-            if (event.getCommitId() == null) {
+        case TimelineEvent.EVENT_CLOSED:
+            if (event.commit_id == null) {
                 message += resources.getString(R.string.issue_event_closed);
             } else {
-                message += String.format(resources.getString(R.string.issue_event_closed_from_commit), "<b>" + event.getCommitId().substring(0,7) + "</b>");
+                message += String.format(resources.getString(R.string.issue_event_closed_from_commit), "<b>" + event.commit_id.substring(0,7) + "</b>");
             }
             setText(0, TypefaceUtils.ICON_CIRCLE_SLASH);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
             break;
-        case IssueEvent.TYPE_REOPENED:
+        case TimelineEvent.EVENT_REOPENED:
             message += resources.getString(R.string.issue_event_reopened);
             setText(0, TypefaceUtils.ICON_PRIMITIVE_DOT);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
             break;
-        case IssueEvent.TYPE_RENAMED:
-            message += resources.getString(R.string.issue_event_rename);
+        case TimelineEvent.EVENT_RENAMED:
+            message += String.format(resources.getString(R.string.issue_event_rename),
+                    "<b>" + event.rename.from + "</b>",
+                    "<b>" + event.rename.to + "</b>");
             setText(0, TypefaceUtils.ICON_PENCIL);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
-        case IssueEvent.TYPE_MERGED:
-            message += String.format(resources.getString(R.string.issue_event_merged), "<b>" + event.getCommitId().substring(0,7) + "</b>");
+        case TimelineEvent.EVENT_MERGED:
+            message += String.format(resources.getString(R.string.issue_event_merged), "<b>" + event.commit_id.substring(0,7) + "</b>");
             setText(0, TypefaceUtils.ICON_GIT_MERGE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_purple));
             break;
-        case IssueEvent.TYPE_LOCKED:
+        case TimelineEvent.EVENT_LOCKED:
             message += resources.getString(R.string.issue_event_lock);
             setText(0, TypefaceUtils.ICON_LOCK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_dark));
             break;
-        case IssueEvent.TYPE_UNLOCKED:
+        case TimelineEvent.EVENT_UNLOCKED:
             message += resources.getString(R.string.issue_event_unlock);
             setText(0, TypefaceUtils.ICON_KEY);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_dark));
             break;
-        case IssueEvent.TYPE_HEAD_REF_DELETED:
+        case TimelineEvent.EVENT_HEAD_REF_DELETED:
             message += resources.getString(R.string.issue_event_head_ref_deleted);
             setText(0, TypefaceUtils.ICON_GIT_BRANCH);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
             break;
-        case IssueEvent.TYPE_HEAD_REF_RESTORED:
+        case TimelineEvent.EVENT_HEAD_REF_RESTORED:
             message += resources.getString(R.string.issue_event_head_ref_restored);
             setText(0, TypefaceUtils.ICON_GIT_BRANCH);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
             break;
         }
 
-        message += " " + TimeUtils.getRelativeTime(event.getCreatedAt());
+        message += " " + TimeUtils.getRelativeTime(event.created_at);
         setText(1, Html.fromHtml(message));
     }
 
     protected void updateReview(final CommitComment review) {
-        User user = review.getUser();
-
-        String message = String.format("<b>%s</b> ", user == null ? "ghost" : user.getLogin());
-        avatars.bind(imageView(2), user);
+        String message = String.format("<b>%s</b> ", review.getUser() == null ? "ghost" : review.getUser().getLogin());
+        avatars.bind(imageView(2), review.getUser());
         message += resources.getString(R.string.issue_event_comment_diff);
         setText(0, TypefaceUtils.ICON_CODE);
         textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
@@ -227,8 +227,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
     protected void updateComment(final Comment comment) {
         imageGetter.bind(textView(0), comment.getBodyHtml(), comment.getId());
-        avatars.bind(imageView(3), comment.getUser());
-        imageView(3).setOnClickListener(new View.OnClickListener() {
+        avatars.bind(imageView(4), comment.getUser());
+        imageView(4).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -237,30 +237,31 @@ public class CommentListAdapter extends MultiTypeAdapter {
         });
 
         setText(1, comment.getUser().getLogin());
-        setText(2, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+        setText(2, TimeUtils.getRelativeTime(comment.getCreatedAt()));
+        setGone(3, !comment.getUpdatedAt().after(comment.getCreatedAt()));
 
         boolean canEdit = isCollaborator || comment.getUser().getLogin().equals(user);
 
         if (issueFragment != null && canEdit) {
             // Edit button
-            setGone(4, false);
-            view(4).setOnClickListener(new View.OnClickListener() {
+            setGone(5, false);
+            view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     issueFragment.editComment(comment);
                 }
             });
             // Delete button
-            setGone(5, false);
-            view(5).setOnClickListener(new View.OnClickListener() {
+            setGone(6, false);
+            view(6).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     issueFragment.deleteComment(comment);
                 }
             });
         } else {
-            setGone(4, true);
             setGone(5, true);
+            setGone(6, true);
         }
     }
 
@@ -295,9 +296,9 @@ public class CommentListAdapter extends MultiTypeAdapter {
 
         if (type == 0) {
             textView(view, 0).setMovementMethod(LinkMovementMethod.getInstance());
-            TypefaceUtils.setOcticons(textView(view, 4), textView(view, 5));
-            setText(view, 4, TypefaceUtils.ICON_PENCIL);
-            setText(view, 5, TypefaceUtils.ICON_X);
+            TypefaceUtils.setOcticons(textView(view, 5), textView(view, 6));
+            setText(view, 5, TypefaceUtils.ICON_PENCIL);
+            setText(view, 6, TypefaceUtils.ICON_X);
         } else {
             TypefaceUtils.setOcticons(textView(view, 0));
         }
@@ -332,7 +333,8 @@ public class CommentListAdapter extends MultiTypeAdapter {
     protected int[] getChildViewIds(int type) {
         if(type == 0)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
-                    R.id.tv_comment_date, R.id.iv_avatar, R.id.iv_comment_edit, R.id.iv_comment_delete };
+                    R.id.tv_comment_date, R.id.tv_comment_edited, R.id.iv_avatar,
+                    R.id.iv_comment_edit, R.id.iv_comment_delete };
         else
             return new int[]{R.id.tv_event_icon, R.id.tv_event, R.id.iv_avatar};
     }
