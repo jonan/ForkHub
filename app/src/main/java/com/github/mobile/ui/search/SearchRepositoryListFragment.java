@@ -125,13 +125,13 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
                 return new com.github.mobile.api.PageIterator<Repository>(page, RESULTS_PER_PAGE) {
 
                     @Override
-                    protected Collection<Repository> getPage(int page) {
+                    protected Collection<Repository> getPage(int page, int itemsPerPage) {
                         if (openRepositoryMatch(query)) {
                             return Collections.emptyList();
                         }
 
                         try {
-                            return searchService.searchRepositories(query, page, size).execute().body().items;
+                            return searchService.searchRepositories(query, page, itemsPerPage).execute().body().items;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

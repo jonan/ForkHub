@@ -23,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface IssueService {
     @Headers("Accept: application/vnd.github.mockingbird-preview")
@@ -30,5 +31,7 @@ public interface IssueService {
     Call<List<TimelineEvent>> getTimeline(
             @Path("owner") String owner,
             @Path("repo") String repo,
-            @Path("issue_number") long issue_number);
+            @Path("issue_number") long issue_number,
+            @Query("page") int page,
+            @Query("per_page") int per_pag);
 }

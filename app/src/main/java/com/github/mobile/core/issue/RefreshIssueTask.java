@@ -21,11 +21,14 @@ import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.TimelineEvent;
+import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -106,8 +109,14 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
             commentImageGetter.encode(comment.getId(), formatted);
         }
 
-        String[] repo = repositoryId.generateId().split("/");
-        List<TimelineEvent> timelineEvents = newIssueService.getTimeline(repo[0], repo[1], issueNumber).execute().body();
+        final String[] repo = repositoryId.generateId().split("/");
+        PaginationService<TimelineEvent> paginationService = new PaginationService<TimelineEvent>() {
+            @Override
+            public Collection<TimelineEvent> getSinglePage(int page, int itemsPerPage) throws IOException {
+                return newIssueService.getTimeline(repo[0], repo[1], issueNumber, page, itemsPerPage).execute().body();
+            }
+        };
+        Collection<TimelineEvent> timelineEvents = paginationService.getAll();
 
         return new FullIssue(issue, sortAllComments(comments, reviews), timelineEvents);
     }
