@@ -28,7 +28,10 @@ import retrofit2.http.Query;
 
 public interface NotificationService {
     @GET("notifications")
-    Call<List<Notification>> listNotifications(@Query("all") boolean all);
+    Call<List<Notification>> listNotifications(
+            @Query("all") boolean all,
+            @Query("page") int page,
+            @Query("per_page") int per_page);
 
     @PATCH("notifications/threads/{id}")
     Call<ResponseBody> markAsRead(@Path("id") int id);

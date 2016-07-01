@@ -18,21 +18,24 @@ package com.github.mobile.ui.notification;
 import android.accounts.Account;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.Notification;
 import com.github.mobile.api.model.Subject;
 import com.github.mobile.api.service.NotificationService;
-import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.api.service.PaginationService;
+import com.github.mobile.core.ResourcePager;
+import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.google.inject.Inject;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -40,7 +43,7 @@ import okhttp3.ResponseBody;
 /**
  * Fragment to display a list of {@link Notification} objects
  */
-public class NotificationsListFragment extends ItemListFragment<Notification>  {
+public class NotificationsListFragment extends PagedItemFragment<Notification> {
 
     @Inject
     private NotificationService service;
@@ -53,21 +56,29 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
     }
 
     @Override
-    public Loader<List<Notification>> onCreateLoader(int id, Bundle args) {
-        return new ThrowableLoader<List<Notification>>(getActivity(), items) {
+    protected ResourcePager<Notification> createPager() {
+        return new ResourcePager<Notification>() {
 
             @Override
-            public List<Notification> loadData() throws Exception {
-                return service.listNotifications(true).execute().body();
+            protected Object getId(Notification resource) {
+                return resource.id;
+            }
+
+            @Override
+            public Iterator<Collection<Notification>> createIterator(int page, int size) {
+                return new PaginationService<Notification>(page) {
+                    @Override
+                    public Collection<Notification> getSinglePage(int page, int itemsPerPage) throws IOException {
+                        return service.listNotifications(true, page, itemsPerPage).execute().body();
+                    }
+                }.getIterator();
             }
         };
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        refresh();
+    protected int getLoadingMessage() {
+        return R.string.loading_notifications;
     }
 
     @Override
@@ -109,6 +120,7 @@ public class NotificationsListFragment extends ItemListFragment<Notification>  {
                 @Override
                 protected void onSuccess(ResponseBody responseBody) throws Exception {
                     notification.is_unread = false;
+                    notifyDataSetChanged();
                 }
             }.execute();
         }

@@ -22,20 +22,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class PaginationService<V> {
-    private int itemsPerPage;
+    private final int itemsPerPage;
+    private final int initialPage;
 
-    public PaginationService(int itemsPerPage) {
-        this.itemsPerPage = itemsPerPage;
+    public PaginationService(int initialPage) {
+        this.itemsPerPage = 100;
+        this.initialPage = initialPage;
     }
 
     public PaginationService() {
         this.itemsPerPage = 100;
+        this.initialPage = 0;
     }
 
     public abstract Collection<V> getSinglePage(int page, int itemsPerPage) throws IOException;
 
     public PageIterator getIterator() {
-        return new PageIterator<V>(0, itemsPerPage) {
+        return new PageIterator<V>(initialPage, itemsPerPage) {
 
             @Override
             protected Collection<V> getPage(int page, int itemsPerPage) {
