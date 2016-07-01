@@ -27,12 +27,10 @@ public interface SearchService {
     @GET("search/users")
     Call<SearchResult<User>> searchUsers(
             @Query("q") String q,
-            @Query("page") int page,
-            @Query("per_page") int per_page);
+            @Query("page") int page);
 
     @GET("search/repositories")
     Call<SearchResult<Repository>> searchRepositories(
             @Query("q") String q,
-            @Query("page") int page,
-            @Query("per_page") int per_page);
+            @Query("page") int page);
 }

@@ -20,12 +20,13 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public abstract class PageIterator<V> implements Iterator<Collection<V>> {
-    private int nextPage;
-    private int itemsPerPage;
+    private final int itemsPerPage;
 
-    public PageIterator(int page, int itemsPerPage) {
-        this.nextPage = page;
+    private int nextPage;
+
+    public PageIterator(int initialPage, int itemsPerPage) {
         this.itemsPerPage = itemsPerPage;
+        this.nextPage = initialPage;
     }
 
     @Override

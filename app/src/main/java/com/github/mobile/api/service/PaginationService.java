@@ -22,17 +22,41 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class PaginationService<V> {
-    private final int itemsPerPage;
-    private final int initialPage;
+    public static final int ITEMS_PER_PAGE_DEFAULT = 30;
+    public static final int ITEMS_PER_PAGE_MAX = 100;
 
-    public PaginationService(int initialPage) {
-        this.itemsPerPage = 100;
-        this.initialPage = initialPage;
-    }
+    private final int initialPage;
+    private final int itemsPerPage;
 
     public PaginationService() {
-        this.itemsPerPage = 100;
-        this.initialPage = 0;
+        this.initialPage = 1;
+        this.itemsPerPage = ITEMS_PER_PAGE_DEFAULT;
+    }
+
+    public PaginationService(int initialPage) {
+        if (initialPage < 1) {
+            this.initialPage = 1;
+        } else {
+            this.initialPage = initialPage;
+        }
+
+        this.itemsPerPage = ITEMS_PER_PAGE_DEFAULT;
+    }
+
+    public PaginationService(int initialPage, int itemsPerPage) {
+        if (initialPage < 1) {
+            this.initialPage = 1;
+        } else {
+            this.initialPage = initialPage;
+        }
+
+        if (itemsPerPage <= 0) {
+            this.itemsPerPage = ITEMS_PER_PAGE_DEFAULT;
+        } else if (itemsPerPage > ITEMS_PER_PAGE_MAX) {
+            this.itemsPerPage = ITEMS_PER_PAGE_MAX;
+        } else {
+            this.itemsPerPage = itemsPerPage;
+        }
     }
 
     public abstract Collection<V> getSinglePage(int page, int itemsPerPage) throws IOException;

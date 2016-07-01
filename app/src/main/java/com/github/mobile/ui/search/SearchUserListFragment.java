@@ -25,6 +25,7 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.api.model.User;
+import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.RefreshUserTask;
@@ -33,8 +34,8 @@ import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
+import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,15 +43,14 @@ import java.util.List;
  * Fragment to display a list of {@link User} instances
  */
 public class SearchUserListFragment extends PagedItemFragment<User> {
-    private static final int RESULTS_PER_PAGE = 30;
-
-    private String query;
 
     @Inject
     private SearchService service;
 
     @Inject
     private AvatarLoader avatars;
+
+    private String query;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -96,19 +96,12 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
 
             @Override
             public Iterator<Collection<User>> createIterator(int page, int size) {
-                return new com.github.mobile.api.PageIterator<User>(page, RESULTS_PER_PAGE) {
-
+                return new PaginationService<User>(page) {
                     @Override
-                    protected Collection<User> getPage(int page, int itemsPerPage) {
-                        try {
-                            return service.searchUsers(query, page, itemsPerPage).execute().body().items;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        return Collections.emptyList();
+                    public Collection<User> getSinglePage(int page, int itemsPerPage) throws IOException {
+                        return service.searchUsers(query, page).execute().body().items;
                     }
-                };
+                }.getIterator();
             }
         };
     }

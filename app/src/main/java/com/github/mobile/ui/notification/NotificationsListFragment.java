@@ -69,7 +69,7 @@ public class NotificationsListFragment extends PagedItemFragment<Notification> {
                 return new PaginationService<Notification>(page) {
                     @Override
                     public Collection<Notification> getSinglePage(int page, int itemsPerPage) throws IOException {
-                        return service.listNotifications(true, page, itemsPerPage).execute().body();
+                        return service.listNotifications(true, page).execute().body();
                     }
                 }.getIterator();
             }

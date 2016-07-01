@@ -33,5 +33,5 @@ public interface IssueService {
             @Path("repo") String repo,
             @Path("issue_number") long issue_number,
             @Query("page") int page,
-            @Query("per_page") int per_pag);
+            @Query("per_page") int per_page);
 }

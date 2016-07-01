@@ -30,8 +30,7 @@ public interface NotificationService {
     @GET("notifications")
     Call<List<Notification>> listNotifications(
             @Query("all") boolean all,
-            @Query("page") int page,
-            @Query("per_page") int per_page);
+            @Query("page") int page);
 
     @PATCH("notifications/threads/{id}")
     Call<ResponseBody> markAsRead(@Path("id") int id);

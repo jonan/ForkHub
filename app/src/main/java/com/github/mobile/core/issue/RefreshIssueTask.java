@@ -110,7 +110,7 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         }
 
         final String[] repo = repositoryId.generateId().split("/");
-        PaginationService<TimelineEvent> paginationService = new PaginationService<TimelineEvent>() {
+        PaginationService<TimelineEvent> paginationService = new PaginationService<TimelineEvent>(1, PaginationService.ITEMS_PER_PAGE_MAX) {
             @Override
             public Collection<TimelineEvent> getSinglePage(int page, int itemsPerPage) throws IOException {
                 return newIssueService.getTimeline(repo[0], repo[1], issueNumber, page, itemsPerPage).execute().body();

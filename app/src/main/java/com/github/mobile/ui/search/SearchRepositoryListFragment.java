@@ -27,6 +27,7 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.api.model.Repository;
+import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
@@ -49,7 +50,6 @@ import org.eclipse.egit.github.core.service.RepositoryService;
  * Fragment to display a list of {@link Repository} instances
  */
 public class SearchRepositoryListFragment extends PagedItemFragment<Repository> {
-    private static final int RESULTS_PER_PAGE = 30;
 
     @Inject
     private RepositoryService service;
@@ -122,23 +122,16 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
 
             @Override
             public Iterator<Collection<Repository>> createIterator(int page, int size) {
-                return new com.github.mobile.api.PageIterator<Repository>(page, RESULTS_PER_PAGE) {
-
+                return new PaginationService<Repository>(page) {
                     @Override
-                    protected Collection<Repository> getPage(int page, int itemsPerPage) {
+                    public Collection<Repository> getSinglePage(int page, int itemsPerPage) throws IOException {
                         if (openRepositoryMatch(query)) {
                             return Collections.emptyList();
                         }
 
-                        try {
-                            return searchService.searchRepositories(query, page, itemsPerPage).execute().body().items;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        return Collections.emptyList();
+                        return searchService.searchRepositories(query, page).execute().body().items;
                     }
-                };
+                }.getIterator();
             }
         };
     }
