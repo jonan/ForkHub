@@ -41,7 +41,7 @@ public abstract class PageIterator<V> implements Iterator<Collection<V>> {
 
         Collection<V> resources = getPage(nextPage, itemsPerPage);
 
-        if (resources.size() > 0) {
+        if (resources.size() == 0) {
             nextPage = -1;
         } else {
             ++nextPage;
