@@ -29,7 +29,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -218,15 +217,9 @@ public class CommitDiffListFragment extends DialogFragment implements
     }
 
     private void copyHashToClipboard() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ClipboardManager manager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("hash", commit.getSha());
-            manager.setPrimaryClip(clip);
-        } else {
-            android.text.ClipboardManager manager = (android.text.ClipboardManager) getActivity().getSystemService
-                    (Context.CLIPBOARD_SERVICE);
-            manager.setText(commit.getSha());
-        }
+        ClipboardManager manager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("hash", commit.getSha());
+        manager.setPrimaryClip(clip);
         Toast.makeText(getActivity(), R.string.toast_msg_copied, Toast.LENGTH_SHORT).show();
     }
 

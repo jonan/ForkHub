@@ -123,8 +123,9 @@ public class GistFileFragment extends DialogFragment implements
                 item.setTitle(R.string.disable_wrapping);
                 editor.setWrap(true);
             }
-            PreferenceUtils.save(codePrefs.edit().putBoolean(WRAP,
-                    editor.getWrap()));
+            codePrefs.edit()
+                    .putBoolean(WRAP, editor.getWrap())
+                    .apply();
             return true;
         default:
             return super.onOptionsItemSelected(item);

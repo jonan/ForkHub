@@ -15,11 +15,8 @@
  */
 package com.github.mobile.ui;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 
 /**
  * {@link ViewPager} extension with support for horizontally scrolling an
@@ -106,14 +103,5 @@ public class ViewPager extends android.support.v4.view.ViewPager {
                 setItem(item);
             }
         });
-    }
-
-    @Override
-    protected boolean canScroll(final View v, final boolean checkV,
-            final int dx, final int x, final int y) {
-        if (SDK_INT < ICE_CREAM_SANDWICH && v instanceof WebView)
-            return ((WebView) v).canScrollHorizontally(-dx);
-        else
-            return super.canScroll(v, checkV, dx, x, y);
     }
 }

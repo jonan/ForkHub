@@ -53,7 +53,6 @@ import com.github.mobile.ui.notification.NotificationsListActivity;
 import com.github.mobile.ui.repo.OrganizationLoader;
 import com.github.mobile.ui.search.SearchActivity;
 import com.github.mobile.util.AvatarLoader;
-import com.github.mobile.util.PreferenceUtils;
 import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -196,8 +195,9 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
     private void setOrg(User org) {
         Log.d(TAG, "setOrg : " + org.getLogin());
 
-        PreferenceUtils.save(sharedPreferences.edit().putInt(PREF_ORG_ID,
-                org.getId()));
+        sharedPreferences.edit()
+                .putInt(PREF_ORG_ID, org.getId())
+                .apply();
 
         // Don't notify listeners or change pager if org hasn't changed
         if (this.org != null && this.org.getId() == org.getId())

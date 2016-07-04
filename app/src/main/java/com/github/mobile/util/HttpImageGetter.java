@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -266,10 +265,6 @@ public class HttpImageGetter implements ImageGetter {
                 return repositoryImage;
         } catch (Exception e) {
             // Ignore and attempt request over regular HTTP request
-        }
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
-            return loading.getDrawable(source);
         }
 
         try {

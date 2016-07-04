@@ -24,7 +24,6 @@ import android.util.Log;
 
 import com.github.mobile.R;
 import com.github.mobile.accounts.AuthenticatedUserTask;
-import com.github.mobile.util.PreferenceUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -65,9 +64,9 @@ public class StarForkHubTask extends AuthenticatedUserTask<Boolean> implements D
     @Override
     protected Boolean run(Account account) throws Exception {
         int numStarts = sharedPreferences.getInt(PREF_START_APP_COUNT, -1);
-        PreferenceUtils.save(sharedPreferences.edit().putInt(
-                PREF_START_APP_COUNT,
-                Math.min(numStarts, NUMBER_STARTS_NEEDED) + 1));
+        sharedPreferences.edit()
+                .putInt(PREF_START_APP_COUNT, Math.min(numStarts, NUMBER_STARTS_NEEDED) + 1)
+                .apply();
         return numStarts == NUMBER_STARTS_NEEDED && !service.isStarring(repository);
     }
 

@@ -16,7 +16,6 @@
 package com.github.mobile.ui.comment;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -51,7 +50,7 @@ public class RawCommentFragment extends DialogFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 Activity activity = getActivity();
-                if (activity != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                if (activity != null)
                     activity.invalidateOptionsMenu();
             }
         });

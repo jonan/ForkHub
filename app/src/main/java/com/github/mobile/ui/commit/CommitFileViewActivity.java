@@ -179,8 +179,9 @@ public class CommitFileViewActivity extends BaseActivity implements
             else
                 item.setTitle(R.string.disable_wrapping);
             editor.toggleWrap();
-            PreferenceUtils.save(PreferenceUtils.getCodePreferences(this)
-                    .edit().putBoolean(WRAP, editor.getWrap()));
+            PreferenceUtils.getCodePreferences(this)
+                    .edit().putBoolean(WRAP, editor.getWrap())
+                    .apply();
             return true;
 
         case R.id.m_share:
@@ -200,8 +201,9 @@ public class CommitFileViewActivity extends BaseActivity implements
                 else
                     loadMarkdown();
             }
-            PreferenceUtils.save(PreferenceUtils.getCodePreferences(this)
-                    .edit().putBoolean(RENDER_MARKDOWN, editor.isMarkdown()));
+            PreferenceUtils.getCodePreferences(this)
+                    .edit().putBoolean(RENDER_MARKDOWN, editor.isMarkdown())
+                    .apply();
             return true;
 
         default:
