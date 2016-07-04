@@ -18,19 +18,15 @@ package com.github.mobile.core.issue;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.model.ReactionSummary;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.egit.github.core.Comment;
+import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.Issue;
 
 /**
  * Issue model with comments
  */
-public class FullIssue extends ArrayList<Comment> implements Serializable {
-
-    private static final long serialVersionUID = 4586476132467323827L;
+public class FullIssue {
 
     private final Issue issue;
 
@@ -38,21 +34,22 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
 
     private Collection<TimelineEvent> events;
 
+    private Collection<CommitComment> reviews;
+
     /**
      * Create wrapper for issue, reactions, comments and events
      *
      * @param issue
      * @param reactions
-     * @param comments
      * @param events
+     * @param reviews
      */
     public FullIssue(final Issue issue, final ReactionSummary reactions,
-            final Collection<Comment> comments, final Collection<TimelineEvent> events) {
-        super(comments);
-
-        this.events = events;
-        this.reactions = reactions;
+            final Collection<TimelineEvent> events, final Collection<CommitComment> reviews) {
         this.issue = issue;
+        this.reactions = reactions;
+        this.events = events;
+        this.reviews = reviews;
     }
 
     /**
@@ -81,5 +78,12 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
      */
     public Collection<TimelineEvent> getEvents() {
         return events;
+    }
+
+    /**
+     * @return reviews
+     */
+    public Collection<CommitComment> getReviews() {
+        return reviews;
     }
 }

@@ -15,7 +15,6 @@
  */
 package com.github.mobile.ui.comment;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -95,7 +94,11 @@ public class CommentListAdapter extends MultiTypeAdapter {
     @Override
     protected void update(int position, Object obj, int type) {
         if (type == 0) {
-            updateComment((Comment) obj);
+            if (obj instanceof Comment) {
+                updateComment((Comment) obj);
+            } else {
+                updateComment((TimelineEvent) obj);
+            }
         } else {
             if (obj instanceof CommitComment) {
                 updateReview((CommitComment) obj);
@@ -116,6 +119,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
         }
 
         String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.login);
+        if (actor != null)
         avatars.bind(imageView(2), actor);
 
         switch (eventString) {
@@ -210,6 +214,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
             break;
         }
 
+        if (event.created_at != null)
         message += " " + TimeUtils.getRelativeTime(event.created_at);
         setText(1, Html.fromHtml(message));
     }
@@ -266,6 +271,47 @@ public class CommentListAdapter extends MultiTypeAdapter {
         }
     }
 
+    protected void updateComment(final TimelineEvent comment) {
+        imageGetter.bind(textView(0), comment.body_html, comment.id);
+        avatars.bind(imageView(4), comment.actor);
+        imageView(4).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                context.startActivity(UserViewActivity.createIntent(comment.actor));
+            }
+        });
+
+        setText(1, comment.actor == null ? "ghost" : comment.actor.login);
+        setText(2, TimeUtils.getRelativeTime(comment.created_at));
+        setGone(3, !comment.updated_at.after(comment.created_at));
+
+        boolean canEdit = isCollaborator ||
+                (comment.actor != null && comment.actor.login.equals(user));
+
+        if (issueFragment != null && canEdit) {
+            // Edit button
+            setGone(5, false);
+            view(5).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    issueFragment.editComment(comment.getOldCommentModel());
+                }
+            });
+            // Delete button
+            setGone(6, false);
+            view(6).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    issueFragment.deleteComment(comment.getOldCommentModel());
+                }
+            });
+        } else {
+            setGone(5, true);
+            setGone(6, true);
+        }
+    }
+
     public MultiTypeAdapter setItems(Collection<?> items) {
         if (items == null || items.isEmpty())
             return this;
@@ -279,12 +325,17 @@ public class CommentListAdapter extends MultiTypeAdapter {
         this.clear();
 
         for (Object item : items) {
-            if (item instanceof CommitComment)
+            if (item instanceof CommitComment) {
                 this.addItem(1, item);
-            else if (item instanceof Comment)
+            } else if (item instanceof Comment) {
                 this.addItem(0, item);
-            else
-                this.addItem(1, item);
+            } else if (item instanceof TimelineEvent) {
+                if (TimelineEvent.EVENT_COMMENTED.equals(((TimelineEvent) item).event)) {
+                    this.addItem(0, item);
+                } else {
+                    this.addItem(1, item);
+                }
+            }
         }
 
         notifyDataSetChanged();

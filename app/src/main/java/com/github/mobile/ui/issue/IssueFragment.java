@@ -497,31 +497,13 @@ public class IssueFragment extends DialogFragment {
                 reactions = fullIssue.getReactions();
 
                 List<TimelineEvent> events = (List<TimelineEvent>) fullIssue.getEvents();
-                int numEvents = events.size();
 
-                List<Object> allItems = new ArrayList<>();
+                List<Object> allItems = new ArrayList<>(events.size());
 
-                int start = 0;
-                for (Comment comment : fullIssue) {
-                    for (int e = start; e < numEvents; e++) {
-                        TimelineEvent event = events.get(e);
-                        if (shouldAddEvent(event, allItems)) {
-                            if (comment.getCreatedAt().after(event.created_at)) {
-                                allItems.add(event);
-                                start = e + 1;
-                            } else {
-                                e = numEvents;
-                            }
-                        }
-                    }
-                    allItems.add(comment);
-                }
-
-                // Adding the last events or if there are no comments
-                for (int e = start; e < numEvents; e++) {
-                    TimelineEvent event = events.get(e);
-                    if (shouldAddEvent(event, allItems))
+                for (TimelineEvent event : events) {
+                    if (shouldAddEvent(event, allItems)) {
                         allItems.add(event);
+                    }
                 }
 
                 items = allItems;
@@ -737,8 +719,7 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_LINE_COMMENTED,
                 TimelineEvent.EVENT_REVIEWED,
                 TimelineEvent.EVENT_COMMITTED,
-                TimelineEvent.EVENT_CROSS_REFERENCED,
-                TimelineEvent.EVENT_COMMENTED);
+                TimelineEvent.EVENT_CROSS_REFERENCED);
 
         if (event == null || excludedEvents.contains(event.event))
             return false;

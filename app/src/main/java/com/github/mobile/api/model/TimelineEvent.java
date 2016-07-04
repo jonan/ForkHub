@@ -15,6 +15,8 @@
  */
 package com.github.mobile.api.model;
 
+import org.eclipse.egit.github.core.Comment;
+
 import java.util.Date;
 
 public class TimelineEvent {
@@ -54,6 +56,8 @@ public class TimelineEvent {
 
     public Date updated_at;
 
+    public String body_html;
+
     public Label label;
 
     public User assignee;
@@ -61,4 +65,14 @@ public class TimelineEvent {
     public Milestone milestone;
 
     public Rename rename;
+
+    public Comment getOldCommentModel() {
+        Comment comment = new Comment();
+        comment.setCreatedAt(created_at);
+        comment.setUpdatedAt(updated_at);
+        comment.setBodyHtml(body_html);
+        comment.setId(id);
+        comment.setUser(actor.getOldUserModel());
+        return comment;
+    }
 }
