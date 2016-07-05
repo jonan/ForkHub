@@ -18,10 +18,10 @@ package com.github.mobile.core.gist;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.ui.gist.GistsViewActivity;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.egit.github.core.Gist;
 
@@ -29,8 +29,6 @@ import org.eclipse.egit.github.core.Gist;
  * Parses a {@link Gist} from a path
  */
 public class GistUriMatcher {
-
-    private static final Pattern PATTERN = Pattern.compile("[a-f0-9]{20}");
 
     /**
      * Get an intent for an exact {@link Gist} match
@@ -49,7 +47,7 @@ public class GistUriMatcher {
         if (TextUtils.isDigitsOnly(gistId))
             return GistsViewActivity.createIntent(new Gist().setId(gistId));
 
-        if (PATTERN.matcher(gistId).matches())
+        if (CommitUtils.isValidCommit(gistId))
             return GistsViewActivity.createIntent(new Gist().setId(gistId));
 
         return null;

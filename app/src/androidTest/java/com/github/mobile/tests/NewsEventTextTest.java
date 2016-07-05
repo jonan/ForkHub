@@ -288,9 +288,9 @@ public class NewsEventTextTest extends InstrumentationTestCase {
         Event event = createEvent(TYPE_PUBLIC);
 
         updateViewWithRepoName(event);
-        verify("user open sourced user/repo");
+        verify("user made user/repo public");
         updateViewWithoutRepoName(event);
-        verify("user open sourced repository");
+        verify("user made repository public");
     }
 
     /**

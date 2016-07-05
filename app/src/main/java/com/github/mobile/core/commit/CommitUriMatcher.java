@@ -57,7 +57,7 @@ public class CommitUriMatcher {
 
     private static Intent getSingleCommitIntent(Repository repo, List<String> pathSegments) {
         String ref = pathSegments.get(3);
-        if (TextUtils.isEmpty(ref))
+        if (TextUtils.isEmpty(ref) || !CommitUtils.isValidCommit(ref))
             return null;
 
         return CommitViewActivity.createIntent(repo, ref);
@@ -72,11 +72,13 @@ public class CommitUriMatcher {
 
         switch (refs.length) {
         case 1:
-            return CommitCompareViewActivity.createIntent(repo, refs[0]);
+            if (CommitUtils.isValidCommit(refs[0]))
+                return CommitCompareViewActivity.createIntent(repo, refs[0]);
         case 2:
-            return CommitCompareViewActivity.createIntent(repo, refs[0], refs[1]);
-        default:
-            return null;
+            if (CommitUtils.isValidCommit(refs[1]))
+                return CommitCompareViewActivity.createIntent(repo, refs[0], refs[1]);
         }
+
+        return null;
     }
 }
