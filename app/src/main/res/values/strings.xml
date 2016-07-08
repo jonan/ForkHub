@@ -318,6 +318,7 @@
     <string name="tab_all">all</string>
     <!--  -->
     <string name="share">Share</string>
+    <string name="open_in_browser">Open in browser</string>
     <string name="show_password">Show password</string>
     <string name="write">Write</string>
     <string name="preview">Preview</string>

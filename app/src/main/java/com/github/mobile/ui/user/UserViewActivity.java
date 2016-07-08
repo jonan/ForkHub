@@ -22,6 +22,7 @@ import static com.github.mobile.Intents.EXTRA_USER;
 
 import android.accounts.Account;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
@@ -39,6 +40,7 @@ import com.github.mobile.core.user.UnfollowUserTask;
 import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.TabPagerActivity;
+import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
@@ -154,20 +156,20 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Override
     public boolean onCreateOptionsMenu(Menu optionsMenu) {
-        if (!isOrganization) {
-            getMenuInflater().inflate(R.menu.user_follow, optionsMenu);
-        }
+        getMenuInflater().inflate(R.menu.user, optionsMenu);
 
         return super.onCreateOptionsMenu(optionsMenu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (!isOrganization) {
-            MenuItem followItem = menu.findItem(R.id.m_follow);
+        MenuItem followItem = menu.findItem(R.id.m_follow);
 
+        if (!isOrganization) {
             followItem.setVisible(followingStatusChecked);
             followItem.setTitle(isFollowing ? R.string.unfollow : R.string.follow);
+        } else {
+            followItem.setVisible(false);
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -178,6 +180,9 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
         switch (item.getItemId()) {
         case R.id.m_follow:
             followUser();
+            return true;
+        case R.id.m_open_browser:
+            UriLauncherActivity.launchUriInBrowser(this, Uri.parse(user.getHtmlUrl()));
             return true;
         case android.R.id.home:
             Intent intent = new Intent(this, HomeActivity.class);

@@ -22,4 +22,9 @@
         app:showAsAction="never"
         android:title="@string/follow" />
 
+    <item
+        android:id="@+id/m_open_browser"
+        app:showAsAction="never"
+        android:title="@string/open_in_browser" />
+
 </menu>

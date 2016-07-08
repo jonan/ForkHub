@@ -281,13 +281,22 @@ public class IssuesViewActivity extends PagerActivity {
                 arguments);
     }
 
-    @Override
-    public void startActivity(Intent intent) {
+    public void startActivity(Intent intent, boolean force) {
+        if (force) {
+            super.startActivity(intent);
+            return;
+        }
+
         Intent converted = UriLauncherActivity.convert(intent);
         if (converted != null)
             super.startActivity(converted);
         else
             super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        startActivity(intent, false);
     }
 
     @Override

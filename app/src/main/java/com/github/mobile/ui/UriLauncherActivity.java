@@ -61,6 +61,67 @@ public class UriLauncherActivity extends Activity {
         }
     }
 
+    static public boolean launchUriInBrowser(Context context, Uri data) {
+        Intent intent = getBrowserIntentForURI(context, data);
+        if (intent == null) {
+            return false;
+        }
+
+        context.startActivity(intent);
+        return true;
+    }
+
+    static public Intent getIntentForURI(Uri data) {
+        List<String> segments = data.getPathSegments();
+        if (segments == null)
+            return null;
+
+        Intent intent;
+        if (HOST_GISTS.equals(data.getHost())) {
+            intent = GistUriMatcher.getGistIntent(segments);
+            if (intent != null) {
+                return intent;
+            }
+        } else if (HOST_DEFAULT.equals(data.getHost())) {
+            intent = CommitUriMatcher.getCommitIntent(segments);
+            if (intent != null) {
+                return intent;
+            }
+
+            intent = IssueUriMatcher.getIssueIntent(segments);
+            if (intent != null) {
+                return intent;
+            }
+
+            intent = RepositoryUriMatcher.getRepositoryIntent(segments);
+            if (intent != null) {
+                return intent;
+            }
+
+            intent = UserUriMatcher.getUserIntent(segments);
+            if (intent != null) {
+                return intent;
+            }
+        }
+
+        return null;
+    }
+
+    static public Intent getBrowserIntentForURI(Context context, Uri data) {
+        final Intent dummyIntent =
+                new Intent(Intent.ACTION_VIEW, Uri.parse("https://dummyintent.github.com/"))
+                        .addCategory(CATEGORY_BROWSABLE);
+
+        List<ResolveInfo> resolvers = context.getPackageManager().queryIntentActivities(dummyIntent, 0);
+        if (resolvers.isEmpty()) {
+            return null;
+        }
+
+        return new Intent(Intent.ACTION_VIEW, data)
+                .addCategory(CATEGORY_BROWSABLE)
+                .setPackage(resolvers.get(0).activityInfo.packageName);
+    }
+
     /**
      * Convert global view intent one into one that can be possibly opened
      * inside the current application.
@@ -117,60 +178,14 @@ public class UriLauncherActivity extends Activity {
         }
 
         // If we can't open the link try to open it in a browser
-
-        final Intent dummyIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse("https://dummyintent.github.com/"))
-                        .addCategory(CATEGORY_BROWSABLE);
-
-        List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(dummyIntent, 0);
-        for (ResolveInfo r : resolvers) {
-            if (!"jp.forkhub".equals(r.activityInfo.packageName)) {
-                final Intent externalIntent = new Intent(Intent.ACTION_VIEW, data)
-                        .addCategory(CATEGORY_BROWSABLE)
-                        .setPackage(r.activityInfo.packageName);
-                startActivity(externalIntent);
-                finish();
-                return;
-            }
+        final Intent externalIntent = getBrowserIntentForURI(this, data);
+        if (externalIntent != null) {
+            startActivity(externalIntent);
+            finish();
+            return;
         }
 
         showParseError(data.toString());
-    }
-
-    static private Intent getIntentForURI(Uri data) {
-        List<String> segments = data.getPathSegments();
-        if (segments == null)
-            return null;
-
-        Intent intent;
-        if (HOST_GISTS.equals(data.getHost())) {
-            intent = GistUriMatcher.getGistIntent(segments);
-            if (intent != null) {
-                return intent;
-            }
-        } else if (HOST_DEFAULT.equals(data.getHost())) {
-            intent = CommitUriMatcher.getCommitIntent(segments);
-            if (intent != null) {
-                return intent;
-            }
-
-            intent = IssueUriMatcher.getIssueIntent(segments);
-            if (intent != null) {
-                return intent;
-            }
-
-            intent = RepositoryUriMatcher.getRepositoryIntent(segments);
-            if (intent != null) {
-                return intent;
-            }
-
-            intent = UserUriMatcher.getUserIntent(segments);
-            if (intent != null) {
-                return intent;
-            }
-        }
-
-        return null;
     }
 
     private void showParseError(String url) {

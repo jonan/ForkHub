@@ -38,5 +38,9 @@
         android:id="@+id/m_refresh"
         android:title="@string/refresh"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/m_open_browser"
+        android:title="@string/open_in_browser"
+        app:showAsAction="never" />
 
 </menu>

@@ -38,6 +38,7 @@ import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -72,6 +73,7 @@ import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.StyledText;
+import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.comment.CommentListAdapter;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.ui.user.UserViewActivity;
@@ -702,6 +704,12 @@ public class IssueFragment extends DialogFragment {
         case R.id.m_state:
             if (issue != null)
                 stateTask.confirm(STATE_OPEN.equals(issue.getState()));
+            return true;
+        case R.id.m_open_browser:
+            IssuesViewActivity activity = (IssuesViewActivity) getActivity();
+            Uri issueUri = Uri.parse(issue.getHtmlUrl());
+            Intent externalIntent = UriLauncherActivity.getBrowserIntentForURI(activity, issueUri);
+            activity.startActivity(externalIntent, true);
             return true;
         default:
             return super.onOptionsItemSelected(item);

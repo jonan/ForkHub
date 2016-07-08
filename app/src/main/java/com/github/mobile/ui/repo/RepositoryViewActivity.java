@@ -208,6 +208,10 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
         case R.id.m_refresh:
             checkStarredRepositoryStatus();
             return super.onOptionsItemSelected(item);
+        case R.id.m_open_browser:
+            Uri repoUri = Uri.parse("https://github.com/" + repository.generateId());
+            UriLauncherActivity.launchUriInBrowser(this, repoUri);
+            return true;
         case android.R.id.home:
             finish();
             Intent intent = UserViewActivity.createIntent(repository.getOwner());
