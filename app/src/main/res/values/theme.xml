@@ -27,7 +27,6 @@
         <item name="colorControlNormal">#50000000</item>
 
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="panelBackground">@color/color_primary_dark</item>
 
         <item name="android:colorBackground">@color/color_primary_dark</item>
 
