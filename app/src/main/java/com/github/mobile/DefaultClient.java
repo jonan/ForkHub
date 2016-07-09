@@ -15,14 +15,14 @@
  */
 package com.github.mobile;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.OkUrlFactory;
-
 import org.eclipse.egit.github.core.client.GitHubClient;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import okhttp3.OkHttpClient;
+import okhttp3.OkUrlFactory;
 
 /**
  * Default client used to communicate with GitHub API

@@ -34,9 +34,6 @@ import android.widget.TextView;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.google.inject.Inject;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -46,6 +43,10 @@ import java.util.Map;
 import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.ContentsService;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Getter for an image
