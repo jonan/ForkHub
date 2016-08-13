@@ -2,8 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+- Add option to open users, repos and issues in external browser.
+
 ### Fixed
 - Improve user and repository search.
+- Some minor bug fixes.
 - Some minor UI fixes and improvements.
 
 ## [ForkHub v1.2.2] - 2016-06-05
