@@ -236,11 +236,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
             }
         });
 
-        setText(1, comment.getUser().getLogin());
+        setText(1, comment.getUser() == null ? "ghost" : comment.getUser().getLogin());
         setText(2, TimeUtils.getRelativeTime(comment.getCreatedAt()));
         setGone(3, !comment.getUpdatedAt().after(comment.getCreatedAt()));
 
-        boolean canEdit = isCollaborator || comment.getUser().getLogin().equals(user);
+        boolean canEdit = isCollaborator ||
+                (comment.getUser() != null && comment.getUser().getLogin().equals(user));
 
         if (issueFragment != null && canEdit) {
             // Edit button
