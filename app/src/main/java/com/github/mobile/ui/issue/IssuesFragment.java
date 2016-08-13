@@ -193,8 +193,12 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
             optionsMenu.removeItem(R.id.create_issue);
         }
 
-        // Set up searching
         Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        // Set up searching
         final MenuItem searchMenuItem = optionsMenu.findItem(R.id.m_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
         SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
