@@ -233,12 +233,16 @@ public class IssuesViewActivity extends PagerActivity {
         int number = issueNumbers[position];
         boolean pullRequest = pullRequests[position];
 
-        if (pullRequest)
-            getSupportActionBar().setTitle(
-                    getString(R.string.pull_request_title) + number);
-        else
-            getSupportActionBar().setTitle(
-                    getString(R.string.issue_title) + number);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) {
+            return;
+        }
+
+        if (pullRequest) {
+            actionBar.setTitle(getString(R.string.pull_request_title) + number);
+        } else {
+            actionBar.setTitle(getString(R.string.issue_title) + number);
+        }
     }
 
     @Override
