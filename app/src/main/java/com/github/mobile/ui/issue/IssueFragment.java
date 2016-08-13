@@ -646,16 +646,24 @@ public class IssueFragment extends DialogFragment {
     }
 
     private void shareIssue() {
+        String title = "";
+        if (IssueUtils.isPullRequest(issue)) {
+            title = "Pull Request ";
+        } else {
+            title = "Issue ";
+        }
+
+        title += issueNumber + " on " + repositoryId.generateId();
+        startActivity(ShareUtils.create(title, getUrl()));
+    }
+
+    private String getUrl() {
         String id = repositoryId.generateId();
-        if (IssueUtils.isPullRequest(issue))
-            startActivity(ShareUtils.create("Pull Request " + issueNumber
-                    + " on " + id, "https://github.com/" + id + "/pull/"
-                    + issueNumber));
-        else
-            startActivity(ShareUtils
-                    .create("Issue " + issueNumber + " on " + id,
-                            "https://github.com/" + id + "/issues/"
-                                    + issueNumber));
+        String issueText = "/issues/";
+        if (IssueUtils.isPullRequest(issue)) {
+            issueText = "/pull/";
+        }
+        return "https://github.com/" + id + issueText + issueNumber;
     }
 
     private void openPullRequestCommits() {
@@ -707,7 +715,7 @@ public class IssueFragment extends DialogFragment {
             return true;
         case R.id.m_open_browser:
             IssuesViewActivity activity = (IssuesViewActivity) getActivity();
-            Uri issueUri = Uri.parse(issue.getHtmlUrl());
+            Uri issueUri = Uri.parse(getUrl());
             Intent externalIntent = UriLauncherActivity.getBrowserIntentForURI(activity, issueUri);
             activity.startActivity(externalIntent, true);
             return true;

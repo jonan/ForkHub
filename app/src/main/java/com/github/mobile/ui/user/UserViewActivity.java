@@ -182,7 +182,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
             followUser();
             return true;
         case R.id.m_open_browser:
-            UriLauncherActivity.launchUriInBrowser(this, Uri.parse(user.getHtmlUrl()));
+            UriLauncherActivity.launchUriInBrowser(this, Uri.parse("https://github.com/" + user.getLogin()));
             return true;
         case android.R.id.home:
             Intent intent = new Intent(this, HomeActivity.class);
