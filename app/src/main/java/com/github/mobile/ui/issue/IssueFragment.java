@@ -646,14 +646,8 @@ public class IssueFragment extends DialogFragment {
     }
 
     private void shareIssue() {
-        String title = "";
-        if (IssueUtils.isPullRequest(issue)) {
-            title = "Pull Request ";
-        } else {
-            title = "Issue ";
-        }
-
-        title += issueNumber + " on " + repositoryId.generateId();
+        int titleString = IssueUtils.isPullRequest(issue) ? R.string.pull_request_title : R.string.issue_title;
+        String title = getString(titleString) + issueNumber + " on " + repositoryId.generateId();
         startActivity(ShareUtils.create(title, getUrl()));
     }
 
