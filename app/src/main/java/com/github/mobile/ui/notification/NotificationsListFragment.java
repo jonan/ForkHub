@@ -91,7 +91,12 @@ public class NotificationsListFragment extends PagedItemFragment<Notification> {
         final Notification notification = (Notification) l.getItemAtPosition(position);
 
         // Create an URL we can open
-        String url = notification.subject.url.replace("://api.github.com/repos/", "://github.com/");
+        String url = notification.subject.url;
+        if (url == null) {
+            return;
+        }
+
+        url = url.replace("://api.github.com/repos/", "://github.com/");
         switch (notification.subject.type) {
         case Subject.TYPE_ISSUE:
             UriLauncherActivity.launchUri(getContext(), Uri.parse(url));
