@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.3] - 2016-08-21
 
 ### Added
 - Add option to open users, repos and issues in external browser.
@@ -128,7 +128,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.2...master
+[ForkHub v1.2.3]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.2...ForkHub-v1.2.3
 [ForkHub v1.2.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.1...ForkHub-v1.2.2
 [ForkHub v1.2.1]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.0...ForkHub-v1.2.1
 [ForkHub v1.2.0]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.1.1...ForkHub-v1.2.0
