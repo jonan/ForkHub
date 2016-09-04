@@ -82,7 +82,7 @@
     <string name="no_followers">Brak obserwujących</string>
     <string name="no_members">Brak członków</string>
     <string name="no_news">Brak aktualności</string>
-    <string name="no_commits">Brak popełnień</string>
+    <string name="no_commits">Brak commitów</string>
     <!--  -->
 
 
@@ -97,7 +97,7 @@
     <string name="news">Aktualności</string>
     <string name="issues">Uwagi</string>
     <string name="gists">Gisty</string>
-    <string name="commits">Popełnienia</string>
+    <string name="commits">Commity</string>
     <string name="global_search">Wyszukiwanie w GitHub</string>
     <string name="find_repositories">Szukanie respozytoriów</string>
     <string name="find_issues">Szukanie uwag</string>
@@ -117,7 +117,7 @@
     <string name="open">Otwarte</string>
     <string name="random">Losowe</string>
     <string name="file_name">Nazwa pliku</string>
-    <string name="file_content">File Content</string>
+    <string name="file_content">Zawartość pliku</string>
     <string name="new_gist">Nowy Gist</string>
     <string name="filter">Filtr</string>
     <string name="bookmark">Zakładka</string>
@@ -133,7 +133,7 @@
     <string name="filter_issues_title">Filtr uwag</string>
     <string name="create_comment_title">Dodaj komentarz</string>
     <string name="comment_hint">Wpisz komentarz</string>
-    <string name="show_more">Pokaz wiecej...</string>
+    <string name="show_more">Pokaż wiecej...</string>
     <string name="repositories">Respozytoria</string>
     <string name="contributors">Współpracownicy</string>
     <string name="issues_title">Uwagi</string>
@@ -142,7 +142,7 @@
     <string name="edit_milestone">Edytuj kamień milowy</string>
     <string name="edit_assignee">Edytuj Assignee</string>
     <string name="description">Opis</string>
-    <string name="gist_description_hint">Android stworzył Gist</string>
+    <string name="gist_description_hint">Gist wysłany przez android</string>
     <string name="title">Tytuł</string>
     <string name="edit">Edytuj</string>
     <string name="starring_gist">Gwiazdkowanie Gistu...</string>
@@ -152,8 +152,8 @@
     <string name="select_milestone">Zaznacz kamień milowy</string>
     <string name="select_labels">Zaznacz etykietę</string>
     <string name="select_ref">Zaznacz Branch lub Tag</string>
-    <string name="enter_otp_code_title">Kod autentyzacyjny</string>
-    <string name="enter_otp_code_message">Na Twoim koncie jest włączona autentyzacja 2-etapowa. Wpisz Twój kod autentyzacyjny, aby Cię zweryfikować.</string>
+    <string name="enter_otp_code_title">Kod autoryzujący</string>
+    <string name="enter_otp_code_message">Na Twoim koncie jest włączona autentyzacja 2-etapowa. Wpisz swój kod autoryzujący, aby Cię zweryfikować.</string>
     <string name="no_milestone">Brak kamieni milowych</string>
     <string name="unassigned">Brak assignów</string>
     <string name="assigned">jest assigned</string>
@@ -167,7 +167,7 @@
     <string name="new_issue">Nowa uwaga</string>
     <string name="anonymous">Anonim</string>
     <string name="message_filter_saved">Filtr uwagi zapisano w zakładkach</string>
-    <string name="recently_viewed">OSTATNIO OGLĄDANE</string>
+    <string name="recently_viewed">Ostatnio oglądane</string>
     <string name="recent">Ostatni</string>
     <string name="recent_remove">Usuń ostatni</string>
     <string name="recent_list_remove">Usuń z ostatnio używanych</string>
@@ -183,14 +183,14 @@
     <string name="signup_link">Nowy na GitHub? &lt;a href=\"https://github.com/plans\">Kliknij tutaj&lt;/a>, aby się zarejestrować</string>
     <string name="signup_link_two_factor_auth">Nie wiesz co zrobić? &lt;a href=\"https://help.github.com/articles/about-two-factor-authentication\">Zdobodź więcej informacji na ten temat.&lt;/a></string>
     <string name="connection_failed">Brak połączenia z GitHubem</string>
-    <string name="invalid_login_or_password">Proszę, podaj prawidłową nazwę użytkownika i hasło</string>
-    <string name="invalid_password">Proszę, podaj prawdziwe hasło.</string>
+    <string name="invalid_login_or_password">Nieprawidłowa nazwa użytkownika i/lub hasło</string>
+    <string name="invalid_password">Nieprawidłowe hasło.</string>
     <string name="password">Hasło</string>
     <string name="username_or_email">Nazwa użytkownika lub e-mail</string>
-    <string name="followers">Obserwują</string>
-    <string name="following">Obserwuje</string>
+    <string name="followers">Obserwujący</string>
+    <string name="following">Obserwowani</string>
     <string name="followers_self">Obserwują</string>
-    <string name="following_self">Obserwuje</string>
+    <string name="following_self">ebserwujesz</string>
     <string name="follow">Obserwuj</string>
     <string name="unfollow">Nie obserwuj</string>
     <string name="star">Gwiazdka</string>
@@ -206,18 +206,18 @@
     <string name="clear">Wyczyść</string>
     <string name="pull_request_commits">Popełnienia: %d</string>
     <string name="open_issues">Otwórz uwagę</string>
-    <string name="closed_issues">Zamknięto uwagę</string>
+    <string name="closed_issues">Zamknij uwagę</string>
     <string name="confirm_bookmark_delete_title">Usuń zakładkę</string>
     <string name="save">Zapisz</string>
     <string name="apply">Zastosuj</string>
-    <string name="labels_prefix">Etykity:</string>
+    <string name="labels_prefix">Etykiety:</string>
     <string name="assignee">Assignee</string>
     <string name="milestone">Kamień milowy</string>
-    <string name="labels">Etykity</string>
-    <string name="issue_confirm_close_message">Czy jest jesteś pewnien zamknięcia tej uwagi?</string>
-    <string name="issue_confirm_reopen_message">Czy jesteś?</string>
+    <string name="labels">Etykiety</string>
+    <string name="issue_confirm_close_message">Czy jest jesteś pewnien by zamknąć tą uwagę?</string>
+    <string name="issue_confirm_reopen_message">Czy jesteś pewien by otworzyć tą uwagę ponownie?</string>
     <string name="issue_confirm_close_title">Zamknij uwagę</string>
-    <string name="issue_confirm_reopen_title">Re-otwórz uwagę</string>
+    <string name="issue_confirm_reopen_title">Ponownie otwórz uwagę</string>
     <string name="closed">Zamknięto</string>
     <string name="no_description_given">Nie podano opisu.</string>
     <string name="close">Zamknij</string>
@@ -226,10 +226,10 @@
     <string name="message_invalid_github_url">Podany adres URL nie mógł zostać otwarty przez aplikację:\n{0}</string>
     <string name="cancel">Anuluj</string>
     <string name="authenticator_conflict_title">Konflikt aplikacji</string>
-    <string name="authenticator_conflict_message">Another installed app is already configured for GitHub authentication.\n\nYou must remove the other app from the Accounts &amp; sync settings and uninstall it before the GitHub app can be used.</string>
+    <string name="authenticator_conflict_message">Inna aplikacja została już skonfigurowana do uwierzytelniania się na GitHub .\n\nMusisz inną aplikację usunąć z kont &amp; zsynchronizować ustawienia i odinstalować zanim aplikacja GitHub zostanie wykorzystana..</string>
     <string name="opening_repository">Otwarto {0}...</string>
-    <string name="commit_compare_title">Połącz popełnienia</string>
-    <string name="commit_prefix">Popełnienie\u0020</string>
+    <string name="commit_compare_title">Połącz commity</string>
+    <string name="commit_prefix">Commit\u0020</string>
     <string name="parent_prefix">Rodzic\u0020</string>
     <string name="authored">autorstwa</string>
     <string name="committed">commitowane</string>
@@ -252,15 +252,15 @@
     <string name="tab_repositories">repozytoria</string>
     <string name="tab_users">użytkownicy</string>
     <string name="tab_news">wiadomości</string>
-    <string name="tab_following_self">following</string>
-    <string name="tab_followers_self">followers</string>
-    <string name="tab_following">following</string>
-    <string name="tab_followers">followers</string>
+    <string name="tab_following_self">Obserwujesz</string>
+    <string name="tab_followers_self">Obserwujący</string>
+    <string name="tab_following">obserwowane</string>
+    <string name="tab_followers">obserwujący</string>
     <string name="tab_members">członkowie</string>
     <string name="tab_code">kod</string>
     <string name="tab_commits">commity</string>
     <string name="tab_issues">problemy</string>
-    <string name="tab_watched">watched</string>
+    <string name="tab_watched">oglądane</string>
     <string name="tab_assigned">assigned</string>
     <string name="tab_created">stworzone</string>
     <string name="tab_mentioned">przywołani</string>
@@ -272,7 +272,7 @@
     <string name="show_password">Pokaż hasło</string>
     <string name="write">Napisz</string>
     <string name="preview">Podgląd</string>
-    <string name="show_raw_markdown">Pokaż surowy markdown</string>
-    <string name="render_markdown">Renderuj markdown</string>
+    <string name="show_raw_markdown">Pokaż kod źródłowy markdown</string>
+    <string name="render_markdown">Pokaż podgląd markdown</string>
 
 </resources>
