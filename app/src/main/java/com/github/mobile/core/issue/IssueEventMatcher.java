@@ -18,6 +18,7 @@ package com.github.mobile.core.issue;
 import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUES;
 import static org.eclipse.egit.github.core.event.Event.TYPE_ISSUE_COMMENT;
 import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST;
+import static org.eclipse.egit.github.core.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.event.Event;
@@ -25,6 +26,7 @@ import org.eclipse.egit.github.core.event.EventPayload;
 import org.eclipse.egit.github.core.event.IssueCommentPayload;
 import org.eclipse.egit.github.core.event.IssuesPayload;
 import org.eclipse.egit.github.core.event.PullRequestPayload;
+import org.eclipse.egit.github.core.event.PullRequestReviewCommentPayload;
 
 /**
  * Helper to find an issue to open for an event
@@ -50,6 +52,9 @@ public class IssueEventMatcher {
             return ((IssueCommentPayload) payload).getIssue();
         else if (TYPE_PULL_REQUEST.equals(type))
             return IssueUtils.toIssue(((PullRequestPayload) payload)
+                    .getPullRequest());
+        else if (TYPE_PULL_REQUEST_REVIEW_COMMENT.equals(type))
+            return IssueUtils.toIssue(((PullRequestReviewCommentPayload) payload)
                     .getPullRequest());
         else
             return null;
