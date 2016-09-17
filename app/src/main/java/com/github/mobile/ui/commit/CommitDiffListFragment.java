@@ -217,6 +217,10 @@ public class CommitDiffListFragment extends DialogFragment implements
     }
 
     private void copyHashToClipboard() {
+        if (commit == null) {
+            return;
+        }
+
         ClipboardManager manager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("hash", commit.getSha());
         manager.setPrimaryClip(clip);
