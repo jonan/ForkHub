@@ -38,14 +38,6 @@ public class CommitUriMatcherTest extends AndroidTestCase {
     }
 
     /**
-     * Verify non-hex commit SHA-1 in uri
-     */
-    public void testNonHexId() {
-        assertNull(CommitUriMatcher.getCommitIntent(Uri
-                .parse("https://github.com/defunkt/resque/commit/abck").getPathSegments()));
-    }
-
-    /**
      * Verify http uri
      */
     public void testHttpUri() {
