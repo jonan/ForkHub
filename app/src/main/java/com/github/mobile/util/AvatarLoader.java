@@ -144,7 +144,7 @@ public class AvatarLoader {
         if (user == null)
             return;
 
-        String avatarUrl = user.getAvatarUrl();
+        String avatarUrl = getAvatarUrl(user);
         if (TextUtils.isEmpty(avatarUrl))
             return;
 
@@ -187,7 +187,7 @@ public class AvatarLoader {
      * @param user A User object that points to the desired user.
      */
     public void bind(final ImageView view, final com.github.mobile.api.model.User user) {
-        bind(view, user.avatar_url);
+        bind(view, getAvatarUrl(user));
     }
 
     /**
@@ -207,7 +207,7 @@ public class AvatarLoader {
      * @param contributor A Contributor object that points to the desired user.
      */
     public void bind(final ImageView view, final Contributor contributor) {
-        bind(view, contributor.getAvatarUrl());
+        bind(view, getAvatarUrl(contributor));
     }
 
     private void bind(final ImageView view, String url) {
@@ -216,6 +216,7 @@ public class AvatarLoader {
             return;
         }
 
+        // Remove the URL params as they are not needed and break cache
         if (url.contains("?") && !url.contains("gravatar")) {
             url = url.substring(0, url.indexOf("?"));
         }
@@ -228,7 +229,7 @@ public class AvatarLoader {
                 .into(view);
     }
 
-    private String getAvatarUrl(User user) {
+    private String getAvatarUrl(final User user) {
         if (user == null)
             return null;
 
@@ -239,7 +240,24 @@ public class AvatarLoader {
         return avatarUrl;
     }
 
-    private String getAvatarUrl(CommitUser user) {
+    private String getAvatarUrl(final Contributor user) {
+        if (user == null)
+            return null;
+
+        return user.getAvatarUrl();
+    }
+
+    private String getAvatarUrl(final com.github.mobile.api.model.User user) {
+        if (user == null)
+            return null;
+
+        return user.avatar_url;
+    }
+
+    private String getAvatarUrl(final CommitUser user) {
+        if (user == null)
+            return null;
+
         return getAvatarUrl(GravatarUtils.getHash(user.getEmail()));
     }
 
