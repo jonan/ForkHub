@@ -728,7 +728,7 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_CROSS_REFERENCED,
                 TimelineEvent.EVENT_COMMENTED);
 
-        if (excludedEvents.contains(event.event))
+        if (event == null || excludedEvents.contains(event.event))
             return false;
 
         // Don't show references to nonexistent commits
