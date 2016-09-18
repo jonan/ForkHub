@@ -227,7 +227,7 @@
     <string name="close">Stäng</string>
     <string name="reopen">Öppna Igen</string>
     <string name="title_invalid_github_url">Ej Giltlig GitHub Adress</string>
-    <string name="message_invalid_github_url">Den följande adressen kunde inte öppnas av den här aplikationen:\n{0}</string>
+    <string name="message_invalid_github_url">Den följande adressen kunde inte öppnas av den här applikationen:\n{0}</string>
     <string name="cancel">Avbryt</string>
     <string name="authenticator_conflict_title">App-konflikt</string>
     <string name="authenticator_conflict_message">En annan installerad App är redan konfigurerad för GitHubautentisering. \n\nDu måste ta bort den andra appen från konto och synk inställningarna och avinstallera den innan GitHub appen kan användas.</string>
@@ -269,7 +269,7 @@
     <string name="tab_created">skapat</string>
     <string name="tab_mentioned">nämnt</string>
     <string name="tab_mine">mina</string>
-    <string name="tab_starred">sjtärnmärkt</string>
+    <string name="tab_starred">stjärnmärkt</string>
     <string name="tab_all">alla</string>
     <!-- -->
     <string name="share">Dela</string>
@@ -279,6 +279,6 @@
     <string name="show_raw_markdown">Visa rå markdown</string>
     <string name="render_markdown">Rendera markdown</string>
     <string name="copy_hash">Kopiera hash</string>
-    <string name="toast_msg_copied">Koperiat till clipboard</string>
+    <string name="toast_msg_copied">Kopierat till clipboard</string>
 
 </resources>
