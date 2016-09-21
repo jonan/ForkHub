@@ -16,6 +16,7 @@
 package com.github.mobile.core.issue;
 
 import com.github.mobile.api.model.TimelineEvent;
+import com.github.mobile.api.model.ReactionSummary;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,19 +34,24 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
 
     private final Issue issue;
 
+    private ReactionSummary reactions;
+
     private Collection<TimelineEvent> events;
 
     /**
-     * Create wrapper for issue, comments and events
+     * Create wrapper for issue, reactions, comments and events
      *
      * @param issue
+     * @param reactions
      * @param comments
      * @param events
      */
-    public FullIssue(final Issue issue, final Collection<Comment> comments, final Collection<TimelineEvent> events) {
+    public FullIssue(final Issue issue, final ReactionSummary reactions,
+            final Collection<Comment> comments, final Collection<TimelineEvent> events) {
         super(comments);
 
         this.events = events;
+        this.reactions = reactions;
         this.issue = issue;
     }
 
@@ -61,6 +67,13 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
      */
     public Issue getIssue() {
         return issue;
+    }
+
+    /**
+     * @return reactions
+     */
+    public ReactionSummary getReactions() {
+        return reactions;
     }
 
     /**
