@@ -16,6 +16,7 @@
 package com.github.mobile;
 
 import com.github.mobile.api.service.NotificationService;
+import com.github.mobile.api.service.ProjectService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.api.service.TeamService;
 import com.google.inject.AbstractModule;
@@ -69,6 +70,12 @@ public class ServicesModule extends AbstractModule {
     @Singleton
     TeamService teamService(Retrofit retrofit) {
         return retrofit.create(TeamService.class);
+    }
+
+    @Provides
+    @Singleton
+    ProjectService projectService(Retrofit retrofit) {
+        return retrofit.create(ProjectService.class);
     }
 
     @Provides

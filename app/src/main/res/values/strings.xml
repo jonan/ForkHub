@@ -24,6 +24,7 @@
     <string name="error_contributors_load">Loading contributors failed</string>
     <string name="error_gist_load">Loading Gist failed</string>
     <string name="error_notifications_load">Loading notifications failed</string>
+    <string name="error_projects_load">Loading projects failed</string>
     <string name="error_news_load">Loading news failed</string>
     <string name="error_followers_load">Loading followers failed</string>
     <string name="error_people_load">Loading people failed</string>
@@ -60,6 +61,7 @@
     <string name="loading_notifications">Loading Notifications…</string>
     <string name="loading_more_issues">Loading More Issues…</string>
     <string name="loading_issues">Loading Issues…</string>
+    <string name="loading_projects">Loading Projects…</string>
     <string name="loading_comments">Loading Comments…</string>
     <string name="loading_repositories">Loading Repositories…</string>
     <string name="loading_issue">Loading Issue…</string>
@@ -91,6 +93,7 @@
     <string name="no_teams">No Teams</string>
     <string name="no_news">No News</string>
     <string name="no_commits">No Commits</string>
+    <string name="no_projects">No Projects</string>
     <!--  -->
 
 
@@ -248,6 +251,7 @@
     <string name="prefix_created">created\u0020</string>
     <string name="prefix_updated">updated\u0020</string>
     <string name="prefix_opened">opened\u0020</string>
+    <string name="updated">Updated %1$s</string>
     <string name="clear">Clear</string>
     <string name="pull_request_commits">Commits: %d</string>
     <string name="pull_request_mergeable_text">This branch has no conflicts with the base branch</string>
@@ -314,6 +318,7 @@
     <string name="tab_code">code</string>
     <string name="tab_commits">commits</string>
     <string name="tab_issues">issues</string>
+    <string name="tab_projects">projects</string>
     <string name="tab_pull_requests">pull requests</string>
     <string name="tab_watched">watched</string>
     <string name="tab_assigned">assigned</string>

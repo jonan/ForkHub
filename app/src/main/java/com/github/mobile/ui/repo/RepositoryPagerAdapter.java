@@ -25,6 +25,7 @@ import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.code.RepositoryCodeFragment;
 import com.github.mobile.ui.commit.CommitListFragment;
 import com.github.mobile.ui.issue.IssuesFragment;
+import com.github.mobile.ui.project.ProjectsListFragment;
 
 /**
  * Adapter to view a repository's various pages
@@ -74,6 +75,8 @@ public class RepositoryPagerAdapter extends FragmentPagerAdapter {
             return resources.getString(R.string.tab_commits);
         case 3:
             return hasIssues ? resources.getString(R.string.tab_issues) : resources.getString(R.string.tab_pull_requests);
+        case 4:
+            return resources.getString(R.string.tab_projects);
         default:
             return null;
         }
@@ -92,6 +95,8 @@ public class RepositoryPagerAdapter extends FragmentPagerAdapter {
             return commitsFragment;
         case 3:
             return new IssuesFragment();
+        case 4:
+            return new ProjectsListFragment();
         default:
             return null;
         }
@@ -99,7 +104,7 @@ public class RepositoryPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     /**
