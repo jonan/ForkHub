@@ -59,6 +59,7 @@ import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.api.model.TimelineEvent;
+import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.core.issue.DeleteCommentTask;
 import com.github.mobile.core.issue.EditAssigneeTask;
 import com.github.mobile.core.issue.EditLabelsTask;
@@ -72,6 +73,7 @@ import com.github.mobile.ui.ConfirmDialogFragment;
 import com.github.mobile.ui.DialogFragment;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.HeaderFooterListAdapter;
+import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.comment.CommentListAdapter;
@@ -112,6 +114,8 @@ public class IssueFragment extends DialogFragment {
 
     private Issue issue;
 
+    private ReactionSummary reactions;
+
     private User user;
 
     private String loggedUser;
@@ -149,6 +153,8 @@ public class IssueFragment extends DialogFragment {
     private TextView titleText;
 
     private TextView bodyText;
+
+    private ReactionsView reactionsView;
 
     private TextView authorText;
 
@@ -294,6 +300,7 @@ public class IssueFragment extends DialogFragment {
         milestoneProgressArea = headerView.findViewById(R.id.v_closed);
         bodyText = (TextView) headerView.findViewById(R.id.tv_issue_body);
         bodyText.setMovementMethod(LinkMovementMethod.getInstance());
+        reactionsView = (ReactionsView) headerView.findViewById(R.id.rv);
 
         loadingView = inflater.inflate(R.layout.loading_item, null);
 
@@ -364,6 +371,8 @@ public class IssueFragment extends DialogFragment {
             bodyImageGetter.bind(bodyText, body, issue.getId());
         else
             bodyText.setText(R.string.no_description_given);
+
+        reactionsView.setReactionSummary(reactions);
 
         authorText.setText(issue.getUser().getLogin());
         createdDateText.setText(new StyledText().append(
@@ -485,6 +494,7 @@ public class IssueFragment extends DialogFragment {
                     return;
 
                 issue = fullIssue.getIssue();
+                reactions = fullIssue.getReactions();
 
                 List<TimelineEvent> events = (List<TimelineEvent>) fullIssue.getEvents();
                 int numEvents = events.size();

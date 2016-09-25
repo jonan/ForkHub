@@ -22,6 +22,7 @@ import android.util.Log;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.service.PaginationService;
+import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
@@ -118,7 +119,14 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         };
         Collection<TimelineEvent> timelineEvents = paginationService.getAll();
 
-        return new FullIssue(issue, sortAllComments(comments, reviews), timelineEvents);
+        ReactionSummary reactions = new ReactionSummary();
+        try {
+            reactions = newIssueService.getIssue(repo[0], repo[1], issueNumber).execute().body().reactions;
+        } catch (Exception e) {
+            // Reactions are in a preview state, API can change, so make sure we don't crash if it does.
+        }
+
+        return new FullIssue(issue, reactions, sortAllComments(comments, reviews), timelineEvents);
     }
 
     @Override
