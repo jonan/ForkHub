@@ -19,6 +19,7 @@ import com.github.mobile.api.service.NotificationService;
 import com.github.mobile.api.service.SearchService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 
 import java.io.IOException;
 
@@ -53,16 +54,19 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
     NotificationService notificationService(Retrofit retrofit) {
         return retrofit.create(NotificationService.class);
     }
 
     @Provides
+    @Singleton
     SearchService searchService(Retrofit retrofit) {
         return retrofit.create(SearchService.class);
     }
 
     @Provides
+    @Singleton
     com.github.mobile.api.service.IssueService issueService(Retrofit retrofit) {
         return retrofit.create(com.github.mobile.api.service.IssueService.class);
     }

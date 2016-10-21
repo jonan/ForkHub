@@ -30,6 +30,7 @@ import com.github.mobile.sync.SyncCampaign;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Named;
 import com.squareup.moshi.Moshi;
@@ -73,6 +74,7 @@ public class GitHubModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
     Retrofit retrofit(Provider<GitHubAccount> accountProvider) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new RequestConfiguration(accountProvider))
