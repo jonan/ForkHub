@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+- Show issue reactions.
+
+### Translations
+- Improve translations: SV.
+
 ## [ForkHub v1.2.4] - 2016-09-18
 
 ### Fixed
@@ -136,6 +144,7 @@
 
 - Last official GitHub release
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...master
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4
 [ForkHub v1.2.3]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.2...ForkHub-v1.2.3
 [ForkHub v1.2.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.1...ForkHub-v1.2.2
