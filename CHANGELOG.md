@@ -5,8 +5,12 @@
 ### Added
 - Show issue reactions.
 
+### Fixed
+- Some minor bug fixes.
+
 ### Translations
-- Improve translations: SV.
+- Improve translations: SV, TR.
+- New translations: PT-BR.
 
 ## [ForkHub v1.2.4] - 2016-09-18
 
