@@ -159,7 +159,7 @@
     <string name="report_issue">Reportar um problema</string>
     <string name="gists_title">Gists</string>
     <string name="issue_title">Problema #</string>
-    <string name="pull_request_title">Pedido de Pull #</string>
+    <string name="pull_request_title">Pedido #</string>
     <string name="gist_title">Gist\u0020</string>
     <string name="filter_issues_title">Filtrar Problemas</string>
     <string name="filter_pull_requests_title">Filtrar Pedidos de Pull</string>
