@@ -130,7 +130,7 @@
     <string name="commits">Commits</string>
     <string name="global_search">Busca GitHub</string>
     <string name="find_repositories">Buscar Repositórios</string>
-    <string name="find_issues">Find Issues</string>
+    <string name="find_issues">Buscar Problemas</string>
     <string name="search_title">Busca…</string>
     <string name="clear_search_history">Limpar Histórico</string>
     <string name="search_history_cleared">Histórico de pesquisas limpas</string>
