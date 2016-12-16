@@ -1,4 +1,7 @@
+* Show issue reactions.
+* Improve the Issue Dashboard to better reflect GitHub's behaviour.
 * Some minor bug fixes.
-* Improve translations: PL.
+* Improve translations: SV, TR.
+* New translations: PT-BR.
 
 https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md
