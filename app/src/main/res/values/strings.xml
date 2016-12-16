@@ -187,6 +187,8 @@
     <string name="enter_otp_code_title">Authentication Code</string>
     <string name="enter_otp_code_message">Two-factor authentication is enabled for your account. Enter your authentication code to verify your identity.</string>
     <string name="star_forkhub_dialog_text">If you like this app, please show your appreciation by starring it.</string>
+    <string name="rate_forkhub_dialog_text">If you like this app, please show your appreciation by rating it in the Play Store.</string>
+    <string name="rate">Rate</string>
     <string name="no_milestone">No milestone</string>
     <string name="unassigned">No one is assigned</string>
     <string name="assigned">is assigned</string>
