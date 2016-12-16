@@ -37,6 +37,16 @@ public class IssueUtils {
     }
 
     /**
+     * Is the given issue a pull request?
+     *
+     * @param issue
+     * @return true if pull request, false otherwise
+     */
+    public static boolean isPullRequest(final com.github.mobile.api.model.Issue issue) {
+        return issue.pull_request != null;
+    }
+
+    /**
      * Convert {@link PullRequest} model {@link Issue} model
      *
      * @param pullRequest

@@ -15,6 +15,7 @@
  */
 package com.github.mobile.api.service;
 
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.Repository;
 import com.github.mobile.api.model.SearchResult;
 import com.github.mobile.api.model.User;
@@ -31,6 +32,11 @@ public interface SearchService {
 
     @GET("search/repositories")
     Call<SearchResult<Repository>> searchRepositories(
+            @Query("q") String q,
+            @Query("page") int page);
+
+    @GET("search/issues")
+    Call<SearchResult<Issue>> searchIssues(
             @Query("q") String q,
             @Query("page") int page);
 }

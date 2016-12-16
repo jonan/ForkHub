@@ -150,6 +150,35 @@ public class IssuesViewActivity extends PagerActivity {
         return builder.toIntent();
     }
 
+    /**
+     * Create an intent to show issues with an initial selected issue
+     *
+     * @param issues
+     * @param position
+     * @return intent
+     */
+    public static Intent createIntentWithNewModel(Collection<? extends com.github.mobile.api.model.Issue> issues,
+                                      int position) {
+        final int count = issues.size();
+        int[] numbers = new int[count];
+        boolean[] pullRequests = new boolean[count];
+        ArrayList<RepositoryId> repos = new ArrayList<RepositoryId>(count);
+        int index = 0;
+        for (com.github.mobile.api.model.Issue issue : issues) {
+            numbers[index] = issue.number;
+            pullRequests[index] = IssueUtils.isPullRequest(issue);
+            index++;
+            repos.add(RepositoryId.createFromUrl(issue.html_url));
+        }
+
+        Builder builder = new Builder("issues.VIEW");
+        builder.add(EXTRA_ISSUE_NUMBERS, numbers);
+        builder.add(EXTRA_REPOSITORIES, repos);
+        builder.add(EXTRA_POSITION, position);
+        builder.add(EXTRA_PULL_REQUESTS, pullRequests);
+        return builder.toIntent();
+    }
+
     private ViewPager pager;
 
     private int[] issueNumbers;

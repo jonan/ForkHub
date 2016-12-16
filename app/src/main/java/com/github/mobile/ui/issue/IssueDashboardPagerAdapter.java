@@ -20,10 +20,6 @@ import static org.eclipse.egit.github.core.service.IssueService.DIRECTION_DESCEN
 import static org.eclipse.egit.github.core.service.IssueService.FIELD_DIRECTION;
 import static org.eclipse.egit.github.core.service.IssueService.FIELD_FILTER;
 import static org.eclipse.egit.github.core.service.IssueService.FIELD_SORT;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_ASSIGNED;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_CREATED;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_MENTIONED;
-import static org.eclipse.egit.github.core.service.IssueService.FILTER_SUBSCRIBED;
 import static org.eclipse.egit.github.core.service.IssueService.SORT_UPDATED;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -31,6 +27,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.mobile.R;
+import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.ui.FragmentStatePagerAdapter;
 
 import java.io.Serializable;
@@ -44,6 +41,8 @@ public class IssueDashboardPagerAdapter extends FragmentStatePagerAdapter {
 
     private final Resources resources;
 
+    private final String loggedUser;
+
     /**
      * Create pager adapter
      *
@@ -53,28 +52,26 @@ public class IssueDashboardPagerAdapter extends FragmentStatePagerAdapter {
         super(activity);
 
         resources = activity.getResources();
+        loggedUser = AccountUtils.getLogin(activity);
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override
     public Fragment getItem(final int position) {
-        String filter = null;
+        String filter = "is:open ";
         switch (position) {
         case 0:
-            filter = FILTER_SUBSCRIBED;
+            filter += "author:" + loggedUser;
             break;
         case 1:
-            filter = FILTER_ASSIGNED;
+            filter += "assignee:" + loggedUser;
             break;
         case 2:
-            filter = FILTER_CREATED;
-            break;
-        case 3:
-            filter = FILTER_MENTIONED;
+            filter += "mentions:" + loggedUser;
             break;
         default:
             return null;
@@ -94,12 +91,10 @@ public class IssueDashboardPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(final int position) {
         switch (position) {
         case 0:
-            return resources.getString(R.string.tab_watched);
+            return resources.getString(R.string.tab_created);
         case 1:
             return resources.getString(R.string.tab_assigned);
         case 2:
-            return resources.getString(R.string.tab_created);
-        case 3:
             return resources.getString(R.string.tab_mentioned);
         default:
             return null;

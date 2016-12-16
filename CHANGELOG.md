@@ -6,6 +6,7 @@
 - Show issue reactions.
 
 ### Fixed
+- Improve the Issue Dashboard to better reflect GitHub's behaviour.
 - Some minor bug fixes.
 
 ### Translations

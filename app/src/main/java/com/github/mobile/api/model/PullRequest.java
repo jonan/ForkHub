@@ -15,45 +15,6 @@
  */
 package com.github.mobile.api.model;
 
-import java.util.Date;
-import java.util.List;
-
-public class Issue {
-    public long id;
-
+public class PullRequest {
     public String url;
-
-    public String html_url;
-
-    public int number;
-
-    public String state;
-
-    public String title;
-
-    public String body;
-
-    public User user;
-
-    public List<Label> labels;
-
-    public User assignee;
-
-    public Milestone milestone;
-
-    public boolean locked;
-
-    public int comments;
-
-    public PullRequest pull_request;
-
-    public Date created_at;
-
-    public Date closed_at;
-
-    public Date updated_at;
-
-    public User closed_by;
-
-    public ReactionSummary reactions;
 }
