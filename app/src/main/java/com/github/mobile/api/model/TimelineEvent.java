@@ -27,6 +27,7 @@ public class TimelineEvent {
     public static final String EVENT_HEAD_REF_DELETED = "head_ref_deleted";
     public static final String EVENT_HEAD_REF_RESTORED = "head_ref_restored";
     public static final String EVENT_LABELED = "labeled";
+    public static final String EVENT_LINE_COMMENTED = "line-commented";
     public static final String EVENT_LOCKED = "locked";
     public static final String EVENT_MENTIONED = "mentioned";
     public static final String EVENT_MERGED = "merged";
@@ -34,6 +35,7 @@ public class TimelineEvent {
     public static final String EVENT_REFERENCED = "referenced";
     public static final String EVENT_RENAMED = "renamed";
     public static final String EVENT_REOPENED = "reopened";
+    public static final String EVENT_REVIEWED = "reviewed";
     public static final String EVENT_SUBSCRIBED = "subscribed";
     public static final String EVENT_UNASSIGNED = "unassigned";
     public static final String EVENT_UNLABELED = "unlabeled";

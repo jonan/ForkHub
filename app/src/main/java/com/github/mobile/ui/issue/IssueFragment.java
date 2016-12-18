@@ -734,6 +734,8 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_MENTIONED,
                 TimelineEvent.EVENT_SUBSCRIBED,
                 TimelineEvent.EVENT_UNSUBSCRIBED,
+                TimelineEvent.EVENT_LINE_COMMENTED,
+                TimelineEvent.EVENT_REVIEWED,
                 TimelineEvent.EVENT_COMMITTED,
                 TimelineEvent.EVENT_CROSS_REFERENCED,
                 TimelineEvent.EVENT_COMMENTED);
