@@ -74,6 +74,7 @@ public class SourceEditor {
         WebSettings settings = view.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
         view.addJavascriptInterface(this, "SourceEditor");
 
         this.view = view;
@@ -166,11 +167,16 @@ public class SourceEditor {
     }
 
     private void loadSource() {
-        if (name != null && content != null)
-            if (markdown)
+        if (name != null && content != null) {
+            if (markdown) {
+                view.getSettings().setUseWideViewPort(false);
                 view.loadDataWithBaseURL(null, content, "text/html", CHARSET_UTF8, null);
-            else
+            }
+            else {
+                view.getSettings().setUseWideViewPort(true);
                 view.loadUrl(URL_PAGE);
+            }
+        }
     }
 
     /**
