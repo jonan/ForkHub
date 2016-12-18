@@ -48,7 +48,15 @@ public class TimelineEvent {
 
     public User actor;
 
+    public CommitAuthor author;
+
+    public CommitAuthor committer;
+
     public String commit_id;
+
+    public String sha;
+
+    public String message;
 
     public String event;
 

@@ -119,8 +119,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
         }
 
         String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.login);
-        if (actor != null)
-        avatars.bind(imageView(2), actor);
+        if (actor != null) {
+            setGone(2, false);
+            avatars.bind(imageView(2), actor);
+        } else {
+            setGone(2, true);
+        }
 
         switch (eventString) {
         case TimelineEvent.EVENT_ASSIGNED:
@@ -192,6 +196,12 @@ public class CommentListAdapter extends MultiTypeAdapter {
             setText(0, TypefaceUtils.ICON_GIT_MERGE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_purple));
             break;
+        case TimelineEvent.EVENT_COMMITTED:
+            setGone(2, true);
+            message = String.format("<b>%s</b> ", event.author.name) + event.message;
+            setText(0, TypefaceUtils.ICON_GIT_COMMIT);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
         case TimelineEvent.EVENT_LOCKED:
             message += resources.getString(R.string.issue_event_lock);
             setText(0, TypefaceUtils.ICON_LOCK);
@@ -214,8 +224,9 @@ public class CommentListAdapter extends MultiTypeAdapter {
             break;
         }
 
-        if (event.created_at != null)
-        message += " " + TimeUtils.getRelativeTime(event.created_at);
+        if (event.created_at != null) {
+            message += " " + TimeUtils.getRelativeTime(event.created_at);
+        }
         setText(1, Html.fromHtml(message));
     }
 

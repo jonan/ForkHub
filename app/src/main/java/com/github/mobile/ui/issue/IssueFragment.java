@@ -718,7 +718,6 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_UNSUBSCRIBED,
                 TimelineEvent.EVENT_LINE_COMMENTED,
                 TimelineEvent.EVENT_REVIEWED,
-                TimelineEvent.EVENT_COMMITTED,
                 TimelineEvent.EVENT_CROSS_REFERENCED);
 
         if (event == null || excludedEvents.contains(event.event))
