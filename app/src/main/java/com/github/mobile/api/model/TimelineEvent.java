@@ -67,6 +67,8 @@ public class TimelineEvent {
 
     public Date updated_at;
 
+    public String body;
+
     public String body_html;
 
     public Label label;
@@ -81,6 +83,7 @@ public class TimelineEvent {
         Comment comment = new Comment();
         comment.setCreatedAt(created_at);
         comment.setUpdatedAt(updated_at);
+        comment.setBody(body);
         comment.setBodyHtml(body_html);
         comment.setId(id);
         comment.setUser(actor.getOldUserModel());
