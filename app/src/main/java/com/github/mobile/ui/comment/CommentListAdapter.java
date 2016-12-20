@@ -100,11 +100,7 @@ public class CommentListAdapter extends MultiTypeAdapter {
                 updateComment((TimelineEvent) obj);
             }
         } else {
-            if (obj instanceof CommitComment) {
-                updateReview((CommitComment) obj);
-            } else {
-                updateEvent((TimelineEvent) obj);
-            }
+            updateEvent((TimelineEvent) obj);
         }
     }
 
@@ -202,6 +198,11 @@ public class CommentListAdapter extends MultiTypeAdapter {
             setText(0, TypefaceUtils.ICON_GIT_COMMIT);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
+        case TimelineEvent.EVENT_LINE_COMMENTED:
+            message += resources.getString(R.string.issue_event_comment_diff);
+            setText(0, TypefaceUtils.ICON_CODE);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
+            break;
         case TimelineEvent.EVENT_LOCKED:
             message += resources.getString(R.string.issue_event_lock);
             setText(0, TypefaceUtils.ICON_LOCK);
@@ -227,17 +228,6 @@ public class CommentListAdapter extends MultiTypeAdapter {
         if (event.created_at != null) {
             message += " " + TimeUtils.getRelativeTime(event.created_at);
         }
-        setText(1, Html.fromHtml(message));
-    }
-
-    protected void updateReview(final CommitComment review) {
-        String message = String.format("<b>%s</b> ", review.getUser() == null ? "ghost" : review.getUser().getLogin());
-        avatars.bind(imageView(2), review.getUser());
-        message += resources.getString(R.string.issue_event_comment_diff);
-        setText(0, TypefaceUtils.ICON_CODE);
-        textView(0).setTextColor(resources.getColor(R.color.issue_event_light));
-
-        message += " " + TimeUtils.getRelativeTime(review.getCreatedAt());
         setText(1, Html.fromHtml(message));
     }
 

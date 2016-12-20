@@ -18,6 +18,7 @@ package com.github.mobile.api.model;
 import org.eclipse.egit.github.core.Comment;
 
 import java.util.Date;
+import java.util.List;
 
 public class TimelineEvent {
     public static final String EVENT_ASSIGNED = "assigned";
@@ -51,6 +52,8 @@ public class TimelineEvent {
     public CommitAuthor author;
 
     public CommitAuthor committer;
+
+    public List<LineComment> comments;
 
     public String commit_id;
 

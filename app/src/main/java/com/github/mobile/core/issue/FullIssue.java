@@ -20,7 +20,6 @@ import com.github.mobile.api.model.ReactionSummary;
 
 import java.util.Collection;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.Issue;
 
 /**
@@ -34,29 +33,18 @@ public class FullIssue {
 
     private Collection<TimelineEvent> events;
 
-    private Collection<CommitComment> reviews;
-
     /**
      * Create wrapper for issue, reactions, comments and events
      *
      * @param issue
      * @param reactions
      * @param events
-     * @param reviews
      */
     public FullIssue(final Issue issue, final ReactionSummary reactions,
-            final Collection<TimelineEvent> events, final Collection<CommitComment> reviews) {
+            final Collection<TimelineEvent> events) {
         this.issue = issue;
         this.reactions = reactions;
         this.events = events;
-        this.reviews = reviews;
-    }
-
-    /**
-     * Create empty wrapper
-     */
-    public FullIssue() {
-        this.issue = null;
     }
 
     /**
@@ -78,12 +66,5 @@ public class FullIssue {
      */
     public Collection<TimelineEvent> getEvents() {
         return events;
-    }
-
-    /**
-     * @return reviews
-     */
-    public Collection<CommitComment> getReviews() {
-        return reviews;
     }
 }

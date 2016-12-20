@@ -58,6 +58,7 @@ import android.widget.TextView;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.api.model.LineComment;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.core.issue.DeleteCommentTask;
@@ -88,6 +89,7 @@ import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -716,7 +718,6 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_MENTIONED,
                 TimelineEvent.EVENT_SUBSCRIBED,
                 TimelineEvent.EVENT_UNSUBSCRIBED,
-                TimelineEvent.EVENT_LINE_COMMENTED,
                 TimelineEvent.EVENT_REVIEWED,
                 TimelineEvent.EVENT_CROSS_REFERENCED);
 
@@ -726,6 +727,18 @@ public class IssueFragment extends DialogFragment {
         // Don't show references to nonexistent commits
         if (TimelineEvent.EVENT_REFERENCED.equals(event.event) && event.commit_id == null)
             return false;
+
+        // Don't show empty line comments
+        if (TimelineEvent.EVENT_LINE_COMMENTED.equals(event.event)) {
+            if (event.comments == null || event.comments.isEmpty()) {
+                return false;
+            }
+
+            // Populate some data for better visualization
+            LineComment comment = event.comments.get(0);
+            event.actor = comment.user;
+            event.created_at = comment.created_at;
+        }
 
         int currentSize = allItems.size();
         if (currentSize == 0)

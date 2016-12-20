@@ -30,13 +30,9 @@ import com.google.inject.Inject;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.service.PullRequestService;
 
 /**
  * Task to load and store an {@link Issue}
@@ -46,10 +42,7 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
     private static final String TAG = "RefreshIssueTask";
 
     @Inject
-    private IssueService issueService;
-
-    @Inject
-    private PullRequestService pullService;
+    private IssueService service;
 
     @Inject
     private IssueStore store;
@@ -87,18 +80,11 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         Issue issue = store.refreshIssue(repositoryId, issueNumber);
         bodyImageGetter.encode(issue.getId(), issue.getBodyHtml());
 
-        List<CommitComment> reviews;
-        if (IssueUtils.isPullRequest(issue))
-            reviews = pullService.getComments(repositoryId, issueNumber);
-        else
-            reviews = Collections.emptyList();
-        reviews = Collections.emptyList();
-
         final String[] repo = repositoryId.generateId().split("/");
         PaginationService<TimelineEvent> paginationService = new PaginationService<TimelineEvent>(1, PaginationService.ITEMS_PER_PAGE_MAX) {
             @Override
             public Collection<TimelineEvent> getSinglePage(int page, int itemsPerPage) throws IOException {
-                return issueService.getTimeline(repo[0], repo[1], issueNumber, page, itemsPerPage).execute().body();
+                return service.getTimeline(repo[0], repo[1], issueNumber, page, itemsPerPage).execute().body();
             }
         };
         Collection<TimelineEvent> timelineEvents = paginationService.getAll();
@@ -113,12 +99,12 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
 
         ReactionSummary reactions = new ReactionSummary();
         try {
-            reactions = issueService.getIssue(repo[0], repo[1], issueNumber).execute().body().reactions;
+            reactions = service.getIssue(repo[0], repo[1], issueNumber).execute().body().reactions;
         } catch (Exception e) {
             // Reactions are in a preview state, API can change, so make sure we don't crash if it does.
         }
 
-        return new FullIssue(issue, reactions, timelineEvents, reviews);
+        return new FullIssue(issue, reactions, timelineEvents);
     }
 
     @Override
