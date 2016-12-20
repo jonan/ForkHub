@@ -77,7 +77,6 @@ import com.github.mobile.ui.HeaderFooterListAdapter;
 import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
-import com.github.mobile.ui.comment.CommentListAdapter;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -89,7 +88,7 @@ import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -110,7 +109,7 @@ public class IssueFragment extends DialogFragment {
 
     private int issueNumber;
 
-    private List<Object> items;
+    private List<TimelineEvent> items;
 
     private RepositoryId repositoryId;
 
@@ -140,7 +139,7 @@ public class IssueFragment extends DialogFragment {
 
     private View footerView;
 
-    private HeaderFooterListAdapter<CommentListAdapter> adapter;
+    private HeaderFooterListAdapter<EventListAdapter> adapter;
 
     private EditMilestoneTask milestoneTask;
 
@@ -356,8 +355,8 @@ public class IssueFragment extends DialogFragment {
 
         Activity activity = getActivity();
         loggedUser = AccountUtils.getLogin(activity);
-        adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
-                new CommentListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
+        adapter = new HeaderFooterListAdapter<EventListAdapter>(list,
+                new EventListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
         list.setAdapter(adapter);
     }
 
@@ -498,23 +497,22 @@ public class IssueFragment extends DialogFragment {
                 issue = fullIssue.getIssue();
                 reactions = fullIssue.getReactions();
 
-                List<TimelineEvent> events = (List<TimelineEvent>) fullIssue.getEvents();
+                Collection<TimelineEvent> allItems = fullIssue.getEvents();
 
-                List<Object> allItems = new ArrayList<>(events.size());
-
-                for (TimelineEvent event : events) {
-                    if (shouldAddEvent(event, allItems)) {
-                        allItems.add(event);
+                List<TimelineEvent> neededItems = new ArrayList<>(allItems.size());
+                for (TimelineEvent event : allItems) {
+                    if (shouldAddEvent(event, neededItems)) {
+                        neededItems.add(event);
                     }
                 }
+                items = neededItems;
 
-                items = allItems;
-                updateList(fullIssue.getIssue(), allItems);
+                updateList(issue, items);
             }
         }.execute();
     }
 
-    private void updateList(Issue issue, List<Object> items) {
+    private void updateList(Issue issue, List<TimelineEvent> items) {
         adapter.getWrappedAdapter().setItems(items);
         adapter.removeHeader(loadingView);
 
@@ -600,15 +598,6 @@ public class IssueFragment extends DialogFragment {
             updateHeader(editedIssue);
             break;
         case COMMENT_CREATE:
-            Comment comment = (Comment) data
-                    .getSerializableExtra(EXTRA_COMMENT);
-            if (items != null) {
-                items.add(comment);
-                issue.setComments(issue.getComments() + 1);
-                updateList(issue, items);
-            } else
-                refreshIssue();
-            break;
         case COMMENT_EDIT:
             // TODO: update the commit without reloading the full issue
             refreshIssue();
@@ -712,7 +701,7 @@ public class IssueFragment extends DialogFragment {
         }
     }
 
-    static private boolean shouldAddEvent(TimelineEvent event, List<Object> allItems) {
+    static private boolean shouldAddEvent(TimelineEvent event, List<TimelineEvent> allItems) {
         // Exclude some events
         List<String> excludedEvents = Arrays.asList(
                 TimelineEvent.EVENT_MENTIONED,
@@ -744,21 +733,19 @@ public class IssueFragment extends DialogFragment {
         if (currentSize == 0)
             return true;
 
-        Object previousItem = allItems.get(currentSize - 1);
-        if (!(previousItem instanceof TimelineEvent))
-            return true;
+        TimelineEvent previousItem = allItems.get(currentSize - 1);
 
         // Remove referenced event before a merge
         if (TimelineEvent.EVENT_MERGED.equals(event.event) &&
-                TimelineEvent.EVENT_REFERENCED.equals(((TimelineEvent) previousItem).event) &&
-                event.commit_id.equals(((TimelineEvent) previousItem).commit_id)) {
+                TimelineEvent.EVENT_REFERENCED.equals((previousItem).event) &&
+                event.commit_id.equals((previousItem).commit_id)) {
             allItems.remove(currentSize - 1);
             return true;
         }
 
         // Don't show the close event after the merged event
         if (TimelineEvent.EVENT_CLOSED.equals(event.event) &&
-                TimelineEvent.EVENT_MERGED.equals(((TimelineEvent) previousItem).event))
+                TimelineEvent.EVENT_MERGED.equals((previousItem).event))
             return false;
 
         return true;
