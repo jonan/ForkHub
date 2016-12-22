@@ -24,6 +24,7 @@ import android.view.View;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.model.User;
 import com.github.mobile.ui.user.UserViewActivity;
@@ -141,6 +142,13 @@ public class EventListAdapter extends MultiTypeAdapter {
             break;
         case TimelineEvent.EVENT_REFERENCED:
             message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + event.commit_id.substring(0,7) + "</b>");
+            setText(0, TypefaceUtils.ICON_BOOKMARK);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case TimelineEvent.EVENT_CROSS_REFERENCED:
+            Issue issue = event.source.issue;
+            String crossRef = issue.repository.full_name + "#" + issue.number;
+            message += String.format(resources.getString(R.string.issue_event_cross_referenced), "<b>" + crossRef + "</b>");
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;

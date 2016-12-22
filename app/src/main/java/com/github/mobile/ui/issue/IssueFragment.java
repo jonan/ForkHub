@@ -707,8 +707,7 @@ public class IssueFragment extends DialogFragment {
                 TimelineEvent.EVENT_MENTIONED,
                 TimelineEvent.EVENT_SUBSCRIBED,
                 TimelineEvent.EVENT_UNSUBSCRIBED,
-                TimelineEvent.EVENT_REVIEWED,
-                TimelineEvent.EVENT_CROSS_REFERENCED);
+                TimelineEvent.EVENT_REVIEWED);
 
         if (event == null || excludedEvents.contains(event.event))
             return false;

@@ -55,6 +55,8 @@ public class TimelineEvent {
 
     public List<LineComment> comments;
 
+    public ReferenceSource source;
+
     public String commit_id;
 
     public String sha;
