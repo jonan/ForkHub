@@ -1,7 +1,5 @@
-* Show issue reactions.
-* Improve the Issue Dashboard to better reflect GitHub's behaviour.
-* Some minor bug fixes.
-* Improve translations: SV, TR.
-* New translations: PT-BR.
+* Show more issue events.
+* Fix crash that occurred when opening a pull request with reviews.
+* Some minor improvements.
 
 https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md

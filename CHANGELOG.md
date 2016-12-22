@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.6] - 2016-12-23
 
 ### Added
 - Show more issue events.
@@ -158,7 +158,7 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...master
+[ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
 [ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4
 [ForkHub v1.2.3]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.2...ForkHub-v1.2.3
