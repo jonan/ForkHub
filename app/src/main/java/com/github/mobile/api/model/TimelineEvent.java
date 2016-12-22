@@ -39,6 +39,8 @@ public class TimelineEvent {
     public static final String EVENT_RENAMED = "renamed";
     public static final String EVENT_REOPENED = "reopened";
     public static final String EVENT_REVIEWED = "reviewed";
+    public static final String EVENT_REVIEW_REQUESTED = "review_requested";
+    public static final String EVENT_REVIEW_REQUEST_REMOVED = "review_request_removed";
     public static final String EVENT_SUBSCRIBED = "subscribed";
     public static final String EVENT_UNASSIGNED = "unassigned";
     public static final String EVENT_UNLABELED = "unlabeled";
@@ -56,6 +58,10 @@ public class TimelineEvent {
     public List<LineComment> comments;
 
     public ReferenceSource source;
+
+    public User review_requester;
+
+    public User requested_reviewer;
 
     public String commit_id;
 

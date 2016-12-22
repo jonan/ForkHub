@@ -152,6 +152,16 @@ public class EventListAdapter extends MultiTypeAdapter {
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
+        case TimelineEvent.EVENT_REVIEW_REQUESTED:
+            message += String.format(resources.getString(R.string.issue_event_review_requested), "<b>" + event.requested_reviewer.login + "</b>");
+            setText(0, TypefaceUtils.ICON_EYE);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case TimelineEvent.EVENT_REVIEW_REQUEST_REMOVED:
+            message += String.format(resources.getString(R.string.issue_event_review_request_removed), "<b>" + event.requested_reviewer.login + "</b>");
+            setText(0, TypefaceUtils.ICON_X);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
         case TimelineEvent.EVENT_MILESTONED:
             message += String.format(resources.getString(R.string.issue_event_milestone_added), "<b>" + event.milestone.title + "</b>");
             setText(0, TypefaceUtils.ICON_MILESTONE);
