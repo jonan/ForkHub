@@ -15,7 +15,10 @@
  */
 package com.github.mobile.api.model;
 
+import org.eclipse.egit.github.core.Comment;
+
 import java.util.Date;
+import java.util.List;
 
 public class TimelineEvent {
     public static final String EVENT_ASSIGNED = "assigned";
@@ -36,6 +39,8 @@ public class TimelineEvent {
     public static final String EVENT_RENAMED = "renamed";
     public static final String EVENT_REOPENED = "reopened";
     public static final String EVENT_REVIEWED = "reviewed";
+    public static final String EVENT_REVIEW_REQUESTED = "review_requested";
+    public static final String EVENT_REVIEW_REQUEST_REMOVED = "review_request_removed";
     public static final String EVENT_SUBSCRIBED = "subscribed";
     public static final String EVENT_UNASSIGNED = "unassigned";
     public static final String EVENT_UNLABELED = "unlabeled";
@@ -46,13 +51,33 @@ public class TimelineEvent {
 
     public User actor;
 
+    public CommitAuthor author;
+
+    public CommitAuthor committer;
+
+    public List<LineComment> comments;
+
+    public ReferenceSource source;
+
+    public User review_requester;
+
+    public User requested_reviewer;
+
     public String commit_id;
+
+    public String sha;
+
+    public String message;
 
     public String event;
 
     public Date created_at;
 
     public Date updated_at;
+
+    public String body;
+
+    public String body_html;
 
     public Label label;
 
@@ -61,4 +86,15 @@ public class TimelineEvent {
     public Milestone milestone;
 
     public Rename rename;
+
+    public Comment getOldCommentModel() {
+        Comment comment = new Comment();
+        comment.setCreatedAt(created_at);
+        comment.setUpdatedAt(updated_at);
+        comment.setBody(body);
+        comment.setBodyHtml(body_html);
+        comment.setId(id);
+        comment.setUser(actor.getOldUserModel());
+        return comment;
+    }
 }
