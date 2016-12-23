@@ -77,19 +77,19 @@
 
 
     <!-- Empty messages -->
-    <string name="no_notifications">Sem Notificações</string>
-    <string name="no_bookmarks">Sem Favoritos</string>
-    <string name="no_repositories">Sem Repositórios</string>
-    <string name="no_contributors">Sem Contribuidores</string>
-    <string name="no_issues">Sem Problemas</string>
-    <string name="no_pull_requests">Sem Pedidos de Pull</string>
-    <string name="no_gists">Sem Gists</string>
-    <string name="no_people">Sem Pessoas</string>
-    <string name="no_followers">Sem Seguidores</string>
-    <string name="no_members">Sem Membros</string>
-    <string name="no_teams">Sem Equipes</string>
-    <string name="no_news">Sem Notícias</string>
-    <string name="no_commits">Sem Commits</string>
+    <string name="no_notifications">Nenhuma Notificação</string>
+    <string name="no_bookmarks">Nenhum Favorito</string>
+    <string name="no_repositories">Nenhum Repositório</string>
+    <string name="no_contributors">Nenhum Contribuidor</string>
+    <string name="no_issues">Nenhum Problema</string>
+    <string name="no_pull_requests">Nenhum Pedido de Pull</string>
+    <string name="no_gists">Nenhum Gist</string>
+    <string name="no_people">Nenhuma Pessoa</string>
+    <string name="no_followers">Nenhum Seguidor</string>
+    <string name="no_members">Nenhum Membro</string>
+    <string name="no_teams">Nenhuma Equipe</string>
+    <string name="no_news">Nenhuma Notícia</string>
+    <string name="no_commits">Nenhum Commit</string>
     <!--  -->
 
 
@@ -103,7 +103,7 @@
     <!-- Issue events texts -->
     <string name="issue_event_label_assigned">foi atribuído por %1$s</string>
     <string name="issue_event_label_unassigned">foi desatribuído por %1$s</string>
-    <string name="issue_event_label_self_assigned">auto-atribuído this</string>
+    <string name="issue_event_label_self_assigned">auto-atribuído</string>
     <string name="issue_event_label_self_unassigned">removeu sua atribuição</string>
     <string name="issue_event_label_added">adicionou o rótulo %1$s</string>
     <string name="issue_event_label_removed">removeu o rótulo %1$s</string>
@@ -111,6 +111,9 @@
     <string name="issue_event_milestone_removed">removeu isto do milestone %1$s</string>
     <string name="issue_event_merged">merged commit %1$s</string>
     <string name="issue_event_referenced">referenciou este problema do commit %1$s</string>
+    <string name="issue_event_cross_referenced">referenciou este problema em %1$s</string>
+    <string name="issue_event_review_requested">solicitou revisão de %1$s</string>
+    <string name="issue_event_review_request_removed">removeu a solicitação para revisão de %1$s</string>
     <string name="issue_event_closed">fechou isto</string>
     <string name="issue_event_closed_from_commit">fechou isto do commit %1$s</string>
     <string name="issue_event_reopened">reabriu isto</string>
@@ -128,14 +131,14 @@
     <string name="issues">Problemas</string>
     <string name="gists">Gists</string>
     <string name="commits">Commits</string>
-    <string name="global_search">GitHub search</string>
-    <string name="find_repositories">Find Repositories</string>
-    <string name="find_issues">Find Issues</string>
-    <string name="search_title">Search…</string>
-    <string name="clear_search_history">Clear History</string>
-    <string name="search_history_cleared">Search history cleared</string>
-    <string name="login_activity_authenticating">Logging in…</string>
-    <string name="creating_gist">Creating Gist…</string>
+    <string name="global_search">Busca GitHub</string>
+    <string name="find_repositories">Buscar Repositórios</string>
+    <string name="find_issues">Buscar Problemas</string>
+    <string name="search_title">Busca…</string>
+    <string name="clear_search_history">Limpar Histórico</string>
+    <string name="search_history_cleared">Histórico de pesquisas limpas</string>
+    <string name="login_activity_authenticating">Entrando…</string>
+    <string name="creating_gist">Criando Gist…</string>
     <string name="create">Criar</string>
     <string name="create_gist">Criar Gist</string>
     <string name="gist_content_hint">colocar \'Olá Mundo!\'</string>
@@ -159,7 +162,7 @@
     <string name="report_issue">Reportar um problema</string>
     <string name="gists_title">Gists</string>
     <string name="issue_title">Problema #</string>
-    <string name="pull_request_title">Pedido de Pull #</string>
+    <string name="pull_request_title">Pedido #</string>
     <string name="gist_title">Gist\u0020</string>
     <string name="filter_issues_title">Filtrar Problemas</string>
     <string name="filter_pull_requests_title">Filtrar Pedidos de Pull</string>
@@ -309,7 +312,7 @@
     <string name="tab_commits">commits</string>
     <string name="tab_issues">problemas</string>
     <string name="tab_pull_requests">pedidos de pull</string>
-    <string name="tab_watched">assistido</string>
+    <string name="tab_watched">assistindo</string>
     <string name="tab_assigned">atribuído</string>
     <string name="tab_created">criado</string>
     <string name="tab_mentioned">mencionado</string>
