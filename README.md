@@ -4,7 +4,7 @@
   <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
 </a>
 <a href="https://f-droid.org/repository/browse/?fdid=jp.forkhub" target="_blank">
-  <img src="https://f-droid.org/wiki/images/5/55/F-Droid-button_get-it-on_bigger.png" height="60"/>
+  <img src="https://f-droid.org/badge/get-it-on.png" height="60"/>
 </a>
 
 ForkHub started off as a fork of the official Android app from GitHub, and has since seen lots of improvements. You can see a comprehensive list of changes in the [change log](https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md).
