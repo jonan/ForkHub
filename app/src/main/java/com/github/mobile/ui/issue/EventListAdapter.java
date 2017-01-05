@@ -43,7 +43,6 @@ public class EventListAdapter extends MultiTypeAdapter {
     private static final int VIEW_EVENT = 1;
     private static final int VIEW_TOTAL = 2;
 
-
     private final Context context;
 
     private final Resources resources;
@@ -204,6 +203,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             setText(0, TypefaceUtils.ICON_GIT_COMMIT);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
+        case TimelineEvent.EVENT_COMMIT_COMMENTED:
         case TimelineEvent.EVENT_LINE_COMMENTED:
             message += resources.getString(R.string.issue_event_comment_diff);
             setText(0, TypefaceUtils.ICON_CODE);

@@ -25,6 +25,7 @@ public class TimelineEvent {
     public static final String EVENT_CLOSED = "closed";
     public static final String EVENT_COMMENTED = "commented";
     public static final String EVENT_COMMITTED = "committed";
+    public static final String EVENT_COMMIT_COMMENTED = "commit-commented";
     public static final String EVENT_CROSS_REFERENCED = "cross-referenced";
     public static final String EVENT_DEMILESTONED = "demilestoned";
     public static final String EVENT_HEAD_REF_DELETED = "head_ref_deleted";

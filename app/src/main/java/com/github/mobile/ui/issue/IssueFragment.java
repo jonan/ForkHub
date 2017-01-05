@@ -717,7 +717,8 @@ public class IssueFragment extends DialogFragment {
             return false;
 
         // Don't show empty line comments
-        if (TimelineEvent.EVENT_LINE_COMMENTED.equals(event.event)) {
+        if (TimelineEvent.EVENT_LINE_COMMENTED.equals(event.event) ||
+                TimelineEvent.EVENT_COMMIT_COMMENTED.equals(event.event)) {
             if (event.comments == null || event.comments.isEmpty()) {
                 return false;
             }
