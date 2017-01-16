@@ -23,8 +23,8 @@ import android.widget.TextView;
 
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.core.code.FullTree.Entry;
-import com.github.mobile.core.code.FullTree.Folder;
+import com.github.mobile.core.code.TreeEntry.Entry;
+import com.github.mobile.core.code.TreeFolder.Folder;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.util.ServiceUtils;
 import com.github.mobile.util.TypefaceUtils;
