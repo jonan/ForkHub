@@ -112,6 +112,15 @@ public class UriLauncherActivity extends Activity {
                 new Intent(Intent.ACTION_VIEW, Uri.parse("https://dummyintent.github.com/"))
                         .addCategory(CATEGORY_BROWSABLE);
 
+        // Try to get default browser
+        ResolveInfo resolver = context.getPackageManager().resolveActivity(dummyIntent, 0);
+        if (resolver != null && resolver.activityInfo != null) {
+            return new Intent(Intent.ACTION_VIEW, data)
+                    .addCategory(CATEGORY_BROWSABLE)
+                    .setPackage(resolver.activityInfo.packageName);
+        }
+
+        // If there is no default browser, get any
         List<ResolveInfo> resolvers = context.getPackageManager().queryIntentActivities(dummyIntent, 0);
         if (resolvers.isEmpty()) {
             return null;
