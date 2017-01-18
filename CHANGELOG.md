@@ -1,5 +1,16 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+- Show the 'commit-commented' issue event.
+
+### Fixed
+- Use the default browser when available.
+
+### Translations
+- Improve translations: DE, PT-BR.
+
 ## [ForkHub v1.2.6] - 2016-12-23
 
 ### Added
@@ -158,6 +169,7 @@
 
 - Last official GitHub release
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...master
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
 [ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4
