@@ -23,7 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import com.github.mobile.R;
-import com.github.mobile.ui.FragmentPagerAdapter;
+import com.github.mobile.ui.FragmentStatePagerAdapter;
 import com.github.mobile.ui.repo.RepositoryListFragment;
 import com.github.mobile.ui.repo.StarredRepositoryListFragment;
 import com.github.mobile.ui.team.TeamListFragment;
@@ -34,7 +34,7 @@ import java.util.Set;
 /**
  * Pager adapter for a user's different views
  */
-public class HomePagerAdapter extends FragmentPagerAdapter {
+public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
     private boolean defaultUser;
 
