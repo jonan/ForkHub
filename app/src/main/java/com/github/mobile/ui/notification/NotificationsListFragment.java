@@ -17,7 +17,6 @@ package com.github.mobile.ui.notification;
 
 import android.accounts.Account;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
@@ -27,15 +26,12 @@ import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.Notification;
 import com.github.mobile.api.model.Subject;
 import com.github.mobile.api.service.NotificationService;
-import com.github.mobile.api.service.PaginationService;
-import com.github.mobile.core.ResourcePager;
-import com.github.mobile.ui.PagedItemFragment;
+import com.github.mobile.ui.NewPagedItemFragment;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.google.inject.Inject;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -43,47 +39,23 @@ import okhttp3.ResponseBody;
 /**
  * Fragment to display a list of {@link Notification} objects
  */
-public class NotificationsListFragment extends PagedItemFragment<Notification> {
+public class NotificationsListFragment extends NewPagedItemFragment<Notification> {
 
     @Inject
     private NotificationService service;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setEmptyText(R.string.no_notifications);
+    public NotificationsListFragment() {
+        super(R.string.no_notifications, R.string.loading_notifications, R.string.error_notifications_load);
     }
 
     @Override
-    protected ResourcePager<Notification> createPager() {
-        return new ResourcePager<Notification>() {
-
-            @Override
-            protected Object getId(Notification resource) {
-                return resource.id;
-            }
-
-            @Override
-            public Iterator<Collection<Notification>> createIterator(int page, int size) {
-                return new PaginationService<Notification>(page) {
-                    @Override
-                    public Collection<Notification> getSinglePage(int page, int itemsPerPage) throws IOException {
-                        return service.listNotifications(true, page).execute().body();
-                    }
-                }.getIterator();
-            }
-        };
+    protected Object getResourceId(Notification resource) {
+        return resource.id;
     }
 
     @Override
-    protected int getLoadingMessage() {
-        return R.string.loading_notifications;
-    }
-
-    @Override
-    protected int getErrorMessage(Exception exception) {
-        return R.string.error_notifications_load;
+    protected Collection<Notification> getPage(int page, int itemsPerPage) throws IOException {
+        return service.listNotifications(true, page).execute().body();
     }
 
     @Override

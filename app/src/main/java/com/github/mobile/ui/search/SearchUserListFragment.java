@@ -29,6 +29,7 @@ import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.user.RefreshUserTask;
+import com.github.mobile.ui.NewPagedItemFragment;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
@@ -42,7 +43,7 @@ import java.util.List;
 /**
  * Fragment to display a list of {@link User} instances
  */
-public class SearchUserListFragment extends PagedItemFragment<User> {
+public class SearchUserListFragment extends NewPagedItemFragment<User> {
 
     @Inject
     private SearchService service;
@@ -52,16 +53,8 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
 
     private String query;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setEmptyText(R.string.no_people);
-    }
-
-    @Override
-    protected int getLoadingMessage() {
-        return R.string.loading_people;
+    public SearchUserListFragment() {
+        super(R.string.no_people, R.string.loading_people, R.string.error_users_search);
     }
 
     @Override
@@ -86,24 +79,13 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
     }
 
     @Override
-    protected ResourcePager<User> createPager() {
-        return new ResourcePager<User>() {
+    protected Object getResourceId(User resource) {
+        return resource.id;
+    }
 
-            @Override
-            protected Object getId(User resource) {
-                return resource.id;
-            }
-
-            @Override
-            public Iterator<Collection<User>> createIterator(int page, int size) {
-                return new PaginationService<User>(page) {
-                    @Override
-                    public Collection<User> getSinglePage(int page, int itemsPerPage) throws IOException {
-                        return service.searchUsers(query, page).execute().body().items;
-                    }
-                }.getIterator();
-            }
-        };
+    @Override
+    protected Collection<User> getPage(int page, int itemsPerPage) throws IOException {
+        return service.searchUsers(query, page).execute().body().items;
     }
 
     @Override
@@ -125,10 +107,5 @@ public class SearchUserListFragment extends PagedItemFragment<User> {
                     startActivity(UserViewActivity.createIntent(user));
             }
         }.execute();
-    }
-
-    @Override
-    protected int getErrorMessage(Exception exception) {
-        return R.string.error_users_search;
     }
 }

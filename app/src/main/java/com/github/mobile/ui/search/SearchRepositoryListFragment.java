@@ -19,7 +19,6 @@ import static android.app.SearchManager.QUERY;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
@@ -27,11 +26,9 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.api.model.Repository;
-import com.github.mobile.api.service.PaginationService;
 import com.github.mobile.api.service.SearchService;
-import com.github.mobile.core.ResourcePager;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
-import com.github.mobile.ui.PagedItemFragment;
+import com.github.mobile.ui.NewPagedItemFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.google.inject.Inject;
 
@@ -39,7 +36,6 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.egit.github.core.RepositoryId;
@@ -49,7 +45,7 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 /**
  * Fragment to display a list of {@link Repository} instances
  */
-public class SearchRepositoryListFragment extends PagedItemFragment<Repository> {
+public class SearchRepositoryListFragment extends NewPagedItemFragment<Repository> {
 
     @Inject
     private RepositoryService service;
@@ -59,11 +55,8 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
 
     private String query;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setEmptyText(R.string.no_repositories);
+    public SearchRepositoryListFragment() {
+        super(R.string.no_repositories, R.string.loading_repositories, R.string.error_repos_load);
     }
 
     @Override
@@ -112,28 +105,17 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
     }
 
     @Override
-    protected ResourcePager<Repository> createPager() {
-        return new ResourcePager<Repository>() {
+    protected Object getResourceId(Repository resource) {
+        return resource.id;
+    }
 
-            @Override
-            protected Object getId(Repository resource) {
-                return resource.id;
-            }
+    @Override
+    protected Collection<Repository> getPage(int page, int itemsPerPage) throws IOException {
+        if (openRepositoryMatch(query)) {
+            return Collections.emptyList();
+        }
 
-            @Override
-            public Iterator<Collection<Repository>> createIterator(int page, int size) {
-                return new PaginationService<Repository>(page) {
-                    @Override
-                    public Collection<Repository> getSinglePage(int page, int itemsPerPage) throws IOException {
-                        if (openRepositoryMatch(query)) {
-                            return Collections.emptyList();
-                        }
-
-                        return searchService.searchRepositories(query, page).execute().body().items;
-                    }
-                }.getIterator();
-            }
-        };
+        return searchService.searchRepositories(query, page).execute().body().items;
     }
 
     /**
@@ -163,16 +145,6 @@ public class SearchRepositoryListFragment extends PagedItemFragment<Repository> 
         if (activity != null)
             activity.finish();
         return true;
-    }
-
-    @Override
-    protected int getLoadingMessage() {
-        return R.string.loading_repositories;
-    }
-
-    @Override
-    protected int getErrorMessage(Exception exception) {
-        return R.string.error_repos_load;
     }
 
     @Override
