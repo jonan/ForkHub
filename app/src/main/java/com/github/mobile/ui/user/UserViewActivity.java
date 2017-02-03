@@ -81,7 +81,7 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
      * @return intent
      */
     public static Intent createIntent(com.github.mobile.api.model.User user) {
-        return new Builder("user.VIEW").user(user.getOldUserModel()).toIntent();
+        return new Builder("user.VIEW").user(user.getOldModel()).toIntent();
     }
 
     /**

@@ -261,7 +261,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             view(5).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    issueFragment.editComment(comment.getOldCommentModel());
+                    issueFragment.editComment(comment.getOldModel());
                 }
             });
             // Delete button
@@ -269,7 +269,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             view(6).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    issueFragment.deleteComment(comment.getOldCommentModel());
+                    issueFragment.deleteComment(comment.getOldModel());
                 }
             });
         } else {

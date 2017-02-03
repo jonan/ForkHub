@@ -88,14 +88,16 @@ public class TimelineEvent {
 
     public Rename rename;
 
-    public Comment getOldCommentModel() {
+    public Comment getOldModel() {
         Comment comment = new Comment();
         comment.setCreatedAt(created_at);
         comment.setUpdatedAt(updated_at);
         comment.setBody(body);
         comment.setBodyHtml(body_html);
         comment.setId(id);
-        comment.setUser(actor.getOldUserModel());
+        if (actor != null) {
+            comment.setUser(actor.getOldModel());
+        }
         return comment;
     }
 }

@@ -15,19 +15,16 @@
  */
 package com.github.mobile.api.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Project implements Serializable {
+public class ProjectCard {
     public long id;
 
-    public String name;
+    public String content_url;
 
-    public String body;
+    public String note;
 
-    public int number;
-
-    public User creator;
+    public Issue issue;
 
     public Date created_at;
 

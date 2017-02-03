@@ -188,6 +188,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.project.ProjectViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="jp.forkhub.mobile.project.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.user.UserViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>

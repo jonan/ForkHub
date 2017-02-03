@@ -15,19 +15,12 @@
  */
 package com.github.mobile.api.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Project implements Serializable {
+public class ProjectColumn {
     public long id;
 
     public String name;
-
-    public String body;
-
-    public int number;
-
-    public User creator;
 
     public Date created_at;
 

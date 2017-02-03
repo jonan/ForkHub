@@ -66,8 +66,9 @@ public class ProjectsListFragment extends NewPagedItemFragment<Project> {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-
+    public void onListItemClick(ListView list, View v, int position, long id) {
+        Project project = items.get(position);
+        startActivity(ProjectViewActivity.createIntent(repository, project));
     }
 
     @Override

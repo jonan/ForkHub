@@ -16,6 +16,8 @@
 package com.github.mobile.api.service;
 
 import com.github.mobile.api.model.Project;
+import com.github.mobile.api.model.ProjectCard;
+import com.github.mobile.api.model.ProjectColumn;
 
 import java.util.List;
 
@@ -32,4 +34,17 @@ public interface ProjectService {
             @Path("owner") String owner,
             @Path("repo") String repo,
             @Query("page") int page);
+
+    @Headers("Accept: application/vnd.github.inertia-preview+json")
+    @GET("projects/{id}/columns")
+    Call<List<ProjectColumn>> getColumns(
+            @Path("id") long id,
+            @Query("page") int page);
+
+    @Headers("Accept: application/vnd.github.inertia-preview+json")
+    @GET("projects/columns/{id}/cards")
+    Call<List<ProjectCard>> getCards(
+            @Path("id") long id,
+            @Query("page") int page,
+            @Query("per_page") int perPage);
 }
