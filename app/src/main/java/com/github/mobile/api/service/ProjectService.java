@@ -15,10 +15,11 @@
  */
 package com.github.mobile.api.service;
 
-import com.github.mobile.api.model.TimelineEvent;
+import com.github.mobile.api.model.Project;
+import com.github.mobile.api.model.ProjectCard;
+import com.github.mobile.api.model.ProjectColumn;
 
 import java.util.List;
-import com.github.mobile.api.model.Issue;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,20 +27,24 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface IssueService {
-    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
-    @GET("repos/{owner}/{repo}/issues/{number}")
-    Call<Issue> getIssue(
+public interface ProjectService {
+    @Headers("Accept: application/vnd.github.inertia-preview+json")
+    @GET("repos/{owner}/{repo}/projects")
+    Call<List<Project>> getProjects(
             @Path("owner") String owner,
             @Path("repo") String repo,
-            @Path("number") long number);
+            @Query("page") int page);
 
-    @Headers("Accept: application/vnd.github.mockingbird-preview")
-    @GET("repos/{owner}/{repo}/issues/{issue_number}/timeline")
-    Call<List<TimelineEvent>> getTimeline(
-            @Path("owner") String owner,
-            @Path("repo") String repo,
-            @Path("issue_number") long issue_number,
+    @Headers("Accept: application/vnd.github.inertia-preview+json")
+    @GET("projects/{id}/columns")
+    Call<List<ProjectColumn>> getColumns(
+            @Path("id") long id,
+            @Query("page") int page);
+
+    @Headers("Accept: application/vnd.github.inertia-preview+json")
+    @GET("projects/columns/{id}/cards")
+    Call<List<ProjectCard>> getCards(
+            @Path("id") long id,
             @Query("page") int page,
-            @Query("per_page") int per_page);
+            @Query("per_page") int perPage);
 }

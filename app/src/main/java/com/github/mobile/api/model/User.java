@@ -74,7 +74,7 @@ public class User implements Serializable {
 
     public Plan plan;
 
-    public org.eclipse.egit.github.core.User getOldUserModel() {
+    public org.eclipse.egit.github.core.User getOldModel() {
         org.eclipse.egit.github.core.User user = new org.eclipse.egit.github.core.User();
         user.setId((int) id);
         user.setLogin(login);

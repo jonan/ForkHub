@@ -18,6 +18,7 @@ package com.github.mobile;
 import static org.eclipse.egit.github.core.RepositoryId.createFromUrl;
 import android.content.Intent;
 
+import com.github.mobile.api.model.Project;
 import com.github.mobile.api.model.Team;
 
 import java.io.Serializable;
@@ -117,6 +118,16 @@ public class Intents {
      * {@link ArrayList} handle of {@link User} objects
      */
     public static final String EXTRA_USERS = INTENT_EXTRA_PREFIX + "USERS";
+
+    /**
+     * Project handle
+     */
+    public static final String EXTRA_PROJECT = INTENT_EXTRA_PREFIX + "PROJECT";
+
+    /**
+     * Project column handle
+     */
+    public static final String EXTRA_PROJECT_COLUMN = INTENT_EXTRA_PREFIX + "PROJECT_COLUMN";
 
     /**
      * Team handle
@@ -237,6 +248,16 @@ public class Intents {
         public Builder issue(Issue issue) {
             return repo(createFromUrl(issue.getHtmlUrl())).add(EXTRA_ISSUE,
                     issue).add(EXTRA_ISSUE_NUMBER, issue.getNumber());
+        }
+
+        /**
+         * Add project to intent being built up
+         *
+         * @param project
+         * @return this builder
+         */
+        public Builder project(Project project) {
+            return add(EXTRA_PROJECT, project);
         }
 
         /**
