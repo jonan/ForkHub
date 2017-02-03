@@ -16,23 +16,23 @@
 package com.github.mobile.ui.team;
 
 import android.os.Bundle;
-import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.ThrowableLoader;
-import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.api.model.Team;
+import com.github.mobile.api.service.TeamService;
+import com.github.mobile.ui.NewPagedItemFragment;
 import com.github.mobile.ui.user.OrganizationSelectionListener;
 import com.github.mobile.ui.user.OrganizationSelectionProvider;
 import com.google.inject.Inject;
 
-import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.service.TeamService;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.github.mobile.Intents.EXTRA_USER;
@@ -40,13 +40,20 @@ import static com.github.mobile.Intents.EXTRA_USER;
 /**
  * Fragment to display the teams of an organization
  */
-public class TeamListFragment extends ItemListFragment<Team> implements
+public class TeamListFragment extends NewPagedItemFragment<Team> implements
         OrganizationSelectionListener {
+
+    // We need an extra request for each team, so we load them in small batches
+    private static final int ITEMS_PER_PAGE = 5;
 
     private User org;
 
     @Inject
     private TeamService service;
+
+    public TeamListFragment() {
+        super(R.string.no_teams, R.string.loading_teams, R.string.error_teams_load);
+    }
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -69,26 +76,24 @@ public class TeamListFragment extends ItemListFragment<Team> implements
         org = ((OrganizationSelectionProvider) getActivity()).addListener(this);
         if (org == null && savedInstanceState != null)
             org = (User) savedInstanceState.getSerializable(EXTRA_USER);
-        setEmptyText(R.string.no_teams);
 
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public Loader<List<Team>> onCreateLoader(int id, Bundle args) {
-        return new ThrowableLoader<List<Team>>(getActivity(), items) {
+    protected Object getResourceId(Team resource) {
+        return resource.id;
+    }
 
-            @Override
-            public List<Team> loadData() throws Exception {
-                List<Team> teams = service.getTeams(org.getLogin());
-                // We need more information about each team
-                List<Team> fullTeams = new ArrayList<Team>(teams.size());
-                for (Team t : teams) {
-                    fullTeams.add(service.getTeam(t.getId()));
-                }
-                return fullTeams;
-            }
-        };
+    @Override
+    protected Collection<Team> getPage(int page, int itemsPerPage) throws IOException {
+        Collection<Team> teams = service.getTeams(org.getLogin(), page, ITEMS_PER_PAGE).execute().body();
+        // We need more information about each team
+        List<Team> fullTeams = new ArrayList<Team>(teams.size());
+        for (Team t : teams) {
+            fullTeams.add(service.getTeam(t.id).execute().body());
+        }
+        return fullTeams;
     }
 
     @Override
@@ -110,10 +115,5 @@ public class TeamListFragment extends ItemListFragment<Team> implements
     public void onListItemClick(ListView l, View v, int position, long id) {
         Team team = (Team) l.getItemAtPosition(position);
         startActivity(TeamViewActivity.createIntent(team, org));
-    }
-
-    @Override
-    protected int getErrorMessage(Exception exception) {
-        return R.string.error_teams_load;
     }
 }

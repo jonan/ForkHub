@@ -24,13 +24,13 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
+import com.github.mobile.api.model.Team;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.ui.repo.UserRepositoryListAdapter;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.TeamService;
 
@@ -85,7 +85,7 @@ public class TeamRepositoryListFragment extends ItemListFragment<Repository> {
 
             @Override
             public List<Repository> loadData() throws Exception {
-                return service.getRepositories(team.getId());
+                return service.getRepositories((int) team.id);
             }
         };
     }

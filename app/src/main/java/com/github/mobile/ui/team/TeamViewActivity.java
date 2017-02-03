@@ -21,12 +21,12 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import com.github.mobile.Intents;
+import com.github.mobile.api.model.Team;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
-import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
@@ -67,7 +67,7 @@ public class TeamViewActivity extends TabPagerActivity<TeamPagerAdapter> {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(team.getName());
+        actionBar.setTitle(team.name);
         actionBar.setSubtitle(org.getLogin());
 
         avatars.bind(getSupportActionBar(), org);

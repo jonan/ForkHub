@@ -68,6 +68,7 @@
     <string name="loading_people">Loading People…</string>
     <string name="loading_gists">Loading Gists…</string>
     <string name="loading_collaborators">Loading Collaborators…</string>
+    <string name="loading_teams">Loading Teams…</string>
     <string name="loading_milestones">Loading Milestones…</string>
     <string name="loading_labels">Loading Labels…</string>
     <string name="loading_commits">Loading Commits…</string>

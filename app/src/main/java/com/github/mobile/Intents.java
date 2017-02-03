@@ -18,6 +18,8 @@ package com.github.mobile;
 import static org.eclipse.egit.github.core.RepositoryId.createFromUrl;
 import android.content.Intent;
 
+import com.github.mobile.api.model.Team;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,7 +28,6 @@ import org.eclipse.egit.github.core.GistFile;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 
 /**

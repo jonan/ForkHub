@@ -17,9 +17,10 @@ package com.github.mobile.api.model;
 
 import com.squareup.moshi.Json;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     public static final String TYPE_USER = "User";
     public static final String TYPE_ORGANIZATION = "Organization";
 

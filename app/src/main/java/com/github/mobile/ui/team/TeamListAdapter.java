@@ -19,8 +19,7 @@ import android.view.LayoutInflater;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-
-import org.eclipse.egit.github.core.Team;
+import com.github.mobile.api.model.Team;
 
 /**
  * List adapter for a list of teams
@@ -48,7 +47,7 @@ public class TeamListAdapter extends SingleTypeAdapter<Team> {
 
     @Override
     public long getItemId(final int position) {
-        return getItem(position).getId();
+        return getItem(position).id;
     }
 
     @Override
@@ -58,17 +57,17 @@ public class TeamListAdapter extends SingleTypeAdapter<Team> {
 
     @Override
     protected void update(final int position, final Team team) {
-        setText(0, team.getName());
+        setText(0, team.name);
 
         String infoText = "";
-        if (team.getMembersCount() > 0) {
-            infoText += (team.getMembersCount() + members);
-            if (team.getReposCount() > 0) {
+        if (team.members_count > 0) {
+            infoText += (team.members_count + members);
+            if (team.repos_count > 0) {
                 infoText += SEPARATOR;
             }
         }
-        if (team.getReposCount() > 0) {
-            infoText += (team.getReposCount() + repositories);
+        if (team.repos_count > 0) {
+            infoText += (team.repos_count + repositories);
         }
 
         setText(1, infoText);
