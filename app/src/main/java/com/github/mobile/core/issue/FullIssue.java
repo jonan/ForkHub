@@ -18,19 +18,14 @@ package com.github.mobile.core.issue;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.model.ReactionSummary;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Issue;
 
 /**
  * Issue model with comments
  */
-public class FullIssue extends ArrayList<Comment> implements Serializable {
-
-    private static final long serialVersionUID = 4586476132467323827L;
+public class FullIssue {
 
     private final Issue issue;
 
@@ -43,23 +38,13 @@ public class FullIssue extends ArrayList<Comment> implements Serializable {
      *
      * @param issue
      * @param reactions
-     * @param comments
      * @param events
      */
     public FullIssue(final Issue issue, final ReactionSummary reactions,
-            final Collection<Comment> comments, final Collection<TimelineEvent> events) {
-        super(comments);
-
-        this.events = events;
-        this.reactions = reactions;
+            final Collection<TimelineEvent> events) {
         this.issue = issue;
-    }
-
-    /**
-     * Create empty wrapper
-     */
-    public FullIssue() {
-        this.issue = null;
+        this.reactions = reactions;
+        this.events = events;
     }
 
     /**

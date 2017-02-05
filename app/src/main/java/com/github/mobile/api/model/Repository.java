@@ -17,6 +17,8 @@ package com.github.mobile.api.model;
 
 import com.squareup.moshi.Json;
 
+import java.util.Date;
+
 public class Repository {
     public long id;
 
@@ -34,11 +36,11 @@ public class Repository {
     @Json(name = "fork")
     public boolean is_fork;
 
-    public String created_at;
+    public Date created_at;
 
-    public String updated_at;
+    public Date updated_at;
 
-    public String pushed_at;
+    public Date pushed_at;
 
     public String homepage;
 

@@ -25,13 +25,13 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.api.model.Team;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.user.UserListAdapter;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
-import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.TeamService;
 
@@ -76,7 +76,7 @@ public class TeamMembersFragment extends ItemListFragment<User> {
 
             @Override
             public List<User> loadData() throws Exception {
-                return service.getMembers(team.getId());
+                return service.getMembers((int) team.id);
             }
         };
     }

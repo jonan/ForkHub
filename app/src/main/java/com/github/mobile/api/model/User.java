@@ -17,7 +17,10 @@ package com.github.mobile.api.model;
 
 import com.squareup.moshi.Json;
 
-public class User {
+import java.io.Serializable;
+import java.util.Date;
+
+public class User implements Serializable {
     public static final String TYPE_USER = "User";
     public static final String TYPE_ORGANIZATION = "Organization";
 
@@ -55,9 +58,9 @@ public class User {
 
     public int following;
 
-    public String created_at;
+    public Date created_at;
 
-    public String updated_at;
+    public Date updated_at;
 
     public int total_private_repos;
 
@@ -70,4 +73,30 @@ public class User {
     public int collaborators;
 
     public Plan plan;
+
+    public org.eclipse.egit.github.core.User getOldModel() {
+        org.eclipse.egit.github.core.User user = new org.eclipse.egit.github.core.User();
+        user.setId((int) id);
+        user.setLogin(login);
+        user.setAvatarUrl(avatar_url);
+        user.setType(type);
+        user.setName(name);
+        user.setCompany(company);
+        user.setBlog(blog);
+        user.setLocation(location);
+        user.setEmail(email);
+        user.setHireable(is_hireable);
+        user.setBio(bio);
+        user.setPublicRepos(public_repos);
+        user.setPublicGists(public_gists);
+        user.setFollowers(followers);
+        user.setFollowing(following);
+        user.setCreatedAt(created_at);
+        user.setTotalPrivateRepos(total_private_repos);
+        user.setOwnedPrivateRepos(owned_private_repos);
+        user.setPrivateGists(private_gists);
+        user.setDiskUsage(disk_usage);
+        user.setCollaborators(collaborators);
+        return user;
+    }
 }

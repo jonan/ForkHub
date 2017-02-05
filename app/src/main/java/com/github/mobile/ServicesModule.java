@@ -16,7 +16,9 @@
 package com.github.mobile;
 
 import com.github.mobile.api.service.NotificationService;
+import com.github.mobile.api.service.ProjectService;
 import com.github.mobile.api.service.SearchService;
+import com.github.mobile.api.service.TeamService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -39,7 +41,6 @@ import org.eclipse.egit.github.core.service.OrganizationService;
 import org.eclipse.egit.github.core.service.PullRequestService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.service.StargazerService;
-import org.eclipse.egit.github.core.service.TeamService;
 import org.eclipse.egit.github.core.service.UserService;
 
 import retrofit2.Retrofit;
@@ -63,6 +64,18 @@ public class ServicesModule extends AbstractModule {
     @Singleton
     SearchService searchService(Retrofit retrofit) {
         return retrofit.create(SearchService.class);
+    }
+
+    @Provides
+    @Singleton
+    TeamService teamService(Retrofit retrofit) {
+        return retrofit.create(TeamService.class);
+    }
+
+    @Provides
+    @Singleton
+    ProjectService projectService(Retrofit retrofit) {
+        return retrofit.create(ProjectService.class);
     }
 
     @Provides
@@ -97,8 +110,8 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
-    TeamService teamService(GitHubClient client) {
-        return new TeamService(client);
+    org.eclipse.egit.github.core.service.TeamService teamService(GitHubClient client) {
+        return new org.eclipse.egit.github.core.service.TeamService(client);
     }
 
     @Provides

@@ -18,20 +18,18 @@ package com.github.mobile.ui.issue;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.github.mobile.R;
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.core.issue.IssueUtils;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
-
-import org.eclipse.egit.github.core.RepositoryIssue;
 
 /**
  * Adapter to display a list of dashboard issues
  */
 public class DashboardIssueListAdapter extends
-        IssueListAdapter<RepositoryIssue> {
+        IssueListAdapter<Issue> {
 
     private int numberPaintFlags;
 
@@ -43,18 +41,18 @@ public class DashboardIssueListAdapter extends
      * @param elements
      */
     public DashboardIssueListAdapter(AvatarLoader avatars,
-            Resources resources, LayoutInflater inflater, RepositoryIssue[] elements) {
+            Resources resources, LayoutInflater inflater, Issue[] elements) {
         super(R.layout.dashboard_issue_item, inflater, resources, elements, avatars);
     }
 
     @Override
     public long getItemId(final int position) {
-        return getItem(position).getId();
+        return getItem(position).id;
     }
 
     @Override
-    protected int getNumber(final RepositoryIssue issue) {
-        return issue.getNumber();
+    protected int getNumber(final Issue issue) {
+        return issue.number;
     }
 
     @Override
@@ -79,26 +77,26 @@ public class DashboardIssueListAdapter extends
     }
 
     @Override
-    protected void update(int position, RepositoryIssue issue) {
-        updateNumber(issue.getNumber(), issue.getState(), numberPaintFlags, 1);
+    protected void update(int position, Issue issue) {
+        updateNumber(issue.number, issue.state, numberPaintFlags, 1);
 
-        avatars.bind(imageView(3), issue.getUser());
+        avatars.bind(imageView(3), issue.user);
 
-        String[] segments = issue.getUrl().split("/");
+        String[] segments = issue.url.split("/");
         int length = segments.length;
         if (length >= 4)
             setText(0, segments[length - 4] + '/' + segments[length - 3]);
         else
             setText(0, null);
 
-        setText(2, issue.getTitle());
+        setText(2, issue.title);
 
-        updateReporter(issue.getUser().getLogin(), issue.getCreatedAt(), 4);
+        updateReporter(issue.user.login, issue.created_at, 4);
 
         setGone(5, !IssueUtils.isPullRequest(issue));
-        setNumber(7, issue.getComments());
+        setNumber(7, issue.comments);
 
-        if (issue.getComments() > 0) {
+        if (issue.comments > 0) {
             textView(6).setTextColor(resources.getColor(R.color.text_icon_highlighted));
             textView(7).setTextColor(resources.getColor(R.color.text_icon_highlighted));
         } else {
@@ -106,6 +104,6 @@ public class DashboardIssueListAdapter extends
             textView(7).setTextColor(resources.getColor(R.color.text_icon_disabled));
         }
 
-        updateLabels(issue.getLabels(), 8);
+        updateLabelsWithNewModel(issue.labels, 8);
     }
 }

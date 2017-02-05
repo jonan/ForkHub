@@ -15,6 +15,30 @@
  */
 package com.github.mobile.api.model;
 
+import java.util.Date;
+
 public class Milestone {
+    public long id;
+
+    public int number;
+
+    public String state;
+
     public String title;
+
+    public String description;
+
+    public User creator;
+
+    public int open_issues;
+
+    public int closed_issues;
+
+    public Date created_at;
+
+    public Date updated_at;
+
+    public Date closed_at;
+
+    public Date due_on;
 }

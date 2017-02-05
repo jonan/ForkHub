@@ -3,10 +3,35 @@
 ## [Unreleased]
 
 ### Added
-- Show issue reactions.
+- Show the 'commit-commented' issue event.
+
+### Fixed
+- Use the default browser when available.
 
 ### Translations
-- Improve translations: SV.
+- Improve translations: DE, PT-BR.
+
+## [ForkHub v1.2.6] - 2016-12-23
+
+### Added
+- Show more issue events.
+
+### Fixed
+- Fix crash that occurred when opening a pull request with reviews.
+- Some minor improvements.
+
+## [ForkHub v1.2.5] - 2016-12-16
+
+### Added
+- Show issue reactions.
+
+### Fixed
+- Improve the Issue Dashboard to better reflect GitHub's behaviour.
+- Some minor bug fixes.
+
+### Translations
+- Improve translations: SV, TR.
+- New translations: PT-BR.
 
 ## [ForkHub v1.2.4] - 2016-09-18
 
@@ -144,7 +169,9 @@
 
 - Last official GitHub release
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...master
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...master
+[ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
+[ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4
 [ForkHub v1.2.3]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.2...ForkHub-v1.2.3
 [ForkHub v1.2.2]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.1...ForkHub-v1.2.2

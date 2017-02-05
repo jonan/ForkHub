@@ -32,6 +32,7 @@ import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -170,5 +171,27 @@ public abstract class IssueListAdapter<V> extends SingleTypeAdapter<V> {
         } else
             for (int i = 0; i < MAX_LABELS; i++)
                 setGone(viewIndex + i, true);
+    }
+
+    /**
+     * Update label views with values from given label models
+     *
+     * @param labels
+     * @param viewIndex
+     */
+    protected void updateLabelsWithNewModel(final List<com.github.mobile.api.model.Label> labels, final int viewIndex) {
+        if (labels == null || labels.isEmpty()) {
+            updateLabels(null, viewIndex);
+            return;
+        }
+
+        List<Label> oldModelLabels = new ArrayList<>(labels.size());
+        Label newLabel;
+        for (com.github.mobile.api.model.Label l : labels) {
+            newLabel = new Label();
+            newLabel.setColor(l.color);
+            oldModelLabels.add(newLabel);
+        }
+        updateLabels(oldModelLabels, viewIndex);
     }
 }

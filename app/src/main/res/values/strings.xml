@@ -24,6 +24,7 @@
     <string name="error_contributors_load">Loading contributors failed</string>
     <string name="error_gist_load">Loading Gist failed</string>
     <string name="error_notifications_load">Loading notifications failed</string>
+    <string name="error_projects_load">Loading projects failed</string>
     <string name="error_news_load">Loading news failed</string>
     <string name="error_followers_load">Loading followers failed</string>
     <string name="error_people_load">Loading people failed</string>
@@ -60,6 +61,7 @@
     <string name="loading_notifications">Loading Notifications…</string>
     <string name="loading_more_issues">Loading More Issues…</string>
     <string name="loading_issues">Loading Issues…</string>
+    <string name="loading_projects">Loading Projects…</string>
     <string name="loading_comments">Loading Comments…</string>
     <string name="loading_repositories">Loading Repositories…</string>
     <string name="loading_issue">Loading Issue…</string>
@@ -68,6 +70,7 @@
     <string name="loading_people">Loading People…</string>
     <string name="loading_gists">Loading Gists…</string>
     <string name="loading_collaborators">Loading Collaborators…</string>
+    <string name="loading_teams">Loading Teams…</string>
     <string name="loading_milestones">Loading Milestones…</string>
     <string name="loading_labels">Loading Labels…</string>
     <string name="loading_commits">Loading Commits…</string>
@@ -90,6 +93,7 @@
     <string name="no_teams">No Teams</string>
     <string name="no_news">No News</string>
     <string name="no_commits">No Commits</string>
+    <string name="no_projects">No Projects</string>
     <!--  -->
 
 
@@ -111,6 +115,9 @@
     <string name="issue_event_milestone_removed">removed this from the %1$s milestone</string>
     <string name="issue_event_merged">merged commit %1$s</string>
     <string name="issue_event_referenced">referenced this issue from commit %1$s</string>
+    <string name="issue_event_cross_referenced">referenced this issue in %1$s</string>
+    <string name="issue_event_review_requested">requested review from %1$s</string>
+    <string name="issue_event_review_request_removed">removed their request for review from %1$s</string>
     <string name="issue_event_closed">closed this</string>
     <string name="issue_event_closed_from_commit">closed this from commit %1$s</string>
     <string name="issue_event_reopened">reopened this</string>
@@ -187,6 +194,8 @@
     <string name="enter_otp_code_title">Authentication Code</string>
     <string name="enter_otp_code_message">Two-factor authentication is enabled for your account. Enter your authentication code to verify your identity.</string>
     <string name="star_forkhub_dialog_text">If you like this app, please show your appreciation by starring it.</string>
+    <string name="rate_forkhub_dialog_text">If you like this app, please show your appreciation by rating it in the Play Store.</string>
+    <string name="rate">Rate</string>
     <string name="no_milestone">No milestone</string>
     <string name="unassigned">No one is assigned</string>
     <string name="assigned">is assigned</string>
@@ -242,6 +251,7 @@
     <string name="prefix_created">created\u0020</string>
     <string name="prefix_updated">updated\u0020</string>
     <string name="prefix_opened">opened\u0020</string>
+    <string name="updated">Updated %1$s</string>
     <string name="clear">Clear</string>
     <string name="pull_request_commits">Commits: %d</string>
     <string name="pull_request_mergeable_text">This branch has no conflicts with the base branch</string>
@@ -308,6 +318,7 @@
     <string name="tab_code">code</string>
     <string name="tab_commits">commits</string>
     <string name="tab_issues">issues</string>
+    <string name="tab_projects">projects</string>
     <string name="tab_pull_requests">pull requests</string>
     <string name="tab_watched">watched</string>
     <string name="tab_assigned">assigned</string>

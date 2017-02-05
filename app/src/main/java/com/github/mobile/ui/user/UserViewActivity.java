@@ -73,6 +73,17 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
     public static Intent createIntent(User user) {
         return new Builder("user.VIEW").user(user).toIntent();
     }
+
+    /**
+     * Create intent for this activity
+     *
+     * @param user
+     * @return intent
+     */
+    public static Intent createIntent(com.github.mobile.api.model.User user) {
+        return new Builder("user.VIEW").user(user.getOldModel()).toIntent();
+    }
+
     /**
      * Create intent for this activity and open the given tab
      *

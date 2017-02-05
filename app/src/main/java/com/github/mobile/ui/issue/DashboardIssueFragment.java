@@ -16,6 +16,8 @@
 package com.github.mobile.ui.issue;
 
 import static com.github.mobile.RequestCodes.ISSUE_VIEW;
+import static org.eclipse.egit.github.core.service.IssueService.FIELD_FILTER;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,23 +25,24 @@ import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Issue;
+import com.github.mobile.api.service.PaginationService;
+import com.github.mobile.api.service.SearchService;
 import com.github.mobile.core.ResourcePager;
-import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.PagedItemFragment;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.client.PageIterator;
-import org.eclipse.egit.github.core.service.IssueService;
 
 /**
  * Fragment to display a pageable list of dashboard issues
  */
-public class DashboardIssueFragment extends PagedItemFragment<RepositoryIssue> {
+public class DashboardIssueFragment extends PagedItemFragment<Issue> {
 
     /**
      * Filter data argument
@@ -47,10 +50,10 @@ public class DashboardIssueFragment extends PagedItemFragment<RepositoryIssue> {
     public static final String ARG_FILTER = "filter";
 
     @Inject
-    private IssueService service;
+    private SearchService service;
 
-    @Inject
-    private IssueStore store;
+    /*@Inject
+    private IssueStore store;*/
 
     @Inject
     private AvatarLoader avatars;
@@ -80,28 +83,33 @@ public class DashboardIssueFragment extends PagedItemFragment<RepositoryIssue> {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         startActivityForResult(
-                IssuesViewActivity.createIntent(items, position
+                IssuesViewActivity.createIntentWithNewModel(items, position
                         - getListAdapter().getHeadersCount()), ISSUE_VIEW);
     }
 
     @Override
-    protected ResourcePager<RepositoryIssue> createPager() {
-        return new ResourcePager<RepositoryIssue>() {
+    protected ResourcePager<Issue> createPager() {
+        return new ResourcePager<Issue>() {
 
-            @Override
-            protected RepositoryIssue register(RepositoryIssue resource) {
+            // TODO
+            /*@Override
+            protected Issue register(Issue resource) {
                 return store.addIssue(resource);
+            }*/
+
+            @Override
+            protected Object getId(Issue resource) {
+                return resource.id;
             }
 
             @Override
-            protected Object getId(RepositoryIssue resource) {
-                return resource.getId();
-            }
-
-            @Override
-            public PageIterator<RepositoryIssue> createIterator(int page,
-                    int size) {
-                return service.pageIssues(filterData, page, size);
+            public Iterator<Collection<Issue>> createIterator(int page, int size) {
+                return new PaginationService<Issue>(page) {
+                    @Override
+                    public Collection<Issue> getSinglePage(int page, int itemsPerPage) throws IOException {
+                        return service.searchIssues(filterData.get(FIELD_FILTER), page).execute().body().items;
+                    }
+                }.getIterator();
             }
         };
     }
@@ -117,10 +125,10 @@ public class DashboardIssueFragment extends PagedItemFragment<RepositoryIssue> {
     }
 
     @Override
-    protected SingleTypeAdapter<RepositoryIssue> createAdapter(
-            List<RepositoryIssue> items) {
+    protected SingleTypeAdapter<Issue> createAdapter(
+            List<Issue> items) {
         return new DashboardIssueListAdapter(avatars, getActivity().getResources(),
                 getActivity().getLayoutInflater(),
-                items.toArray(new RepositoryIssue[items.size()]));
+                items.toArray(new Issue[items.size()]));
     }
 }

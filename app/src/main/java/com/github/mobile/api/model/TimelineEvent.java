@@ -15,18 +15,23 @@
  */
 package com.github.mobile.api.model;
 
+import org.eclipse.egit.github.core.Comment;
+
 import java.util.Date;
+import java.util.List;
 
 public class TimelineEvent {
     public static final String EVENT_ASSIGNED = "assigned";
     public static final String EVENT_CLOSED = "closed";
     public static final String EVENT_COMMENTED = "commented";
     public static final String EVENT_COMMITTED = "committed";
+    public static final String EVENT_COMMIT_COMMENTED = "commit-commented";
     public static final String EVENT_CROSS_REFERENCED = "cross-referenced";
     public static final String EVENT_DEMILESTONED = "demilestoned";
     public static final String EVENT_HEAD_REF_DELETED = "head_ref_deleted";
     public static final String EVENT_HEAD_REF_RESTORED = "head_ref_restored";
     public static final String EVENT_LABELED = "labeled";
+    public static final String EVENT_LINE_COMMENTED = "line-commented";
     public static final String EVENT_LOCKED = "locked";
     public static final String EVENT_MENTIONED = "mentioned";
     public static final String EVENT_MERGED = "merged";
@@ -34,6 +39,9 @@ public class TimelineEvent {
     public static final String EVENT_REFERENCED = "referenced";
     public static final String EVENT_RENAMED = "renamed";
     public static final String EVENT_REOPENED = "reopened";
+    public static final String EVENT_REVIEWED = "reviewed";
+    public static final String EVENT_REVIEW_REQUESTED = "review_requested";
+    public static final String EVENT_REVIEW_REQUEST_REMOVED = "review_request_removed";
     public static final String EVENT_SUBSCRIBED = "subscribed";
     public static final String EVENT_UNASSIGNED = "unassigned";
     public static final String EVENT_UNLABELED = "unlabeled";
@@ -44,13 +52,33 @@ public class TimelineEvent {
 
     public User actor;
 
+    public CommitAuthor author;
+
+    public CommitAuthor committer;
+
+    public List<LineComment> comments;
+
+    public ReferenceSource source;
+
+    public User review_requester;
+
+    public User requested_reviewer;
+
     public String commit_id;
+
+    public String sha;
+
+    public String message;
 
     public String event;
 
     public Date created_at;
 
     public Date updated_at;
+
+    public String body;
+
+    public String body_html;
 
     public Label label;
 
@@ -59,4 +87,17 @@ public class TimelineEvent {
     public Milestone milestone;
 
     public Rename rename;
+
+    public Comment getOldModel() {
+        Comment comment = new Comment();
+        comment.setCreatedAt(created_at);
+        comment.setUpdatedAt(updated_at);
+        comment.setBody(body);
+        comment.setBodyHtml(body_html);
+        comment.setId(id);
+        if (actor != null) {
+            comment.setUser(actor.getOldModel());
+        }
+        return comment;
+    }
 }

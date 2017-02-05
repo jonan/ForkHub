@@ -149,7 +149,8 @@ public class GistFragment extends DialogFragment implements OnItemClickListener 
         progress = finder.find(R.id.pb_loading);
 
         Activity activity = getActivity();
-        adapter = new HeaderFooterListAdapter<CommentListAdapter>(list, new CommentListAdapter(activity, avatars, imageGetter));
+        adapter = new HeaderFooterListAdapter<CommentListAdapter>(list,
+                new CommentListAdapter(activity.getLayoutInflater(), avatars, imageGetter));
         list.setAdapter(adapter);
     }
 

@@ -16,6 +16,8 @@
 package com.github.mobile.api.model;
 
 public class Label {
+    public long id;
+
     public String name;
 
     public String color;
