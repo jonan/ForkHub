@@ -24,6 +24,7 @@
     <string name="error_contributors_load">Carregamento dos contribuidores falhou</string>
     <string name="error_gist_load">Carregamento do Gist falhou</string>
     <string name="error_notifications_load">Carregamento das notificações falhou</string>
+    <string name="error_projects_load">Carregamento dos projetos falhou</string>
     <string name="error_news_load">Carregamento das notícias falhou</string>
     <string name="error_followers_load">Carregamento dos seguidores falhou</string>
     <string name="error_people_load">Carregamento das pessoas falhou</string>
@@ -60,6 +61,7 @@
     <string name="loading_notifications">Carregando Notificações…</string>
     <string name="loading_more_issues">Carregando Mais Problemas…</string>
     <string name="loading_issues">Carregando Problemas…</string>
+    <string name="loading_projects">Carregando Projetos…</string>
     <string name="loading_comments">Carregando Comentários…</string>
     <string name="loading_repositories">Carregando Repositórios…</string>
     <string name="loading_issue">Carregando Problema…</string>
@@ -90,6 +92,7 @@
     <string name="no_teams">Nenhuma Equipe</string>
     <string name="no_news">Nenhuma Notícia</string>
     <string name="no_commits">Nenhum Commit</string>
+    <string name="no_commits">Nenhum Projeto</string>
     <!--  -->
 
 
@@ -245,6 +248,7 @@
     <string name="prefix_created">criou\u0020</string>
     <string name="prefix_updated">atualizou\u0020</string>
     <string name="prefix_opened">abriu\u0020</string>
+    <string name="updated">Atualizado %1$s</string>
     <string name="clear">Limpar</string>
     <string name="pull_request_commits">Commits: %d</string>
     <string name="pull_request_mergeable_text">Este branch não tem conflitos com o branch base</string>
@@ -311,6 +315,7 @@
     <string name="tab_code">código</string>
     <string name="tab_commits">commits</string>
     <string name="tab_issues">problemas</string>
+    <string name="tab_projects">projetos</string>
     <string name="tab_pull_requests">pedidos de pull</string>
     <string name="tab_watched">assistindo</string>
     <string name="tab_assigned">atribuído</string>
