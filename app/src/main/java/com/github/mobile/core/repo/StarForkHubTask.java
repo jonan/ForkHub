@@ -16,6 +16,7 @@
 package com.github.mobile.core.repo;
 
 import android.accounts.Account;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -134,7 +135,12 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
             new StarRepositoryTask(context, repository).start();
             break;
         case NUMBER_EXECUTIONS_NEEDED_PLAY_STORE:
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=jp.forkhub")));
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=jp.forkhub")));
+            } catch (ActivityNotFoundException e) {
+                Log.d(TAG, "PlayStore not installed, using other browser", e);
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=jp.forkhub")));
+            }
             break;
         }
     }
