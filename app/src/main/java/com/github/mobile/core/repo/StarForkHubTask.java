@@ -97,7 +97,7 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
         switch (result) {
         case NUMBER_EXECUTIONS_NEEDED_STAR:
             // Star dialog
-            new AlertDialog.Builder(context)
+            new AlertDialog.Builder(context, R.style.AlertDialog)
                     .setMessage(context.getResources().getString(R.string.star_forkhub_dialog_text))
                     .setPositiveButton(context.getResources().getString(R.string.star), this)
                     .setNegativeButton(context.getResources().getString(android.R.string.cancel), this)
@@ -106,7 +106,7 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
             break;
         case NUMBER_EXECUTIONS_NEEDED_PLAY_STORE:
             // Rate dialog
-            new AlertDialog.Builder(context)
+            new AlertDialog.Builder(context, R.style.AlertDialog)
                     .setMessage(context.getResources().getString(R.string.rate_forkhub_dialog_text))
                     .setPositiveButton(context.getResources().getString(R.string.rate), this)
                     .setNegativeButton(context.getResources().getString(android.R.string.cancel), this)
