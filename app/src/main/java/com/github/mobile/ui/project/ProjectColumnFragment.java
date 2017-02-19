@@ -54,7 +54,7 @@ public class ProjectColumnFragment extends NewPagedItemFragment<ProjectCard> {
     private IssueService issueService;
 
     public ProjectColumnFragment() {
-        super(R.string.no_projects, R.string.loading_projects, R.string.error_projects_load);
+        super(R.string.no_cards, R.string.loading_cards, R.string.error_cards_load);
     }
 
     @Override
