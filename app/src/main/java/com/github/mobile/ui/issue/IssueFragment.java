@@ -704,6 +704,9 @@ public class IssueFragment extends DialogFragment {
     static private boolean shouldAddEvent(TimelineEvent event, List<TimelineEvent> allItems) {
         // Exclude some events
         List<String> excludedEvents = Arrays.asList(
+                TimelineEvent.EVENT_ADDED_TO_PROJECT,
+                TimelineEvent.EVENT_MOVED_COLUMNS_IN_PROJECT,
+                TimelineEvent.EVENT_REMOVED_FROM_PROJECT,
                 TimelineEvent.EVENT_MENTIONED,
                 TimelineEvent.EVENT_SUBSCRIBED,
                 TimelineEvent.EVENT_UNSUBSCRIBED,
