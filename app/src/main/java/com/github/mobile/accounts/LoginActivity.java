@@ -21,9 +21,6 @@ import static android.accounts.AccountManager.KEY_AUTHTOKEN;
 import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.Intent.CATEGORY_BROWSABLE;
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
-import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
@@ -55,9 +52,6 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -183,6 +177,10 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         signupText.setMovementMethod(LinkMovementMethod.getInstance());
         signupText.setText(Html.fromHtml(getString(R.string.signup_link)));
 
+        TextView explanationText = finder.find(R.id.tv_explanation);
+        explanationText.setMovementMethod(LinkMovementMethod.getInstance());
+        explanationText.setText(Html.fromHtml(getString(R.string.login_pass_explanation)));
+
         if (!TextUtils.isEmpty(username)) {
             loginText.setText(username);
             loginText.setEnabled(false);
@@ -222,24 +220,6 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
                     return true;
                 }
                 return false;
-            }
-        });
-
-        CheckBox showPassword = finder.find(R.id.cb_show_password);
-        showPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                    boolean isChecked) {
-                int type = TYPE_CLASS_TEXT;
-                if (isChecked)
-                    type |= TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
-                else
-                    type |= TYPE_TEXT_VARIATION_PASSWORD;
-                int selection = passwordText.getSelectionStart();
-                passwordText.setInputType(type);
-                if (selection > 0)
-                    passwordText.setSelection(selection);
             }
         });
 

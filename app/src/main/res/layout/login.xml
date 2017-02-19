@@ -68,9 +68,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                app:hintTextAppearance="@style/TextInputLayout">
+                app:hintTextAppearance="@style/TextInputLayout"
+                app:passwordToggleEnabled="true">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/et_password"
                     style="@style/LoginEditText"
                     android:hint="@string/password"
@@ -80,13 +81,12 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <CheckBox
-                android:id="@+id/cb_show_password"
+            <TextView
+                android:id="@+id/tv_explanation"
                 style="@style/SubtitleText"
-                android:layout_marginTop="2dp"
-                android:singleLine="true"
-                android:text="@string/show_password"
-                android:textColor="@color/text" />
+                android:layout_marginTop="20dp"
+                android:textColor="@color/text"
+                android:textColorLink="@color/sign_up_text_link" />
 
         </LinearLayout>
     </ScrollView>
