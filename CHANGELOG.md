@@ -3,10 +3,12 @@
 ## [Unreleased]
 
 ### Added
+- Show repository projects
 - Show the 'commit-commented' issue event.
 
 ### Fixed
 - Use the default browser when available.
+- Some minor UI improvements.
 
 ### Translations
 - Improve translations: DE, PT-BR.
