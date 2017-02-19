@@ -5,6 +5,7 @@
 ### Added
 - Show repository projects
 - Show the 'commit-commented' issue event.
+- Make some issue events clickable.
 
 ### Fixed
 - Use the default browser when available.
