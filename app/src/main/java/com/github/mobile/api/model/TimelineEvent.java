@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TimelineEvent {
+    public static final String EVENT_ADDED_TO_PROJECT = "added_to_project";
     public static final String EVENT_ASSIGNED = "assigned";
     public static final String EVENT_CLOSED = "closed";
     public static final String EVENT_COMMENTED = "commented";
@@ -36,8 +37,10 @@ public class TimelineEvent {
     public static final String EVENT_MENTIONED = "mentioned";
     public static final String EVENT_MERGED = "merged";
     public static final String EVENT_MILESTONED = "milestoned";
+    public static final String EVENT_MOVED_COLUMNS_IN_PROJECT = "moved_columns_in_project";
     public static final String EVENT_REFERENCED = "referenced";
     public static final String EVENT_RENAMED = "renamed";
+    public static final String EVENT_REMOVED_FROM_PROJECT = "removed_from_project";
     public static final String EVENT_REOPENED = "reopened";
     public static final String EVENT_REVIEWED = "reviewed";
     public static final String EVENT_REVIEW_REQUESTED = "review_requested";

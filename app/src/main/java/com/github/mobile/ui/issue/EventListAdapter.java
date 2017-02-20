@@ -33,7 +33,9 @@ import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.TimeUtils;
 import com.github.mobile.util.TypefaceUtils;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Adapter for a list of {@link TimelineEvent} objects
@@ -42,6 +44,12 @@ public class EventListAdapter extends MultiTypeAdapter {
     private static final int VIEW_COMMENT = 0;
     private static final int VIEW_EVENT = 1;
     private static final int VIEW_TOTAL = 2;
+
+    private static final List<String> CLICKABLE_EVENTS = Arrays.asList(
+            TimelineEvent.EVENT_CLOSED,
+            TimelineEvent.EVENT_CROSS_REFERENCED,
+            TimelineEvent.EVENT_MERGED,
+            TimelineEvent.EVENT_REFERENCED);
 
     private final Context context;
 
@@ -335,7 +343,13 @@ public class EventListAdapter extends MultiTypeAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        TimelineEvent event = (TimelineEvent) getItem(position);
+
+        if (TimelineEvent.EVENT_CLOSED.equals(event.event)) {
+            return event.commit_id != null;
+        }
+
+        return CLICKABLE_EVENTS.contains(event.event);
     }
 
     @Override

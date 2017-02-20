@@ -49,6 +49,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -78,6 +80,7 @@ import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.commit.CommitCompareViewActivity;
+import com.github.mobile.ui.commit.CommitViewActivity;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -105,7 +108,15 @@ import org.eclipse.egit.github.core.User;
 /**
  * Fragment to display an issue
  */
-public class IssueFragment extends DialogFragment {
+public class IssueFragment extends DialogFragment implements OnItemClickListener {
+    private static final List<String> EXCLUDED_EVENTS = Arrays.asList(
+            TimelineEvent.EVENT_ADDED_TO_PROJECT,
+            TimelineEvent.EVENT_MOVED_COLUMNS_IN_PROJECT,
+            TimelineEvent.EVENT_REMOVED_FROM_PROJECT,
+            TimelineEvent.EVENT_MENTIONED,
+            TimelineEvent.EVENT_SUBSCRIBED,
+            TimelineEvent.EVENT_UNSUBSCRIBED,
+            TimelineEvent.EVENT_REVIEWED);
 
     private int issueNumber;
 
@@ -358,6 +369,7 @@ public class IssueFragment extends DialogFragment {
         adapter = new HeaderFooterListAdapter<EventListAdapter>(list,
                 new EventListAdapter(activity, avatars, commentImageGetter, this, isCollaborator, loggedUser));
         list.setAdapter(adapter);
+        list.setOnItemClickListener(this);
     }
 
     private void updateHeader(final Issue issue) {
@@ -605,6 +617,25 @@ public class IssueFragment extends DialogFragment {
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TimelineEvent event = items.get(position - 1);
+
+        switch (event.event) {
+        case TimelineEvent.EVENT_CROSS_REFERENCED:
+            startActivity(IssuesViewActivity.createIntent(event.source.issue.getOldModel()));
+            break;
+        case TimelineEvent.EVENT_CLOSED:
+        case TimelineEvent.EVENT_MERGED:
+        case TimelineEvent.EVENT_REFERENCED:
+            Repository repo = new Repository();
+            repo.setName(repositoryId.getName());
+            repo.setOwner(new User().setLogin(repositoryId.getOwner()));
+            startActivity(CommitViewActivity.createIntent(repo, event.commit_id));
+            break;
+        }
+    }
+
     /**
      * Edit existing comment
      */
@@ -703,13 +734,7 @@ public class IssueFragment extends DialogFragment {
 
     static private boolean shouldAddEvent(TimelineEvent event, List<TimelineEvent> allItems) {
         // Exclude some events
-        List<String> excludedEvents = Arrays.asList(
-                TimelineEvent.EVENT_MENTIONED,
-                TimelineEvent.EVENT_SUBSCRIBED,
-                TimelineEvent.EVENT_UNSUBSCRIBED,
-                TimelineEvent.EVENT_REVIEWED);
-
-        if (event == null || excludedEvents.contains(event.event))
+        if (event == null || EXCLUDED_EVENTS.contains(event.event))
             return false;
 
         // Don't show references to nonexistent commits

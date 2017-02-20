@@ -25,6 +25,7 @@
     <string name="error_gist_load">Loading Gist failed</string>
     <string name="error_notifications_load">Loading notifications failed</string>
     <string name="error_projects_load">Loading projects failed</string>
+    <string name="error_cards_load">Loading cards failed</string>
     <string name="error_news_load">Loading news failed</string>
     <string name="error_followers_load">Loading followers failed</string>
     <string name="error_people_load">Loading people failed</string>
@@ -62,6 +63,7 @@
     <string name="loading_more_issues">Loading More Issues…</string>
     <string name="loading_issues">Loading Issues…</string>
     <string name="loading_projects">Loading Projects…</string>
+    <string name="loading_cards">Loading Cards…</string>
     <string name="loading_comments">Loading Comments…</string>
     <string name="loading_repositories">Loading Repositories…</string>
     <string name="loading_issue">Loading Issue…</string>
@@ -94,6 +96,7 @@
     <string name="no_news">No News</string>
     <string name="no_commits">No Commits</string>
     <string name="no_projects">No Projects</string>
+    <string name="no_cards">No Cards</string>
     <!--  -->
 
 
@@ -191,6 +194,7 @@
     <string name="select_milestone">Select Milestone</string>
     <string name="select_labels">Select Labels</string>
     <string name="select_ref">Select Branch or Tag</string>
+    <string name="login_pass_explanation">ForkHub will only use your password to generate a &lt;i>Personal Access Token&lt;/i>. If you prefer you can &lt;a href=\"https://github.com/settings/tokens\">create it yourself&lt;/a> and use it as password here.</string>
     <string name="enter_otp_code_title">Authentication Code</string>
     <string name="enter_otp_code_message">Two-factor authentication is enabled for your account. Enter your authentication code to verify your identity.</string>
     <string name="star_forkhub_dialog_text">If you like this app, please show your appreciation by starring it.</string>

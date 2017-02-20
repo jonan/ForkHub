@@ -16,6 +16,7 @@
 package com.github.mobile.core.repo;
 
 import android.accounts.Account;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -97,7 +98,7 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
         switch (result) {
         case NUMBER_EXECUTIONS_NEEDED_STAR:
             // Star dialog
-            new AlertDialog.Builder(context)
+            new AlertDialog.Builder(context, R.style.AlertDialog)
                     .setMessage(context.getResources().getString(R.string.star_forkhub_dialog_text))
                     .setPositiveButton(context.getResources().getString(R.string.star), this)
                     .setNegativeButton(context.getResources().getString(android.R.string.cancel), this)
@@ -106,7 +107,7 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
             break;
         case NUMBER_EXECUTIONS_NEEDED_PLAY_STORE:
             // Rate dialog
-            new AlertDialog.Builder(context)
+            new AlertDialog.Builder(context, R.style.AlertDialog)
                     .setMessage(context.getResources().getString(R.string.rate_forkhub_dialog_text))
                     .setPositiveButton(context.getResources().getString(R.string.rate), this)
                     .setNegativeButton(context.getResources().getString(android.R.string.cancel), this)
@@ -134,7 +135,12 @@ public class StarForkHubTask extends AuthenticatedUserTask<Integer> implements D
             new StarRepositoryTask(context, repository).start();
             break;
         case NUMBER_EXECUTIONS_NEEDED_PLAY_STORE:
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=jp.forkhub")));
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=jp.forkhub")));
+            } catch (ActivityNotFoundException e) {
+                Log.d(TAG, "PlayStore not installed, using other browser", e);
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=jp.forkhub")));
+            }
             break;
         }
     }
