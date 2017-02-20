@@ -25,6 +25,7 @@
     <string name="error_gist_load">Carregamento do Gist falhou</string>
     <string name="error_notifications_load">Carregamento das notificações falhou</string>
     <string name="error_projects_load">Carregamento dos projetos falhou</string>
+    <string name="error_cards_load">Carregamento dos cartões falhou</string>
     <string name="error_news_load">Carregamento das notícias falhou</string>
     <string name="error_followers_load">Carregamento dos seguidores falhou</string>
     <string name="error_people_load">Carregamento das pessoas falhou</string>
@@ -62,6 +63,7 @@
     <string name="loading_more_issues">Carregando Mais Problemas…</string>
     <string name="loading_issues">Carregando Problemas…</string>
     <string name="loading_projects">Carregando Projetos…</string>
+    <string name="loading_cards">Carregando Cartões…</string>
     <string name="loading_comments">Carregando Comentários…</string>
     <string name="loading_repositories">Carregando Repositórios…</string>
     <string name="loading_issue">Carregando Problema…</string>
@@ -93,6 +95,7 @@
     <string name="no_news">Nenhuma Notícia</string>
     <string name="no_commits">Nenhum Commit</string>
     <string name="no_projects">Nenhum Projeto</string>
+    <string name="no_cards">Nenhum Cartão</string>
     <!--  -->
 
 
@@ -190,6 +193,7 @@
     <string name="select_milestone">Selecionar Milestone</string>
     <string name="select_labels">Selecionar Rótulos</string>
     <string name="select_ref">Selecionar Branch ou Etiqueta</string>
+    <string name="login_pass_explanation">O ForkHub usará sua senha apenas para gerar um &lt;i>Token de Acesso Pessoal&lt;/i>. Se preferir, pode &lt;a href=\"https://github.com/settings/tokens\">criá-lo você mesmo&lt;/a> e usá-lo como senha aqui.</string>
     <string name="enter_otp_code_title">Código de Autenticação</string>
     <string name="enter_otp_code_message">Autenticação de dois fatores está habilitado para sua conta. Digite o seu código de autenticação para verificar a sua identidade.</string>
     <string name="star_forkhub_dialog_text">Se você gosta deste app, por favor mostre o seu apreço dando estrelas.</string>
