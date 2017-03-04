@@ -3,11 +3,12 @@
 ## [Unreleased]
 
 ### Added
-- Show repository projects
+- Show repository projects.
 - Show the 'commit-commented' issue event.
 - Make some issue events clickable.
 
 ### Fixed
+- Improve zoom in the code viewer.
 - Use the default browser when available.
 - Some minor UI improvements.
 
@@ -170,7 +171,7 @@
 
 ## [1.9.0] - 2014-02-21
 
-- Last official GitHub release
+- Last official GitHub release.
 
 [Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...master
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
