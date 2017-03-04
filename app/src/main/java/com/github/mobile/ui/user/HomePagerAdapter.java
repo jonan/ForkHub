@@ -23,7 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import com.github.mobile.R;
-import com.github.mobile.ui.FragmentStatePagerAdapter;
+import com.github.mobile.ui.FragmentPagerAdapter;
 import com.github.mobile.ui.repo.RepositoryListFragment;
 import com.github.mobile.ui.repo.StarredRepositoryListFragment;
 import com.github.mobile.ui.team.TeamListFragment;
@@ -34,7 +34,7 @@ import java.util.Set;
 /**
  * Pager adapter for a user's different views
  */
-public class HomePagerAdapter extends FragmentStatePagerAdapter {
+public class HomePagerAdapter extends FragmentPagerAdapter {
 
     private boolean defaultUser;
 
@@ -96,7 +96,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
             if (fragment != null)
                 transaction.remove(fragment);
         }
-        transaction.commit();
+        transaction.commitNow();
         tags.clear();
 
         return this;
@@ -107,6 +107,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
         return POSITION_NONE;
     }
 
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Object fragment = super.instantiateItem(container, position);
         if (fragment instanceof Fragment)
