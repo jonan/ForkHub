@@ -46,7 +46,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-moshi:2.1.0'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
     compile 'org.roboguice:roboguice:2.0'
-    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.4.0.201606070830-r'
     compile('com.google.inject.extensions:guice-assistedinject:3.0') {
         exclude group: 'com.google.inject'
