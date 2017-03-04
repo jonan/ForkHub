@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.7] - 2017-03-04
 
 ### Added
 - Show repository projects.
@@ -173,7 +173,7 @@
 
 - Last official GitHub release.
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...master
+[ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
 [ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4
