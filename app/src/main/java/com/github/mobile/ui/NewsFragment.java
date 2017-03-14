@@ -60,6 +60,7 @@ import org.eclipse.egit.github.core.event.DownloadPayload;
 import org.eclipse.egit.github.core.event.Event;
 import org.eclipse.egit.github.core.event.PushPayload;
 import org.eclipse.egit.github.core.service.EventService;
+import com.github.mobile.ui.DownloadEvent;
 
 /**
  * Base news fragment class with utilities for subclasses to built on
@@ -89,17 +90,23 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
         Event event = (Event) l.getItemAtPosition(position);
 
         if (TYPE_DOWNLOAD.equals(event.getType())) {
-            openDownload(event);
+            DownloadEvent openDownload = new DownloadEvent();
+            openDownload.openEvent(event);
+            //openDownload(event);
             return;
         }
 
         if (TYPE_PUSH.equals(event.getType())) {
-            openPush(event);
+            PushEvent push = new PushEvent();
+            push.openEvent(event);
+            //openPush(event);
             return;
         }
 
         if (TYPE_COMMIT_COMMENT.equals(event.getType())) {
-            openCommitComment(event);
+            CommitCommentEvent cce = new CommitCommentEvent();
+            cce.openEvent(event);
+            //openCommitComment(event);
             return;
         }
 
@@ -174,62 +181,62 @@ public abstract class NewsFragment extends PagedItemFragment<Event> {
         return false;
     }
 
-    private void openDownload(Event event) {
-        Download download = ((DownloadPayload) event.getPayload())
-                .getDownload();
-        if (download == null)
-            return;
+//    private void openDownload(Event event) {
+//       Download download = ((DownloadPayload) event.getPayload())
+//                .getDownload();
+//        if (download == null)
+//            return;
+//
+//        String url = download.getHtmlUrl();
+//        if (TextUtils.isEmpty(url))
+//            return;
+//
+//        Intent intent = new Intent(ACTION_VIEW, Uri.parse(url));
+//        intent.addCategory(CATEGORY_BROWSABLE);
+//        startActivity(intent);
+//    }
+//
+//    private void openCommitComment(Event event) {
+//        Repository repo = RepositoryEventMatcher.getRepository(event.getRepo(),
+//                event.getActor(), event.getOrg());
+//        if (repo == null)
+//            return;
+//
+//        CommitCommentPayload payload = (CommitCommentPayload) event
+//                .getPayload();
+//        CommitComment comment = payload.getComment();
+//        if (comment == null)
+//            return;
+//
+//        String sha = comment.getCommitId();
+//        if (!TextUtils.isEmpty(sha))
+//            startActivity(CommitViewActivity.createIntent(repo, sha));
+//    }
 
-        String url = download.getHtmlUrl();
-        if (TextUtils.isEmpty(url))
-            return;
-
-        Intent intent = new Intent(ACTION_VIEW, Uri.parse(url));
-        intent.addCategory(CATEGORY_BROWSABLE);
-        startActivity(intent);
-    }
-
-    private void openCommitComment(Event event) {
-        Repository repo = RepositoryEventMatcher.getRepository(event.getRepo(),
-                event.getActor(), event.getOrg());
-        if (repo == null)
-            return;
-
-        CommitCommentPayload payload = (CommitCommentPayload) event
-                .getPayload();
-        CommitComment comment = payload.getComment();
-        if (comment == null)
-            return;
-
-        String sha = comment.getCommitId();
-        if (!TextUtils.isEmpty(sha))
-            startActivity(CommitViewActivity.createIntent(repo, sha));
-    }
-
-    private void openPush(Event event) {
-        Repository repo = RepositoryEventMatcher.getRepository(event.getRepo(),
-                event.getActor(), event.getOrg());
-        if (repo == null)
-            return;
-
-        PushPayload payload = (PushPayload) event.getPayload();
-        List<Commit> commits = payload.getCommits();
-        if (commits == null || commits.isEmpty())
-            return;
-
-        if (commits.size() > 1) {
-            String base = payload.getBefore();
-            String head = payload.getHead();
-            if (!TextUtils.isEmpty(base) && !TextUtils.isEmpty(head))
-                startActivity(CommitCompareViewActivity.createIntent(repo,
-                        base, head));
-        } else {
-            Commit commit = commits.get(0);
-            String sha = commit != null ? commit.getSha() : null;
-            if (!TextUtils.isEmpty(sha))
-                startActivity(CommitViewActivity.createIntent(repo, sha));
-        }
-    }
+//    private void openPush(Event event) {
+//        Repository repo = RepositoryEventMatcher.getRepository(event.getRepo(),
+//                event.getActor(), event.getOrg());
+//        if (repo == null)
+//            return;
+//
+//        PushPayload payload = (PushPayload) event.getPayload();
+//        List<Commit> commits = payload.getCommits();
+//        if (commits == null || commits.isEmpty())
+//            return;
+//
+//        if (commits.size() > 1) {
+//            String base = payload.getBefore();
+//            String head = payload.getHead();
+//            if (!TextUtils.isEmpty(base) && !TextUtils.isEmpty(head))
+//                startActivity(CommitCompareViewActivity.createIntent(repo,
+//                        base, head));
+//        } else {
+//            Commit commit = commits.get(0);
+//            String sha = commit != null ? commit.getSha() : null;
+//            if (!TextUtils.isEmpty(sha))
+//                startActivity(CommitViewActivity.createIntent(repo, sha));
+//        }
+//    }
 
     /**
      * Set if the repository's name should be displayed in each item
