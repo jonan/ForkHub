@@ -35,6 +35,7 @@ import com.github.mobile.util.TypefaceUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,10 +105,17 @@ public class EventListAdapter extends MultiTypeAdapter {
         String eventString = event.event;
 
         User actor;
-        if (eventString.equals(TimelineEvent.EVENT_ASSIGNED) || eventString.equals(TimelineEvent.EVENT_UNASSIGNED)) {
+        switch (eventString) {
+        case TimelineEvent.EVENT_ASSIGNED:
+        case TimelineEvent.EVENT_UNASSIGNED:
             actor = event.assignee;
-        } else {
+            break;
+        case TimelineEvent.EVENT_REVIEWED:
+            actor = event.user;
+            break;
+        default:
             actor = event.actor;
+            break;
         }
 
         String message = String.format("<b>%s</b> ", actor == null ? "ghost" : actor.login);
@@ -166,6 +174,16 @@ public class EventListAdapter extends MultiTypeAdapter {
             break;
         case TimelineEvent.EVENT_REVIEW_REQUEST_REMOVED:
             message += String.format(resources.getString(R.string.issue_event_review_request_removed), "<b>" + event.requested_reviewer.login + "</b>");
+            setText(0, TypefaceUtils.ICON_X);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case TimelineEvent.EVENT_REVIEWED:
+            message += resources.getString(R.string.issue_event_reviewed);
+            setText(0, TypefaceUtils.ICON_EYE);
+            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            break;
+        case TimelineEvent.EVENT_REVIEW_DISMISSED:
+            message += resources.getString(R.string.issue_event_review_dismissed);
             setText(0, TypefaceUtils.ICON_X);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
@@ -239,8 +257,18 @@ public class EventListAdapter extends MultiTypeAdapter {
             break;
         }
 
-        if (event.created_at != null) {
-            message += " " + TimeUtils.getRelativeTime(event.created_at);
+        Date date;
+        switch (eventString) {
+        case TimelineEvent.EVENT_REVIEWED:
+            date = event.submitted_at;
+            break;
+        default:
+            date = event.created_at;
+            break;
+        }
+
+        if (date != null) {
+            message += " " + TimeUtils.getRelativeTime(date);
         }
         setText(1, Html.fromHtml(message));
     }

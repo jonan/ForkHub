@@ -42,9 +42,10 @@ public class TimelineEvent {
     public static final String EVENT_RENAMED = "renamed";
     public static final String EVENT_REMOVED_FROM_PROJECT = "removed_from_project";
     public static final String EVENT_REOPENED = "reopened";
-    public static final String EVENT_REVIEWED = "reviewed";
+    public static final String EVENT_REVIEW_DISMISSED = "review_dismissed";
     public static final String EVENT_REVIEW_REQUESTED = "review_requested";
     public static final String EVENT_REVIEW_REQUEST_REMOVED = "review_request_removed";
+    public static final String EVENT_REVIEWED = "reviewed";
     public static final String EVENT_SUBSCRIBED = "subscribed";
     public static final String EVENT_UNASSIGNED = "unassigned";
     public static final String EVENT_UNLABELED = "unlabeled";
@@ -52,6 +53,8 @@ public class TimelineEvent {
     public static final String EVENT_UNSUBSCRIBED = "unsubscribed";
 
     public long id;
+
+    public User user;
 
     public User actor;
 
@@ -78,6 +81,8 @@ public class TimelineEvent {
     public Date created_at;
 
     public Date updated_at;
+
+    public Date submitted_at;
 
     public String body;
 
