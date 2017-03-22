@@ -1,5 +1,16 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+- Show the 'reviewed' and 'review_dismissed' issue events.
+
+### Fixed
+- Fix crash when opening the browser in some devices.
+
+### Translations
+- Improve translations: ZH-CN.
+
 ## [ForkHub v1.2.7] - 2017-03-04
 
 ### Added
@@ -173,6 +184,7 @@
 
 - Last official GitHub release.
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.7...master
 [ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
 [ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
