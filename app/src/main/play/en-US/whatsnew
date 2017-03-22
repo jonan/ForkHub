@@ -1,9 +1,5 @@
-* Show repository projects.
-* Show the 'commit-commented' issue event.
-* Make some issue events clickable.
-* Improve zoom in the code viewer.
-* Use the default browser when available.
-* Some minor UI improvements.
-* Improve translations: DE, PT-BR.
+* Show the 'reviewed' and 'review_dismissed' issue events.
+* Fix crash when opening the browser in some devices.
+* Improve translations: ZH-CN.
 
 https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md
