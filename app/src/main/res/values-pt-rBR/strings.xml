@@ -120,6 +120,8 @@
     <string name="issue_event_cross_referenced">referenciou este problema em %1$s</string>
     <string name="issue_event_review_requested">solicitou revisão de %1$s</string>
     <string name="issue_event_review_request_removed">removeu a solicitação para revisão de %1$s</string>
+    <string name="issue_event_reviewed">revisado</string>
+    <string name="issue_event_review_dismissed">rejeitou sua revisão</string>
     <string name="issue_event_closed">fechou isto</string>
     <string name="issue_event_closed_from_commit">fechou isto do commit %1$s</string>
     <string name="issue_event_reopened">reabriu isto</string>
