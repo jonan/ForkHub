@@ -1,13 +1,25 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.8] - 2017-03-22
 
 ### Added
-- Show repository projects
+- Show the 'reviewed' and 'review_dismissed' issue events.
+
+### Fixed
+- Fix crash when opening the browser in some devices.
+
+### Translations
+- Improve translations: ZH-CN.
+
+## [ForkHub v1.2.7] - 2017-03-04
+
+### Added
+- Show repository projects.
 - Show the 'commit-commented' issue event.
 - Make some issue events clickable.
 
 ### Fixed
+- Improve zoom in the code viewer.
 - Use the default browser when available.
 - Some minor UI improvements.
 
@@ -170,9 +182,10 @@
 
 ## [1.9.0] - 2014-02-21
 
-- Last official GitHub release
+- Last official GitHub release.
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...master
+[ForkHub v1.2.8]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.7...ForkHub-v1.2.8
+[ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
 [ForkHub v1.2.5]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.4...ForkHub-v1.2.5
 [ForkHub v1.2.4]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.3...ForkHub-v1.2.4

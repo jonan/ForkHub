@@ -18,6 +18,7 @@ package com.github.mobile.ui.comment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class RenderedCommentFragment extends DialogFragment implements
 
         progress = finder.find(R.id.pb_loading);
         bodyText = finder.find(R.id.tv_comment_body);
+        bodyText.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**

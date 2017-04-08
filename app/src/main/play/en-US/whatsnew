@@ -1,5 +1,5 @@
-* Show more issue events.
-* Fix crash that occurred when opening a pull request with reviews.
-* Some minor improvements.
+* Show the 'reviewed' and 'review_dismissed' issue events.
+* Fix crash when opening the browser in some devices.
+* Improve translations: ZH-CN.
 
 https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md

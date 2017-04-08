@@ -115,8 +115,7 @@ public class IssueFragment extends DialogFragment implements OnItemClickListener
             TimelineEvent.EVENT_REMOVED_FROM_PROJECT,
             TimelineEvent.EVENT_MENTIONED,
             TimelineEvent.EVENT_SUBSCRIBED,
-            TimelineEvent.EVENT_UNSUBSCRIBED,
-            TimelineEvent.EVENT_REVIEWED);
+            TimelineEvent.EVENT_UNSUBSCRIBED);
 
     private int issueNumber;
 
