@@ -39,14 +39,14 @@
     <color name="pager_footer">#FFFFFF</color>
     <color name="footer_text">#F4F2F1</color>
     <color name="footer_background">#525252</color>
-    <color name="footer_background_selected">#282828</color>
+    <color name="footer_background_selected">#24292E</color>
     <color name="edit_text_background">#F8F8F8</color>
     <color name="edit_text_inner">#EDEDED</color>
     <color name="edit_text_outer">#959595</color>
     <color name="edit_text_cursor">#A6A6A6</color>
     <color name="list_divider_top">#E2E2E2</color>
     <color name="list_divider_bottom">#FFFFFF</color>
-    <color name="text_link">#0366d6</color>
+    <color name="text_link">#0366B6</color>
     <color name="text_news_details">#666666</color>
     <color name="label_outer">#55000000</color>
     <color name="label_inner">#55FFFFFF</color>
@@ -58,7 +58,7 @@
     <color name="sign_up_background">#E6E6E5</color>
     <color name="sign_up_background_bottom">#D4D4D4</color>
     <color name="sign_up_text">#666666</color>
-    <color name="sign_up_text_link">#0366d6</color>
+    <color name="sign_up_text_link">#0366B6</color>
     <color name="state_background_closed">#BD2C00</color>
     <color name="state_background_merged">#6E5494</color>
     <color name="state_text">#FFFFFF</color>
@@ -85,8 +85,8 @@
     <color name="issue_event_green">#6CC644</color>
     <color name="notification_unread">#4078C0</color>
 
-    <color name="color_primary">#24292e</color>
+    <color name="color_primary">#24292E</color>
     <color name="color_primary_dark">#000000</color>
-    <color name="color_accent">#0366d6</color>
+    <color name="color_accent">#0366B6</color>
 
 </resources>
