@@ -20,19 +20,22 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.Comment;
+import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.service.IssueService;
 import com.github.mobile.api.service.PaginationService;
-import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 
-import java.io.IOException;
-import java.util.Collection;
-
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Task to load and store an {@link Issue}
@@ -89,11 +92,23 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
         };
         Collection<TimelineEvent> timelineEvents = paginationService.getAll();
 
+        HashMap<Long,Comment> commentMap= new HashMap<>();
+
+        try {
+            List<Comment> commentList = service.getIssueComments(repo[0], repo[1], issueNumber).execute().body();
+            for (Comment comment: commentList) {
+                commentMap.put(comment.getId(),comment);
+            }
+        } catch (Exception e) {
+            // Reactions are in a preview state, API can change, so make sure we don't crash if it does.
+        }
+
         for (TimelineEvent comment : timelineEvents) {
             if (TimelineEvent.EVENT_COMMENTED.equals(comment.event)) {
                 String formatted = HtmlUtils.format(comment.body_html).toString();
                 comment.body_html = formatted;
                 commentImageGetter.encode(comment.id, formatted);
+                comment.reaction = commentMap.get(comment.id).getReactions();
             }
         }
 
