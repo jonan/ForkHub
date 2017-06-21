@@ -316,7 +316,7 @@
     <!--  -->
 
     <string name="share">Teilen</string>
-    <string name="open_in_browser">Open in browser</string>
+    <string name="open_in_browser">Im Browser öffnen</string>
     <string name="show_password">Passwort anzeigen</string>
     <string name="write">Schreiben</string>
     <string name="preview">Vorschau</string>
