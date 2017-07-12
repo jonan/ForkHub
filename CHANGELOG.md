@@ -1,5 +1,14 @@
 # Change Log
 
+## [Unreleased]
+
+### Fixed
+- Improve the source viewer for many languages (CodeMirror 5.27.4).
+
+### Translations
+- Improve translations: DE, PT-BR, RU.
+- New translations: PT-PT.
+
 ## [ForkHub v1.2.8] - 2017-03-22
 
 ### Added
@@ -184,6 +193,7 @@
 
 - Last official GitHub release.
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.8...master
 [ForkHub v1.2.8]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.7...ForkHub-v1.2.8
 [ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
