@@ -313,7 +313,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             setGone(5, true);
             setGone(6, true);
         }
-        ((ReactionsView)view(7)).setReactionSummary(comment.reaction);
+        ((ReactionsView)view(7)).setReactionSummary(comment.reactions);
     }
 
     public MultiTypeAdapter setItems(Collection<TimelineEvent> items) {

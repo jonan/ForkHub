@@ -35,7 +35,9 @@ public interface IssueService {
             @Path("repo") String repo,
             @Path("number") long number);
 
-    @Headers("Accept: application/vnd.github.mockingbird-preview")
+    @Headers({"Accept: application/vnd.github.v3.full+json",
+            "Accept: application/vnd.github.mockingbird-preview",
+            "Accept: application/vnd.github.squirrel-girl-preview"})
     @GET("repos/{owner}/{repo}/issues/{issue_number}/timeline")
     Call<List<TimelineEvent>> getTimeline(
             @Path("owner") String owner,

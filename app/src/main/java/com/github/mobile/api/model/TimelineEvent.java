@@ -96,7 +96,7 @@ public class TimelineEvent {
 
     public Rename rename;
 
-    public ReactionSummary reaction;
+    public ReactionSummary reactions;
 
     public Comment getOldModel() {
         Comment comment = new Comment();
