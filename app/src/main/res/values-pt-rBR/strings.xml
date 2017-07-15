@@ -86,7 +86,7 @@
     <string name="no_repositories">Nenhum Repositório</string>
     <string name="no_contributors">Nenhum Contribuidor</string>
     <string name="no_issues">Nenhum Problema</string>
-    <string name="no_pull_requests">Nenhum Pedido de Pull</string>
+    <string name="no_pull_requests">Nenhum Pedido</string>
     <string name="no_gists">Nenhum Gist</string>
     <string name="no_people">Nenhuma Pessoa</string>
     <string name="no_followers">Nenhum Seguidor</string>
@@ -322,7 +322,7 @@
     <string name="tab_commits">commits</string>
     <string name="tab_issues">problemas</string>
     <string name="tab_projects">projetos</string>
-    <string name="tab_pull_requests">pedidos de pull</string>
+    <string name="tab_pull_requests">pedidos</string>
     <string name="tab_watched">assistindo</string>
     <string name="tab_assigned">atribuído</string>
     <string name="tab_created">criado</string>
@@ -340,5 +340,8 @@
     <string name="render_markdown">Iterpretar remarcação</string>
     <string name="copy_hash">Copiar hash</string>
     <string name="toast_msg_copied">Copiado para a área de tranferência</string>
+    <string name="loading_teams">Carregando Equipes...</string>
+    <string name="rate_forkhub_dialog_text">Se você gosta deste aplicativo, mostre sua avaliação classificando-o na Play Store.</string>
+    <string name="rate">Taxa</string>
 
 </resources>
