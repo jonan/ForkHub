@@ -34,6 +34,7 @@ public class TimelineEvent {
     public static final String EVENT_LABELED = "labeled";
     public static final String EVENT_LINE_COMMENTED = "line-commented";
     public static final String EVENT_LOCKED = "locked";
+    public static final String EVENT_MARKED_AS_DUPLICATE = "marked_as_duplicate";
     public static final String EVENT_MENTIONED = "mentioned";
     public static final String EVENT_MERGED = "merged";
     public static final String EVENT_MILESTONED = "milestoned";
