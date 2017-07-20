@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Add shortcuts for viewing the issue dashboard and notifications.
+
 ### Fixed
 - Improve the source viewer for many languages (CodeMirror 5.27.4).
 

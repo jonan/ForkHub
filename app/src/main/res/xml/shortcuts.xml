@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="Notifications"
+        android:icon="@drawable/ic_notifications_none_white_24dp"
+        android:shortcutShortLabel="@string/notifications">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.github.mobile.ui.notification.NotificationsListActivity"
+            android:targetPackage="jp.forkhub" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="IssueDashboard"
+        android:icon="@drawable/dropdown_dashboard"
+        android:shortcutShortLabel="@string/dashboard_issues_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.github.mobile.ui.issue.IssueDashboardActivity"
+            android:targetPackage="jp.forkhub" />
+    </shortcut>
+</shortcuts>
