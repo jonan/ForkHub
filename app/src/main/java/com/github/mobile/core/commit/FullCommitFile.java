@@ -17,11 +17,12 @@ package com.github.mobile.core.commit;
 
 import android.util.SparseArray;
 
+import com.github.mobile.api.model.CommitComment;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 
 /**
