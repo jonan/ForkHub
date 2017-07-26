@@ -178,9 +178,38 @@ public class EventListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_REVIEWED:
-            message += resources.getString(R.string.issue_event_reviewed);
-            setText(0, TypefaceUtils.ICON_EYE);
-            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            switch (event.state) {
+            case TimelineEvent.STATE_PENDING:
+                message += resources.getString(R.string.issue_event_review_pending);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            case TimelineEvent.STATE_COMMENTED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            case TimelineEvent.STATE_CHANGES_REQUESTED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_X);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
+                break;
+            case TimelineEvent.STATE_APPROVED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_CHECK);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
+                break;
+            case TimelineEvent.STATE_DISMISSED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            default:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            }
             break;
         case TimelineEvent.EVENT_REVIEW_DISMISSED:
             message += resources.getString(R.string.issue_event_review_dismissed);

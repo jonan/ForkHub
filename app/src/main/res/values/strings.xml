@@ -122,6 +122,7 @@
     <string name="issue_event_review_requested">requested review from %1$s</string>
     <string name="issue_event_review_request_removed">removed their request for review from %1$s</string>
     <string name="issue_event_reviewed">reviewed</string>
+    <string name="issue_event_review_pending">started a review</string>
     <string name="issue_event_review_dismissed">dismissed their review</string>
     <string name="issue_event_closed">closed this</string>
     <string name="issue_event_closed_from_commit">closed this from commit %1$s</string>

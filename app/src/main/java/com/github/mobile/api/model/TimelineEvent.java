@@ -53,6 +53,12 @@ public class TimelineEvent {
     public static final String EVENT_UNLOCKED = "unlocked";
     public static final String EVENT_UNSUBSCRIBED = "unsubscribed";
 
+    public static final String STATE_PENDING = "pending";
+    public static final String STATE_COMMENTED = "commented";
+    public static final String STATE_CHANGES_REQUESTED = "changes_requested";
+    public static final String STATE_APPROVED = "approved";
+    public static final String STATE_DISMISSED = "dismissed";
+
     public long id;
 
     public User user;
@@ -84,6 +90,8 @@ public class TimelineEvent {
     public Date updated_at;
 
     public Date submitted_at;
+
+    public String state;
 
     public String body;
 
