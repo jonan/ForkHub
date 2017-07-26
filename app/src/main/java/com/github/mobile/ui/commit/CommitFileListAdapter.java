@@ -34,6 +34,8 @@ import java.util.List;
 import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 
+import roboguice.util.Ln;
+
 /**
  * Adapter to display a list of files changed in commits
  */
@@ -161,8 +163,8 @@ public class CommitFileListAdapter extends MultiTypeAdapter {
             return new int[] { R.id.tv_diff };
         case TYPE_LINE_COMMENT:
         case TYPE_COMMENT:
-            return new int[] { R.id.tv_comment_body, R.id.iv_avatar,
-                    R.id.tv_comment_author, R.id.tv_comment_date };
+            return new int[] { R.id.tv_comment_body, R.id.iv_avatar, R.id.tv_comment_author,
+                    R.id.tv_comment_date, R.id.tv_comment_edited };
         default:
             return null;
         }
@@ -204,6 +206,7 @@ public class CommitFileListAdapter extends MultiTypeAdapter {
             avatars.bind(imageView(1), comment.getUser());
             setText(2, comment.getUser().getLogin());
             setText(3, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+            setGone(4, !comment.getUpdatedAt().after(comment.getCreatedAt()));
             imageGetter.bind(textView(0), comment.getBodyHtml(),
                     comment.getId());
             return;
