@@ -45,6 +45,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit2:converter-moshi:2.3.0'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:4.4.0.201606070830-r'

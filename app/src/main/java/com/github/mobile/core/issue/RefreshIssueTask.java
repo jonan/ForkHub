@@ -20,19 +20,18 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.service.IssueService;
 import com.github.mobile.api.service.PaginationService;
-import com.github.mobile.api.model.ReactionSummary;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 
+import org.eclipse.egit.github.core.IRepositoryIdProvider;
+
 import java.io.IOException;
 import java.util.Collection;
-
-import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.Issue;
 
 /**
  * Task to load and store an {@link Issue}
@@ -77,10 +76,11 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
 
     @Override
     public FullIssue run(Account account) throws Exception {
-        Issue issue = store.refreshIssue(repositoryId, issueNumber);
-        bodyImageGetter.encode(issue.getId(), issue.getBodyHtml());
-
         final String[] repo = repositoryId.generateId().split("/");
+
+        Issue issue = service.getIssue(repo[0], repo[1], issueNumber).execute().body();
+        bodyImageGetter.encode(issue.id, issue.body_html);
+
         PaginationService<TimelineEvent> paginationService = new PaginationService<TimelineEvent>(1, PaginationService.ITEMS_PER_PAGE_MAX) {
             @Override
             public Collection<TimelineEvent> getSinglePage(int page, int itemsPerPage) throws IOException {
@@ -97,14 +97,7 @@ public class RefreshIssueTask extends AuthenticatedUserTask<FullIssue> {
             }
         }
 
-        ReactionSummary reactions = new ReactionSummary();
-        try {
-            reactions = service.getIssue(repo[0], repo[1], issueNumber).execute().body().reactions;
-        } catch (Exception e) {
-            // Reactions are in a preview state, API can change, so make sure we don't crash if it does.
-        }
-
-        return new FullIssue(issue, reactions, timelineEvents);
+        return new FullIssue(issue.getOldModel(), issue.reactions, timelineEvents);
     }
 
     @Override

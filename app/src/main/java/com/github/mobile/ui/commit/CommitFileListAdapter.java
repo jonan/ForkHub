@@ -23,7 +23,9 @@ import android.view.LayoutInflater;
 import com.github.kevinsawicki.wishlist.MultiTypeAdapter;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
+import com.github.mobile.api.model.CommitComment;
 import com.github.mobile.core.commit.FullCommitFile;
+import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.StyledText;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -31,7 +33,6 @@ import com.github.mobile.util.TimeUtils;
 
 import java.util.List;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 
 /**
@@ -161,8 +162,8 @@ public class CommitFileListAdapter extends MultiTypeAdapter {
             return new int[] { R.id.tv_diff };
         case TYPE_LINE_COMMENT:
         case TYPE_COMMENT:
-            return new int[] { R.id.tv_comment_body, R.id.iv_avatar,
-                    R.id.tv_comment_author, R.id.tv_comment_date };
+            return new int[] { R.id.tv_comment_body, R.id.iv_avatar, R.id.tv_comment_author,
+                    R.id.tv_comment_date, R.id.tv_comment_edited, R.id.rv_comment_reaction };
         default:
             return null;
         }
@@ -202,10 +203,12 @@ public class CommitFileListAdapter extends MultiTypeAdapter {
         case TYPE_COMMENT:
             CommitComment comment = (CommitComment) item;
             avatars.bind(imageView(1), comment.getUser());
-            setText(2, comment.getUser().getLogin());
+            setText(2, comment.getUser().login);
             setText(3, TimeUtils.getRelativeTime(comment.getUpdatedAt()));
+            setGone(4, !comment.getUpdatedAt().after(comment.getCreatedAt()));
             imageGetter.bind(textView(0), comment.getBodyHtml(),
                     comment.getId());
+            ((ReactionsView)view(5)).setReactionSummary(comment.getReactions());
             return;
         }
     }
