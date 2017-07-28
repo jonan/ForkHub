@@ -105,6 +105,8 @@ public class TimelineEvent {
 
     public Rename rename;
 
+    public ReactionSummary reactions;
+
     public Comment getOldModel() {
         Comment comment = new Comment();
         comment.setCreatedAt(created_at);
