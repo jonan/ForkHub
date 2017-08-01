@@ -91,4 +91,13 @@
         android:textColorLink="@color/text_link"
         android:textSize="14dp" />
 
+    <com.github.mobile.ui.ReactionsView
+        android:id="@+id/rv_comment_reaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:visibility="gone"/>
+
 </LinearLayout>

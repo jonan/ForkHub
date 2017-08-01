@@ -155,6 +155,12 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
+    com.github.mobile.api.service.CommitService commitService(Retrofit retrofit) {
+        return retrofit.create(com.github.mobile.api.service.CommitService.class);
+    }
+
+    @Provides
     DataService dataService(GitHubClient client) {
         return new DataService(client);
     }
