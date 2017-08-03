@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.accounts.LoginActivity;
 import com.github.mobile.core.repo.StarForkHubTask;
 import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
@@ -309,6 +310,11 @@ public class HomeActivity extends TabPagerActivity<HomePagerAdapter> implements
                 navigationDrawer.closeDrawer(GravityCompat.START);
                 UriLauncherActivity.launchUri(this,
                         Uri.parse("https://github.com/jonan/ForkHub/issues"));
+                break;
+            case R.id.navigation_logout:
+                navigationDrawer.closeDrawer(GravityCompat.START);
+                AccountUtils.logout(accountDataManager.getContext());
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
 

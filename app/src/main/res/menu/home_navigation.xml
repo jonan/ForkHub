@@ -46,6 +46,10 @@
             android:id="@+id/navigation_report_issue"
             android:icon="@drawable/menu_issue_open"
             android:title="@string/report_issue" />
+        <item
+            android:id="@+id/navigation_logout"
+            android:icon="@drawable/menu_logout"
+            android:title="@string/logout" />
     </group>
 
 </menu>

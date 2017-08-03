@@ -351,4 +351,10 @@ public class AccountUtils {
 
         return false;
     }
+
+    public static void logout(final Context context) {
+        AccountManager manager = AccountManager.get(context);
+        Account account = getAccount(context);
+        manager.removeAccount(account, null, null);
+    }
 }
