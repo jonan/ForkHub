@@ -345,5 +345,6 @@
     <string name="render_markdown">Render markdown</string>
     <string name="copy_hash">Copy hash</string>
     <string name="toast_msg_copied">Copied to clipboard</string>
+    <string name="parent_repo">Parent repository</string>
 
 </resources>

@@ -30,6 +30,10 @@
         app:showAsAction="never"
         android:title="@string/contributors"/>
     <item
+        android:id="@+id/m_parent_repo"
+        app:showAsAction="never"
+        android:title="@string/parent_repo"/>
+    <item
         android:id="@+id/m_share"
         app:showAsAction="never"
         android:title="@string/share"/>
