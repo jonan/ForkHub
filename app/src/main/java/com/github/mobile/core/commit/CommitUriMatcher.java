@@ -38,7 +38,7 @@ public class CommitUriMatcher {
      * @return {@link Intent} or null if path is not valid
      */
     public static Intent getCommitIntent(List<String> pathSegments) {
-        if (pathSegments.size() != 4)
+        if (pathSegments.size() < 4)
             return null;
 
         Repository repo = RepositoryUriMatcher.getRepository(pathSegments);
@@ -46,12 +46,14 @@ public class CommitUriMatcher {
             return null;
 
         switch (pathSegments.get(2)) {
-        case "commit":
-            return getSingleCommitIntent(repo, pathSegments);
-        case "compare":
-            return getCommitCompareIntent(repo, pathSegments);
-        default:
-            return null;
+            case "commit":
+                return getSingleCommitIntent(repo, pathSegments);
+            case "pull":
+                return getSingleCommitIntent(repo, pathSegments);
+            case "compare":
+                return getCommitCompareIntent(repo, pathSegments);
+            default:
+                return null;
         }
     }
 
@@ -59,6 +61,9 @@ public class CommitUriMatcher {
         String ref = pathSegments.get(3);
         if (TextUtils.isEmpty(ref))
             return null;
+
+        if (TextUtils.isDigitsOnly(ref))
+            ref = pathSegments.get(pathSegments.size() - 1);
 
         return CommitViewActivity.createIntent(repo, ref);
     }
@@ -71,10 +76,10 @@ public class CommitUriMatcher {
         String[] refs = path.split("\\.\\.\\.");
 
         switch (refs.length) {
-        case 1:
-            return CommitCompareViewActivity.createIntent(repo, refs[0]);
-        case 2:
-            return CommitCompareViewActivity.createIntent(repo, refs[0], refs[1]);
+            case 1:
+                return CommitCompareViewActivity.createIntent(repo, refs[0]);
+            case 2:
+                return CommitCompareViewActivity.createIntent(repo, refs[0], refs[1]);
         }
 
         return null;
