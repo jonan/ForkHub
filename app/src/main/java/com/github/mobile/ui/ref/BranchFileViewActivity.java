@@ -40,7 +40,6 @@ import com.github.mobile.core.code.RefreshBlobTask;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.ui.BaseActivity;
 import com.github.mobile.ui.MarkdownLoader;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.MarkdownUtils;
 import com.github.mobile.util.PreferenceUtils;
@@ -107,9 +106,6 @@ public class BranchFileViewActivity extends BaseActivity implements
     private MenuItem markdownItem;
 
     @Inject
-    private AvatarLoader avatars;
-
-    @Inject
     private HttpImageGetter imageGetter;
 
     @Override
@@ -135,7 +131,6 @@ public class BranchFileViewActivity extends BaseActivity implements
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(file);
         actionBar.setSubtitle(branch);
-        avatars.bind(actionBar, repo.getOwner());
 
         loadContent();
     }

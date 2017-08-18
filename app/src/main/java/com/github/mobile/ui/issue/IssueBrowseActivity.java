@@ -28,8 +28,6 @@ import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.ui.DialogFragmentActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 
@@ -51,9 +49,6 @@ public class IssueBrowseActivity extends DialogFragmentActivity {
 
     private Repository repo;
 
-    @Inject
-    private AvatarLoader avatars;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +61,6 @@ public class IssueBrowseActivity extends DialogFragmentActivity {
         actionBar.setTitle(repo.getName());
         actionBar.setSubtitle(repo.getOwner().getLogin());
         actionBar.setDisplayHomeAsUpEnabled(true);
-        avatars.bind(actionBar, repo.getOwner());
     }
 
     @Override

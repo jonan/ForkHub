@@ -24,9 +24,7 @@ import android.view.MenuItem;
 
 import com.github.mobile.R;
 import com.github.mobile.ui.TabPagerActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Comment;
 
@@ -37,12 +35,6 @@ public abstract class CreateCommentActivity extends
         TabPagerActivity<CommentPreviewPagerAdapter> {
 
     private MenuItem applyItem;
-
-    /**
-     * Avatar loader
-     */
-    @Inject
-    protected AvatarLoader avatars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

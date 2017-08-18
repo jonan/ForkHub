@@ -92,7 +92,6 @@ public class CreateCommentActivity extends
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getString(R.string.issue_title) + issueNumber);
         actionBar.setSubtitle(repositoryId.generateId());
-        avatars.bind(actionBar, (User) getSerializableExtra(EXTRA_USER));
     }
 
     @Override

@@ -19,7 +19,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -33,7 +32,6 @@ import com.squareup.picasso.Transformation;
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.egit.github.core.CommitUser;
 import org.eclipse.egit.github.core.Contributor;
@@ -85,16 +83,6 @@ public class AvatarLoader {
     }
 
     /**
-     * Sets the logo on the {@link ActionBar} to the user's avatar.
-     *
-     * @param actionBar An ActionBar object on which you're placing the user's avatar.
-     * @param user      An AtomicReference that points to the desired user.
-     */
-    public void bind(final ActionBar actionBar, final User user) {
-        bind(actionBar, new AtomicReference<User>(user));
-    }
-
-    /**
      * Sets the logo on the {@link MenuItem} to the user's avatar.
      *
      * @param item A MenuItem object on which you're placing the user's avatar.
@@ -126,46 +114,6 @@ public class AvatarLoader {
             @Override
             protected void onSuccess(BitmapDrawable image) throws Exception {
                 item.setIcon(image);
-            }
-        }.execute();
-    }
-
-    /**
-     * Sets the logo on the {@link ActionBar} to the user's avatar.
-     *
-     * @param actionBar     An ActionBar object on which you're placing the user's avatar.
-     * @param userReference An AtomicReference that points to the desired user.
-     */
-    public void bind(final ActionBar actionBar, final AtomicReference<User> userReference) {
-        if (userReference == null)
-            return;
-
-        final User user = userReference.get();
-        if (user == null)
-            return;
-
-        String avatarUrl = getAvatarUrl(user);
-        if (TextUtils.isEmpty(avatarUrl))
-            return;
-
-        // Remove the URL params as they are not needed and break cache
-        if (avatarUrl.contains("?") && !avatarUrl.contains("gravatar")) {
-            avatarUrl = avatarUrl.substring(0, avatarUrl.indexOf("?"));
-        }
-
-        final String url = avatarUrl;
-
-        new FetchAvatarTask(context) {
-
-            @Override
-            public BitmapDrawable call() throws Exception {
-                Bitmap image = Bitmap.createScaledBitmap(p.load(url).get(), avatarSize, avatarSize, false);
-                return new BitmapDrawable(context.getResources(), ImageUtils.roundCorners(image, cornerRadius));
-            }
-
-            @Override
-            protected void onSuccess(BitmapDrawable image) throws Exception {
-                actionBar.setLogo(image);
             }
         }.execute();
     }

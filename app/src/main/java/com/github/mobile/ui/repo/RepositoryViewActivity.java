@@ -44,11 +44,9 @@ import com.github.mobile.core.repo.UnstarRepositoryTask;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.UriLauncherActivity;
 import com.github.mobile.ui.user.UserViewActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
@@ -80,9 +78,6 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
 
     private Repository repository;
 
-    @Inject
-    private AvatarLoader avatars;
-
     private ProgressBar loadingBar;
 
     private boolean isStarred;
@@ -107,7 +102,6 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
         if (owner.getAvatarUrl() != null && RepositoryUtils.isComplete(repository))
             configurePager();
         else {
-            avatars.bind(getSupportActionBar(), owner);
             ViewUtils.setGone(loadingBar, false);
             setGone(true);
             new RefreshRepositoryTask(this, repository) {
@@ -182,7 +176,6 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
     }
 
     private void configurePager() {
-        avatars.bind(getSupportActionBar(), repository.getOwner());
         configureTabPager();
         ViewUtils.setGone(loadingBar, true);
         setGone(false);

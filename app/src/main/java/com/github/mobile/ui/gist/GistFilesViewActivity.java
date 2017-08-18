@@ -34,7 +34,6 @@ import com.github.mobile.core.gist.RefreshGistTask;
 import com.github.mobile.ui.FragmentProvider;
 import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -73,9 +72,6 @@ public class GistFilesViewActivity extends PagerActivity {
 
     @Inject
     private GistStore store;
-
-    @Inject
-    private AvatarLoader avatars;
 
     @Inject
     private HttpImageGetter imageGetter;
@@ -127,7 +123,6 @@ public class GistFilesViewActivity extends PagerActivity {
         User owner = gist.getOwner();
         if (owner != null) {
             actionBar.setSubtitle(owner.getLogin());
-            avatars.bind(actionBar, owner);
         } else
             actionBar.setSubtitle(R.string.anonymous);
 

@@ -36,7 +36,6 @@ import com.github.mobile.ui.FragmentProvider;
 import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.UriLauncherActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
 import java.io.Serializable;
@@ -90,9 +89,6 @@ public class GistsViewActivity extends PagerActivity implements
 
     @Inject
     private GistStore store;
-
-    @Inject
-    private AvatarLoader avatars;
 
     private GistsPagerAdapter adapter;
 
@@ -188,7 +184,6 @@ public class GistsViewActivity extends PagerActivity implements
             actionBar.setSubtitle(null);
             actionBar.setLogo(null);
         } else if (gist.getOwner() != null) {
-            avatars.bind(actionBar, gist.getOwner());
             actionBar.setSubtitle(gist.getOwner().getLogin());
         } else {
             actionBar.setSubtitle(R.string.anonymous);

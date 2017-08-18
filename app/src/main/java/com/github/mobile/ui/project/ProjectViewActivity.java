@@ -29,9 +29,7 @@ import com.github.mobile.api.model.ProjectColumn;
 import com.github.mobile.core.project.RefreshProjectColumnsTask;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 
@@ -60,9 +58,6 @@ public class ProjectViewActivity extends TabPagerActivity<ProjectPagerAdapter> {
         return new Builder("project.VIEW").repo(repository).project(project).toIntent();
     }
 
-    @Inject
-    private AvatarLoader avatars;
-
     private Repository repository;
 
     private List<ProjectColumn> columns;
@@ -81,7 +76,6 @@ public class ProjectViewActivity extends TabPagerActivity<ProjectPagerAdapter> {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(project.name);
         actionBar.setSubtitle(repository.generateId());
-        avatars.bind(actionBar, repository.getOwner());
 
         ViewUtils.setGone(loadingBar, false);
         setGone(true);

@@ -32,8 +32,6 @@ import com.github.mobile.ui.FragmentProvider;
 import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
 
 import java.util.Collection;
 
@@ -99,9 +97,6 @@ public class CommitViewActivity extends PagerActivity {
 
     private int initialPosition;
 
-    @Inject
-    private AvatarLoader avatars;
-
     private CommitPagerAdapter adapter;
 
     @Override
@@ -125,7 +120,6 @@ public class CommitViewActivity extends PagerActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle(repository.generateId());
-        avatars.bind(actionBar, repository.getOwner());
     }
 
     @Override
