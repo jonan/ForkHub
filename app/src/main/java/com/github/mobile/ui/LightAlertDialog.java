@@ -17,9 +17,7 @@ package com.github.mobile.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.os.Build;
 
-import static android.R.style.Theme;
 import static android.R.style.Theme_Holo_Light_Dialog;
 import static android.R.style.Theme_Material_Light_Dialog_Alert;
 
@@ -62,9 +60,9 @@ public class LightAlertDialog extends AlertDialog {
          */
         public static LightAlertDialog.Builder create(final Context context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                return new LightAlertDialog(context, Theme_Material_Light_Dialog_Alert);
+                return new LightAlertDialog.Builder(context, Theme_Material_Light_Dialog_Alert);
             else
-                return new LightAlertDialog(context, Theme_Holo_Light_Dialog);
+                return new LightAlertDialog.Builder(context, Theme_Holo_Light_Dialog);
         }
 
         private Builder(Context context) {
