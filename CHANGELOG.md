@@ -4,9 +4,13 @@
 
 ### Added
 - Add shortcuts for viewing the issue dashboard and notifications.
+- Display reactions in issue and commit comments.
+- Add logout button.
+- Remove repository image from the toolbar.
 
 ### Fixed
 - Improve the source viewer for many languages (CodeMirror 5.27.4).
+- Some minor improvements.
 
 ### Translations
 - Improve translations: DE, PT-BR, RU.
