@@ -1,5 +1,3 @@
-package com.github.mobile.api.model;
-
 /*
  * Copyright 2017 Kavalchuk Viktar
  *
@@ -15,18 +13,28 @@ package com.github.mobile.api.model;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.github.mobile.api.model;
 
 import java.util.Date;
 
 public class Comment {
     public Long id;
+
     public String html_url;
+
     public String url;
+
     public String body;
+
     public String body_html;
+
     public String body_text;
+
     public User user;
+
     public Date created_at;
+
     public Date updated_at;
+
     public ReactionSummary reactions;
 }

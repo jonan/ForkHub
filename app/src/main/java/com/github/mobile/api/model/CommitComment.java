@@ -1,5 +1,3 @@
-package com.github.mobile.api.model;
-
 /*
  * Copyright 2017 Kavalchuk Viktar
  *
@@ -15,12 +13,19 @@ package com.github.mobile.api.model;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.github.mobile.api.model;
 
-public class CommitComment extends Comment{
+public class CommitComment extends Comment {
     public String path;
+
     public Integer position;
+
     public Integer line;
+
     public String commit_id;
+
+    public CommitComment() {
+    }
 
     public CommitComment(org.eclipse.egit.github.core.CommitComment comment) {
         this.path = comment.getPath();
