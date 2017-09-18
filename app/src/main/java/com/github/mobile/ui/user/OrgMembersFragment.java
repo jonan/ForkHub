@@ -104,8 +104,7 @@ public class OrgMembersFragment extends ItemListFragment<User> implements
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         User user = (User) l.getItemAtPosition(position);
-        if (!AccountUtils.isUser(getActivity(), user))
-            startActivity(UserViewActivity.createIntent(user));
+        startActivity(UserViewActivity.createIntent(user));
     }
 
     @Override

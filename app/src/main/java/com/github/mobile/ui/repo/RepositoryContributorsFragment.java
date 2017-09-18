@@ -98,8 +98,7 @@ public class RepositoryContributorsFragment extends ItemListFragment<Contributor
             protected void onSuccess(User user) throws Exception {
                 super.onSuccess(user);
 
-                if (!AccountUtils.isUser(getActivity(), user))
-                    startActivity(UserViewActivity.createIntent(user));
+                startActivity(UserViewActivity.createIntent(user));
             }
         }.execute();
     }
