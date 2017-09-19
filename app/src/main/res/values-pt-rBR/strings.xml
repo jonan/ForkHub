@@ -121,6 +121,7 @@
     <string name="issue_event_review_requested">solicitou revisão de %1$s</string>
     <string name="issue_event_review_request_removed">removeu a solicitação para revisão de %1$s</string>
     <string name="issue_event_reviewed">revisado</string>
+    <string name="issue_event_review_pending">iniciou uma revisão</string>
     <string name="issue_event_review_dismissed">rejeitou sua revisão</string>
     <string name="issue_event_closed">fechou isto</string>
     <string name="issue_event_closed_from_commit">fechou isto do commit %1$s</string>
@@ -343,5 +344,7 @@
     <string name="loading_teams">Carregando Equipes...</string>
     <string name="rate_forkhub_dialog_text">Se você gosta deste aplicativo, mostre sua avaliação classificando-o na Play Store.</string>
     <string name="rate">Taxa</string>
+    <string name="logout">Sair</string>
+    <string name="parent_repo">Repositório principal</string>
 
 </resources>
