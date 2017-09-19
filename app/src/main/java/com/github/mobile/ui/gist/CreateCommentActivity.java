@@ -59,7 +59,6 @@ public class CreateCommentActivity extends
         User owner = gist.getOwner();
         if (owner != null)
             actionBar.setSubtitle(owner.getLogin());
-        avatars.bind(actionBar, owner);
     }
 
     @Override

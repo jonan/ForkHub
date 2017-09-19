@@ -40,7 +40,6 @@ import com.github.mobile.core.code.RefreshBlobTask;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.ui.BaseActivity;
 import com.github.mobile.ui.MarkdownLoader;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
 import com.github.mobile.util.MarkdownUtils;
 import com.github.mobile.util.PreferenceUtils;
@@ -107,9 +106,6 @@ public class CommitFileViewActivity extends BaseActivity implements
     private MenuItem markdownItem;
 
     @Inject
-    private AvatarLoader avatars;
-
-    @Inject
     private HttpImageGetter imageGetter;
 
     @Override
@@ -141,7 +137,6 @@ public class CommitFileViewActivity extends BaseActivity implements
             actionBar.setTitle(path);
         actionBar.setSubtitle(getString(R.string.commit_prefix)
                 + CommitUtils.abbreviate(commit));
-        avatars.bind(actionBar, repo.getOwner());
 
         loadContent();
     }

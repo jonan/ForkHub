@@ -41,7 +41,6 @@ import com.github.mobile.core.user.UserComparator;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.UriLauncherActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
 import com.github.mobile.util.TypefaceUtils;
 import com.google.inject.Inject;
@@ -100,9 +99,6 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
 
     @Inject
     private Provider<UserComparator> userComparatorProvider;
-
-    @Inject
-    private AvatarLoader avatars;
 
     private User user;
 
@@ -207,7 +203,6 @@ public class UserViewActivity extends TabPagerActivity<UserPagerAdapter>
     }
 
     private void configurePager() {
-        avatars.bind(getSupportActionBar(), user);
         isOrganization = User.TYPE_ORG.equals(user.getType());
         configureTabPager();
         ViewUtils.setGone(loadingBar, true);

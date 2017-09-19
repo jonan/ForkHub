@@ -34,6 +34,7 @@ public class TimelineEvent {
     public static final String EVENT_LABELED = "labeled";
     public static final String EVENT_LINE_COMMENTED = "line-commented";
     public static final String EVENT_LOCKED = "locked";
+    public static final String EVENT_MARKED_AS_DUPLICATE = "marked_as_duplicate";
     public static final String EVENT_MENTIONED = "mentioned";
     public static final String EVENT_MERGED = "merged";
     public static final String EVENT_MILESTONED = "milestoned";
@@ -51,6 +52,12 @@ public class TimelineEvent {
     public static final String EVENT_UNLABELED = "unlabeled";
     public static final String EVENT_UNLOCKED = "unlocked";
     public static final String EVENT_UNSUBSCRIBED = "unsubscribed";
+
+    public static final String STATE_PENDING = "pending";
+    public static final String STATE_COMMENTED = "commented";
+    public static final String STATE_CHANGES_REQUESTED = "changes_requested";
+    public static final String STATE_APPROVED = "approved";
+    public static final String STATE_DISMISSED = "dismissed";
 
     public long id;
 
@@ -84,6 +91,8 @@ public class TimelineEvent {
 
     public Date submitted_at;
 
+    public String state;
+
     public String body;
 
     public String body_html;
@@ -95,6 +104,8 @@ public class TimelineEvent {
     public Milestone milestone;
 
     public Rename rename;
+
+    public ReactionSummary reactions;
 
     public Comment getOldModel() {
         Comment comment = new Comment();

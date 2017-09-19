@@ -32,8 +32,8 @@
             </intent-filter>
 
             <meta-data
-                android:name="android.app.default_searchable"
-                android:value="com.github.mobile.ui.search.SearchActivity" />
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".ui.notification.NotificationsListActivity"

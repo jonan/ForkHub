@@ -24,8 +24,6 @@ import com.github.mobile.Intents;
 import com.github.mobile.api.model.Team;
 import com.github.mobile.ui.TabPagerActivity;
 import com.github.mobile.ui.user.UserViewActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.User;
 
@@ -53,9 +51,6 @@ public class TeamViewActivity extends TabPagerActivity<TeamPagerAdapter> {
         return builder.toIntent();
     }
 
-    @Inject
-    private AvatarLoader avatars;
-
     private User org;
 
     @Override
@@ -70,7 +65,6 @@ public class TeamViewActivity extends TabPagerActivity<TeamPagerAdapter> {
         actionBar.setTitle(team.name);
         actionBar.setSubtitle(org.getLogin());
 
-        avatars.bind(getSupportActionBar(), org);
         configureTabPager();
     }
 

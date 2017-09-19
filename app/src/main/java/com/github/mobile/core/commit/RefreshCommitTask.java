@@ -20,17 +20,17 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.CommitComment;
+import com.github.mobile.api.service.CommitService;
 import com.github.mobile.util.HtmlUtils;
 import com.github.mobile.util.HttpImageGetter;
 import com.google.inject.Inject;
 
-import java.util.List;
-
 import org.eclipse.egit.github.core.Commit;
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommit;
-import org.eclipse.egit.github.core.service.CommitService;
+
+import java.util.List;
 
 /**
  * Task to load a commit by SHA-1 id
@@ -68,16 +68,17 @@ public class RefreshCommitTask extends AuthenticatedUserTask<FullCommit> {
 
     @Override
     protected FullCommit run(Account account) throws Exception {
+        final String[] repo = repository.generateId().split("/");
         RepositoryCommit commit = store.refreshCommit(repository, id);
         Commit rawCommit = commit.getCommit();
         if (rawCommit != null && rawCommit.getCommentCount() > 0) {
-            List<CommitComment> comments = service.getComments(repository,
-                    commit.getSha());
+            List<CommitComment> comments = service.getCommitComments(repo[0], repo[1],
+                                            commit.getSha()).execute().body();
             for (CommitComment comment : comments) {
-                String formatted = HtmlUtils.format(comment.getBodyHtml())
+                String formatted = HtmlUtils.format(comment.body_html)
                         .toString();
-                comment.setBodyHtml(formatted);
-                imageGetter.encode(comment, formatted);
+                comment.body_html = formatted;
+                imageGetter.encode(comment.id, formatted);
             }
             return new FullCommit(commit, comments);
         } else

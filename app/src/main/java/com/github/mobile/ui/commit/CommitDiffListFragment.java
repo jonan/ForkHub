@@ -49,6 +49,7 @@ import android.widget.Toast;
 import com.github.kevinsawicki.wishlist.ViewFinder;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
+import com.github.mobile.api.model.CommitComment;
 import com.github.mobile.core.commit.CommitStore;
 import com.github.mobile.core.commit.CommitUtils;
 import com.github.mobile.core.commit.FullCommit;
@@ -69,7 +70,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Commit;
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryCommit;
@@ -166,7 +166,7 @@ public class CommitDiffListFragment extends DialogFragment implements
             Commit rawCommit = commit.getCommit();
             if (rawCommit != null)
                 rawCommit.setCommentCount(rawCommit.getCommentCount() + 1);
-            commentImageGetter.encode(comment, comment.getBodyHtml());
+            commentImageGetter.encode(comment, comment.body_html);
             updateItems(comments, files);
         } else
             refreshCommit();
@@ -176,8 +176,8 @@ public class CommitDiffListFragment extends DialogFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (RESULT_OK == resultCode && COMMENT_CREATE == requestCode
                 && data != null) {
-            CommitComment comment = (CommitComment) data
-                    .getSerializableExtra(EXTRA_COMMENT);
+            CommitComment comment = new CommitComment((org.eclipse.egit.github.core.CommitComment) data
+                    .getSerializableExtra(EXTRA_COMMENT));
             addComment(comment);
             return;
         }
@@ -514,7 +514,7 @@ public class CommitDiffListFragment extends DialogFragment implements
         else if (item instanceof CharSequence)
             selectPreviousFile(position, item, parent);
         else if (item instanceof CommitComment)
-            if (!TextUtils.isEmpty(((CommitComment) item).getPath()))
+            if (!TextUtils.isEmpty(((CommitComment) item).path))
                 selectPreviousFile(position, item, parent);
     }
 }

@@ -17,13 +17,13 @@ package com.github.mobile.tests.commit;
 
 import android.test.AndroidTestCase;
 
+import com.github.mobile.api.model.CommitComment;
 import com.github.mobile.core.commit.FullCommit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
@@ -40,8 +40,8 @@ public class FullCommitTest extends AndroidTestCase {
         CommitFile file = new CommitFile();
         file.setFilename("a.txt");
         CommitComment comment = new CommitComment();
-        comment.setPath(file.getFilename());
-        comment.setPosition(10);
+        comment.path = file.getFilename();
+        comment.position = 10;
         commit.setFiles(Collections.singletonList(file));
         FullCommit full = new FullCommit(commit, new ArrayList<CommitComment>(
                 Collections.singletonList(comment)));
@@ -101,8 +101,8 @@ public class FullCommitTest extends AndroidTestCase {
         file.setFilename("a.txt");
         commit.setFiles(Collections.singletonList(file));
         CommitComment comment1 = new CommitComment();
-        comment1.setPath(file.getFilename());
-        comment1.setPosition(10);
+        comment1.path = file.getFilename();
+        comment1.position = 10;
         CommitComment comment2 = new CommitComment();
         FullCommit full = new FullCommit(commit, new ArrayList<CommitComment>(
                 Arrays.asList(comment1, comment2)));

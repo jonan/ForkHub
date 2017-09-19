@@ -169,6 +169,7 @@
     <string name="dashboard_issues_title">Панель задач</string>
     <string name="bookmarks">Закладки</string>
     <string name="report_issue">Сообщить о проблеме</string>
+    <string name="logout">Выйти</string>
     <string name="gists_title">Gists</string>
     <string name="issue_title">Задача #</string>
     <string name="pull_request_title">Pull Request #</string>

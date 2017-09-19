@@ -32,8 +32,6 @@ import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 
@@ -72,9 +70,6 @@ public class CommitCompareViewActivity extends DialogFragmentActivity {
 
     private Repository repository;
 
-    @Inject
-    private AvatarLoader avatars;
-
     private Fragment fragment;
 
     @Override
@@ -88,7 +83,6 @@ public class CommitCompareViewActivity extends DialogFragmentActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle(repository.generateId());
-        avatars.bind(actionBar, repository.getOwner());
 
         fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.commit_compare_list_fragment);

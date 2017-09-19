@@ -15,10 +15,11 @@
  */
 package com.github.mobile.api.service;
 
+import com.github.mobile.api.model.Comment;
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.TimelineEvent;
 
 import java.util.List;
-import com.github.mobile.api.model.Issue;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -34,7 +35,9 @@ public interface IssueService {
             @Path("repo") String repo,
             @Path("number") long number);
 
-    @Headers("Accept: application/vnd.github.mockingbird-preview")
+    @Headers({"Accept: application/vnd.github.v3.full+json",
+            "Accept: application/vnd.github.mockingbird-preview",
+            "Accept: application/vnd.github.squirrel-girl-preview"})
     @GET("repos/{owner}/{repo}/issues/{issue_number}/timeline")
     Call<List<TimelineEvent>> getTimeline(
             @Path("owner") String owner,
@@ -42,4 +45,11 @@ public interface IssueService {
             @Path("issue_number") long issue_number,
             @Query("page") int page,
             @Query("per_page") int per_page);
+
+    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
+    @GET("repos/{owner}/{repo}/issues/{number}/comments")
+    Call<List<Comment>> getIssueComments(
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Path("number") long number);
 }

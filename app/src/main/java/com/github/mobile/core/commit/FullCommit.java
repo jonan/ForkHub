@@ -17,6 +17,8 @@ package com.github.mobile.core.commit;
 
 import android.text.TextUtils;
 
+import com.github.mobile.api.model.CommitComment;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +26,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.CommitFile;
 import org.eclipse.egit.github.core.RepositoryCommit;
 
@@ -77,7 +78,7 @@ public class FullCommit extends ArrayList<CommitComment> implements
                     FullCommitFile full = new FullCommitFile(file);
                     while (iterator.hasNext()) {
                         CommitComment comment = iterator.next();
-                        if (file.getFilename().equals(comment.getPath())) {
+                        if (file.getFilename().equals(comment.path)) {
                             full.add(comment);
                             iterator.remove();
                         }
@@ -97,7 +98,7 @@ public class FullCommit extends ArrayList<CommitComment> implements
 
     @Override
     public boolean add(final CommitComment comment) {
-        String path = comment.getPath();
+        String path = comment.path;
         if (TextUtils.isEmpty(path))
             return super.add(comment);
         else {

@@ -26,11 +26,8 @@ import android.view.MenuItem;
 import com.github.mobile.Intents;
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragmentActivity;
-import com.github.mobile.util.AvatarLoader;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
 
 /**
  * Activity to view repository contributors
@@ -49,9 +46,6 @@ public class RepositoryContributorsActivity extends DialogFragmentActivity {
 
     private Repository repository;
 
-    @Inject
-    private AvatarLoader avatars;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +58,6 @@ public class RepositoryContributorsActivity extends DialogFragmentActivity {
         actionBar.setTitle(repository.getName());
         actionBar.setSubtitle(R.string.contributors);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        User owner = repository.getOwner();
-        avatars.bind(getSupportActionBar(), owner);
     }
 
     @Override

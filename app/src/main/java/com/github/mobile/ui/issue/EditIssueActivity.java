@@ -66,7 +66,6 @@ import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.RepositoryIssue;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.LabelService;
@@ -207,7 +206,6 @@ public class EditIssueActivity extends DialogFragmentActivity {
             }.execute();
         }
         actionBar.setSubtitle(repository.generateId());
-        avatars.bind(actionBar, (User) intent.getSerializableExtra(EXTRA_USER));
 
         titleText.addTextChangedListener(new TextWatcherAdapter() {
 

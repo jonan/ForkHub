@@ -33,13 +33,11 @@ import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.core.issue.IssueUtils;
-import com.github.mobile.core.repo.RefreshRepositoryTask;
 import com.github.mobile.ui.FragmentProvider;
 import com.github.mobile.ui.PagerActivity;
 import com.github.mobile.ui.ViewPager;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.ui.UriLauncherActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
 import java.util.ArrayList;
@@ -190,9 +188,6 @@ public class IssuesViewActivity extends PagerActivity {
     private Repository repo;
 
     @Inject
-    private AvatarLoader avatars;
-
-    @Inject
     private IssueStore store;
 
     @Inject
@@ -220,24 +215,7 @@ public class IssuesViewActivity extends PagerActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setSubtitle(repo.generateId());
             user.set(repo.getOwner());
-            avatars.bind(actionBar, user);
         }
-
-        // Load avatar if single issue and user is currently unset or missing
-        // avatar URL
-        if (issueNumbers.length == 1
-                && (user.get() == null || user.get().getAvatarUrl() == null))
-            new RefreshRepositoryTask(this, repo != null ? repo : repoIds.get(0)) {
-
-                @Override
-                protected void onSuccess(Repository fullRepository)
-                        throws Exception {
-                    super.onSuccess(fullRepository);
-
-                    avatars.bind(getSupportActionBar(),
-                            fullRepository.getOwner());
-                }
-            }.execute();
 
         isCollaborator = false;
         checkCollaboratorStatus();
@@ -297,7 +275,6 @@ public class IssuesViewActivity extends PagerActivity {
                 Repository fullRepo = issue.getRepository();
                 if (fullRepo != null && fullRepo.getOwner() != null) {
                     user.set(fullRepo.getOwner());
-                    avatars.bind(actionBar, user);
                 } else
                     actionBar.setLogo(null);
             } else

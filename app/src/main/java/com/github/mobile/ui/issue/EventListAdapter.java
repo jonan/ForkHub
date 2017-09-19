@@ -27,6 +27,7 @@ import com.github.mobile.R;
 import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.TimelineEvent;
 import com.github.mobile.api.model.User;
+import com.github.mobile.ui.ReactionsView;
 import com.github.mobile.ui.user.UserViewActivity;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -178,9 +179,38 @@ public class EventListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_REVIEWED:
-            message += resources.getString(R.string.issue_event_reviewed);
-            setText(0, TypefaceUtils.ICON_EYE);
-            textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+            switch (event.state) {
+            case TimelineEvent.STATE_PENDING:
+                message += resources.getString(R.string.issue_event_review_pending);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            case TimelineEvent.STATE_COMMENTED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            case TimelineEvent.STATE_CHANGES_REQUESTED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_X);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
+                break;
+            case TimelineEvent.STATE_APPROVED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_CHECK);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
+                break;
+            case TimelineEvent.STATE_DISMISSED:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            default:
+                message += resources.getString(R.string.issue_event_reviewed);
+                setText(0, TypefaceUtils.ICON_EYE);
+                textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
+                break;
+            }
             break;
         case TimelineEvent.EVENT_REVIEW_DISMISSED:
             message += resources.getString(R.string.issue_event_review_dismissed);
@@ -312,6 +342,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             setGone(5, true);
             setGone(6, true);
         }
+        ((ReactionsView)view(7)).setReactionSummary(comment.reactions);
     }
 
     public MultiTypeAdapter setItems(Collection<TimelineEvent> items) {
@@ -385,7 +416,7 @@ public class EventListAdapter extends MultiTypeAdapter {
         if(type == VIEW_COMMENT)
             return new int[] { R.id.tv_comment_body, R.id.tv_comment_author,
                     R.id.tv_comment_date, R.id.tv_comment_edited, R.id.iv_avatar,
-                    R.id.iv_comment_edit, R.id.iv_comment_delete };
+                    R.id.iv_comment_edit, R.id.iv_comment_delete, R.id.rv_comment_reaction };
         else
             return new int[]{R.id.tv_event_icon, R.id.tv_event, R.id.iv_avatar};
     }

@@ -1,5 +1,21 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+- Add shortcuts for viewing the issue dashboard and notifications.
+- Display reactions in issue and commit comments.
+- Add logout button.
+- Remove repository image from the toolbar.
+
+### Fixed
+- Improve the source viewer for many languages (CodeMirror 5.27.4).
+- Some minor improvements.
+
+### Translations
+- Improve translations: DE, PT-BR, RU.
+- New translations: PT-PT.
+
 ## [ForkHub v1.2.8] - 2017-03-22
 
 ### Added
@@ -184,6 +200,7 @@
 
 - Last official GitHub release.
 
+[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.8...master
 [ForkHub v1.2.8]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.7...ForkHub-v1.2.8
 [ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6

@@ -35,6 +35,8 @@ public class Issue {
 
     public String body;
 
+    public String body_html;
+
     public User user;
 
     public List<Label> labels;
@@ -68,7 +70,9 @@ public class Issue {
         issue.setHtmlUrl(html_url);
         issue.setNumber(number);
         issue.setState(state);
+        issue.setTitle(title);
         issue.setBody(body);
+        issue.setBodyHtml(body_html);
         issue.setCreatedAt(created_at);
         issue.setClosedAt(closed_at);
         issue.setUpdatedAt(updated_at);

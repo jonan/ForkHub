@@ -35,9 +35,7 @@ import android.widget.LinearLayout;
 import com.github.mobile.R;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.ToastUtils;
-import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 
@@ -45,9 +43,6 @@ import org.eclipse.egit.github.core.Repository;
  * Activity to search issues
  */
 public class IssueSearchActivity extends RoboActionBarActivity {
-
-    @Inject
-    private AvatarLoader avatars;
 
     private Repository repository;
 
@@ -91,7 +86,6 @@ public class IssueSearchActivity extends RoboActionBarActivity {
             if (repository != null) {
                 actionBar.setSubtitle(repository.generateId());
                 actionBar.setDisplayHomeAsUpEnabled(true);
-                avatars.bind(actionBar, repository.getOwner());
             }
         }
 
