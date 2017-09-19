@@ -319,7 +319,7 @@ public class IssuesViewActivity extends PagerActivity {
         switch (item.getItemId()) {
         case android.R.id.home:
             Repository repository = repo;
-            if (repository == null) {
+            if (repository == null && pager != null) {
                 int position = pager.getCurrentItem();
                 RepositoryId repoId = repoIds.get(position);
                 if (repoId != null) {
