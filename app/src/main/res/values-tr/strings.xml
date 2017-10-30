@@ -24,6 +24,8 @@
     <string name="error_contributors_load">Katkıda Bulunanları Yükleme Başarısız Oldu</string>
     <string name="error_gist_load">Gist Yükleme Başarısız Oldu</string>
     <string name="error_notifications_load">Bildirimleri Yükleme Başarısız Oldu</string>
+    <string name="error_projects_load">Projeleri Yükleme Başarısız Oldu</string>
+    <string name="error_cards_load">Kartları Yükleme Başarısız Oldu</string>
     <string name="error_news_load">Haberleri Yükleme Başarısız Oldu</string>
     <string name="error_followers_load">Takipçileri Yükleme Başarısız Oldu</string>
     <string name="error_people_load">Kişileri Yükleme Başarısız Oldu</string>
@@ -60,6 +62,8 @@
     <string name="loading_notifications">Daha Fazla Bildirim Yükleniyor…</string>
     <string name="loading_more_issues">Daha Fazla Sorun Yükleniyor…</string>
     <string name="loading_issues">Sorunlar Yükleniyor…</string>
+    <string name="loading_projects">Projeler Yükleniyor…</string>
+    <string name="loading_cards">Kartlar Yükleniyor…</string>
     <string name="loading_comments">Yorumlar Yükleniyor…</string>
     <string name="loading_repositories">Depolar Yükleniyor…</string>
     <string name="loading_issue">Sorun Yükleniyor…</string>
@@ -68,6 +72,7 @@
     <string name="loading_people">Kişiler Yükleniyor…</string>
     <string name="loading_gists">Gist\'ler Yükleniyor…</string>
     <string name="loading_collaborators">Ortak Çalışanlar Yükleniyor…</string>
+    <string name="loading_teams">Takımlar Yükleniyor…</string>
     <string name="loading_milestones">Dönüm Noktaları Yükleniyor…</string>
     <string name="loading_labels">Etiketler Yükleniyor…</string>
     <string name="loading_commits">Onaylamalar Yükleniyor…</string>
@@ -90,6 +95,8 @@
     <string name="no_teams">Takım Yok</string>
     <string name="no_news">Haber Yok</string>
     <string name="no_commits">Onaylama Yok</string>
+    <string name="no_projects">Proje Yok</string>
+    <string name="no_cards">Kart Yok</string>
     <!--  -->
 
 
@@ -111,6 +118,11 @@
     <string name="issue_event_milestone_removed">bunu %1$s dönüm noktasından sildi</string>
     <string name="issue_event_merged">onaylama %1$s ile birleştirdi</string>
     <string name="issue_event_referenced">bu soruna %1$s onaylamasından referans verdi</string>
+    <string name="issue_event_cross_referenced">bu soruna %1$s deposundan referans verdi</string>
+    <string name="issue_event_review_requested">%1$s\'den inceleme istedi</string>
+    <string name="issue_event_review_request_removed">%1$s\'den gelen inceleme isteğini kaldırdı</string>
+    <string name="issue_event_reviewed">incelendi</string>
+    <string name="issue_event_review_dismissed">incelemesini reddetti</string>
     <string name="issue_event_closed">bunu kapattı</string>
     <string name="issue_event_closed_from_commit">%1$s onaylaması ile bunu kapattı</string>
     <string name="issue_event_reopened">bunu yeniden açtı</string>
@@ -157,6 +169,7 @@
     <string name="dashboard_issues_title">Sorun Kontrol Paneli</string>
     <string name="bookmarks">Yer İmleri</string>
     <string name="report_issue">Sorun bildir</string>
+    <string name="logout">Çıkış yap</string>
     <string name="gists_title">Gist\'ler</string>
     <string name="issue_title">Sorun #</string>
     <string name="pull_request_title">Çekme Talebi #</string>
@@ -184,9 +197,12 @@
     <string name="select_milestone">Dönüm Noktası Seç</string>
     <string name="select_labels">Etiket Seç</string>
     <string name="select_ref">Bir Dal Veya Etiket Seç</string>
+    <string name="login_pass_explanation">ForkHub parolanızı sadece &lt;i>Kişisel Erişim Anahtarı&lt;/i> oluşturmak için kullanacaktır. İsterseniz kendiniz bir adet &lt;a href=\"https://github.com/settings/tokens\">oluşturabilir&lt;/a> ve burada şifre olarak kullanabilirsiniz.</string>
     <string name="enter_otp_code_title">Doğrulama Kodu</string>
     <string name="enter_otp_code_message">Hesabınızda Iki-Faktörlü doğrulama etkin. Kimliğinizi doğrulamak için doğrulama kodunuzu giriniz.</string>
     <string name="star_forkhub_dialog_text">Eğer bu uygulamayı beğendiyseniz, lütfen desteğinizi oylayarak vererek gösteriniz.</string>
+    <string name="rate_forkhub_dialog_text">Bu uygulamayı beğendiyseniz, lütfen Play Store\'da derecelendirerek desteğinizi gösteriniz.</string>
+    <string name="rate">Derecelendir</string>
     <string name="no_milestone">Dönüm Noktası Yok</string>
     <string name="unassigned">Kimse Atanmamış</string>
     <string name="assigned">atanmış</string>
@@ -242,6 +258,7 @@
     <string name="prefix_created">oluşturuldu\u0020</string>
     <string name="prefix_updated">güncellendi\u0020</string>
     <string name="prefix_opened">açıldı\u0020</string>
+    <string name="updated">Güncellendi %1$s</string>
     <string name="clear">Temizle</string>
     <string name="pull_request_commits">Onaylamalar: %d</string>
     <string name="pull_request_mergeable_text">Bu dalın merkezi dal ile çakışması yok.</string>
@@ -308,6 +325,7 @@
     <string name="tab_code">Kod</string>
     <string name="tab_commits">Onaylamalar</string>
     <string name="tab_issues">Sorunlar</string>
+    <string name="tab_projects">projeler</string>
     <string name="tab_pull_requests">Çekme Istekleri</string>
     <string name="tab_watched">İzlediklerim</string>
     <string name="tab_assigned">Atandıklarım</string>
@@ -326,5 +344,6 @@
     <string name="render_markdown">Markdown dosyasını renderla</string>
     <string name="copy_hash">Hash Kodunu Kopyala</string>
     <string name="toast_msg_copied">Kopyalandı</string>
+    <string name="parent_repo">Ana depo</string>
 
 </resources>
