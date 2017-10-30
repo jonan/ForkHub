@@ -336,7 +336,7 @@
     <string name="open_in_browser">Abrir no navegador</string>
     <string name="show_password">Mostrar senha</string>
     <string name="write">Escrever</string>
-    <string name="preview">Previsualizar</string>
+    <string name="preview">Pré-visualizar</string>
     <string name="show_raw_markdown">Mostrar remarcação pura</string>
     <string name="render_markdown">Iterpretar remarcação</string>
     <string name="copy_hash">Copiar hash</string>
