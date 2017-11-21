@@ -29,6 +29,12 @@
         android:id="@+id/m_contributors"
         app:showAsAction="never"
         android:title="@string/contributors"/>
+
+    <item
+        android:id="@+id/m_milestone"
+        app:showAsAction="never"
+        android:title="@string/milestone"/>
+
     <item
         android:id="@+id/m_parent_repo"
         app:showAsAction="never"

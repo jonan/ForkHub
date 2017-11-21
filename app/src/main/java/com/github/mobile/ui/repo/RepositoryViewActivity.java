@@ -198,6 +198,9 @@ public class RepositoryViewActivity extends TabPagerActivity<RepositoryPagerAdap
         case R.id.m_contributors:
             startActivity(RepositoryContributorsActivity.createIntent(repository));
             return true;
+        case R.id.m_milestone:
+            startActivity(RepositoryMilestonesActivity.createIntent(repository));
+            return true;
         case R.id.m_parent_repo:
             if (repository.getParent() == null) {
                 // TODO: save parent in OrganizationRepositories so we don't need to do this
