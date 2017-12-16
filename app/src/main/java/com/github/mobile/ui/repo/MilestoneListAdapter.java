@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
  */
 public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
 
+    private final Context context;
     /**
      * Create milestone list adapter
      *
@@ -40,6 +41,7 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
     public MilestoneListAdapter(final Context context,
                                 final Milestone[] elements, final AvatarLoader avatars) {
         super(LayoutInflater.from(context), R.layout.milestone_item);
+        this.context = context.getApplicationContext();
         setItems(elements);
     }
 
@@ -60,11 +62,11 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
 
     @Override
     protected void update(int position, Milestone milestone) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MMM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 
         setText(0, milestone.getTitle());
-        setText(1, "Due by " + sdf.format(milestone.getDueOn()));
-        setText(2, "Opened: " + String.valueOf(milestone.getOpenIssues()));
-        setText(3, "Closed: " + String.valueOf(milestone.getClosedIssues()));
+        setText(1, context.getString(R.string.ms_due_by) + sdf.format(milestone.getDueOn()));
+        setText(2, context.getString(R.string.ms_opened_issues) + String.valueOf(milestone.getOpenIssues()));
+        setText(3, context.getString(R.string.ms_closed_issues) + String.valueOf(milestone.getClosedIssues()));
     }
 }
