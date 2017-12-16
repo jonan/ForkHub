@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
@@ -92,17 +93,8 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         final Milestone milestone = (Milestone) l.getItemAtPosition(position);
-        //todo
-        /*new RefreshUserTask(getActivity(), contributor.getLogin()) {
-
-            @Override
-            protected void onSuccess(User user) throws Exception {
-                super.onSuccess(user);
-
-                if (!AccountUtils.isUser(getActivity(), user))
-                    startActivity(UserViewActivity.createIntent(user));
-            }
-        }.execute();*/
+        Toast.makeText(getContext(),milestone.getTitle(),Toast.LENGTH_SHORT).show();
+        //todo add open milestone view page
     }
 
     @Override

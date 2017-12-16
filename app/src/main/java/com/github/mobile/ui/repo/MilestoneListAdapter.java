@@ -46,13 +46,6 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
     }
 
     @Override
-    public long getItemId(final int position) {
-        //todo
-        //return getItem(position).getId();
-        return 0;
-    }
-
-    @Override
     protected int[] getChildViewIds() {
         return new int[]{R.id.tv_milestone_title,
                 R.id.tv_milestone_due_to,
