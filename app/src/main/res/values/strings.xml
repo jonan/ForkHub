@@ -346,5 +346,8 @@
     <string name="copy_hash">Copy hash</string>
     <string name="toast_msg_copied">Copied to clipboard</string>
     <string name="parent_repo">Parent repository</string>
+    <string name="ms_due_by">Due by</string>
+    <string name="ms_opened_issues">Opened:</string>
+    <string name="ms_closed_issues">Closed:</string>
 
 </resources>
