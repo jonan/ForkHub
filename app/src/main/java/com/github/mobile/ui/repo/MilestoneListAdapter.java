@@ -24,6 +24,7 @@ import com.github.mobile.util.AvatarLoader;
 
 import org.eclipse.egit.github.core.Milestone;
 
+import java.text.SimpleDateFormat;
 /**
  * List adapter for a list of milestones
  */
@@ -38,11 +39,8 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
      */
     public MilestoneListAdapter(final Context context,
                                 final Milestone[] elements, final AvatarLoader avatars) {
-        super(LayoutInflater.from(context), R.layout.contributor_item);
-
-        /*this.context = context.getApplicationContext();
-        this.avatars = avatars;
-        setItems(elements);*/
+        super(LayoutInflater.from(context), R.layout.milestone_item);
+        setItems(elements);
     }
 
     @Override
@@ -54,16 +52,19 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
 
     @Override
     protected int[] getChildViewIds() {
-        //todo
-        //return new int[] { R.id.iv_avatar, R.id.tv_login, R.id.tv_contributions };
-        return new int[]{};
+        return new int[]{R.id.tv_milestone_title,
+                R.id.tv_milestone_due_to,
+                R.id.tv_milestone_opened_iss_number,
+                R.id.tv_milestone_closed_iss_number};
     }
 
     @Override
     protected void update(int position, Milestone milestone) {
-        //todo
-        /*avatars.bind(imageView(0), contributor);
-        setText(1, contributor.getLogin());
-        setText(2, context.getString(R.string.contributions, contributor.getContributions()));*/
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MMM.yyyy");
+
+        setText(0, milestone.getTitle());
+        setText(1, "Due by " + sdf.format(milestone.getDueOn()));
+        setText(2, "Opened: " + String.valueOf(milestone.getOpenIssues()));
+        setText(3, "Closed: " + String.valueOf(milestone.getClosedIssues()));
     }
 }
