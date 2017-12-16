@@ -21,7 +21,9 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
@@ -68,8 +70,18 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
                 intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 return true;
+            case R.id.add_ms_menu_item:
+                //todo change on opening of milestone_create_page
+                Toast.makeText(this, "open milestone", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.milestone, menu);
+        return true;
     }
 }
