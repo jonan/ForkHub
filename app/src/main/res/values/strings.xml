@@ -256,6 +256,7 @@
     <string name="reopening_issue">Reopening Issue…</string>
     <string name="avatar">Avatar</string>
     <string name="creating_issue">Creating Issue…</string>
+    <string name="creating_milestone">Creating Milestone…</string>
     <string name="prefix_created">created\u0020</string>
     <string name="prefix_updated">updated\u0020</string>
     <string name="prefix_opened">opened\u0020</string>
