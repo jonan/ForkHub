@@ -235,7 +235,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         if (milestone != null) {
             titleText.setText(milestone.getTitle());
             descriptionText.setText(milestone.getDescription());
-            dateText.setText(milestone.getDueOn().toString());
+            Date dueOn = milestone.getDueOn();
+            if (dueOn != null) {
+                dateText.setText(dueOn.toString());
+            } else {
+                dateText.setText(R.string.none);
+            }
         } else {
             titleText.setText(R.string.none);
             descriptionText.setText(R.string.none);
