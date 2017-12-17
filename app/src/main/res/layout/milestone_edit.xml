@@ -99,15 +99,20 @@
                     android:id="@+id/tv_milestone_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Date:" />
 
-                <TextView
-                    android:id="@+id/tv_clear"
+                <EditText
+                    android:id="@+id/et_milestone_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/b_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:text="@string/clear" />
 
             </LinearLayout>
