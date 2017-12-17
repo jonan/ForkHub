@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
@@ -84,7 +85,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private EditText descriptionText;
 
-    private EditText dateText;
+    private TextView dateText;
 
     private MilestoneDialog milestoneDialog;
 
@@ -107,7 +108,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
         titleText = finder.find(R.id.et_milestone_title);
         descriptionText = finder.find(R.id.et_milestone_description);
-        dateText = finder.find(R.id.et_milestone_date);
+        dateText = finder.find(R.id.tv_milestone_date);
         Button twoWeeksButton = finder.find(R.id.b_two_weeks);
         Button monthButton = finder.find(R.id.b_month);
         Button chooseDateButton = finder.find(R.id.b_choose_date);

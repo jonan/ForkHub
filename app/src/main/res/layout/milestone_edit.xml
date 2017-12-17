@@ -62,7 +62,7 @@
                 android:layout_alignStart="@+id/tv_milestone_title"
                 android:layout_below="@+id/tv_milestone_title"
                 android:layout_marginTop="10dp"
-                android:text="@string/title" />
+                />
 
             <TextView
                 android:id="@+id/tv_milestone_description"
@@ -77,7 +77,7 @@
 
             <EditText
                 android:id="@+id/et_milestone_description"
-                style="@style/FormalSingleLineEditText"
+                style="@style/FormalMultiLineEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/et_milestone_title"
@@ -87,7 +87,7 @@
                 android:minLines="5"
                 android:inputType="textMultiLine"
                 android:lines="5"
-                android:text="@string/description" />
+                 />
 
             <LinearLayout
                 android:id="@+id/ll_textviews"
@@ -99,13 +99,13 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/tv_milestone_date"
+                    android:id="@+id/tv_milestone_date_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date:" />
+                    android:text="@string/ms_due_by" />
 
-                <EditText
-                    android:id="@+id/et_milestone_date"
+                <TextView
+                    android:id="@+id/tv_milestone_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text"
@@ -134,14 +134,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="2 weeks" />
+                    android:text="@string/ms_date_2_weeks" />
 
                 <Button
                     android:id="@+id/b_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="month" />
+                    android:text="@string/ms_date_month" />
 
             </LinearLayout>
 
@@ -153,7 +153,7 @@
                 android:layout_alignStart="@+id/ll_buttons"
                 android:layout_below="@+id/ll_buttons"
                 android:layout_marginTop="15dp"
-                android:text="Choose date" />
+                android:text="@string/ms_choose_date" />
 
         </RelativeLayout>
     </ScrollView>
