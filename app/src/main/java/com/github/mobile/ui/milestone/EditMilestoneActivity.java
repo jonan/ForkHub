@@ -1,6 +1,7 @@
 package com.github.mobile.ui.milestone;
 
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -17,15 +18,20 @@ import android.widget.TextView;
 import com.github.mobile.Intents;
 import com.github.mobile.R;
 import org.eclipse.egit.github.core.Milestone;
+
+import com.github.mobile.accounts.AccountUtils;
+import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.AssigneeDialog;
+import com.github.mobile.ui.issue.EditIssueActivity;
 import com.github.mobile.ui.issue.LabelsDialog;
 import com.github.mobile.ui.issue.MilestoneDialog;
 import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.LabelService;
@@ -42,14 +48,15 @@ import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
  */
 public class EditMilestoneActivity extends DialogFragmentActivity {
 
+
     /**
-     * Create intent to create a milestone
+     * Create intent for this activity
      *
-     * @param issue
+     * @param repository
      * @return intent
      */
-    public static Intent createIntent(Issue issue) {
-        return createIntent(null, issue);
+    public static Intent createIntent(Repository repository) {
+        return new Intents.Builder("repo.milestones.edit.VIEW").repo(repository).toIntent();
     }
 
 
@@ -120,7 +127,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         monthButton = finder.find(R.id.b_month);
         clearText = finder.find(R.id.tv_clear);
 
-        //todo  checkCollaboratorStatus();?
+        checkCollaboratorStatus();
 
         Intent intent = getIntent();
 
@@ -223,6 +230,29 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
     }
 
     private void checkCollaboratorStatus() {
-        //todo
+        new AuthenticatedUserTask<Boolean>(this) {
+
+            @Override
+            public Boolean run(Account account) throws Exception {
+                return collaboratorService.isCollaborator(
+                        repository, AccountUtils.getLogin(EditMilestoneActivity.this));
+            }
+
+            @Override
+            protected void onSuccess(Boolean isCollaborator) throws Exception {
+                super.onSuccess(isCollaborator);
+
+                showMainContent();
+                if (isCollaborator)
+                    showCollaboratorOptions();
+            }
+
+            @Override
+            protected void onException(Exception e) throws RuntimeException {
+                super.onException(e);
+
+                showMainContent();
+            }
+        }.execute();
     }
 }
