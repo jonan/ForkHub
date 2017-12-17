@@ -15,35 +15,52 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItem" >
+    style="@style/ListItemTwoLines"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/rb_selected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+    <LinearLayout
+        android:id="@+id/ll_milestone_issues"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_milestone_opened_iss_number"
+            style="@style/ListSubtitleText"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_milestone_closed_iss_number"
+            style="@style/ListSubtitleText"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/rb_selected"
-        android:orientation="vertical"
-        android:paddingLeft="5dp" >
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/ll_milestone_issues"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_milestone_title"
             style="@style/ListTitleText"
-            android:singleLine="true" />
+            android:paddingBottom="0dp"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
 
         <TextView
-            android:id="@+id/tv_milestone_description"
+            android:id="@+id/tv_milestone_due_to"
             style="@style/ListSubtitleText"
-            android:singleLine="true" />
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
     </LinearLayout>
 
 </RelativeLayout>
