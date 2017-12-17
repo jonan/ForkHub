@@ -102,7 +102,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private Button monthButton;
 
-    private Button chooseButton;
+    private Button chooseDateButton;
 
     private Button clear;
 
@@ -137,12 +137,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         dateText = finder.find(R.id.et_milestone_date);
         twoWeeksButton = finder.find(R.id.b_two_weeks);
         monthButton = finder.find(R.id.b_month);
-        chooseButton = finder.find(R.id.b_choose_date);
+        chooseDateButton = finder.find(R.id.b_choose_date);
         clear = finder.find(R.id.b_clear);
 
         final Calendar dateAndTime = Calendar.getInstance();
 
-        chooseButton.setOnClickListener(new View.OnClickListener() {
+        chooseDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog.OnDateSetListener picker =new DatePickerDialog.OnDateSetListener() {
@@ -161,6 +161,36 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.get(Calendar.MONTH),
                         dateAndTime.get(Calendar.DAY_OF_MONTH))
                         .show();
+            }
+        });
+
+        twoWeeksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int noOfDays = 14; //two weeks
+                Date dateOfOrder = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateOfOrder);
+                dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = dateAndTime.getTime();
+                String fdate = sd.format(startDate);
+                dateText.setText(fdate);
+            }
+        });
+
+        monthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int noOfDays = 31; //1 month
+                Date dateOfOrder = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateOfOrder);
+                dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = dateAndTime.getTime();
+                String fdate = sd.format(startDate);
+                dateText.setText(fdate);
             }
         });
 
