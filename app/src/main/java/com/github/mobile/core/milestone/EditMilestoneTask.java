@@ -27,7 +27,7 @@ import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
 public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
-    private static final String TAG = "CreateMilestoneTask";
+    private static final String TAG = "EditMilestoneTask";
 
     @Inject
     private MilestoneService service;
