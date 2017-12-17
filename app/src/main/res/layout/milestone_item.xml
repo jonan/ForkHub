@@ -20,28 +20,6 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/ll_milestone_issues"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_milestone_title"
-            style="@style/ListTitleText"
-            android:paddingBottom="0dp"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textStyle="normal" />
-
-        <TextView
-            android:id="@+id/tv_milestone_due_to"
-            style="@style/ListSubtitleText"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/ll_milestone_issues"
         android:layout_width="100dp"
         android:layout_height="match_parent"
@@ -57,6 +35,28 @@
 
         <TextView
             android:id="@+id/tv_milestone_closed_iss_number"
+            style="@style/ListSubtitleText"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/ll_milestone_issues"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_milestone_title"
+            style="@style/ListTitleText"
+            android:paddingBottom="0dp"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_milestone_due_to"
             style="@style/ListSubtitleText"
             android:paddingLeft="10dp"
             android:singleLine="true"

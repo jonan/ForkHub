@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2012 GitHub Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,112 +36,126 @@
         android:layout_below="@id/toolbar"
         android:visibility="gone">
 
-        <TextView
-            android:id="@+id/tv_milestone_title"
-            style="@style/HeaderTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/toolbar"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/title" />
-
-
-        <EditText
-            android:id="@+id/et_milestone_title"
-            style="@style/FormalSingleLineEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_milestone_title"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/tv_milestone_title"
-            android:layout_alignEnd="@+id/tv_milestone_title"
-            android:text="@string/title"/>
-
-        <TextView
-            android:id="@+id/tv_milestone_description"
-            style="@style/HeaderTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_milestone_title"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/tv_milestone_title"
-            android:layout_alignEnd="@+id/tv_milestone_title"
-            android:text="@string/description"/>
-
-        <EditText
-            android:id="@+id/et_milestone_description"
-            style="@style/FormalSingleLineEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_milestone_description"
-            android:layout_marginTop="10dp"
-            android:layout_alignStart="@+id/et_milestone_title"
-            android:layout_alignEnd="@+id/et_milestone_title"
-            android:text="@string/description" />
-
-        <LinearLayout
-            android:id="@+id/ll_textviews"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/et_milestone_description"
-            android:layout_alignStart="@+id/et_milestone_description"
-            android:layout_below="@+id/et_milestone_description"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_milestone_title"
+                style="@style/HeaderTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/title" />
+
+
+            <EditText
+                android:id="@+id/et_milestone_title"
+                style="@style/FormalSingleLineEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/tv_milestone_title"
+                android:layout_alignStart="@+id/tv_milestone_title"
+                android:layout_below="@+id/tv_milestone_title"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_milestone_description"
+                style="@style/HeaderTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/tv_milestone_title"
+                android:layout_alignStart="@+id/tv_milestone_title"
+                android:layout_below="@+id/et_milestone_title"
+                android:layout_marginTop="10dp"
+                android:text="@string/description" />
+
+            <EditText
+                android:id="@+id/et_milestone_description"
+                style="@style/FormalMultiLineEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/et_milestone_title"
+                android:layout_alignStart="@+id/et_milestone_title"
+                android:layout_below="@+id/tv_milestone_description"
+                android:layout_marginTop="10dp"
+                android:minLines="5"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                 />
+
+            <View
+                android:id="@+id/strut"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/b_clear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/strut"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/et_milestone_description"
+                android:text="@string/clear" />
+
+            <TextView
+                android:id="@+id/tv_milestone_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/b_clear"
+                android:layout_alignStart="@id/et_milestone_description"
+                android:text="@string/ms_due_by" />
 
             <TextView
                 android:id="@+id/tv_milestone_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date:" />
+                android:layout_alignBaseline="@id/b_clear"
+                android:layout_toEndOf="@id/tv_milestone_date_label"
+                android:textColor="@color/text" />
 
-            <TextView
-                android:id="@+id/tv_clear"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:id="@+id/ll_buttons"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/clear" />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/b_clear"
+                android:layout_marginTop="10dp">
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/b_two_weeks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ms_date_2_weeks" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_textviews"
-            android:layout_alignStart="@+id/ll_textviews"
-            android:layout_alignEnd="@+id/ll_textviews"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ll_buttons">
+                <Button
+                    android:id="@+id/b_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ms_date_month" />
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/b_two_weeks"
+                android:id="@+id/b_choose_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2 weeks" />
+                android:layout_alignEnd="@+id/ll_buttons"
+                android:layout_alignStart="@+id/ll_buttons"
+                android:layout_below="@+id/ll_buttons"
+                android:layout_marginTop="15dp"
+                android:text="@string/ms_choose_date" />
 
-            <Button
-                android:id="@+id/b_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="month" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/b_choose_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/ll_buttons"
-            android:layout_below="@+id/ll_buttons"
-            android:layout_marginTop="15dp"
-            android:text="Choose date"
-            android:layout_alignEnd="@+id/ll_buttons" />
+        </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

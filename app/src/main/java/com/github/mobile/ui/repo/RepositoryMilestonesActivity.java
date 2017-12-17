@@ -27,8 +27,11 @@ import android.widget.Toast;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.ui.DialogFragmentActivity;
+import com.github.mobile.ui.milestone.EditMilestoneActivity;
 
+import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 
 /**
@@ -71,8 +74,10 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
                 startActivity(intent);
                 return true;
             case R.id.add_ms_menu_item:
-                //todo change on opening of milestone_create_page
-                Toast.makeText(this, "open milestone", Toast.LENGTH_SHORT).show();
+                //creating new milestone
+                Intent i = EditMilestoneActivity.createIntent(repository);
+                i.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
