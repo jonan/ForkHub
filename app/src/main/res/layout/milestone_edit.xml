@@ -89,44 +89,45 @@
                 android:lines="5"
                  />
 
-            <LinearLayout
-                android:id="@+id/ll_textviews"
-                android:layout_width="match_parent"
+            <View
+                android:id="@+id/strut"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/b_clear"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/et_milestone_description"
-                android:layout_alignStart="@+id/et_milestone_description"
-                android:layout_below="@+id/et_milestone_description"
-                android:layout_marginTop="10dp">
+                android:layout_alignLeft="@id/strut"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/et_milestone_description"
+                android:text="@string/clear" />
 
-                <TextView
-                    android:id="@+id/tv_milestone_date_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ms_due_by" />
+            <TextView
+                android:id="@+id/tv_milestone_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/b_clear"
+                android:layout_alignStart="@id/et_milestone_description"
+                android:text="@string/ms_due_by" />
 
-                <TextView
-                    android:id="@+id/tv_milestone_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text"
-                    android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_milestone_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/b_clear"
+                android:layout_toEndOf="@id/tv_milestone_date_label"
+                android:textColor="@color/text" />
 
-                <Button
-                    android:id="@+id/b_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/clear" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/ll_textviews"
-                android:layout_alignStart="@+id/ll_textviews"
-                android:layout_below="@+id/ll_textviews"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/b_clear"
                 android:layout_marginTop="10dp">
 
                 <Button

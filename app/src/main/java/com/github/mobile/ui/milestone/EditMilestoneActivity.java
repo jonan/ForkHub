@@ -170,8 +170,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                titleText.setText("");
-                descriptionText.setText("");
                 dateText.setText("");
             }
         });
@@ -195,7 +193,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         if (milestone.getNumber() > 0)
             actionBar.setTitle(getString(R.string.milestone)
-                        + milestone.getNumber());
+                    + milestone.getNumber());
         else
             actionBar.setTitle(R.string.new_milestone);
         actionBar.setSubtitle(repository.generateId());
@@ -239,12 +237,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             if (dueOn != null) {
                 dateText.setText(dueOn.toString());
             } else {
-                dateText.setText(R.string.none);
+                dateText.setText("");
             }
         } else {
             titleText.setText(R.string.none);
             descriptionText.setText(R.string.none);
-            dateText.setText(R.string.none);
+            dateText.setText("");
         }
     }
 
