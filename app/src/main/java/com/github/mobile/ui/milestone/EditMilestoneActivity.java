@@ -155,11 +155,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             @Override
             public void onClick(View v) {
                 final Calendar dateAndTime = Calendar.getInstance();
-                int noOfDays = 31; //1 month
-                Date dateOfOrder = new Date();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dateOfOrder);
-                dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
+                dateAndTime.add(Calendar.MONTH, 1);
                 SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
                 final Date startDate = dateAndTime.getTime();
                 String fdate = sd.format(startDate);
