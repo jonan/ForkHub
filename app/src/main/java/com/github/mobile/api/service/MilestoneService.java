@@ -64,4 +64,11 @@ public interface MilestoneService {
             @Path("repo") String repo,
             @Path("number") long number,
             @Body Milestone milestone);
+
+    @Headers("Accept: application/vnd.github.v3+json")
+    @DELETE("repos/{owner}/{repo}/milestones/{number}")
+    Call<Milestone> deleteMilestone(
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Path("number") long number);
 }
