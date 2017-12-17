@@ -14,12 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ScrollView;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
 
-import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Milestone;
 
 import com.github.mobile.accounts.AccountUtils;
@@ -27,9 +25,7 @@ import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
-import com.github.mobile.ui.issue.MilestoneDialogFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
-import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -38,18 +34,16 @@ import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import static com.github.mobile.Intents.EXTRA_ISSUE;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
-import static com.github.mobile.Intents.EXTRA_USER;
-import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 
 /*
  * Activity to edit or create a milestone
@@ -65,7 +59,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
      */
     public static Intent createIntent(Repository repository) {
         return createIntent(null, repository.getOwner().getLogin(),
-                repository.getName(), repository.getOwner(), null);
+                repository.getName());
     }
 
     /**
@@ -74,17 +68,11 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
      * @param milestone
      * @param repositoryOwner
      * @param repositoryName
-     * @param user
      * @return intent
      */
     public static Intent createIntent(final Milestone milestone,
-                                      final String repositoryOwner, final String repositoryName,
-                                      final User user, final Issue issue) {
+                                      final String repositoryOwner, final String repositoryName) {
         Intents.Builder builder = new Intents.Builder("repo.milestones.edit.VIEW");
-        if (user != null)
-            builder.add(EXTRA_USER, user);
-        if(issue != null)
-            builder.add(EXTRA_ISSUE, issue);
         builder.add(EXTRA_REPOSITORY_NAME, repositoryName);
         builder.add(EXTRA_REPOSITORY_OWNER, repositoryOwner);
         if (milestone != null)
@@ -98,19 +86,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private EditText dateText;
 
-    private Button twoWeeksButton;
-
-    private Button monthButton;
-
-    private Button chooseDateButton;
-
-    private Button clear;
-
-    private ScrollView milestoneContent;
-
-    @Inject
-    private AvatarLoader avatars;
-
     private MilestoneDialog milestoneDialog;
 
     @Inject
@@ -123,8 +98,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private RepositoryId repository;
 
-    private Issue issue;
-
     private MenuItem saveItem;
 
     @Override
@@ -135,17 +108,18 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         titleText = finder.find(R.id.et_milestone_title);
         descriptionText = finder.find(R.id.et_milestone_description);
         dateText = finder.find(R.id.et_milestone_date);
-        twoWeeksButton = finder.find(R.id.b_two_weeks);
-        monthButton = finder.find(R.id.b_month);
-        chooseDateButton = finder.find(R.id.b_choose_date);
-        clear = finder.find(R.id.b_clear);
-
-        final Calendar dateAndTime = Calendar.getInstance();
+        Button twoWeeksButton = finder.find(R.id.b_two_weeks);
+        Button monthButton = finder.find(R.id.b_month);
+        Button chooseDateButton = finder.find(R.id.b_choose_date);
+        Button clear = finder.find(R.id.b_clear);
 
         chooseDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog.OnDateSetListener picker =new DatePickerDialog.OnDateSetListener() {
+                final Calendar dateAndTime = Calendar.getInstance();
+
+                new DatePickerDialog(EditMilestoneActivity.this, R.style.Theme_AppCompat_DayNight_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         dateAndTime.set(Calendar.YEAR, year);
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
@@ -155,18 +129,15 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         String fdate = sd.format(startDate);
                         dateText.setText(fdate);
                     }
-                };
-                new DatePickerDialog(EditMilestoneActivity.this, picker,
-                        dateAndTime.get(Calendar.YEAR),
-                        dateAndTime.get(Calendar.MONTH),
-                        dateAndTime.get(Calendar.DAY_OF_MONTH))
-                        .show();
+                }, dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH), dateAndTime.get(Calendar.DAY_OF_MONTH)).show();
+
             }
         });
 
         twoWeeksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Calendar dateAndTime = Calendar.getInstance();
                 int noOfDays = 14; //two weeks
                 Date dateOfOrder = new Date();
                 Calendar calendar = Calendar.getInstance();
@@ -182,6 +153,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         monthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Calendar dateAndTime = Calendar.getInstance();
                 int noOfDays = 31; //1 month
                 Date dateOfOrder = new Date();
                 Calendar calendar = Calendar.getInstance();
@@ -218,8 +190,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 intent.getStringExtra(EXTRA_REPOSITORY_OWNER),
                 intent.getStringExtra(EXTRA_REPOSITORY_NAME));
 
-        issue = (Issue)intent.getSerializableExtra(EXTRA_ISSUE);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         if (milestone.getNumber() > 0)
@@ -247,11 +217,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         if (RESULT_OK != resultCode)
             return;
         switch (requestCode) {
-            case ISSUE_MILESTONE_UPDATE:
-                issue.setMilestone(MilestoneDialogFragment.getSelected(arguments));
-                updateMilestone();
-                break;
-            //todo think about labels and assignee cases
+            //todo think about cases
         }
     }
 
@@ -262,17 +228,17 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private void showCollaboratorOptions() {
         updateMilestone();
-        //todo think about labels and assignee update
     }
 
     private void updateMilestone() {
-        Milestone milestone = issue.getMilestone();
         if (milestone != null) {
             titleText.setText(milestone.getTitle());
-            //todo add more fields
+            descriptionText.setText(milestone.getDescription());
+            dateText.setText(milestone.getDueOn().toString());
         } else {
             titleText.setText(R.string.none);
-            //todo add more fields
+            descriptionText.setText(R.string.none);
+            dateText.setText(R.string.none);
         }
     }
 
@@ -316,7 +282,15 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             case R.id.m_apply:
                 milestone.setTitle(titleText.getText().toString());
                 milestone.setDescription(descriptionText.getText().toString());
-                //todo add more information to milestone and run EditMilestoneTask
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    Date date = sd.parse(dateText.getText().toString());
+                    milestone.setDueOn(date);
+                }
+                catch (ParseException e){
+                    e.printStackTrace();
+                }
+                //todo run EditMilestoneTask
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

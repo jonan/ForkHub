@@ -84,6 +84,9 @@
                 android:layout_alignStart="@+id/et_milestone_title"
                 android:layout_below="@+id/tv_milestone_description"
                 android:layout_marginTop="10dp"
+                android:minLines="5"
+                android:inputType="textMultiLine"
+                android:lines="5"
                 android:text="@string/description" />
 
             <LinearLayout
