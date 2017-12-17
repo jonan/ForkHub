@@ -36,10 +36,9 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
      *
      * @param context
      * @param elements
-     * @param avatars
      */
     public MilestoneListAdapter(final Context context,
-                                final Milestone[] elements, final AvatarLoader avatars) {
+                                final Milestone[] elements) {
         super(LayoutInflater.from(context), R.layout.milestone_item);
         this.context = context.getApplicationContext();
         setItems(elements);

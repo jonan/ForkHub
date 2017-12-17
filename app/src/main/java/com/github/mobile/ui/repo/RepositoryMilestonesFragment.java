@@ -16,7 +16,6 @@
 package com.github.mobile.ui.repo;
 
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static org.eclipse.egit.github.core.service.IssueService.STATE_OPEN;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
-import com.github.mobile.util.AvatarLoader;
 import com.google.inject.Inject;
 
 import java.util.List;
@@ -42,12 +40,7 @@ import org.eclipse.egit.github.core.service.MilestoneService;
  * Fragment to display a list of milestones for a specific repository
  */
 public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
-
-    /**
-     * Avatar loader
-     */
-    @Inject
-    protected AvatarLoader avatars;
+    public static final String MILESTONES_STATE_ALL="all";
 
     /**
      * Milestone service
@@ -77,17 +70,15 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
 
             @Override
             public List<Milestone> loadData() throws Exception {
-                //todo which state? STATE_OPEN?
-                return service.getMilestones(repo, STATE_OPEN);
+                return service.getMilestones(repo, MILESTONES_STATE_ALL);
             }
         };
     }
 
     @Override
     protected SingleTypeAdapter<Milestone> createAdapter(List<Milestone> items) {
-        //todo what to send to MilestoneListAdapter
         return new MilestoneListAdapter(getActivity(),
-                items.toArray(new Milestone[items.size()]), avatars);
+                items.toArray(new Milestone[items.size()]));
     }
 
     @Override
