@@ -26,8 +26,8 @@ import com.github.mobile.ui.ProgressDialogTask;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
-public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
-    private static final String TAG = "EditMilestoneTask";
+public class DeleteMilestoneTask extends ProgressDialogTask<Milestone> {
+    private static final String TAG = "DeleteMilestoneTask";
 
     @Inject
     private MilestoneService service;
@@ -37,17 +37,17 @@ public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
     private final Milestone milestone;
 
     /**
-     * Create task to edit an {@link Milestone}
+     * Create task to delete an {@link Milestone}
      *
      * @param activity
      * @param owner
      * @param repo
      * @param milestone
      */
-    public EditMilestoneTask(final Activity activity,
-                             final String owner,
-                             final String repo,
-                             final Milestone milestone) {
+    public DeleteMilestoneTask(final Activity activity,
+                               final String owner,
+                               final String repo,
+                               final Milestone milestone) {
         super(activity);
         this.owner = owner;
         this.repo = repo;
@@ -55,12 +55,12 @@ public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
     }
 
     /**
-     * Edit milestone
+     * Delete milestone
      *
      * @return this task
      */
-    public EditMilestoneTask create() {
-        showIndeterminate(R.string.updating_milestone);
+    public DeleteMilestoneTask create() {
+        showIndeterminate(R.string.deleting_milestone);
 
         execute();
         return this;
@@ -68,14 +68,15 @@ public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
 
     @Override
     public Milestone run(Account account) throws Exception {
-        return service.editMilestone(owner, repo, milestone.number, milestone).execute().body();
+        service.deleteMilestone(owner, repo, milestone.number).execute();
+        return milestone;
     }
 
     @Override
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.e(TAG, "Exception editing milestone", e);
+        Log.e(TAG, "Exception deleting milestone", e);
         ToastUtils.show((Activity) getContext(), e.getMessage());
     }
 }
