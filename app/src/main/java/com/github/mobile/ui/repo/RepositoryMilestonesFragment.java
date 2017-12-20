@@ -28,6 +28,7 @@ import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
 import com.github.mobile.ui.ItemListFragment;
+import com.github.mobile.ui.milestone.MilestoneViewActivity;
 import com.google.inject.Inject;
 
 import java.util.List;
@@ -86,6 +87,7 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
         final Milestone milestone = (Milestone) l.getItemAtPosition(position);
         Toast.makeText(getContext(),milestone.getTitle(),Toast.LENGTH_SHORT).show();
         //todo add open milestone view page
+        startActivity(MilestoneViewActivity.createIntent(repo, position));
     }
 
     @Override
