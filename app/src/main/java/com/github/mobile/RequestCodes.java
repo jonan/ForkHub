@@ -109,4 +109,9 @@ public interface RequestCodes {
      * Request to delete a comment
      */
     int COMMENT_DELETE = 15;
+
+    /**
+     * Request to view milestone
+     */
+    int MILESTONE_VIEW = 16;
 }
