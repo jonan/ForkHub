@@ -356,5 +356,7 @@
     <string name="ms_date_month">month</string>
     <string name="ms_choose_date">Choose date</string>
     <string name="ms_percent_completed">% completed</string>
+    <string name="issues_display_closed">Display closed</string>
+    <string name="issues_display_opened">Display opened</string>
 
 </resources>

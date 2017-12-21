@@ -3,13 +3,21 @@ package com.github.mobile.ui.milestone;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.ui.DialogFragmentActivity;
+import com.github.mobile.ui.issue.IssuesFragment;
 import com.github.mobile.ui.repo.RepositoryViewActivity;
 
 import org.eclipse.egit.github.core.Milestone;
@@ -18,6 +26,7 @@ import org.eclipse.egit.github.core.User;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.RequestCodes.MILESTONE_VIEW;
@@ -41,6 +50,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
     private Repository repository;
     private Milestone milestone;
+    private ToggleButton closedIssues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,36 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         actionBar.setTitle(milestone.getTitle());
         actionBar.setSubtitle(R.string.milestone);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        MilestoneFragment milestoneFragment = new MilestoneFragment();
+        IssuesFragment issuesFragment = new IssuesFragment();
+
+        IssueFilter filter = new IssueFilter(repository);
+        filter.setMilestone(milestone);
+        filter.setOpen(true);
+        getIntent().putExtra(EXTRA_ISSUE_FILTER, filter);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.add(R.id.ms_description, milestoneFragment);
+        transaction.add(R.id.ms_issues, issuesFragment);
+
+        transaction.commit();
+
+        closedIssues = (ToggleButton) finder.find(R.id.tb_closed_issues);
+        closedIssues.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                IssueFilter filter = new IssueFilter(repository);
+                filter.setMilestone(milestone);
+                filter.setOpen(!b);
+                getIntent().putExtra(EXTRA_ISSUE_FILTER, filter);
+                IssuesFragment issuesFragment = new IssuesFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.ms_issues, issuesFragment);
+                transaction.commit();
+            }
+        });
     }
 
     @Override

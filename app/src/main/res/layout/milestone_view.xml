@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,10 +9,30 @@
         android:id="@+id/toolbar"
         style="@style/Toolbar" />
 
-    <fragment
-        android:id="@android:id/list"
-        class="com.github.mobile.ui.milestone.MilestoneFragment"
+    <FrameLayout
+        android:id="@+id/ms_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+    <ToggleButton
+        android:id="@+id/tb_closed_issues"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/issues_display_closed"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.Design.Hint"
+        android:textOff="@string/issues_display_closed"
+        android:textOn="@string/issues_display_opened"
+        android:textSize="14sp" />
+
+
+    <FrameLayout
+        android:id="@+id/ms_issues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
