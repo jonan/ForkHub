@@ -50,7 +50,6 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
     private Repository repository;
     private Milestone milestone;
-    private ToggleButton closedIssues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,21 +79,6 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         transaction.add(R.id.ms_issues, issuesFragment);
 
         transaction.commit();
-
-        closedIssues = (ToggleButton) finder.find(R.id.tb_closed_issues);
-        closedIssues.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                IssueFilter filter = new IssueFilter(repository);
-                filter.setMilestone(milestone);
-                filter.setOpen(!b);
-                getIntent().putExtra(EXTRA_ISSUE_FILTER, filter);
-                IssuesFragment issuesFragment = new IssuesFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.ms_issues, issuesFragment);
-                transaction.commit();
-            }
-        });
     }
 
     @Override
