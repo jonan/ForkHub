@@ -113,6 +113,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.milestone.MilestoneViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="jp.forkhub.mobile.repo.milestone.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.search.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/search_title"
