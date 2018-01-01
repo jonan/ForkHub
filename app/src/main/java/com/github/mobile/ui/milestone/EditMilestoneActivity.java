@@ -21,13 +21,13 @@ import com.github.mobile.R;
 
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
 import com.google.inject.Inject;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.CollaboratorService;
@@ -183,8 +183,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        if (milestone.getNumber() > 0)
-            actionBar.setTitle(milestone.getTitle());
+        if (milestone.number > 0)
+            actionBar.setTitle(milestone.title);
         else
             actionBar.setTitle(R.string.new_milestone);
         actionBar.setSubtitle(repository.generateId());
@@ -198,8 +198,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         });
 
         updateSaveMenu();
-        titleText.setText(milestone.getTitle());
-        descriptionText.setText(milestone.getDescription());
+        titleText.setText(milestone.title);
+        descriptionText.setText(milestone.description);
     }
 
     @Override
@@ -222,9 +222,9 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private void updateMilestone() {
         if (milestone != null) {
-            titleText.setText(milestone.getTitle());
-            descriptionText.setText(milestone.getDescription());
-            Date dueOn = milestone.getDueOn();
+            titleText.setText(milestone.title);
+            descriptionText.setText(milestone.description);
+            Date dueOn = milestone.due_on;
             if (dueOn != null) {
                 SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
                 try {
@@ -277,30 +277,30 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.m_apply:
-                milestone.setTitle(titleText.getText().toString());
-                milestone.setDescription(descriptionText.getText().toString());
+                milestone.title = titleText.getText().toString();
+                milestone.description = descriptionText.getText().toString();
                 SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
                 try {
                     Date date = sd.parse(dateText.getText().toString());
-                    milestone.setDueOn(date);
+                    milestone.due_on = date;
                 }
                 catch (ParseException e){
                     e.printStackTrace();
                 }
 
-//                new EditMilestoneTask(this, repository.getOwner(), repository, milestone) {
-//
-//                    @Override
-//                    protected void onSuccess(Milestone editedMilestone)
-//                            throws Exception {
-//                        super.onSuccess(editedMilestone);
-//
-//                        Intent intent = new Intent();
-//                        intent.putExtra(EXTRA_MILESTONE, editedMilestone);
-//                        setResult(RESULT_OK, intent);
-//                        finish();
-//                    }
-//                }.edit();
+                new EditMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
+
+                    @Override
+                    protected void onSuccess(Milestone editedMilestone)
+                            throws Exception {
+                        super.onSuccess(editedMilestone);
+
+                        Intent intent = new Intent();
+                        intent.putExtra(EXTRA_MILESTONE, editedMilestone);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                }.create();
 
                 return true;
             default:

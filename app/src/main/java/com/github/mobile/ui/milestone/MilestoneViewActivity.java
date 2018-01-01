@@ -9,11 +9,11 @@ import android.view.MenuItem;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.issue.IssuesFragment;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 
@@ -52,7 +52,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         milestone = getSerializableExtra(EXTRA_MILESTONE);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(milestone.getTitle());
+        actionBar.setTitle(milestone.title);
         actionBar.setSubtitle(R.string.milestone);
         actionBar.setDisplayHomeAsUpEnabled(true);
 

@@ -20,9 +20,8 @@ import android.view.LayoutInflater;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
-import com.github.mobile.util.AvatarLoader;
+import com.github.mobile.api.model.Milestone;
 
-import org.eclipse.egit.github.core.Milestone;
 
 import java.text.SimpleDateFormat;
 /**
@@ -56,9 +55,9 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
     protected void update(int position, Milestone milestone) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
 
-        setText(0, milestone.getTitle());
-        setText(1, context.getString(R.string.ms_due_by) + sdf.format(milestone.getDueOn()));
-        setText(2, context.getString(R.string.ms_opened_issues) + String.valueOf(milestone.getOpenIssues()));
-        setText(3, context.getString(R.string.ms_closed_issues) + String.valueOf(milestone.getClosedIssues()));
+        setText(0, milestone.title);
+        setText(1, context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on));
+        setText(2, context.getString(R.string.ms_opened_issues) + String.valueOf(milestone.open_issues));
+        setText(3, context.getString(R.string.ms_closed_issues) + String.valueOf(milestone.closed_issues));
     }
 }

@@ -23,15 +23,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
-import com.github.mobile.api.model.Milestone;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.milestone.EditMilestoneActivity;
 
-import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
 
 /**

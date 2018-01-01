@@ -15,11 +15,7 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
-import static com.github.mobile.Intents.EXTRA_USER;
 import static com.github.mobile.RequestCodes.MILESTONE_VIEW;
 
 import android.content.Context;
@@ -27,22 +23,18 @@ import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.milestone.MilestoneViewActivity;
 import com.google.inject.Inject;
 
 import java.util.List;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
 /**
