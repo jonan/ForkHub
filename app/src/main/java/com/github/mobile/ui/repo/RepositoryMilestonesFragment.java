@@ -32,6 +32,7 @@ import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.milestone.MilestoneViewActivity;
 import com.google.inject.Inject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.egit.github.core.Repository;
@@ -71,9 +72,18 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
 
             @Override
             public List<Milestone> loadData() throws Exception {
-                return service.getMilestones(repo, MILESTONES_STATE_ALL);
+                return convertMilestonesList(service.getMilestones(repo, MILESTONES_STATE_ALL));
             }
         };
+    }
+
+    private List<Milestone> convertMilestonesList(List<org.eclipse.egit.github.core.Milestone> milestoneList) {
+        List<Milestone> newList = new ArrayList<Milestone>();
+        for (org.eclipse.egit.github.core.Milestone m : milestoneList) {
+            newList.add(new Milestone(m));
+        }
+        return newList;
+
     }
 
     @Override
