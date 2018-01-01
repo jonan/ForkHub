@@ -1,7 +1,6 @@
 package com.github.mobile.ui.milestone;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,15 +15,11 @@ import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragment;
 
 import org.eclipse.egit.github.core.Milestone;
-import org.eclipse.egit.github.core.RepositoryId;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
-import static com.github.mobile.RequestCodes.MILESTONE_EDIT;
 
 public class MilestoneFragment extends DialogFragment {
     private Milestone milestone;
@@ -34,8 +29,6 @@ public class MilestoneFragment extends DialogFragment {
     private TextView milestoneDescription;
     private ProgressBar milestoneProgress;
     private TextView milestoneProgressPercentage;
-
-    private RepositoryId repositoryId;
 
     @Override
     public void onAttach(Context context) {
@@ -53,11 +46,6 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle args = getArguments();
-        repositoryId = RepositoryId.create(
-                args.getString(EXTRA_REPOSITORY_OWNER),
-                args.getString(EXTRA_REPOSITORY_NAME));
     }
 
     @Override
@@ -82,13 +70,6 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.m_edit:
-                if (milestone != null) {
-                    Intent intent = EditMilestoneActivity.createIntent(milestone,
-                            repositoryId.getOwner(), repositoryId.getName());
-                    startActivityForResult(intent, MILESTONE_EDIT);
-                }
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -97,13 +78,6 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
         inflater.inflate(R.menu.milestone_view, optionsMenu);
-        MenuItem editItem = optionsMenu.findItem(R.id.m_edit);
-        if (editItem != null) {
-            boolean canEdit = false;
-            if (milestone != null)
-                canEdit = true;
-            editItem.setVisible(canEdit);
-        }
     }
 
     private void updateMilestone(final Milestone milestone){

@@ -23,6 +23,7 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
 import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.MILESTONE_EDIT;
 
 
 public class MilestoneViewActivity extends DialogFragmentActivity {
@@ -89,6 +90,13 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
                 return true;
             case R.id.add_ms_menu_item:
                 //todo add issues to milestone
+                return true;
+            case R.id.m_edit: {
+                Intent intent = EditMilestoneActivity.createIntent(milestone,
+                        repository.getOwner().getLogin(), repository.getName());
+                startActivityForResult(intent, MILESTONE_EDIT);
+                return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,7 +104,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.milestone, menu);
+        getMenuInflater().inflate(R.menu.milestone_view, menu);
         return true;
     }
 }

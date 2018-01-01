@@ -19,19 +19,17 @@ import android.widget.TextView;
 import com.github.mobile.Intents;
 import com.github.mobile.R;
 
-import org.eclipse.egit.github.core.Milestone;
-
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
-import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.google.inject.Inject;
 
+import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
@@ -40,8 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
@@ -188,8 +184,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         if (milestone.getNumber() > 0)
-            actionBar.setTitle(getString(R.string.milestone)
-                    + milestone.getNumber());
+            actionBar.setTitle(milestone.getTitle());
         else
             actionBar.setTitle(R.string.new_milestone);
         actionBar.setSubtitle(repository.generateId());
@@ -231,7 +226,15 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             descriptionText.setText(milestone.getDescription());
             Date dueOn = milestone.getDueOn();
             if (dueOn != null) {
-                dateText.setText(dueOn.toString());
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    Date date = sd.parse(dueOn.toString());
+                    dateText.setText(date.toString());
+                }
+                catch (ParseException e){
+                    e.printStackTrace(); //todo fix the unparseable date
+                    dateText.setText(dueOn.toString());
+                }
             } else {
                 dateText.setText("");
             }
@@ -271,13 +274,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Repository repo = new Repository();
-                repo.setName(repository.getName());
-                repo.setOwner(new User().setLogin(repository.getOwner()));
-                Intent intent = RepositoryViewActivity.createIntent(repo);
-                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP
-                        | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                finish();
                 return true;
             case R.id.m_apply:
                 milestone.setTitle(titleText.getText().toString());
@@ -290,7 +287,21 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 catch (ParseException e){
                     e.printStackTrace();
                 }
-                //todo run EditMilestoneTask
+
+//                new EditMilestoneTask(this, repository.getOwner(), repository, milestone) {
+//
+//                    @Override
+//                    protected void onSuccess(Milestone editedMilestone)
+//                            throws Exception {
+//                        super.onSuccess(editedMilestone);
+//
+//                        Intent intent = new Intent();
+//                        intent.putExtra(EXTRA_MILESTONE, editedMilestone);
+//                        setResult(RESULT_OK, intent);
+//                        finish();
+//                    }
+//                }.edit();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
