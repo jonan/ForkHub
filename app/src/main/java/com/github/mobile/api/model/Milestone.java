@@ -39,7 +39,7 @@ public class Milestone implements Serializable {
 
     public Date updated_at;
 
-    public Date closed_at; //it is in API but no in MilestoneService
+    public Date closed_at;
 
     public Date due_on;
 
@@ -60,7 +60,6 @@ public class Milestone implements Serializable {
         this.closed_issues = milestone.getClosedIssues();
         this.created_at = milestone.getCreatedAt();
         //todo this.updated_at=???
-        //it is in API but no in MilestoneService
         this.due_on = milestone.getDueOn();
     }
 
@@ -76,7 +75,6 @@ public class Milestone implements Serializable {
         milestone.setTitle(title);
         //todo milestone.setUrl();
         //no url in this class
-        //it is in API but no in MilestoneService
         milestone.setCreator(creator.getOldModel());
 
         return milestone;
