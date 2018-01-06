@@ -38,7 +38,6 @@ import static com.github.mobile.Intents.EXTRA_MILESTONE;
 
 /**
  * Fragment to display a milestone.
- *
  */
 public class MilestoneFragment extends DialogFragment {
     private Milestone milestone;
@@ -113,16 +112,17 @@ public class MilestoneFragment extends DialogFragment {
 
         Date dueOn = milestone.getDueOn();
         Date current = Calendar.getInstance().getTime();
-
+        String state = milestone.getState();
+        boolean open = state.equals("open");
         long diff = dueOn.getTime() - current.getTime();
         long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
         GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
-        if (-100 <= days && days < 0){
-            milestoneTime.setText("past due by " + (-days) + " days");
+        if (-100 <= days && days < 0 && open){
+            milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
             back.setColor(getResources().getColor(R.color.badge_red));
         }
-        else if (0 <= days && days <= 100){
-            milestoneTime.setText(days + " days");
+        else if (0 <= days && days <= 100 && open){
+            milestoneTime.setText(days + " " + getString(R.string.ms_days));
             back.setColor(getResources().getColor(R.color.badge_default));
         }
         else {
