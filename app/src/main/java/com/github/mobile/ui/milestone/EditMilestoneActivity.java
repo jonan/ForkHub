@@ -37,6 +37,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
@@ -232,8 +233,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                     dateText.setText(date.toString());
                 }
                 catch (ParseException e){
-                    e.printStackTrace(); //todo fix the unparseable date
-                    dateText.setText(dueOn.toString());
+                    Calendar cal = new GregorianCalendar();
+                    cal.setTime(dueOn);
+                    dateText.setText(sd.format(cal.getTime()));
+                    //dateText.setText(dueOn.toString());
                 }
             } else {
                 dateText.setText("");

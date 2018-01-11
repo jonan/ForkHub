@@ -43,6 +43,8 @@ public class Milestone implements Serializable {
 
     public Date due_on;
 
+    private String url;
+
     public Milestone() {
     }
 
@@ -59,6 +61,7 @@ public class Milestone implements Serializable {
         this.open_issues = milestone.getOpenIssues();
         this.closed_issues = milestone.getClosedIssues();
         this.created_at = milestone.getCreatedAt();
+        this.url = milestone.getUrl();
         //todo this.updated_at=???
         this.due_on = milestone.getDueOn();
     }
@@ -73,8 +76,7 @@ public class Milestone implements Serializable {
         milestone.setDescription(description);
         milestone.setState(state);
         milestone.setTitle(title);
-        //todo milestone.setUrl();
-        //no url in this class
+        milestone.setUrl(url);
         milestone.setCreator(creator.getOldModel());
 
         return milestone;

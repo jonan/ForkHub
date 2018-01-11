@@ -34,7 +34,7 @@ public class MilestoneFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        milestone = (Milestone) getSerializableExtra(EXTRA_MILESTONE);
+        milestone = ((com.github.mobile.api.model.Milestone)getSerializableExtra(EXTRA_MILESTONE)).getOldModel();
     }
 
     @Override
