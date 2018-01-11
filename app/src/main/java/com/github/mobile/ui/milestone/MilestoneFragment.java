@@ -46,6 +46,16 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle != null && bundle.getSerializable(EXTRA_MILESTONE) != null)
+            try {
+                milestone = ((com.github.mobile.api.model.Milestone) bundle.getSerializable(EXTRA_MILESTONE)).getOldModel();
+            }
+            catch (ClassCastException e)
+            {
+                e.printStackTrace();
+            }
     }
 
     @Override

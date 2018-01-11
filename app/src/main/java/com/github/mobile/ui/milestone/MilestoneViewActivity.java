@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
@@ -106,5 +107,40 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.milestone_view, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(MILESTONE_EDIT == requestCode) {
+            milestone = (Milestone) data.getSerializableExtra(EXTRA_MILESTONE);
+            updateMilestone();
+        }
+    }
+
+    private void updateMilestone() {
+        if(milestone != null) {
+            MilestoneFragment milestoneFragment = new MilestoneFragment();
+
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle(milestone.title);
+            actionBar.setSubtitle(R.string.milestone);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            Bundle args = new Bundle();
+            if (repository != null) {
+                args.putString(EXTRA_REPOSITORY_NAME, repository.getName());
+                User owner = repository.getOwner();
+                args.putString(EXTRA_REPOSITORY_OWNER, owner.getLogin());
+                args.putSerializable(EXTRA_USER, owner);
+                args.putSerializable(EXTRA_MILESTONE, milestone);
+            }
+            milestoneFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.add(R.id.ms_description, milestoneFragment);
+            transaction.commit();
+        }
     }
 }

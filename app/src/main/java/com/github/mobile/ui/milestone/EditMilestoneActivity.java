@@ -303,7 +303,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         setResult(RESULT_OK, intent);
                         finish();
                     }
-                }.create();
+                }.edit();
 
                 return true;
             default:
