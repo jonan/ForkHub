@@ -88,4 +88,7 @@
     <color name="color_primary_dark">#1A237E</color>
     <color name="color_accent">#64DD17</color>
 
+    <color name="milestone_item_issue_closed">#ff7f7f</color>
+    <color name="milestone_item_issue_opened">#96d196</color>
+
 </resources>
