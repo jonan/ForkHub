@@ -19,6 +19,7 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.RequestCodes.MILESTONE_VIEW;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -100,5 +101,14 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
     @Override
     protected int getErrorMessage(Exception exception) {
         return R.string.error_milestones_load;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(MILESTONE_VIEW == requestCode)
+        {
+            //todo
+        }
     }
 }

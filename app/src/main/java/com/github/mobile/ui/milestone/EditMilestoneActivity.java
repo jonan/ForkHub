@@ -280,6 +280,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.m_apply:
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setTitle(milestone.title);
                 milestone.title = titleText.getText().toString();
                 milestone.description = descriptionText.getText().toString();
                 SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
