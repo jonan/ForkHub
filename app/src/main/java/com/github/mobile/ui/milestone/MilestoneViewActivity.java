@@ -113,8 +113,10 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(MILESTONE_EDIT == requestCode) {
-            milestone = (Milestone) data.getSerializableExtra(EXTRA_MILESTONE);
-            updateMilestone();
+            if(data != null) { // user has changed something
+                milestone = (Milestone) data.getSerializableExtra(EXTRA_MILESTONE);
+                updateMilestone();
+            }
         }
     }
 
