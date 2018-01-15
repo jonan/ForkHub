@@ -28,14 +28,14 @@
 
         <TextView
             android:id="@+id/tv_milestone_opened_iss_number"
-            style="@style/ListSubtitleText"
+            style="@style/MilestoneItemOpenedIssue"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tv_milestone_closed_iss_number"
-            style="@style/ListSubtitleText"
+            style="@style/MilestoneItemClosedIssue"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:textStyle="normal" />
