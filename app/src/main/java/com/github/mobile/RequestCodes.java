@@ -114,4 +114,9 @@ public interface RequestCodes {
      * Request to view milestone
      */
     int MILESTONE_VIEW = 16;
+
+    /**
+     * Request to edit milestone
+     */
+    int MILESTONE_EDIT = 17;
 }

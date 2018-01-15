@@ -15,6 +15,8 @@
  */
 package com.github.mobile.core.issue;
 
+import com.github.mobile.api.model.Milestone;
+
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import static org.eclipse.egit.github.core.service.IssueService.DIRECTION_DESCENDING;
 import static org.eclipse.egit.github.core.service.IssueService.FIELD_DIRECTION;
@@ -39,7 +41,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.egit.github.core.Label;
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 
@@ -185,7 +186,7 @@ public class IssueFilter implements Serializable, Cloneable, Comparator<Label> {
 
         if (milestone != null)
             filter.put(FILTER_MILESTONE,
-                    Integer.toString(milestone.getNumber()));
+                    Integer.toString(milestone.number));
 
         if (labels != null && !labels.isEmpty()) {
             StringBuilder labelsQuery = new StringBuilder();
@@ -217,7 +218,7 @@ public class IssueFilter implements Serializable, Cloneable, Comparator<Label> {
             segments.add("Assignee: " + assignee.getLogin());
 
         if (milestone != null)
-            segments.add("Milestone: " + milestone.getTitle());
+            segments.add("Milestone: " + milestone.title);
 
         if (labels != null && !labels.isEmpty()) {
             StringBuilder builder = new StringBuilder("Labels: ");
@@ -243,7 +244,7 @@ public class IssueFilter implements Serializable, Cloneable, Comparator<Label> {
     public int hashCode() {
         return Arrays.hashCode(new Object[] { open,
                 assignee != null ? assignee.getId() : null,
-                milestone != null ? milestone.getNumber() : null,
+                milestone != null ? milestone.number : null,
                 assignee != null ? assignee.getId() : null,
                 repository != null ? repository.getId() : null, labels });
     }
@@ -257,7 +258,7 @@ public class IssueFilter implements Serializable, Cloneable, Comparator<Label> {
     private boolean isEqual(Milestone a, Milestone b) {
         if (a == null && b == null)
             return true;
-        return a != null && b != null && a.getNumber() == b.getNumber();
+        return a != null && b != null && a.number == b.number;
     }
 
     private boolean isEqual(User a, User b) {

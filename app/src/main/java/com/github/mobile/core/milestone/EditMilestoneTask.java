@@ -59,7 +59,7 @@ public class EditMilestoneTask extends ProgressDialogTask<Milestone> {
      *
      * @return this task
      */
-    public EditMilestoneTask create() {
+    public EditMilestoneTask edit() {
         showIndeterminate(R.string.updating_milestone);
 
         execute();

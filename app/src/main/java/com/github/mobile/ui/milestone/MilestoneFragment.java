@@ -3,10 +3,11 @@ package com.github.mobile.ui.milestone;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,10 +20,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
-
-/**
- * Created by Александр on 20.12.2017.
- */
 
 public class MilestoneFragment extends DialogFragment {
     private Milestone milestone;
@@ -37,13 +34,22 @@ public class MilestoneFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        milestone = (Milestone) getSerializableExtra(EXTRA_MILESTONE);
+        milestone = ((com.github.mobile.api.model.Milestone)getSerializableExtra(EXTRA_MILESTONE)).getOldModel();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.repo_milestone_item, null);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle != null && bundle.getSerializable(EXTRA_MILESTONE) != null)
+            milestone = ((com.github.mobile.api.model.Milestone)bundle.getSerializable(EXTRA_MILESTONE)).getOldModel();
     }
 
     @Override
@@ -68,15 +74,14 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.m_edit:
-//                if (issue != null) {
-//                    Intent intent = EditIssueActivity.createIntent(issue,
-//                            repositoryId.getOwner(), repositoryId.getName(), user);
-//                    startActivityForResult(intent, ISSUE_EDIT);
-//                }
-//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
+        inflater.inflate(R.menu.milestone_view, optionsMenu);
     }
 
     private void updateMilestone(final Milestone milestone){
