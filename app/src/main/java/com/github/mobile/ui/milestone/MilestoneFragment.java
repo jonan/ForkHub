@@ -116,7 +116,11 @@ public class MilestoneFragment extends DialogFragment {
         long diff = dueOn.getTime() - current.getTime();
         long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
         GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
-        if (-100 <= days && days < 0 && open){
+        if (!open){
+            milestoneTime.setText(R.string.status_closed);
+            back.setColor(getResources().getColor(R.color.milestone_badge_default));
+        }
+        else if (-100 <= days && days < 0 && open){
             milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
             back.setColor(getResources().getColor(R.color.milestone_badge_red));
         }
