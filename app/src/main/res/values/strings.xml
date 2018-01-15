@@ -358,5 +358,6 @@
     <string name="ms_percent_completed">% completed</string>
     <string name="issues_display_closed">Display closed</string>
     <string name="issues_display_opened">Display opened</string>
+    <string name="ms_date_format">dd MMM yyyy</string>
 
 </resources>

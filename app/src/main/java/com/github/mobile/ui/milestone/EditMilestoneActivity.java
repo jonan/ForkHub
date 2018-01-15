@@ -37,7 +37,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
@@ -122,7 +121,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.set(Calendar.YEAR, year);
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                         final Date startDate = dateAndTime.getTime();
                         String fdate = sd.format(startDate);
                         dateText.setText(fdate);
@@ -141,7 +140,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateOfOrder);
                 dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 final Date startDate = dateAndTime.getTime();
                 String fdate = sd.format(startDate);
                 dateText.setText(fdate);
@@ -153,7 +152,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             public void onClick(View v) {
                 final Calendar dateAndTime = Calendar.getInstance();
                 dateAndTime.add(Calendar.MONTH, 1);
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 final Date startDate = dateAndTime.getTime();
                 String fdate = sd.format(startDate);
                 dateText.setText(fdate);
@@ -227,17 +226,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             descriptionText.setText(milestone.description);
             Date dueOn = milestone.due_on;
             if (dueOn != null) {
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    Date date = sd.parse(dueOn.toString());
-                    dateText.setText(date.toString());
-                }
-                catch (ParseException e){
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(dueOn);
-                    dateText.setText(sd.format(cal.getTime()));
-                    //dateText.setText(dueOn.toString());
-                }
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
+                dateText.setText(sd.format(dueOn));
             } else {
                 dateText.setText("");
             }
@@ -284,12 +274,11 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 actionBar.setTitle(milestone.title);
                 milestone.title = titleText.getText().toString();
                 milestone.description = descriptionText.getText().toString();
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 try {
                     Date date = sd.parse(dateText.getText().toString());
                     milestone.due_on = date;
-                }
-                catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
 

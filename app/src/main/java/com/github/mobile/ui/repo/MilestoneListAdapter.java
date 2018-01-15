@@ -53,7 +53,7 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
 
     @Override
     protected void update(int position, Milestone milestone) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat(context.getString(R.string.ms_date_format));
 
         setText(0, milestone.title);
         setText(1, context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on));
