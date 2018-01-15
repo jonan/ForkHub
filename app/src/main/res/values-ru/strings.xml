@@ -350,5 +350,11 @@
     <string name="ms_choose_date">Выбрать дату</string>
     <string name="ms_date_2_weeks">2 недели</string>
     <string name="ms_date_month">Месяц</string>
+    <string name="ms_percent_completed">% завершено</string>
+    <string name="issues_display_closed">Показать закрытые</string>
+    <string name="issues_display_opened">Показать открытые</string>
+    <string name="ms_time_past">Просрочен</string>
+    <string name="ms_days">дней</string>
+    <string name="new_milestone">Новый milestone</string>
 
 </resources>

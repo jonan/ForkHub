@@ -69,15 +69,6 @@ public class MilestoneDialogFragment extends SingleChoiceDialogFragment {
         @Override
         protected void update(int position, Milestone item) {
             setText(1, item.getTitle());
-
-            // Due to updated milestone_item.xml this is excluded
-//            String description = item.getDescription();
-//            if (!TextUtils.isEmpty(description))
-//                ViewUtils.setGone(setText(2, description), false);
-//            else
-//                setGone(2, true);
-//
-//            setChecked(0, selected == position);
         }
 
         @Override

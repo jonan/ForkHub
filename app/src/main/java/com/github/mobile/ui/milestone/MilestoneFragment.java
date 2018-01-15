@@ -1,5 +1,4 @@
 /*
- * Copyright 2017 Aleksandr Smilyanskiy
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,11 +118,11 @@ public class MilestoneFragment extends DialogFragment {
         GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
         if (-100 <= days && days < 0 && open){
             milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.badge_red));
+            back.setColor(getResources().getColor(R.color.milestone_badge_red));
         }
         else if (0 <= days && days <= 100 && open){
             milestoneTime.setText(days + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.badge_default));
+            back.setColor(getResources().getColor(R.color.milestone_badge_default));
         }
         else {
             milestoneTime.setText("");

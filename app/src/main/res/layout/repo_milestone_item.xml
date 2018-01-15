@@ -28,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:gravity="end"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
             android:textAlignment="viewEnd"
             android:textColor="@android:color/white" />
     </LinearLayout>
