@@ -15,10 +15,15 @@ import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.issue.IssuesFragment;
 
 import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
 
 import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
+import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.MILESTONE_EDIT;
 
 /**
  * Activity to display milestone detailed view
