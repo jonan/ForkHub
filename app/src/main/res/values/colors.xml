@@ -83,6 +83,8 @@
     <color name="issue_event_red">#BD2C00</color>
     <color name="issue_event_green">#6CC644</color>
     <color name="notification_unread">#4078C0</color>
+    <color name="milestone_badge_default">#616161</color>
+    <color name="milestone_badge_red">#bf360c</color>
 
     <color name="color_primary">#3F51B5</color>
     <color name="color_primary_dark">#1A237E</color>

@@ -11,9 +11,28 @@
     android:paddingStart="?android:attr/listPreferredItemPaddingEnd"
     android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/tv_milestone_name"
-        style="@style/TitleText" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_milestone_name"
+            style="@style/TitleText"
+            android:layout_weight="1" />
+
+        <TextView
+            android:background="@drawable/rounded_corners"
+            android:id="@+id/tv_milestone_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="end"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_milestone_due_to"
