@@ -9,19 +9,16 @@ import android.view.MenuItem;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.issue.IssueFilter;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.issue.IssuesFragment;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_ISSUE_FILTER;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-
 
 /**
  * Activity to display milestone detailed view
@@ -52,11 +49,21 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         milestone = getSerializableExtra(EXTRA_MILESTONE);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(milestone.getTitle());
+        actionBar.setTitle(milestone.title);
         actionBar.setSubtitle(R.string.milestone);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         MilestoneFragment milestoneFragment = new MilestoneFragment();
+
+        Bundle args = new Bundle();
+        if (repository != null) {
+            args.putString(EXTRA_REPOSITORY_NAME, repository.getName());
+            User owner = repository.getOwner();
+            args.putString(EXTRA_REPOSITORY_OWNER, owner.getLogin());
+            args.putSerializable(EXTRA_USER, owner);
+        }
+        milestoneFragment.setArguments(args);
+
         IssuesFragment issuesFragment = new IssuesFragment();
 
         IssueFilter filter = new IssueFilter(repository);
@@ -79,11 +86,14 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.add_ms_menu_item:
-                //creating new milestone
-                Intent i = EditMilestoneActivity.createIntent(repository);
-                i.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(i);
+                //todo add issues to milestone
                 return true;
+            case R.id.m_edit: {
+                Intent intent = EditMilestoneActivity.createIntent(milestone,
+                        repository.getOwner().getLogin(), repository.getName());
+                startActivityForResult(intent, MILESTONE_EDIT);
+                return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -91,7 +101,44 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.milestone, menu);
+        getMenuInflater().inflate(R.menu.milestone_view, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(MILESTONE_EDIT == requestCode) {
+            if(data != null) { // user has changed something
+                milestone = (Milestone) data.getSerializableExtra(EXTRA_MILESTONE);
+                updateMilestone();
+            }
+        }
+    }
+
+    private void updateMilestone() {
+        if(milestone != null) {
+            MilestoneFragment milestoneFragment = new MilestoneFragment();
+
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle(milestone.title);
+            actionBar.setSubtitle(R.string.milestone);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            Bundle args = new Bundle();
+            if (repository != null) {
+                args.putString(EXTRA_REPOSITORY_NAME, repository.getName());
+                User owner = repository.getOwner();
+                args.putString(EXTRA_REPOSITORY_OWNER, owner.getLogin());
+                args.putSerializable(EXTRA_USER, owner);
+                args.putSerializable(EXTRA_MILESTONE, milestone);
+            }
+            milestoneFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.add(R.id.ms_description, milestoneFragment);
+            transaction.commit();
+        }
     }
 }

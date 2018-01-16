@@ -360,5 +360,6 @@
     <string name="issues_display_opened">Display opened</string>
     <string name="ms_time_past">past due by</string>
     <string name="ms_days">days</string>
+    <string name="ms_date_format">dd MMM yyyy</string>
 
 </resources>

@@ -172,6 +172,20 @@
         <item name="android:layout_width">wrap_content</item>
     </style>
 
+    <style name="MilestoneItemOpenedIssue">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/milestone_item_issue_opened</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="MilestoneItemClosedIssue">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/milestone_item_issue_closed</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
     <style name="PlainText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text</item>

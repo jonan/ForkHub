@@ -76,7 +76,7 @@ public class FilterListAdapter extends SingleTypeAdapter<IssueFilter> {
         } else
             setGone(3, true);
 
-        Milestone milestone = filter.getMilestone();
+        Milestone milestone = filter.getMilestone().getOldModel();
         if (milestone != null)
             ViewUtils.setGone(setText(4, milestone.getTitle()), false);
         else

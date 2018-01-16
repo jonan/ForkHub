@@ -19,19 +19,17 @@ import android.widget.TextView;
 import com.github.mobile.Intents;
 import com.github.mobile.R;
 
-import org.eclipse.egit.github.core.Milestone;
-
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.api.model.Milestone;
+import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
-import com.github.mobile.ui.repo.RepositoryViewActivity;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
@@ -40,8 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
@@ -125,7 +121,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.set(Calendar.YEAR, year);
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                         final Date startDate = dateAndTime.getTime();
                         String fdate = sd.format(startDate);
                         dateText.setText(fdate);
@@ -144,7 +140,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateOfOrder);
                 dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 final Date startDate = dateAndTime.getTime();
                 String fdate = sd.format(startDate);
                 dateText.setText(fdate);
@@ -156,7 +152,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             public void onClick(View v) {
                 final Calendar dateAndTime = Calendar.getInstance();
                 dateAndTime.add(Calendar.MONTH, 1);
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 final Date startDate = dateAndTime.getTime();
                 String fdate = sd.format(startDate);
                 dateText.setText(fdate);
@@ -187,9 +183,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        if (milestone.getNumber() > 0)
-            actionBar.setTitle(getString(R.string.milestone)
-                    + milestone.getNumber());
+        if (milestone.number > 0)
+            actionBar.setTitle(milestone.title);
         else
             actionBar.setTitle(R.string.new_milestone);
         actionBar.setSubtitle(repository.generateId());
@@ -203,8 +198,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         });
 
         updateSaveMenu();
-        titleText.setText(milestone.getTitle());
-        descriptionText.setText(milestone.getDescription());
+        titleText.setText(milestone.title);
+        descriptionText.setText(milestone.description);
     }
 
     @Override
@@ -227,11 +222,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private void updateMilestone() {
         if (milestone != null) {
-            titleText.setText(milestone.getTitle());
-            descriptionText.setText(milestone.getDescription());
-            Date dueOn = milestone.getDueOn();
+            titleText.setText(milestone.title);
+            descriptionText.setText(milestone.description);
+            Date dueOn = milestone.due_on;
             if (dueOn != null) {
-                dateText.setText(dueOn.toString());
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
+                dateText.setText(sd.format(dueOn));
             } else {
                 dateText.setText("");
             }
@@ -271,26 +267,35 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Repository repo = new Repository();
-                repo.setName(repository.getName());
-                repo.setOwner(new User().setLogin(repository.getOwner()));
-                Intent intent = RepositoryViewActivity.createIntent(repo);
-                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP
-                        | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                finish();
                 return true;
             case R.id.m_apply:
-                milestone.setTitle(titleText.getText().toString());
-                milestone.setDescription(descriptionText.getText().toString());
-                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setTitle(milestone.title);
+                milestone.title = titleText.getText().toString();
+                milestone.description = descriptionText.getText().toString();
+                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
                 try {
                     Date date = sd.parse(dateText.getText().toString());
-                    milestone.setDueOn(date);
-                }
-                catch (ParseException e){
+                    milestone.due_on = date;
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //todo run EditMilestoneTask
+
+                new EditMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
+
+                    @Override
+                    protected void onSuccess(Milestone editedMilestone)
+                            throws Exception {
+                        super.onSuccess(editedMilestone);
+
+                        Intent intent = new Intent();
+                        intent.putExtra(EXTRA_MILESTONE, editedMilestone);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                }.edit();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

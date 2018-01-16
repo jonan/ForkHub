@@ -15,34 +15,28 @@
  */
 package com.github.mobile.ui.repo;
 
-import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
-import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
-import static com.github.mobile.Intents.EXTRA_USER;
 import static com.github.mobile.RequestCodes.MILESTONE_VIEW;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.mobile.R;
 import com.github.mobile.ThrowableLoader;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.ui.ItemListFragment;
 import com.github.mobile.ui.milestone.MilestoneViewActivity;
 import com.google.inject.Inject;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryId;
-import org.eclipse.egit.github.core.RepositoryIssue;
-import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
 /**
@@ -79,9 +73,18 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
 
             @Override
             public List<Milestone> loadData() throws Exception {
-                return service.getMilestones(repo, MILESTONES_STATE_ALL);
+                return convertMilestonesList(service.getMilestones(repo, MILESTONES_STATE_ALL));
             }
         };
+    }
+
+    private List<Milestone> convertMilestonesList(List<org.eclipse.egit.github.core.Milestone> milestoneList) {
+        List<Milestone> newList = new ArrayList<Milestone>();
+        for (org.eclipse.egit.github.core.Milestone m : milestoneList) {
+            newList.add(new Milestone(m));
+        }
+        return newList;
+
     }
 
     @Override
@@ -98,5 +101,14 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
     @Override
     protected int getErrorMessage(Exception exception) {
         return R.string.error_milestones_load;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(MILESTONE_VIEW == requestCode)
+        {
+            //todo
+        }
     }
 }
