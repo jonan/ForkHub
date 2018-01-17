@@ -17,7 +17,10 @@ package com.github.mobile.ui.repo;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.RequestCodes.MILESTONE_CREATE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -26,6 +29,7 @@ import android.view.MenuItem;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.milestone.EditMilestoneActivity;
 
@@ -74,10 +78,18 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
                 //creating new milestone
                 Intent i = EditMilestoneActivity.createIntent(repository);
                 i.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(i);
+                startActivityForResult(i, MILESTONE_CREATE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MILESTONE_CREATE && resultCode == RESULT_OK) {
+            //todo refresh list
         }
     }
 

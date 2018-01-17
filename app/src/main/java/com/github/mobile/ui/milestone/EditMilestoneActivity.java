@@ -22,6 +22,7 @@ import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
 import com.github.mobile.api.model.Milestone;
+import com.github.mobile.core.milestone.CreateMilestoneTask;
 import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
@@ -281,21 +282,35 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                if(milestone.created_at == null) {
+                    new CreateMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
 
-                new EditMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
+                        @Override
+                        protected void onSuccess(Milestone created) throws Exception {
+                            super.onSuccess(created);
 
-                    @Override
-                    protected void onSuccess(Milestone editedMilestone)
-                            throws Exception {
-                        super.onSuccess(editedMilestone);
+                            Intent intent = new Intent();
+                            intent.putExtra(EXTRA_MILESTONE, created);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
 
-                        Intent intent = new Intent();
-                        intent.putExtra(EXTRA_MILESTONE, editedMilestone);
-                        setResult(RESULT_OK, intent);
-                        finish();
-                    }
-                }.edit();
+                    }.create();
+                }else {
+                    new EditMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
 
+                        @Override
+                        protected void onSuccess(Milestone editedMilestone)
+                                throws Exception {
+                            super.onSuccess(editedMilestone);
+
+                            Intent intent = new Intent();
+                            intent.putExtra(EXTRA_MILESTONE, editedMilestone);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                    }.edit();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
