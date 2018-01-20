@@ -27,6 +27,7 @@ import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
+import com.github.mobile.ui.repo.RepositoryMilestonesActivity;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -40,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
+import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
 
@@ -56,7 +58,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
      * @return intent
      */
     public static Intent createIntent(Repository repository) {
-        return createIntent(null, repository.getOwner().getLogin(),
+        return createIntent(null, repository, repository.getOwner().getLogin(),
                 repository.getName());
     }
 
@@ -69,10 +71,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
      * @return intent
      */
     public static Intent createIntent(final Milestone milestone,
+                                      final Repository repository,
                                       final String repositoryOwner, final String repositoryName) {
         Intents.Builder builder = new Intents.Builder("repo.milestones.edit.VIEW");
         builder.add(EXTRA_REPOSITORY_NAME, repositoryName);
         builder.add(EXTRA_REPOSITORY_OWNER, repositoryOwner);
+        builder.add(EXTRA_REPOSITORY, repository);
         if (milestone != null)
             builder.milestone(milestone);
         return builder.toIntent();
@@ -94,7 +98,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private Milestone milestone;
 
-    private RepositoryId repository;
+    private RepositoryId repositoryId;
+    private Repository repository;
 
     private MenuItem saveItem;
 
@@ -178,9 +183,12 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         if (milestone == null)
             milestone = new Milestone();
 
-        repository = RepositoryId.create(
+        repository=(Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
+        repositoryId = RepositoryId.create(
                 intent.getStringExtra(EXTRA_REPOSITORY_OWNER),
                 intent.getStringExtra(EXTRA_REPOSITORY_NAME));
+
+        repository = getSerializableExtra(EXTRA_REPOSITORY);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -188,7 +196,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             actionBar.setTitle(milestone.title);
         else
             actionBar.setTitle(R.string.new_milestone);
-        actionBar.setSubtitle(repository.generateId());
+        actionBar.setSubtitle(repositoryId.generateId());
 
         titleText.addTextChangedListener(new TextWatcherAdapter() {
 
@@ -282,22 +290,20 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if(milestone.created_at == null) {
-                    new CreateMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
+                if (milestone.created_at == null) {
+                    new CreateMilestoneTask(this, repositoryId.getOwner(), repositoryId.getName(), milestone) {
 
                         @Override
                         protected void onSuccess(Milestone created) throws Exception {
                             super.onSuccess(created);
 
-                            Intent intent = new Intent();
-                            intent.putExtra(EXTRA_MILESTONE, created);
-                            setResult(RESULT_OK, intent);
-                            finish();
+                            Intent intent =RepositoryMilestonesActivity.createIntent(repository);
+                            startActivity(intent);
                         }
 
                     }.create();
-                }else {
-                    new EditMilestoneTask(this, repository.getOwner(), repository.getName(), milestone) {
+                } else {
+                    new EditMilestoneTask(this, repositoryId.getOwner(), repositoryId.getName(), milestone) {
 
                         @Override
                         protected void onSuccess(Milestone editedMilestone)
@@ -323,7 +329,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             @Override
             public Boolean run(Account account) throws Exception {
                 return collaboratorService.isCollaborator(
-                        repository, AccountUtils.getLogin(EditMilestoneActivity.this));
+                        repositoryId, AccountUtils.getLogin(EditMilestoneActivity.this));
             }
 
             @Override

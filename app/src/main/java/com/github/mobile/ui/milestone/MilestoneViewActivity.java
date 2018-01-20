@@ -94,7 +94,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
                 //todo add issues to milestone
                 return true;
             case R.id.m_edit: {
-                Intent intent = EditMilestoneActivity.createIntent(milestone,
+                Intent intent = EditMilestoneActivity.createIntent(milestone, repository,
                         repository.getOwner().getLogin(), repository.getName());
                 startActivityForResult(intent, MILESTONE_EDIT);
                 return true;
