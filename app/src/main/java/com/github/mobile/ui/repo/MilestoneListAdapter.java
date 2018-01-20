@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
 
     private final Context context;
+    private static final String EMPTY_STR = "";
     /**
      * Create milestone list adapter
      *
@@ -56,7 +57,10 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
         SimpleDateFormat sdf = new SimpleDateFormat(context.getString(R.string.ms_date_format));
 
         setText(0, milestone.title);
-        setText(1, context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on));
+        setText(1,
+                (milestone.due_on != null) ?
+                        context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on)
+                        : EMPTY_STR);
         setText(2, context.getString(R.string.ms_opened_issues) + String.valueOf(milestone.open_issues));
         setText(3, context.getString(R.string.ms_closed_issues) + String.valueOf(milestone.closed_issues));
     }
