@@ -73,7 +73,7 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
                 //creating new milestone
                 Intent i = EditMilestoneActivity.createIntent(repository);
                 i.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(i/*, MILESTONE_CREATE*/);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -119,9 +119,4 @@ public interface RequestCodes {
      * Request to edit milestone
      */
     int MILESTONE_EDIT = 17;
-
-    /**
-     * Request to create milestone
-     */
-    int MILESTONE_CREATE = 18;
 }
