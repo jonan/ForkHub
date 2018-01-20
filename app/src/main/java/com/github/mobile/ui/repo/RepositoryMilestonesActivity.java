@@ -18,6 +18,7 @@ package com.github.mobile.ui.repo;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -66,9 +67,7 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = RepositoryViewActivity.createIntent(repository);
-                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                navigateToRepository();
                 return true;
             case R.id.add_ms_menu_item:
                 //creating new milestone
@@ -85,5 +84,17 @@ public class RepositoryMilestonesActivity extends DialogFragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.milestone, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToRepository();
+        super.onBackPressed();
+    }
+
+    private void navigateToRepository() {
+        Intent intent = RepositoryViewActivity.createIntent(repository);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

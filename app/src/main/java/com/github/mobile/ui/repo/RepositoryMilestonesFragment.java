@@ -108,7 +108,7 @@ public class RepositoryMilestonesFragment extends ItemListFragment<Milestone> {
         super.onActivityResult(requestCode, resultCode, data);
         if(MILESTONE_VIEW == requestCode)
         {
-            //todo
+            refreshWithProgress();
         }
     }
 }
