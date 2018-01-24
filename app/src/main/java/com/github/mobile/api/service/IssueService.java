@@ -22,8 +22,10 @@ import com.github.mobile.api.model.TimelineEvent;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -34,6 +36,13 @@ public interface IssueService {
             @Path("owner") String owner,
             @Path("repo") String repo,
             @Path("number") long number);
+
+    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
+    @GET("repos/{owner}/{repo}/issues")
+    Call<List<Issue>> getIssues(
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Query("milestone") String milestone);
 
     @Headers({"Accept: application/vnd.github.v3.full+json",
             "Accept: application/vnd.github.mockingbird-preview",
