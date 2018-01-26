@@ -195,7 +195,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         if (milestone.number > 0)
             actionBar.setTitle(milestone.title);
         else
-            actionBar.setTitle(R.string.new_milestone);
+            actionBar.setTitle(R.string.ms_new_milestone);
         actionBar.setSubtitle(repositoryId.generateId());
 
         titleText.addTextChangedListener(new TextWatcherAdapter() {
