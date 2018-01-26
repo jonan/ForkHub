@@ -32,13 +32,10 @@ import com.github.mobile.api.model.Issue;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.SingleChoiceDialogFragment;
 
-import org.eclipse.egit.github.core.Milestone;
-
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
-import static android.content.DialogInterface.BUTTON_NEUTRAL;
 
 /**
  * Dialog fragment to add an issue to milestone

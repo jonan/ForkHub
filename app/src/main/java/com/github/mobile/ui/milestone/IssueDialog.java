@@ -120,7 +120,7 @@ public class IssueDialog {
         }
 
         IssueDialogFragment.show(activity, requestCode,
-                activity.getString(R.string.select_issue), null,
+                activity.getString(R.string.ms_select_issue), null,
                 repositoryIssues);
     }
 }

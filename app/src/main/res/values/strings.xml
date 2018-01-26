@@ -196,7 +196,6 @@
     <string name="accounts_label">Accounts</string>
     <string name="select_assignee">Select Assignee</string>
     <string name="select_milestone">Select Milestone</string>
-    <string name="select_issue">Select Issue</string>
     <string name="select_labels">Select Labels</string>
     <string name="select_ref">Select Branch or Tag</string>
     <string name="login_pass_explanation">ForkHub will only use your password to generate a &lt;i>Personal Access Token&lt;/i>. If you prefer you can &lt;a href=\"https://github.com/settings/tokens\">create it yourself&lt;/a> and use it as password here.</string>
@@ -352,7 +351,7 @@
     <string name="ms_due_by">Due by </string>
     <string name="ms_opened_issues">Opened:</string>
     <string name="ms_closed_issues">Closed:</string>
-    <string name="new_milestone">New milestone</string>
+    <string name="ms_new_milestone">New milestone</string>
     <string name="ms_date_2_weeks">2 weeks</string>
     <string name="ms_date_month">month</string>
     <string name="ms_choose_date">Choose date</string>
@@ -362,5 +361,6 @@
     <string name="ms_time_past">past due by</string>
     <string name="ms_days">days</string>
     <string name="ms_date_format">dd MMM yyyy</string>
+    <string name="ms_select_issue">Select Issue</string>
 
 </resources>
