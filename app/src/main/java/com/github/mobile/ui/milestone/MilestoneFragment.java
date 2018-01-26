@@ -111,35 +111,50 @@ public class MilestoneFragment extends DialogFragment {
 
         milestoneTitle.setText(milestone.getTitle());
         DateFormat sdf = SimpleDateFormat.getDateInstance();
-        milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
-        milestoneDescription.setText(milestone.getDescription());
+
+        if (milestone.getDueOn() != null){
+            milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        }
+
+        if (milestone.getDescription() != null){
+            milestoneDescription.setText(milestone.getDescription());
+        }
+
         int totalIssues = milestone.getClosedIssues() + milestone.getOpenIssues();
         int progress = totalIssues == 0 ? 0 : milestone.getClosedIssues() * 100 / totalIssues;
         milestoneProgress.setProgress(progress);
         milestoneProgressPercentage.setText(String.valueOf(progress));
 
         Date dueOn = milestone.getDueOn();
-        Date current = Calendar.getInstance().getTime();
-        String state = milestone.getState();
-        boolean open = state.equals("open");
-        long diff = dueOn.getTime() - current.getTime();
-        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
-        if (!open){
-            milestoneTime.setText(R.string.status_closed);
-            back.setColor(getResources().getColor(R.color.milestone_badge_default));
+        if (dueOn != null){
+            Date current = Calendar.getInstance().getTime();
+            String state = milestone.getState();
+            boolean open = state.equals("open");
+
+            long diff = dueOn.getTime() - current.getTime();
+            long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
+            if (!open){
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(R.string.status_closed);
+                back.setColor(getResources().getColor(R.color.milestone_badge_default));
+            }
+            else if (-100 <= days && days < 0 && open){
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
+                back.setColor(getResources().getColor(R.color.milestone_badge_red));
+            }
+            else if (0 <= days && days <= 100 && open){
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(days + " " + getString(R.string.ms_days));
+                back.setColor(getResources().getColor(R.color.milestone_badge_default));
+            }
+            else {
+                milestoneTime.setVisibility(View.GONE);
+            }
+        } else{
+            milestoneTime.setVisibility(View.GONE);
         }
-        else if (-100 <= days && days < 0 && open){
-            milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.milestone_badge_red));
-        }
-        else if (0 <= days && days <= 100 && open){
-            milestoneTime.setText(days + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.milestone_badge_default));
-        }
-        else {
-            milestoneTime.setText("");
-            back.setColor(getResources().getColor(R.color.background));
-        }
+
     }
 }
