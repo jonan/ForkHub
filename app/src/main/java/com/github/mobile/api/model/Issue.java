@@ -15,10 +15,11 @@
  */
 package com.github.mobile.api.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Issue {
+public class Issue implements Serializable {
     public long id;
 
     public Repository repository;

@@ -9,10 +9,14 @@ import android.view.MenuItem;
 
 import com.github.mobile.Intents;
 import com.github.mobile.R;
+import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.Milestone;
+import com.github.mobile.api.service.IssueService;
 import com.github.mobile.core.issue.IssueFilter;
+import com.github.mobile.core.milestone.AddIssueTask;
 import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.issue.IssuesFragment;
+import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
@@ -23,6 +27,7 @@ import static com.github.mobile.Intents.EXTRA_REPOSITORY;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_NAME;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY_OWNER;
 import static com.github.mobile.Intents.EXTRA_USER;
+import static com.github.mobile.RequestCodes.ISSUE_MILESTONE_UPDATE;
 import static com.github.mobile.RequestCodes.MILESTONE_EDIT;
 
 /**
@@ -43,6 +48,12 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
     private Repository repository;
     private Milestone milestone;
+    private IssueDialog issueDialog;
+
+    private AddIssueTask issueTask;
+
+    @Inject
+    private IssueService issueService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,8 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         actionBar.setTitle(milestone.title);
         actionBar.setSubtitle(R.string.milestone);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        DialogFragmentActivity dialogActivity = (DialogFragmentActivity) this;
 
         MilestoneFragment milestoneFragment = new MilestoneFragment();
 
@@ -82,6 +95,21 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         transaction.add(R.id.ms_issues, issuesFragment);
 
         transaction.commit();
+
+        issueTask = new AddIssueTask(dialogActivity, repository,
+                milestone.number) {
+
+            @Override
+            protected void onSuccess(Milestone editedMilestone) throws Exception {
+                super.onSuccess(editedMilestone);
+                IssuesFragment issuesFragment = new IssuesFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.ms_issues, issuesFragment);
+                transaction.commit();
+                milestone = editedMilestone;
+                updateMilestone();
+            }
+        };
     }
 
     @Override
@@ -91,7 +119,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.add_ms_menu_item:
-                //todo add issues to milestone
+                issueTask.prompt();
                 return true;
             case R.id.m_edit: {
                 Intent intent = EditMilestoneActivity.createIntent(milestone, repository,
@@ -121,6 +149,19 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
         }
     }
 
+    @Override
+    public void onDialogResult(int requestCode, int resultCode, Bundle arguments) {
+        if (RESULT_OK != resultCode)
+            return;
+
+        switch (requestCode) {
+            case ISSUE_MILESTONE_UPDATE:
+                Issue issue = IssueDialogFragment.getSelected(arguments);
+                issueTask.edit(issue);
+                break;
+        }
+    }
+
     private void updateMilestone() {
         if(milestone != null) {
             MilestoneFragment milestoneFragment = new MilestoneFragment();
@@ -142,7 +183,7 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-            transaction.add(R.id.ms_description, milestoneFragment);
+            transaction.replace(R.id.ms_description, milestoneFragment);
             transaction.commit();
         }
     }

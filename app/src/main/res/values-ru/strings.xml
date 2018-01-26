@@ -344,6 +344,7 @@
     <string name="render_markdown">Отобразить Markdown</string>
     <string name="copy_hash">Копировать хэш</string>
     <string name="toast_msg_copied">Скопировано в буфер обмена</string>
+
     <string name="ms_closed_issues">"Закрытые: "</string>
     <string name="ms_due_by">"До "</string>
     <string name="ms_opened_issues">"Открытые: "</string>
@@ -355,6 +356,7 @@
     <string name="issues_display_opened">Показать открытые</string>
     <string name="ms_time_past">Просрочен</string>
     <string name="ms_days">дней</string>
-    <string name="new_milestone">Новый milestone</string>
+    <string name="ms_select_issue">Выбрать задачу</string>
+    <string name="ms_new_milestone">Новая цель</string>
 
 </resources>

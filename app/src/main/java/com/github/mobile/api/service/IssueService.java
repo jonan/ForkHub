@@ -35,6 +35,13 @@ public interface IssueService {
             @Path("repo") String repo,
             @Path("number") long number);
 
+    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
+    @GET("repos/{owner}/{repo}/issues")
+    Call<List<Issue>> getIssues(
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Query("milestone") String milestone);
+
     @Headers({"Accept: application/vnd.github.v3.full+json",
             "Accept: application/vnd.github.mockingbird-preview",
             "Accept: application/vnd.github.squirrel-girl-preview"})
