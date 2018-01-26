@@ -113,11 +113,17 @@ public class MilestoneFragment extends DialogFragment {
         DateFormat sdf = SimpleDateFormat.getDateInstance();
 
         if (milestone.getDueOn() != null){
+            milestoneDueTo.setVisibility(View.VISIBLE);
             milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        } else{
+            milestoneDueTo.setVisibility(View.GONE);
         }
 
         if (milestone.getDescription() != null){
+            milestoneDescription.setVisibility(View.VISIBLE);
             milestoneDescription.setText(milestone.getDescription());
+        } else{
+            milestoneDescription.setVisibility(View.GONE);
         }
 
         int totalIssues = milestone.getClosedIssues() + milestone.getOpenIssues();
