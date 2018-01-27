@@ -330,10 +330,7 @@ public class IssuesViewActivity extends PagerActivity {
                 }
             }
             if (repository != null) {
-                Intent intent = RepositoryViewActivity.createIntent(repository);
-                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP
-                        | FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                finish();
             }
             return true;
         default:
