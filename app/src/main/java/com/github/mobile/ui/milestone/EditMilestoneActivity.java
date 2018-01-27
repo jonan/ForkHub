@@ -82,11 +82,14 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         return builder.toIntent();
     }
 
-    private EditText titleText;
 
-    private EditText descriptionText;
+    // Param views
+    private EditText etTitle;
+    private EditText etDescription;
+    private TextView etDate;
 
-    private TextView dateText;
+    // Param
+    private Date mDate;
 
     private MilestoneDialog milestoneDialog;
 
@@ -108,9 +111,9 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.milestone_edit);
 
-        titleText = finder.find(R.id.et_milestone_title);
-        descriptionText = finder.find(R.id.et_milestone_description);
-        dateText = finder.find(R.id.tv_milestone_date);
+        etTitle = finder.find(R.id.et_milestone_title);
+        etDescription = finder.find(R.id.et_milestone_description);
+        etDate = finder.find(R.id.tv_milestone_date);
         Button twoWeeksButton = finder.find(R.id.b_two_weeks);
         Button monthButton = finder.find(R.id.b_month);
         Button chooseDateButton = finder.find(R.id.b_choose_date);
@@ -127,10 +130,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.set(Calendar.YEAR, year);
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
-                        final Date startDate = dateAndTime.getTime();
-                        String fdate = sd.format(startDate);
-                        dateText.setText(fdate);
+
                     }
                 }, dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH), dateAndTime.get(Calendar.DAY_OF_MONTH)).show();
 
@@ -146,10 +146,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateOfOrder);
                 dateAndTime.add(Calendar.DAY_OF_YEAR, noOfDays);
-                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
-                final Date startDate = dateAndTime.getTime();
-                String fdate = sd.format(startDate);
-                dateText.setText(fdate);
+                updateDate(dateAndTime.getTime());
             }
         });
 
@@ -158,17 +155,14 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             public void onClick(View v) {
                 final Calendar dateAndTime = Calendar.getInstance();
                 dateAndTime.add(Calendar.MONTH, 1);
-                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
-                final Date startDate = dateAndTime.getTime();
-                String fdate = sd.format(startDate);
-                dateText.setText(fdate);
+                updateDate(dateAndTime.getTime());
             }
         });
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateText.setText("");
+                updateDate(null);
             }
         });
 
@@ -198,7 +192,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             actionBar.setTitle(R.string.ms_new_milestone);
         actionBar.setSubtitle(repositoryId.generateId());
 
-        titleText.addTextChangedListener(new TextWatcherAdapter() {
+        etTitle.addTextChangedListener(new TextWatcherAdapter() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -207,8 +201,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         });
 
         updateSaveMenu();
-        titleText.setText(milestone.title);
-        descriptionText.setText(milestone.description);
+        etTitle.setText(milestone.title);
+        etDescription.setText(milestone.description);
     }
 
     @Override
@@ -231,19 +225,14 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private void updateMilestone() {
         if (milestone != null) {
-            titleText.setText(milestone.title);
-            descriptionText.setText(milestone.description);
+            etTitle.setText(milestone.title);
+            etDescription.setText(milestone.description);
             Date dueOn = milestone.due_on;
-            if (dueOn != null) {
-                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
-                dateText.setText(sd.format(dueOn));
-            } else {
-                dateText.setText("");
-            }
+            updateDate(dueOn);
         } else {
-            titleText.setText(R.string.none);
-            descriptionText.setText(R.string.none);
-            dateText.setText("");
+            etTitle.setText(R.string.none);
+            etDescription.setText(R.string.none);
+            etDate.setText("");
         }
     }
 
@@ -255,8 +244,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
     }
 
     private void updateSaveMenu() {
-        if (titleText != null)
-            updateSaveMenu(titleText.getText());
+        if (etTitle != null)
+            updateSaveMenu(etTitle.getText());
     }
 
     private void updateSaveMenu(final CharSequence text) {
@@ -281,15 +270,9 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             case R.id.m_apply:
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setTitle(milestone.title);
-                milestone.title = titleText.getText().toString();
-                milestone.description = descriptionText.getText().toString();
-                SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
-                try {
-                    Date date = sd.parse(dateText.getText().toString());
-                    milestone.due_on = date;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                milestone.title = etTitle.getText().toString();
+                milestone.description = etDescription.getText().toString();
+                milestone.due_on = mDate;
                 if (milestone.created_at == null) {
                     new CreateMilestoneTask(this, repositoryId.getOwner(), repositoryId.getName(), milestone) {
 
@@ -348,5 +331,19 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 showMainContent();
             }
         }.execute();
+    }
+
+    private void updateDate(Date date){
+        if (date == null){
+            etDate.setVisibility(View.GONE);
+            mDate = null;
+            milestone.due_on = null;
+        } else {
+            etDate.setVisibility(View.VISIBLE);
+            mDate = date;
+            SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
+            String fdate = sd.format(date);
+            etDate.setText(fdate);
+        }
     }
 }
