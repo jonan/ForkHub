@@ -111,7 +111,9 @@ public class MilestoneFragment extends DialogFragment {
 
         milestoneTitle.setText(milestone.getTitle());
         DateFormat sdf = SimpleDateFormat.getDateInstance();
-        milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        if(milestone.getDueOn() != null) {
+            milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        }
         milestoneDescription.setText(milestone.getDescription());
         int totalIssues = milestone.getClosedIssues() + milestone.getOpenIssues();
         int progress = totalIssues == 0 ? 0 : milestone.getClosedIssues() * 100 / totalIssues;
@@ -122,8 +124,11 @@ public class MilestoneFragment extends DialogFragment {
         Date current = Calendar.getInstance().getTime();
         String state = milestone.getState();
         boolean open = state.equals("open");
-        long diff = dueOn.getTime() - current.getTime();
-        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        long days = 200;
+        if(dueOn != null) {
+            long diff = dueOn.getTime() - current.getTime();
+            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        }
         GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
         if (!open){
             milestoneTime.setText(R.string.status_closed);
