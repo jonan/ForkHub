@@ -22,6 +22,7 @@ import com.github.mobile.accounts.AccountScope;
 import com.github.mobile.accounts.GitHubAccount;
 import com.github.mobile.api.DateAdapter;
 import com.github.mobile.api.RequestConfiguration;
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.commit.CommitStore;
 import com.github.mobile.core.gist.GistStore;
 import com.github.mobile.core.issue.IssueStore;
@@ -33,6 +34,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Named;
+import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 import java.io.File;
@@ -80,8 +82,11 @@ public class GitHubModule extends AbstractModule {
                 .addInterceptor(new RequestConfiguration(accountProvider))
                 .build();
 
+        JsonAdapter<Milestone> adapter =
+                new Moshi.Builder().add(new DateAdapter()).build().adapter(Milestone.class).serializeNulls();
         Moshi converter = new Moshi.Builder()
                 .add(new DateAdapter())
+                .add(Milestone.class, adapter)
                 .build();
 
         return new Retrofit.Builder()

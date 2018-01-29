@@ -288,7 +288,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                     Date date = sd.parse(dateText.getText().toString());
                     milestone.due_on = date;
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    milestone.due_on = null;
                 }
                 if (milestone.created_at == null) {
                     new CreateMilestoneTask(this, repositoryId.getOwner(), repositoryId.getName(), milestone) {

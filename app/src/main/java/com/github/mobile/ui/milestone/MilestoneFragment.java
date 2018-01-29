@@ -48,6 +48,10 @@ public class MilestoneFragment extends DialogFragment {
     private ProgressBar milestoneProgress;
     private TextView milestoneProgressPercentage;
     private TextView milestoneTime;
+    
+    private final static int MS_TIME_PAST_DAYS = -100;
+    private final static int MS_TIME_OK_DAYS = 100;
+
 
     @Override
     public void onAttach(Context context) {
@@ -111,7 +115,9 @@ public class MilestoneFragment extends DialogFragment {
 
         milestoneTitle.setText(milestone.getTitle());
         DateFormat sdf = SimpleDateFormat.getDateInstance();
-        milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        if(milestone.getDueOn() != null) {
+            milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        }
         milestoneDescription.setText(milestone.getDescription());
         int totalIssues = milestone.getClosedIssues() + milestone.getOpenIssues();
         int progress = totalIssues == 0 ? 0 : milestone.getClosedIssues() * 100 / totalIssues;
@@ -122,18 +128,21 @@ public class MilestoneFragment extends DialogFragment {
         Date current = Calendar.getInstance().getTime();
         String state = milestone.getState();
         boolean open = state.equals("open");
-        long diff = dueOn.getTime() - current.getTime();
-        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        long days = MS_TIME_OK_DAYS;
+        if(dueOn != null) {
+            long diff = dueOn.getTime() - current.getTime();
+            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        }
         GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
         if (!open){
             milestoneTime.setText(R.string.status_closed);
             back.setColor(getResources().getColor(R.color.milestone_badge_default));
         }
-        else if (-100 <= days && days < 0 && open){
+        else if (MS_TIME_PAST_DAYS <= days && days < 0 && open){
             milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
             back.setColor(getResources().getColor(R.color.milestone_badge_red));
         }
-        else if (0 <= days && days <= 100 && open){
+        else if (0 <= days && days < MS_TIME_OK_DAYS && open){
             milestoneTime.setText(days + " " + getString(R.string.ms_days));
             back.setColor(getResources().getColor(R.color.milestone_badge_default));
         }
