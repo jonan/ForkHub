@@ -25,9 +25,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragment;
+
 import org.eclipse.egit.github.core.Milestone;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,7 +51,7 @@ public class MilestoneFragment extends DialogFragment {
     private ProgressBar milestoneProgress;
     private TextView milestoneProgressPercentage;
     private TextView milestoneTime;
-    
+
     private final static int MS_TIME_PAST_DAYS = -100;
     private final static int MS_TIME_OK_DAYS = 100;
 
@@ -57,7 +60,7 @@ public class MilestoneFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        milestone = ((com.github.mobile.api.model.Milestone)getSerializableExtra(EXTRA_MILESTONE)).getOldModel();
+        milestone = ((com.github.mobile.api.model.Milestone) getSerializableExtra(EXTRA_MILESTONE)).getOldModel();
     }
 
     @Override
@@ -71,8 +74,8 @@ public class MilestoneFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = getArguments();
-        if(bundle != null && bundle.getSerializable(EXTRA_MILESTONE) != null)
-            milestone = ((com.github.mobile.api.model.Milestone)bundle.getSerializable(EXTRA_MILESTONE)).getOldModel();
+        if (bundle != null && bundle.getSerializable(EXTRA_MILESTONE) != null)
+            milestone = ((com.github.mobile.api.model.Milestone) bundle.getSerializable(EXTRA_MILESTONE)).getOldModel();
     }
 
     @Override
@@ -90,7 +93,7 @@ public class MilestoneFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (milestone != null){
+        if (milestone != null) {
             updateMilestone(milestone);
         }
     }
@@ -108,47 +111,60 @@ public class MilestoneFragment extends DialogFragment {
         inflater.inflate(R.menu.milestone_view, optionsMenu);
     }
 
-    private void updateMilestone(final Milestone milestone){
-        if (!isUsable()){
+    private void updateMilestone(final Milestone milestone) {
+        if (!isUsable()) {
             return;
         }
 
         milestoneTitle.setText(milestone.getTitle());
         DateFormat sdf = SimpleDateFormat.getDateInstance();
-        if(milestone.getDueOn() != null) {
+
+        if (milestone.getDueOn() != null) {
+            milestoneDueTo.setVisibility(View.VISIBLE);
             milestoneDueTo.setText(sdf.format(milestone.getDueOn()));
+        } else {
+            milestoneDueTo.setVisibility(View.GONE);
         }
-        milestoneDescription.setText(milestone.getDescription());
+
+        if (milestone.getDescription() != null) {
+            milestoneDescription.setVisibility(View.VISIBLE);
+            milestoneDescription.setText(milestone.getDescription());
+        } else {
+            milestoneDescription.setVisibility(View.GONE);
+        }
+
         int totalIssues = milestone.getClosedIssues() + milestone.getOpenIssues();
         int progress = totalIssues == 0 ? 0 : milestone.getClosedIssues() * 100 / totalIssues;
         milestoneProgress.setProgress(progress);
         milestoneProgressPercentage.setText(String.valueOf(progress));
 
         Date dueOn = milestone.getDueOn();
-        Date current = Calendar.getInstance().getTime();
-        String state = milestone.getState();
-        boolean open = state.equals("open");
-        long days = MS_TIME_OK_DAYS;
-        if(dueOn != null) {
+        if (dueOn != null) {
+            Date current = Calendar.getInstance().getTime();
+            String state = milestone.getState();
+            boolean open = state.equals("open");
+            long days = MS_TIME_OK_DAYS;
             long diff = dueOn.getTime() - current.getTime();
             days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        }
-        GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
-        if (!open){
-            milestoneTime.setText(R.string.status_closed);
-            back.setColor(getResources().getColor(R.color.milestone_badge_default));
-        }
-        else if (MS_TIME_PAST_DAYS <= days && days < 0 && open){
-            milestoneTime.setText(getString(R.string.ms_time_past) + " " +(-days) + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.milestone_badge_red));
-        }
-        else if (0 <= days && days < MS_TIME_OK_DAYS && open){
-            milestoneTime.setText(days + " " + getString(R.string.ms_days));
-            back.setColor(getResources().getColor(R.color.milestone_badge_default));
-        }
-        else {
-            milestoneTime.setText("");
-            back.setColor(getResources().getColor(R.color.background));
+            GradientDrawable back = (GradientDrawable) milestoneTime.getBackground();
+            if (!open) {
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(R.string.status_closed);
+                back.setColor(getResources().getColor(R.color.milestone_badge_default));
+            } else if (MS_TIME_PAST_DAYS <= days && days < 0 && open) {
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(getString(R.string.ms_time_past) + " " + (-days) + " " + getString(R.string.ms_days));
+                back.setColor(getResources().getColor(R.color.milestone_badge_red));
+            } else if (0 <= days && days < MS_TIME_OK_DAYS && open) {
+                milestoneTime.setVisibility(View.VISIBLE);
+                milestoneTime.setText(days + " " + getString(R.string.ms_days));
+                back.setColor(getResources().getColor(R.color.milestone_badge_default));
+            } else {
+                milestoneTime.setText("");
+                back.setColor(getResources().getColor(R.color.background));
+            }
+        } else {
+            milestoneTime.setVisibility(View.GONE);
         }
     }
 }
