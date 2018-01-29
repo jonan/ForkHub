@@ -73,7 +73,7 @@ public class IssueDialog {
         return repositoryIssues;
     }
 
-    private void load() {
+    public void show() {
         new ProgressDialogTask<ArrayList<Issue>>(activity) {
 
             @Override
@@ -109,12 +109,5 @@ public class IssueDialog {
                 super.execute();
             }
         }.execute();
-    }
-
-    /**
-     * Show dialog
-     */
-    public void show() {
-        load();
     }
 }
