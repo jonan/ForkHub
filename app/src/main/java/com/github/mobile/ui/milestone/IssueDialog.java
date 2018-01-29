@@ -73,14 +73,14 @@ public class IssueDialog {
         return repositoryIssues;
     }
 
-    private void load() {
+    public void show() {
         new ProgressDialogTask<ArrayList<Issue>>(activity) {
 
             @Override
             public ArrayList<Issue> run(Account account) throws Exception {
                 ArrayList<Issue> issues = new ArrayList<Issue>();
                 String[] repid = repository.generateId().split("/");
-                issues.addAll(service.getIssues(repid[0],repid[1], "none").execute().body());
+                issues.addAll(service.getIssues(repid[0], repid[1], "none").execute().body());
                 return issues;
             }
 
@@ -89,7 +89,9 @@ public class IssueDialog {
                 super.onSuccess(all);
 
                 repositoryIssues = all;
-                show();
+                IssueDialogFragment.show(activity, requestCode,
+                        activity.getString(R.string.ms_select_issue), null,
+                        repositoryIssues);
             }
 
             @Override
@@ -107,20 +109,5 @@ public class IssueDialog {
                 super.execute();
             }
         }.execute();
-    }
-
-    /**
-     * Show dialog
-     *
-     */
-    public void show() {
-        if (repositoryIssues == null) {
-            load();
-            return;
-        }
-
-        IssueDialogFragment.show(activity, requestCode,
-                activity.getString(R.string.ms_select_issue), null,
-                repositoryIssues);
     }
 }
