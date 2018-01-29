@@ -26,12 +26,13 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DateAdapter {
-    private final DateFormat[] formats = new DateFormat[3];
+    private final DateFormat[] formats = new DateFormat[4];
 
     public DateAdapter() {
         formats[0] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'");
         formats[1] = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss Z");
         formats[2] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss");
+        formats[3] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'X");
         final TimeZone timeZone = TimeZone.getTimeZone("Zulu");
         for (DateFormat format : formats) {
             format.setTimeZone(timeZone);
@@ -40,7 +41,7 @@ public class DateAdapter {
 
     @ToJson
     String toJson(Date date) {
-        return formats[0].format(date);
+        return formats[3].format(date);
     }
 
     @FromJson

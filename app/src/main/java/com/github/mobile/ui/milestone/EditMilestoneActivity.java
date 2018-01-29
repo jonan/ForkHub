@@ -39,6 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static com.github.mobile.Intents.EXTRA_MILESTONE;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
@@ -106,10 +107,15 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
 
     private MenuItem saveItem;
 
+    private SimpleDateFormat sd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.milestone_edit);
+
+        sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
+        sd.setTimeZone(TimeZone.getTimeZone("Zulu"));
 
         etTitle = finder.find(R.id.et_milestone_title);
         etDescription = finder.find(R.id.et_milestone_description);
@@ -130,7 +136,9 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.set(Calendar.YEAR, year);
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+                        final Date startDate = dateAndTime.getTime();
+                        String fdate = sd.format(startDate);
+                        etDate.setText(fdate);
                     }
                 }, dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH), dateAndTime.get(Calendar.DAY_OF_MONTH)).show();
 
@@ -177,7 +185,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         if (milestone == null)
             milestone = new Milestone();
 
-        repository=(Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
+        repository = (Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
         repositoryId = RepositoryId.create(
                 intent.getStringExtra(EXTRA_REPOSITORY_OWNER),
                 intent.getStringExtra(EXTRA_REPOSITORY_NAME));
@@ -280,7 +288,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         protected void onSuccess(Milestone created) throws Exception {
                             super.onSuccess(created);
 
-                            Intent intent =RepositoryMilestonesActivity.createIntent(repository);
+                            Intent intent = RepositoryMilestonesActivity.createIntent(repository);
                             startActivity(intent);
                         }
 
@@ -333,8 +341,8 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         }.execute();
     }
 
-    private void updateDate(Date date){
-        if (date == null){
+    private void updateDate(Date date) {
+        if (date == null) {
             etDate.setVisibility(View.GONE);
             mDate = null;
             milestone.due_on = null;
