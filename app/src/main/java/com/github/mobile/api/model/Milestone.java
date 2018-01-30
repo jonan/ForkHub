@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Milestone implements Serializable {
+    public static final String MS_STATE_OPEN = "open";
     public long id;
 
     public int number;
@@ -46,6 +47,7 @@ public class Milestone implements Serializable {
     private String url;
 
     public Milestone() {
+        state = MS_STATE_OPEN;
     }
 
     public Milestone(org.eclipse.egit.github.core.Milestone milestone) {

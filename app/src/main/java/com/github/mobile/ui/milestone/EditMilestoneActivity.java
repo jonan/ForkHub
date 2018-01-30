@@ -137,8 +137,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                         dateAndTime.set(Calendar.MONTH, monthOfYear);
                         dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         final Date startDate = dateAndTime.getTime();
-                        String fdate = sd.format(startDate);
-                        etDate.setText(fdate);
+                        updateDate(startDate);
                     }
                 }, dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH), dateAndTime.get(Calendar.DAY_OF_MONTH)).show();
 
@@ -348,7 +347,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             milestone.due_on = null;
         } else {
             etDate.setVisibility(View.VISIBLE);
-            mDate = date;
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.HOUR, 8);
+            mDate = c.getTime();
             SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
             String fdate = sd.format(date);
             etDate.setText(fdate);
