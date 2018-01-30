@@ -347,8 +347,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             milestone.due_on = null;
         } else {
             etDate.setVisibility(View.VISIBLE);
-            mDate = date;
-            mDate.setTime(mDate.getTime() + 8 * 3600 * 1000);
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.HOUR, 8);
+            mDate = c.getTime();
             SimpleDateFormat sd = new SimpleDateFormat(getApplicationContext().getString(R.string.ms_date_format));
             String fdate = sd.format(date);
             etDate.setText(fdate);
