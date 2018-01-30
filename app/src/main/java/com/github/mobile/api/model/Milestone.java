@@ -46,6 +46,7 @@ public class Milestone implements Serializable {
     private String url;
 
     public Milestone() {
+        state = "open";
     }
 
     public Milestone(org.eclipse.egit.github.core.Milestone milestone) {
