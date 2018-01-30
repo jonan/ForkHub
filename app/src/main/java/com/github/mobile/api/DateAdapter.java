@@ -32,7 +32,7 @@ public class DateAdapter {
         formats[0] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'");
         formats[1] = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss Z");
         formats[2] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss");
-        formats[3] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'Z\'X");
+        formats[3] = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss\'ZZ\'");
         final TimeZone timeZone = TimeZone.getTimeZone("Zulu");
         for (DateFormat format : formats) {
             format.setTimeZone(timeZone);
