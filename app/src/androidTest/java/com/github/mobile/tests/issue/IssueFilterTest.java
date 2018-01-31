@@ -57,9 +57,10 @@ public class IssueFilterTest extends AndroidTestCase {
         assertEquals(filter1.hashCode(), filter2.hashCode());
 
         Milestone milestone = new Milestone().setNumber(3);
-        filter1.setMilestone(milestone);
+        com.github.mobile.api.model.Milestone extraMilestone = new com.github.mobile.api.model.Milestone(milestone);
+        filter1.setMilestone(extraMilestone);
         assertFalse(filter1.equals(filter2));
-        filter2.setMilestone(milestone);
+        filter2.setMilestone(extraMilestone);
         assertEquals(filter1, filter2);
         assertEquals(filter1.hashCode(), filter2.hashCode());
     }
