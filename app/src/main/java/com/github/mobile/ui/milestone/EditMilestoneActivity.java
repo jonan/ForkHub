@@ -28,6 +28,7 @@ import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
 import com.github.mobile.ui.repo.RepositoryMilestonesActivity;
+import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -199,15 +200,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             actionBar.setTitle(R.string.ms_new_milestone);
         actionBar.setSubtitle(repositoryId.generateId());
 
-        etTitle.addTextChangedListener(new TextWatcherAdapter() {
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateSaveMenu(s);
-            }
-        });
-
-        updateSaveMenu();
         etTitle.setText(milestone.title);
         etDescription.setText(milestone.description);
     }
@@ -250,21 +242,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         outState.putSerializable(EXTRA_MILESTONE, milestone);
     }
 
-    private void updateSaveMenu() {
-        if (etTitle != null)
-            updateSaveMenu(etTitle.getText());
-    }
-
-    private void updateSaveMenu(final CharSequence text) {
-        if (saveItem != null)
-            saveItem.setEnabled(!TextUtils.isEmpty(text));
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu options) {
         getMenuInflater().inflate(R.menu.milestone_edit, options);
         saveItem = options.findItem(R.id.m_apply);
-        updateSaveMenu();
         return true;
     }
 
@@ -275,6 +256,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.m_apply:
+                if (etTitle.getText().toString().isEmpty()){
+                    ToastUtils.show(this, R.string.error_empty_title);
+                    return false;
+                }
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setTitle(milestone.title);
                 milestone.title = etTitle.getText().toString();
