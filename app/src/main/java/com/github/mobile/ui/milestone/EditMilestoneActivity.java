@@ -6,8 +6,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +23,6 @@ import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.milestone.CreateMilestoneTask;
 import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
-import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
 import com.github.mobile.ui.repo.RepositoryMilestonesActivity;
 import com.github.mobile.util.ToastUtils;
@@ -36,7 +33,6 @@ import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -257,7 +253,7 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 return true;
             case R.id.m_apply:
                 if (etTitle.getText().toString().isEmpty()){
-                    ToastUtils.show(this, R.string.error_empty_title);
+                    ToastUtils.show(this, R.string.ms_empty_title_error);
                     return false;
                 }
                 ActionBar actionBar = getSupportActionBar();

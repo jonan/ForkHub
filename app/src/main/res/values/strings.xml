@@ -53,7 +53,6 @@
     <string name="error_checking_starring_status">Checking starring status failed</string>
     <string name="error_rendering_markdown">Rendering markdown failed</string>
     <string name="error_users_search">Searching users failed</string>
-    <string name="error_empty_title">Saving with empty title failed</string>
     <!--  -->
 
 
@@ -349,6 +348,10 @@
     <string name="copy_hash">Copy hash</string>
     <string name="toast_msg_copied">Copied to clipboard</string>
     <string name="parent_repo">Parent repository</string>
+    <!--  -->
+    <string name="issues_display_closed">Display closed</string>
+    <string name="issues_display_opened">Display opened</string>
+
     <string name="ms_due_by">Due by </string>
     <string name="ms_opened_issues">Opened:</string>
     <string name="ms_closed_issues">Closed:</string>
@@ -357,11 +360,11 @@
     <string name="ms_date_month">month</string>
     <string name="ms_choose_date">Choose date</string>
     <string name="ms_percent_completed">% completed</string>
-    <string name="issues_display_closed">Display closed</string>
-    <string name="issues_display_opened">Display opened</string>
     <string name="ms_time_past">past due by</string>
     <string name="ms_days">days</string>
     <string name="ms_date_format">dd MMM yyyy</string>
     <string name="ms_select_issue">Select Issue</string>
+    <string name="ms_empty_title_error">Saving with empty title failed</string>
+
 
 </resources>
