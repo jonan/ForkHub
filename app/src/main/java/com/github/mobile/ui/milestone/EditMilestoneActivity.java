@@ -6,8 +6,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +23,9 @@ import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.milestone.CreateMilestoneTask;
 import com.github.mobile.core.milestone.EditMilestoneTask;
 import com.github.mobile.ui.DialogFragmentActivity;
-import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.ui.issue.MilestoneDialog;
 import com.github.mobile.ui.repo.RepositoryMilestonesActivity;
+import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.Repository;
@@ -35,7 +33,6 @@ import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.CollaboratorService;
 import org.eclipse.egit.github.core.service.MilestoneService;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -199,15 +196,6 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
             actionBar.setTitle(R.string.ms_new_milestone);
         actionBar.setSubtitle(repositoryId.generateId());
 
-        etTitle.addTextChangedListener(new TextWatcherAdapter() {
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateSaveMenu(s);
-            }
-        });
-
-        updateSaveMenu();
         etTitle.setText(milestone.title);
         etDescription.setText(milestone.description);
     }
@@ -250,21 +238,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
         outState.putSerializable(EXTRA_MILESTONE, milestone);
     }
 
-    private void updateSaveMenu() {
-        if (etTitle != null)
-            updateSaveMenu(etTitle.getText());
-    }
-
-    private void updateSaveMenu(final CharSequence text) {
-        if (saveItem != null)
-            saveItem.setEnabled(!TextUtils.isEmpty(text));
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu options) {
         getMenuInflater().inflate(R.menu.milestone_edit, options);
         saveItem = options.findItem(R.id.m_apply);
-        updateSaveMenu();
         return true;
     }
 
@@ -275,6 +252,10 @@ public class EditMilestoneActivity extends DialogFragmentActivity {
                 finish();
                 return true;
             case R.id.m_apply:
+                if (etTitle.getText().toString().isEmpty()){
+                    ToastUtils.show(this, R.string.ms_empty_title_error);
+                    return false;
+                }
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setTitle(milestone.title);
                 milestone.title = etTitle.getText().toString();
