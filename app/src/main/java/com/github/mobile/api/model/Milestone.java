@@ -59,7 +59,8 @@ public class Milestone implements Serializable {
         this.state = milestone.getState();
         this.title = milestone.getTitle();
         this.description = milestone.getDescription();
-        this.creator = new User(milestone.getCreator());
+        org.eclipse.egit.github.core.User creator = milestone.getCreator();
+        this.creator = creator == null ? null : new User(creator);
         this.open_issues = milestone.getOpenIssues();
         this.closed_issues = milestone.getClosedIssues();
         this.created_at = milestone.getCreatedAt();

@@ -236,9 +236,9 @@ public class EditIssuesFilterActivity extends DialogFragmentActivity {
     }
 
     private void updateMilestone() {
-        Milestone selected = filter.getMilestone().getOldModel();
+        com.github.mobile.api.model.Milestone selected = filter.getMilestone();
         if (selected != null)
-            milestoneText.setText(selected.getTitle());
+            milestoneText.setText(selected.getOldModel().getTitle());
         else
             milestoneText.setText(R.string.none);
     }
