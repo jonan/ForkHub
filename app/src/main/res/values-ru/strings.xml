@@ -229,7 +229,7 @@
     <string name="status_closed">Закрыта</string>
     <string name="section_issue_assigned">Ответственный:</string>
     <string name="assignee_anyone">Кто угодно</string>
-    <string name="section_issue_milestone">Ве:</string>
+    <string name="section_issue_milestone">Веха:</string>
     <string name="none">Нет</string>
     <string name="section_issue_labels">Теги:</string>
     <string name="log_in">Войти</string>
