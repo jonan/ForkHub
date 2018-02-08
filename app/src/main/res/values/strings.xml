@@ -353,8 +353,8 @@
     <string name="issues_display_opened">Display opened</string>
 
     <string name="ms_due_by">Due by </string>
-    <string name="ms_opened_issues">Opened:</string>
-    <string name="ms_closed_issues">Closed:</string>
+    <string name="ms_opened_issues">"Opened: "</string>
+    <string name="ms_closed_issues">"Closed: "</string>
     <string name="ms_new_milestone">New milestone</string>
     <string name="ms_date_2_weeks">2 weeks</string>
     <string name="ms_date_month">month</string>
@@ -362,7 +362,7 @@
     <string name="ms_percent_completed">% completed</string>
     <string name="ms_time_past">past due by</string>
     <string name="ms_days">days</string>
-    <string name="ms_date_format">dd MMM yyyy</string>
+    <string name="ms_date_format" translatable="false">dd MMM yyyy</string>
     <string name="ms_select_issue">Select Issue</string>
     <string name="ms_empty_title_error">Saving with empty title failed</string>
 

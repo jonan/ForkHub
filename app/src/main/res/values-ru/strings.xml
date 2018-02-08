@@ -34,7 +34,7 @@
     <string name="error_gists_load">Ошибка при загрузке Gists</string>
     <string name="error_issue_load">Ошибка при загрузке задачи</string>
     <string name="error_collaborators_load">Ошибка при загрузке соучастников</string>
-    <string name="error_milestones_load">Ошибка при загрузке целей</string>
+    <string name="error_milestones_load">Ошибка при загрузке вех</string>
     <string name="error_labels_load">Ошибка при загрузке тегов</string>
     <string name="error_bookmarks_load">Ошибка при загрузке закладок</string>
     <string name="error_members_load">Ошибка при загрузке членов</string>
@@ -73,7 +73,7 @@
     <string name="loading_gists">Загружаем Gists…</string>
     <string name="loading_collaborators">Загружаем соучастников…</string>
     <string name="loading_teams">Загружаем сотрудников…</string>
-    <string name="loading_milestones">Загружаем цели…</string>
+    <string name="loading_milestones">Загружаем вехи…</string>
     <string name="loading_labels">Загружаем теги…</string>
     <string name="loading_commits">Загружаем коммиты…</string>
     <string name="loading_files_and_comments">Загружаем файлы и комментарии…</string>
@@ -104,7 +104,7 @@
     <string name="updating_assignee">Обновляем ответственного…</string>
     <string name="updating_issue">Обновляем задачу…</string>
     <string name="updating_labels">Обновляем теги…</string>
-    <string name="updating_milestone">Обновляем цель…</string>
+    <string name="updating_milestone">Обновляем веху…</string>
     <!--  -->
 
     <!-- Issue events texts -->
@@ -114,8 +114,8 @@
     <string name="issue_event_label_self_unassigned">назначение себе снято</string>
     <string name="issue_event_label_added">добавлен %1$s тег</string>
     <string name="issue_event_label_removed">удалён %1$s тег</string>
-    <string name="issue_event_milestone_added">добавлено к %1$s цели</string>
-    <string name="issue_event_milestone_removed">удалено из %1$s цели</string>
+    <string name="issue_event_milestone_added">добавлено к %1$s вехе</string>
+    <string name="issue_event_milestone_removed">удалено из %1$s вехи</string>
     <string name="issue_event_merged">объединён коммит %1$s</string>
     <string name="issue_event_referenced">ссылается на задачу для коммита %1$s</string>
     <string name="issue_event_cross_referenced">ссылается на задачу в %1$s</string>
@@ -183,8 +183,8 @@
     <string name="contributors">Участники</string>
     <string name="issues_title">Задачи</string>
     <string name="edit_labels">Редактировать теги</string>
-    <string name="milestone_prefix">Цель:</string>
-    <string name="edit_milestone">Изменить цель</string>
+    <string name="milestone_prefix">Веха:</string>
+    <string name="edit_milestone">Изменить веху</string>
     <string name="edit_assignee">Назначить ответственного</string>
     <string name="description">Описание</string>
     <string name="gist_description_hint">Gist, созданный на Android</string>
@@ -194,7 +194,7 @@
     <string name="unstarring_gist">Снимаем отметку с Gist…</string>
     <string name="accounts_label">Аккаунты</string>
     <string name="select_assignee">Выбрать ответственного</string>
-    <string name="select_milestone">Выбрать цель</string>
+    <string name="select_milestone">Выбрать веху</string>
     <string name="select_labels">Выбрать тег</string>
     <string name="select_ref">Выбрать ветку или метку</string>
     <string name="login_pass_explanation">ForkHub будет использовать ваш пароль только для генерации &lt;i>Personal Access Token&lt;/i>. Вы можете &lt;a href=\"https://github.com/settings/tokens\">создать его самостоятельно&lt;/a> и использовать его здесь вместо пароля.</string>
@@ -202,8 +202,8 @@
     <string name="enter_otp_code_message">Для вашего аккаунта включена двухэтапная аутентификация. Введите код аутентификации для подтверждения личности.</string>
     <string name="star_forkhub_dialog_text">Если вам нравится это приложение, пожалуйста оцените его звёздами.</string>
     <string name="rate_forkhub_dialog_text">Если вам нравится это приложение, пожалуйста оцените его рейтингом Play Store.</string>
-    <string name="rate">Rate</string>
-    <string name="no_milestone">Нет целей</string>
+    <string name="rate">Оценить</string>
+    <string name="no_milestone">Нет вех</string>
     <string name="unassigned">Нет ответственных</string>
     <string name="assigned">ответственен</string>
     <string name="no_gists_found">Gists не найдены</string>
@@ -229,7 +229,7 @@
     <string name="status_closed">Закрыта</string>
     <string name="section_issue_assigned">Ответственный:</string>
     <string name="assignee_anyone">Кто угодно</string>
-    <string name="section_issue_milestone">Цель:</string>
+    <string name="section_issue_milestone">Веха:</string>
     <string name="none">Нет</string>
     <string name="section_issue_labels">Теги:</string>
     <string name="log_in">Войти</string>
@@ -272,14 +272,14 @@
     <string name="apply">ОК</string>
     <string name="labels_prefix">Теги:</string>
     <string name="assignee">Ответственный</string>
-    <string name="milestone">Цель</string>
+    <string name="milestone">Вехи</string>
     <string name="labels">Теги</string>
     <string name="issue_confirm_close_message">Вы действительно хотите закрыть эту задачу?</string>
     <string name="issue_confirm_reopen_message">Вы действительно хотите переоткрыть эту задачу?</string>
     <string name="issue_confirm_close_title">Закрыть задачу</string>
     <string name="issue_confirm_reopen_title">Переоткрыть задачу</string>
     <string name="closed">Закрыта</string>
-    <string name="merged">Объеденино</string>
+    <string name="merged">Объединено</string>
     <string name="no_description_given">Описание отсутствует.</string>
     <string name="close">Закрыть</string>
     <string name="reopen">Переоткрыть</string>
@@ -358,7 +358,12 @@
     <string name="ms_time_past">Просрочен</string>
     <string name="ms_days">дней</string>
     <string name="ms_select_issue">Выбрать задачу</string>
-    <string name="ms_new_milestone">Новая цель</string>
+    <string name="ms_new_milestone">Новая веха</string>
     <string name="ms_empty_title_error">Ошибка при сохранении с пустым заголовком</string>
+
+    <string name="creating_milestone">Создаем веху…</string>
+    <string name="deleting_milestone">Удаляем веху…</string>
+    <string name="issue_event_review_pending">начата проверка</string>
+    <string name="parent_repo">Родительский репозиторий</string>
 
 </resources>

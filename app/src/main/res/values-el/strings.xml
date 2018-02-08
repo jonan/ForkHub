@@ -186,7 +186,6 @@
     <string name="invalid_login_or_password">Παρακαλούμε εισάγετε έγκυρο όνομα χρήστη &amp; συνθηματικό</string>
     <string name="invalid_password">Παρακαλούμε εισάγετε έγκυρο συνθηματικό.</string>
     <string name="password">Συνθηματικό</string>
-    <string name="login_or_email">Όνομα ή Email</string>
     <string name="followers">Ακόλουθοι</string>
     <string name="following">Ακολουθούν</string>
     <string name="followers_self">Ακόλουθοι</string>

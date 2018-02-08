@@ -170,7 +170,6 @@
     <string name="invalid_login_or_password">Моля, въведете коректно име и парола</string>
     <string name="invalid_password">Моля, въведете коректна парола.</string>
     <string name="password">Парола</string>
-    <string name="login_or_email">Име или имейл</string>
     <string name="followers">Фенове</string>
     <string name="following">Следва</string>
     <string name="followers_self">Фенове</string>

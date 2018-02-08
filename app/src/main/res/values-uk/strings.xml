@@ -175,7 +175,6 @@
     <string name="invalid_login_or_password">Введіть правильні логін та пароль</string>
     <string name="invalid_password">Введіть правильний пароль.</string>
     <string name="password">Пароль</string>
-    <string name="login_or_email">Логін або пошта</string>
     <string name="followers">Читачі</string>
     <string name="following">Підписки</string>
     <string name="followers_self">Читачі</string>
