@@ -103,8 +103,7 @@ public class SearchUserListFragment extends NewPagedItemFragment<User> {
             protected void onSuccess(org.eclipse.egit.github.core.User user) throws Exception {
                 super.onSuccess(user);
 
-                if (!AccountUtils.isUser(getActivity(), user))
-                    startActivity(UserViewActivity.createIntent(user));
+                startActivity(UserViewActivity.createIntent(user));
             }
         }.execute();
     }
