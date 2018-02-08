@@ -163,9 +163,10 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
     }
 
     private void updateMilestone() {
-        if(milestone != null) {
-            MilestoneFragment milestoneFragment = new MilestoneFragment();
+        MilestoneFragment milestoneFragment = new MilestoneFragment();
+        IssuesFragment issuesFragment = new IssuesFragment();
 
+        if(milestone != null) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(milestone.title);
             actionBar.setSubtitle(R.string.milestone);
@@ -181,10 +182,15 @@ public class MilestoneViewActivity extends DialogFragmentActivity {
             }
             milestoneFragment.setArguments(args);
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            transaction.replace(R.id.ms_description, milestoneFragment);
-            transaction.commit();
+            IssueFilter filter = new IssueFilter(repository);
+            filter.setMilestone(milestone);
+            filter.setOpen(true);
+            getIntent().putExtra(EXTRA_ISSUE_FILTER, filter);
         }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.ms_description, milestoneFragment);
+        transaction.replace(R.id.ms_issues, issuesFragment);
+        transaction.commit();
     }
 }
