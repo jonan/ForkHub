@@ -279,7 +279,7 @@
     <string name="issue_confirm_close_title">Закрыть задачу</string>
     <string name="issue_confirm_reopen_title">Переоткрыть задачу</string>
     <string name="closed">Закрыта</string>
-    <string name="merged">Объеденино</string>
+    <string name="merged">Объединено</string>
     <string name="no_description_given">Описание отсутствует.</string>
     <string name="close">Закрыть</string>
     <string name="reopen">Переоткрыть</string>
@@ -360,5 +360,10 @@
     <string name="ms_select_issue">Выбрать задачу</string>
     <string name="ms_new_milestone">Новая цель</string>
     <string name="ms_empty_title_error">Ошибка при сохранении с пустым заголовком</string>
+
+    <string name="creating_milestone">Создаем цель…</string>
+    <string name="deleting_milestone">Удаляем цель…</string>
+    <string name="issue_event_review_pending">начата проверка</string>
+    <string name="parent_repo">Родительский репозиторий</string>
 
 </resources>

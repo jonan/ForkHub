@@ -162,7 +162,6 @@
     <string name="invalid_login_or_password">請輸入正確的帳號與密碼</string>
     <string name="invalid_password">請輸入正確的密碼.</string>
     <string name="password">密碼</string>
-    <string name="login_or_email">帳號或電子郵件</string>
     <string name="followers">追隨我的</string>
     <string name="following">我追隨的</string>
     <string name="followers_self">追隨我的</string>

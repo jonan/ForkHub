@@ -166,7 +166,6 @@
     <string name="invalid_login_or_password">Adj meg érvényes felhasználónevet &amp; jelszót</string>
     <string name="invalid_password">Adj meg érvényes jelszót.</string>
     <string name="password">Jelszó</string>
-    <string name="login_or_email">Felhasználónév vagy E-mail cím</string>
     <string name="followers">Követők</string>
     <string name="following">Követettek</string>
     <string name="followers_self">Követőim</string>

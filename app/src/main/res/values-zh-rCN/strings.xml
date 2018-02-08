@@ -237,7 +237,6 @@
     <string name="invalid_login_or_password">请输入正确的账户名和密码。</string>
     <string name="invalid_password">请输入正确的密码。</string>
     <string name="password">密码</string>
-    <string name="login_or_email">账户名 / 电子邮件</string>
     <string name="followers">关注者</string>
     <string name="following">正在关注</string>
     <string name="followers_self">关注我的</string>

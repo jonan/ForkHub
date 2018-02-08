@@ -179,7 +179,6 @@
     <string name="invalid_login_or_password">Inserisci un nome utente e una password validi</string>
     <string name="invalid_password">Inserisci una password valida.</string>
     <string name="password">Password</string>
-    <string name="login_or_email">Login o Email</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
     <string name="followers_self">Followers</string>
