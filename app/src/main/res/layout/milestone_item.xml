@@ -20,10 +20,10 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/ll_milestone_issues"
-        android:layout_width="100dp"
+        android:id="@+id/ll_milestone_issues_nums"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:orientation="vertical">
 
         <TextView
@@ -42,9 +42,31 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_milestone_issues"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@id/ll_milestone_issues_nums"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_milestone_opened_iss"
+            style="@style/MilestoneItemOpenedIssue"
+            android:singleLine="true"
+            android:text="@string/ms_opened_issues"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_milestone_closed_iss"
+            style="@style/MilestoneItemClosedIssue"
+            android:singleLine="true"
+            android:text="@string/ms_closed_issues"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/ll_milestone_issues"
+        android:layout_toStartOf="@id/ll_milestone_issues"
         android:orientation="vertical">
 
         <TextView
