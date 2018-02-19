@@ -39,7 +39,7 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
      */
     public MilestoneListAdapter(final Context context,
                                 final Milestone[] elements) {
-        super(LayoutInflater.from(context), R.layout.milestone_item);
+        super(LayoutInflater.from(context), R.layout.milestone_list_item);
         this.context = context.getApplicationContext();
         setItems(elements);
     }
