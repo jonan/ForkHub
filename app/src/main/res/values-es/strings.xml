@@ -186,6 +186,7 @@
     <string name="invalid_login_or_password">Por favor introduce un usuario y contraseña válidos</string>
     <string name="invalid_password">Por favor introduce una contraseña válida.</string>
     <string name="password">Contraseña</string>
+    <string name="login_or_email">Usuario o Correo Electrónico</string>
     <string name="followers">Seguidores</string>
     <string name="following">Siguiendo</string>
     <string name="followers_self">Seguidores</string>

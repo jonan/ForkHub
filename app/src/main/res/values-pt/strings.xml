@@ -162,6 +162,7 @@
     <string name="invalid_login_or_password">Por favor, digite um login e senha válidos.</string>
     <string name="invalid_password">Por favor, digite uma senha válida.</string>
     <string name="password">Senha</string>
+    <string name="login_or_email">Login ou Email</string>
     <string name="followers">Seguidores</string>
     <string name="following">Seguindo</string>
     <string name="members">Membros</string>

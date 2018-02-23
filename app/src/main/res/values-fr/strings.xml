@@ -178,6 +178,7 @@
     <string name="invalid_login_or_password">Veuillez entrer un login et un mot de passe valides</string>
     <string name="invalid_password">Veuillez entrer un mot de passe valide</string>
     <string name="password">Mot de passe</string>
+    <string name="login_or_email">Login ou Email</string>
     <string name="followers">Abonnés</string>
     <string name="following">Abonnements</string>
     <string name="followers_self">Abonnés</string>
