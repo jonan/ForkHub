@@ -28,11 +28,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.kevinsawicki.wishlist.ViewUpdater;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.mobile.R;
 import com.github.mobile.ui.DialogFragmentActivity;
@@ -69,6 +67,14 @@ public class MilestoneDialogFragment extends SingleChoiceDialogFragment {
         @Override
         protected void update(int position, Milestone item) {
             setText(1, item.getTitle());
+
+            String description = item.getDescription();
+            if (!TextUtils.isEmpty(description))
+                ViewUtils.setGone(setText(2, description), false);
+            else
+                setGone(2, true);
+
+            setChecked(0, selected == position);
         }
 
         @Override
