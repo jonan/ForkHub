@@ -360,6 +360,7 @@
     <string name="ms_select_issue">Выбрать задачу</string>
     <string name="ms_new_milestone">Новая цель</string>
     <string name="ms_empty_title_error">Ошибка при сохранении с пустым заголовком</string>
+    <string name="milestones">Цели</string>
 
     <string name="creating_milestone">Создаем цель…</string>
     <string name="deleting_milestone">Удаляем цель…</string>

@@ -365,6 +365,7 @@
     <string name="ms_date_format" translatable="false">dd MMM yyyy</string>
     <string name="ms_select_issue">Select Issue</string>
     <string name="ms_empty_title_error">Saving with empty title failed</string>
+    <string name="milestones">Milestones</string>
 
 
 </resources>
