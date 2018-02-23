@@ -145,7 +145,12 @@ public class EditIssuesFilterActivity extends DialogFragmentActivity {
                     milestoneDialog = new MilestoneDialog(
                             EditIssuesFilterActivity.this, REQUEST_MILESTONE,
                             repository, milestones);
-                milestoneDialog.show(filter.getMilestone().getOldModel());
+                com.github.mobile.api.model.Milestone milestone = filter.getMilestone();
+                if (milestone == null) {
+                    milestoneDialog.show(null);
+                } else {
+                    milestoneDialog.show(milestone.getOldModel());
+                }
             }
         };
 
