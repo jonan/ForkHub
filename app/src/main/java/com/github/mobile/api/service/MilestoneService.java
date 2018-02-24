@@ -30,14 +30,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MilestoneService {
-    @Headers("Accept: application/vnd.github.v3+json")
     @GET("repos/{owner}/{repo}/milestones/{number}")
     Call<Milestone> getMilestone(
             @Path("owner") String owner,
             @Path("repo") String repo,
             @Path("number") long number);
 
-    @Headers("Accept: application/vnd.github.v3+json")
     @GET("repos/{owner}/{repo}/milestones")
     Call<List<Milestone>> getMilestones(
             @Path("owner") String owner,
@@ -50,14 +48,12 @@ public interface MilestoneService {
             @Path("repo") String repo,
             @Query("milestone") long milestone);
 
-    @Headers("Accept: application/vnd.github.v3+json")
     @POST("repos/{owner}/{repo}/milestones")
     Call<Milestone> createMilestone (
             @Path("owner") String owner,
             @Path("repo") String repo,
             @Body Milestone milestone);
-
-    @Headers("Accept: application/vnd.github.v3+json")
+    
     @PATCH("repos/{owner}/{repo}/milestones/{number}")
     Call<Milestone> editMilestone (
             @Path("owner") String owner,
@@ -65,7 +61,6 @@ public interface MilestoneService {
             @Path("number") long number,
             @Body Milestone milestone);
 
-    @Headers("Accept: application/vnd.github.v3+json")
     @DELETE("repos/{owner}/{repo}/milestones/{number}")
     Call<Milestone> deleteMilestone(
             @Path("owner") String owner,
