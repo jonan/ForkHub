@@ -192,6 +192,7 @@
     <string name="invalid_password">Ange ett giltligt lösenord.</string>
     <string name="password">Lösenord</string>
     <string name="username_or_email">Användarnamn eller Email</string>
+    <string name="login_or_email">Användarnamn eller Email</string>
     <string name="followers">Följare</string>
     <string name="following">följar på</string>
     <string name="follow">följa</string>

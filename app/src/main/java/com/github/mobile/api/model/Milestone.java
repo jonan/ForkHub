@@ -51,10 +51,6 @@ public class Milestone implements Serializable {
     }
 
     public Milestone(org.eclipse.egit.github.core.Milestone milestone) {
-        //todo this.id=?
-        //there are two variants of id usage
-        //1)id is like an id in Issues, but it is in old Issues class too - the remove field
-        //2)id is like an serialVersionUID - then generate it using "serialver -classpath . Milestone" in terminal
         this.number = milestone.getNumber();
         this.state = milestone.getState();
         this.title = milestone.getTitle();
@@ -65,7 +61,6 @@ public class Milestone implements Serializable {
         this.closed_issues = milestone.getClosedIssues();
         this.created_at = milestone.getCreatedAt();
         this.url = milestone.getUrl();
-        //todo this.updated_at=???
         this.due_on = milestone.getDueOn();
     }
 

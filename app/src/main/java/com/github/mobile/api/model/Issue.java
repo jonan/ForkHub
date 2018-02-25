@@ -77,6 +77,7 @@ public class Issue implements Serializable {
         issue.setCreatedAt(created_at);
         issue.setClosedAt(closed_at);
         issue.setUpdatedAt(updated_at);
+
         if (milestone != null){
             issue.setMilestone(milestone.getOldModel());
         }
