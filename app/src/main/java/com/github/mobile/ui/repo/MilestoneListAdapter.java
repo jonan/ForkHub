@@ -39,7 +39,7 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
      */
     public MilestoneListAdapter(final Context context,
                                 final Milestone[] elements) {
-        super(LayoutInflater.from(context), R.layout.milestone_item);
+        super(LayoutInflater.from(context), R.layout.milestone_list_item);
         this.context = context.getApplicationContext();
         setItems(elements);
     }
@@ -61,7 +61,7 @@ public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
                 (milestone.due_on != null) ?
                         context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on)
                         : EMPTY_STR);
-        setText(2, context.getString(R.string.ms_opened_issues) + String.valueOf(milestone.open_issues));
-        setText(3, context.getString(R.string.ms_closed_issues) + String.valueOf(milestone.closed_issues));
+        setText(2, String.valueOf(milestone.open_issues));
+        setText(3, String.valueOf(milestone.closed_issues));
     }
 }
