@@ -1,5 +1,10 @@
-* Show the 'reviewed' and 'review_dismissed' issue events.
-* Fix crash when opening the browser in some devices.
-* Improve translations: ZH-CN.
+* Add shortcuts for viewing the issue dashboard and notifications.
+* Display reactions in issue and commit comments.
+* Add logout button.
+* Remove repository image from the toolbar.
+* Improve the source viewer for many languages (CodeMirror 5.27.4).
+* Some minor improvements.
+* Improve translations: DE, PT-BR, RU, TR.
+* New translations: PT-PT.
 
 https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md

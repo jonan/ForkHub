@@ -13,8 +13,8 @@ android {
         applicationId 'jp.forkhub'
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1020800
-        versionName '1.2.8'
+        versionCode 1020900
+        versionName '1.2.9'
     }
 
     packagingOptions {

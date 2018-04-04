@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [ForkHub v1.2.9] - 2018-04-04
 
 ### Added
 - Add shortcuts for viewing the issue dashboard and notifications.
@@ -200,7 +200,7 @@
 
 - Last official GitHub release.
 
-[Unreleased]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.8...master
+[ForkHub v1.2.9]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.8...ForkHub-v1.2.9
 [ForkHub v1.2.8]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.7...ForkHub-v1.2.8
 [ForkHub v1.2.7]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.6...ForkHub-v1.2.7
 [ForkHub v1.2.6]: https://github.com/jonan/ForkHub/compare/ForkHub-v1.2.5...ForkHub-v1.2.6
