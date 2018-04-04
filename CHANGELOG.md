@@ -13,7 +13,7 @@
 - Some minor improvements.
 
 ### Translations
-- Improve translations: DE, PT-BR, RU.
+- Improve translations: DE, PT-BR, RU, TR.
 - New translations: PT-PT.
 
 ## [ForkHub v1.2.8] - 2017-03-22
