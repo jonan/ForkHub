@@ -18,8 +18,11 @@ package com.github.mobile.ui;
 import android.app.AlertDialog;
 import android.content.Context;
 
+import static android.R.style.Theme_Holo_Light_Dialog;
+import static android.R.style.Theme_Material_Light_Dialog_Alert;
+
 /**
- * Alert dialog using the Holo Light theme
+ * Alert dialog using the Material Light theme
  */
 public class LightAlertDialog extends AlertDialog {
 
@@ -30,7 +33,10 @@ public class LightAlertDialog extends AlertDialog {
      * @return dialog
      */
     public static AlertDialog create(final Context context) {
-        return new LightAlertDialog(context, THEME_HOLO_LIGHT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            return new LightAlertDialog(context, Theme_Material_Light_Dialog_Alert);
+        else
+            return new LightAlertDialog(context, Theme_Holo_Light_Dialog);
     }
 
     private LightAlertDialog(final Context context, final int theme) {
@@ -42,7 +48,7 @@ public class LightAlertDialog extends AlertDialog {
     }
 
     /**
-     * Alert dialog builder using the Holo Light theme
+     * Alert dialog builder using the Material Light theme
      */
     public static class Builder extends AlertDialog.Builder {
 
@@ -53,7 +59,10 @@ public class LightAlertDialog extends AlertDialog {
          * @return dialog builder
          */
         public static LightAlertDialog.Builder create(final Context context) {
-            return new LightAlertDialog.Builder(context, THEME_HOLO_LIGHT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                return new LightAlertDialog.Builder(context, Theme_Material_Light_Dialog_Alert);
+            else
+                return new LightAlertDialog.Builder(context, Theme_Holo_Light_Dialog);
         }
 
         private Builder(Context context) {

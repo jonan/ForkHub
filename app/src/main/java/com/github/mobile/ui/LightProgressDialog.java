@@ -18,12 +18,15 @@ package com.github.mobile.ui;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 
 import com.github.mobile.R;
 
+import static android.R.style.Theme_Holo_Light_Dialog;
+import static android.R.style.Theme_Material_Light_Dialog_Alert;
 
 /**
- * Progress dialog in Holo Light theme
+ * Progress dialog in Material Light theme
  */
 public class LightProgressDialog extends ProgressDialog {
 
@@ -55,6 +58,6 @@ public class LightProgressDialog extends ProgressDialog {
     }
 
     private LightProgressDialog(Context context, CharSequence message) {
-        super(context, THEME_HOLO_LIGHT);
+        super(context, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Theme_Material_Light_Dialog_Alert : Theme_Holo_Light_Dialog);
     }
 }
