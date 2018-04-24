@@ -256,6 +256,7 @@
     <string name="reopening_issue">Reopening Issue…</string>
     <string name="avatar">Avatar</string>
     <string name="creating_issue">Creating Issue…</string>
+    <string name="creating_milestone">Creating Milestone…</string>
     <string name="prefix_created">created\u0020</string>
     <string name="prefix_updated">updated\u0020</string>
     <string name="prefix_opened">opened\u0020</string>
@@ -311,6 +312,7 @@
     <string name="navigate_to">Navigate to…</string>
     <string name="navigate_to_user">Navigate to %s</string>
     <string name="contributions">%d commits</string>
+    <string name="deleting_milestone">Deleting milestone…</string>
 
     <!-- Tab titles, should be as short as possible -->
     <string name="tab_repositories">repositories</string>
@@ -346,5 +348,24 @@
     <string name="copy_hash">Copy hash</string>
     <string name="toast_msg_copied">Copied to clipboard</string>
     <string name="parent_repo">Parent repository</string>
+    <!--  -->
+    <string name="issues_display_closed">Display closed</string>
+    <string name="issues_display_opened">Display opened</string>
+
+    <string name="ms_due_by">"Due date "</string>
+    <string name="ms_opened_issues">"Opened: "</string>
+    <string name="ms_closed_issues">"Closed: "</string>
+    <string name="ms_new_milestone">New milestone</string>
+    <string name="ms_date_2_weeks">2 weeks</string>
+    <string name="ms_date_month">month</string>
+    <string name="ms_choose_date">Choose date</string>
+    <string name="ms_percent_completed">% completed</string>
+    <string name="ms_time_past">past due by</string>
+    <string name="ms_days">days</string>
+    <string name="ms_date_format" translatable="false">dd MMM yyyy</string>
+    <string name="ms_select_issue">Select Issue</string>
+    <string name="ms_empty_title_error">Saving with empty title failed</string>
+    <string name="milestones">Milestones</string>
+
 
 </resources>

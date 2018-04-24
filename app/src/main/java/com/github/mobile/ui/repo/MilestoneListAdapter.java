@@ -1,0 +1,67 @@
+/*
+ * Copyright 2013 GitHub Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.github.mobile.ui.repo;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+
+import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
+import com.github.mobile.R;
+import com.github.mobile.api.model.Milestone;
+
+
+import java.text.SimpleDateFormat;
+/**
+ * List adapter for a list of milestones
+ */
+public class MilestoneListAdapter extends SingleTypeAdapter<Milestone> {
+
+    private final Context context;
+    private static final String EMPTY_STR = "";
+    /**
+     * Create milestone list adapter
+     *
+     * @param context
+     * @param elements
+     */
+    public MilestoneListAdapter(final Context context,
+                                final Milestone[] elements) {
+        super(LayoutInflater.from(context), R.layout.milestone_list_item);
+        this.context = context.getApplicationContext();
+        setItems(elements);
+    }
+
+    @Override
+    protected int[] getChildViewIds() {
+        return new int[]{R.id.tv_milestone_title,
+                R.id.tv_milestone_due_to,
+                R.id.tv_milestone_opened_iss_number,
+                R.id.tv_milestone_closed_iss_number};
+    }
+
+    @Override
+    protected void update(int position, Milestone milestone) {
+        SimpleDateFormat sdf = new SimpleDateFormat(context.getString(R.string.ms_date_format));
+
+        setText(0, milestone.title);
+        setText(1,
+                (milestone.due_on != null) ?
+                        context.getString(R.string.ms_due_by) + sdf.format(milestone.due_on)
+                        : EMPTY_STR);
+        setText(2, String.valueOf(milestone.open_issues));
+        setText(3, String.valueOf(milestone.closed_issues));
+    }
+}

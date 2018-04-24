@@ -135,6 +135,11 @@ public class ServicesModule extends AbstractModule {
     }
 
     @Provides
+    com.github.mobile.api.service.MilestoneService milestoneService(Retrofit retrofit) {
+        return retrofit.create(com.github.mobile.api.service.MilestoneService.class);
+    }
+
+    @Provides
     LabelService labelService(GitHubClient client) {
         return new LabelService(client);
     }

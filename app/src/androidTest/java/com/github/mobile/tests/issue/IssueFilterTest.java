@@ -17,9 +17,9 @@ package com.github.mobile.tests.issue;
 
 import android.test.AndroidTestCase;
 
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.core.issue.IssueFilter;
 
-import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 
@@ -56,7 +56,8 @@ public class IssueFilterTest extends AndroidTestCase {
         assertEquals(filter1, filter2);
         assertEquals(filter1.hashCode(), filter2.hashCode());
 
-        Milestone milestone = new Milestone().setNumber(3);
+        Milestone milestone = new Milestone();
+        milestone.number = 3;
         filter1.setMilestone(milestone);
         assertFalse(filter1.equals(filter2));
         filter2.setMilestone(milestone);

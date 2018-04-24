@@ -151,7 +151,8 @@ public class IssuesFragment extends PagedItemFragment<Issue> {
         } else
             labels.setVisibility(GONE);
 
-        Milestone filterMilestone = filter.getMilestone();
+        com.github.mobile.api.model.Milestone newFilterMs = filter.getMilestone();
+        Milestone filterMilestone = newFilterMs == null ? null : newFilterMs.getOldModel();
         if (filterMilestone != null) {
             milestone.setText(filterMilestone.getTitle());
             milestone.setVisibility(VISIBLE);

@@ -279,7 +279,7 @@
     <string name="issue_confirm_close_title">Закрыть задачу</string>
     <string name="issue_confirm_reopen_title">Переоткрыть задачу</string>
     <string name="closed">Закрыта</string>
-    <string name="merged">Объеденино</string>
+    <string name="merged">Объединено</string>
     <string name="no_description_given">Описание отсутствует.</string>
     <string name="close">Закрыть</string>
     <string name="reopen">Переоткрыть</string>
@@ -344,5 +344,27 @@
     <string name="render_markdown">Отобразить Markdown</string>
     <string name="copy_hash">Копировать хэш</string>
     <string name="toast_msg_copied">Скопировано в буфер обмена</string>
+    <!--  -->
+    <string name="issues_display_closed">Показать закрытые</string>
+    <string name="issues_display_opened">Показать открытые</string>
+
+    <string name="ms_closed_issues">"Закрытые: "</string>
+    <string name="ms_due_by">"До "</string>
+    <string name="ms_opened_issues">"Открытые: "</string>
+    <string name="ms_choose_date">Выбрать дату</string>
+    <string name="ms_date_2_weeks">2 недели</string>
+    <string name="ms_date_month">Месяц</string>
+    <string name="ms_percent_completed">% завершено</string>
+    <string name="ms_time_past">Просрочен</string>
+    <string name="ms_days">дней</string>
+    <string name="ms_select_issue">Выбрать задачу</string>
+    <string name="ms_new_milestone">Новая цель</string>
+    <string name="ms_empty_title_error">Ошибка при сохранении с пустым заголовком</string>
+    <string name="milestones">Цели</string>
+
+    <string name="creating_milestone">Создаем цель…</string>
+    <string name="deleting_milestone">Удаляем цель…</string>
+    <string name="issue_event_review_pending">начата проверка</string>
+    <string name="parent_repo">Родительский репозиторий</string>
 
 </resources>

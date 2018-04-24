@@ -18,6 +18,7 @@ package com.github.mobile;
 import static org.eclipse.egit.github.core.RepositoryId.createFromUrl;
 import android.content.Intent;
 
+import com.github.mobile.api.model.Milestone;
 import com.github.mobile.api.model.Project;
 import com.github.mobile.api.model.Team;
 
@@ -80,6 +81,11 @@ public class Intents {
      * Issue handle
      */
     public static final String EXTRA_ISSUE = INTENT_EXTRA_PREFIX + "ISSUE";
+
+    /**
+     * Milestone handle
+     */
+    public static final String EXTRA_MILESTONE = INTENT_EXTRA_PREFIX + "MILESTONE";
 
     /**
      * Issue number collection handle
@@ -248,6 +254,16 @@ public class Intents {
         public Builder issue(Issue issue) {
             return repo(createFromUrl(issue.getHtmlUrl())).add(EXTRA_ISSUE,
                     issue).add(EXTRA_ISSUE_NUMBER, issue.getNumber());
+        }
+
+        /**
+         * Add milestone to intent being built up
+         *
+         * @param milestone
+         * @return this builder
+         */
+        public Builder milestone(Milestone milestone) {
+            return add(EXTRA_MILESTONE, milestone);
         }
 
         /**

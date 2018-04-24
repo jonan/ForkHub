@@ -16,39 +16,54 @@
 package com.github.mobile.api.service;
 
 import com.github.mobile.api.model.Issue;
-import com.github.mobile.api.model.TimelineEvent;
-
+import com.github.mobile.api.model.Milestone;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface IssueService {
-    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
-    @GET("repos/{owner}/{repo}/issues/{number}")
-    Call<Issue> getIssue(
+public interface MilestoneService {
+    @GET("repos/{owner}/{repo}/milestones/{number}")
+    Call<Milestone> getMilestone(
             @Path("owner") String owner,
             @Path("repo") String repo,
             @Path("number") long number);
+
+    @GET("repos/{owner}/{repo}/milestones")
+    Call<List<Milestone>> getMilestones(
+            @Path("owner") String owner,
+            @Path("repo") String repo);
 
     @Headers("Accept: application/vnd.github.squirrel-girl-preview")
     @GET("repos/{owner}/{repo}/issues")
     Call<List<Issue>> getIssues(
             @Path("owner") String owner,
             @Path("repo") String repo,
-            @Query("milestone") String milestone);
+            @Query("milestone") long milestone);
 
-    @Headers({"Accept: application/vnd.github.v3.full+json",
-            "Accept: application/vnd.github.mockingbird-preview",
-            "Accept: application/vnd.github.squirrel-girl-preview"})
-    @GET("repos/{owner}/{repo}/issues/{issue_number}/timeline")
-    Call<List<TimelineEvent>> getTimeline(
+    @POST("repos/{owner}/{repo}/milestones")
+    Call<Milestone> createMilestone (
             @Path("owner") String owner,
             @Path("repo") String repo,
-            @Path("issue_number") long issue_number,
-            @Query("page") int page,
-            @Query("per_page") int per_page);
+            @Body Milestone milestone);
+    
+    @PATCH("repos/{owner}/{repo}/milestones/{number}")
+    Call<Milestone> editMilestone (
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Path("number") long number,
+            @Body Milestone milestone);
+
+    @DELETE("repos/{owner}/{repo}/milestones/{number}")
+    Call<Milestone> deleteMilestone(
+            @Path("owner") String owner,
+            @Path("repo") String repo,
+            @Path("number") long number);
 }
