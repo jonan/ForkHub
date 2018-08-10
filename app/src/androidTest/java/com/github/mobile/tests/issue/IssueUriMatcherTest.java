@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.test.AndroidTestCase;
 
 import com.github.mobile.core.issue.IssueUriMatcher;
+import com.github.mobile.ui.UriLauncherActivity;
 
 import org.eclipse.egit.github.core.Repository;
 
@@ -41,17 +42,18 @@ public class IssueUriMatcherTest extends AndroidTestCase {
      * Verify non-numeric issue number in uri
      */
     public void testNonNumericIssueNumber() {
-        assertNull(IssueUriMatcher.getIssueIntent(Uri
-                .parse("https://github.com/defunkt/resque/issues/fourty").getPathSegments()));
+        assertNull(UriLauncherActivity.getIntentForURI(Uri
+                .parse("https://github.com/defunkt/resque/issues/fourty")));
     }
 
     /**
      * Verify http uri
      */
     public void testHttpUri() {
-        Intent intent = IssueUriMatcher.getIssueIntent(Uri
-                .parse("https://github.com/defunkt/resque/issues/3").getPathSegments());
+        Intent intent = UriLauncherActivity.getIntentForURI(Uri
+                .parse("https://github.com/defunkt/resque/issues/3"));
         assertNotNull(intent);
+        assertEquals(intent.getAction(), "jp.forkhub.mobile.issues.VIEW");
         assertEquals(3, intent.getIntArrayExtra(EXTRA_ISSUE_NUMBERS)[0]);
         Repository repo = (Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
         assertNotNull(repo);
@@ -64,9 +66,10 @@ public class IssueUriMatcherTest extends AndroidTestCase {
      * Verify pull uri
      */
     public void testPullUri() {
-        Intent intent = IssueUriMatcher.getIssueIntent(Uri
-                .parse("https://github.com/defunkt/resque/pull/3").getPathSegments());
+        Intent intent = UriLauncherActivity.getIntentForURI(Uri
+                .parse("https://github.com/defunkt/resque/pull/3"));
         assertNotNull(intent);
+        assertEquals(intent.getAction(), "jp.forkhub.mobile.issues.VIEW");
         assertEquals(3, intent.getIntArrayExtra(EXTRA_ISSUE_NUMBERS)[0]);
         Repository repo = (Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
         assertNotNull(repo);
@@ -79,9 +82,10 @@ public class IssueUriMatcherTest extends AndroidTestCase {
      * Verify https uri
      */
     public void testHttpsUri() {
-        Intent intent = IssueUriMatcher.getIssueIntent(Uri
-                .parse("http://github.com/defunkt/resque/issues/15").getPathSegments());
+        Intent intent = UriLauncherActivity.getIntentForURI(Uri
+                .parse("http://github.com/defunkt/resque/issues/15"));
         assertNotNull(intent);
+        assertEquals(intent.getAction(), "jp.forkhub.mobile.issues.VIEW");
         assertEquals(15, intent.getIntArrayExtra(EXTRA_ISSUE_NUMBERS)[0]);
         Repository repo = (Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
         assertNotNull(repo);
@@ -94,9 +98,10 @@ public class IssueUriMatcherTest extends AndroidTestCase {
      * Verify uri with comment fragment
      */
     public void testCommentUri() {
-        Intent intent = IssueUriMatcher.getIssueIntent(Uri
-                .parse("https://github.com/defunkt/resque/issues/300#issuecomment-123456").getPathSegments());
+        Intent intent = UriLauncherActivity.getIntentForURI(Uri
+                .parse("https://github.com/defunkt/resque/issues/300#issuecomment-123456"));
         assertNotNull(intent);
+        assertEquals(intent.getAction(), "jp.forkhub.mobile.issues.VIEW");
         assertEquals(300, intent.getIntArrayExtra(EXTRA_ISSUE_NUMBERS)[0]);
         Repository repo = (Repository) intent.getSerializableExtra(EXTRA_REPOSITORY);
         assertNotNull(repo);

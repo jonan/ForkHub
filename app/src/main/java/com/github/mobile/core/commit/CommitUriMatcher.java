@@ -45,10 +45,16 @@ public class CommitUriMatcher {
         if (repo == null)
             return null;
 
+        if (pathSegments.size() == 6) {
+            if ("pull".equals(pathSegments.get(2)) && "commits".equals(pathSegments.get(4))) {
+                return getSingleCommitIntent(repo, pathSegments);
+            } else {
+                return null;
+            }
+        }
+
         switch (pathSegments.get(2)) {
         case "commit":
-            return getSingleCommitIntent(repo, pathSegments);
-        case "pull":
             return getSingleCommitIntent(repo, pathSegments);
         case "compare":
             return getCommitCompareIntent(repo, pathSegments);
@@ -58,11 +64,7 @@ public class CommitUriMatcher {
     }
 
     private static Intent getSingleCommitIntent(Repository repo, List<String> pathSegments) {
-        String ref;
-        if (pathSegments.size() == 4 || pathSegments.size() == 6)
-            ref = pathSegments.get(pathSegments.size() - 1);
-        else
-            return null;
+        String ref = pathSegments.get(pathSegments.size() - 1);
 
         if (TextUtils.isEmpty(ref))
             return null;

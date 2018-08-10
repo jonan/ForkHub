@@ -15,7 +15,6 @@
  */
 package com.github.mobile.api.service;
 
-import com.github.mobile.api.model.Comment;
 import com.github.mobile.api.model.Issue;
 import com.github.mobile.api.model.TimelineEvent;
 
@@ -45,11 +44,4 @@ public interface IssueService {
             @Path("issue_number") long issue_number,
             @Query("page") int page,
             @Query("per_page") int per_page);
-
-    @Headers("Accept: application/vnd.github.squirrel-girl-preview")
-    @GET("repos/{owner}/{repo}/issues/{number}/comments")
-    Call<List<Comment>> getIssueComments(
-            @Path("owner") String owner,
-            @Path("repo") String repo,
-            @Path("number") long number);
 }
