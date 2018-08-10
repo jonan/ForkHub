@@ -22,7 +22,7 @@
     <string name="error_repos_load">Ошибка при загрузке репозиториев</string>
     <string name="error_repo_load">Ошибка при загрузке репозитория</string>
     <string name="error_contributors_load">Ошибка при загрузке участников</string>
-    <string name="error_gist_load">Ошибка при загрузке Gist</string>
+    <string name="error_gist_load">Ошибка при загрузке отрывка</string>
     <string name="error_notifications_load">Ошибка при загрузке уведомлений</string>
     <string name="error_projects_load">Ошибка при загрузке проектов</string>
     <string name="error_cards_load">Ошибка при загрузке карточек</string>
@@ -30,8 +30,8 @@
     <string name="error_followers_load">Ошибка при загрузке подписчиков</string>
     <string name="error_people_load">Ошибка при загрузке профилей</string>
     <string name="error_person_load">Ошибка при загрузке профиля</string>
-    <string name="error_gist_file_load">Ошибка при загрузке содержимого Gist-файла</string>
-    <string name="error_gists_load">Ошибка при загрузке Gists</string>
+    <string name="error_gist_file_load">Ошибка при загрузке содержимого отрывка</string>
+    <string name="error_gists_load">Ошибка при загрузке отрывков</string>
     <string name="error_issue_load">Ошибка при загрузке задачи</string>
     <string name="error_collaborators_load">Ошибка при загрузке соучастников</string>
     <string name="error_milestones_load">Ошибка при загрузке целей</string>
@@ -49,7 +49,7 @@
     <string name="error_checking_following_status">Ошибка при проверке статуса подписки</string>
     <string name="error_starring_repository">Ошибка при отмечании</string>
     <string name="error_unstarring_repository">Ошибка при снятии отметки</string>
-    <string name="error_forking_repository">Ошибка при Forking</string>
+    <string name="error_forking_repository">Ошибка при создании форка</string>
     <string name="error_checking_starring_status">Ошибка при проверке отметки</string>
     <string name="error_rendering_markdown">Ошибка отображения Markdown</string>
     <string name="error_users_search">Ошибка поиска пользователей</string>
@@ -57,8 +57,8 @@
 
 
     <!-- Loading messages -->
-    <string name="loading_gist">Загружаем Gist…</string>
-    <string name="random_gist">Загружаем случайный Gist…</string>
+    <string name="loading_gist">Загружаем отрывок…</string>
+    <string name="random_gist">Загружаем случайный отрывок…</string>
     <string name="loading_notifications">Загружаем уведомления…</string>
     <string name="loading_more_issues">Загружаем больше задач…</string>
     <string name="loading_issues">Загружаем задачи…</string>
@@ -70,8 +70,8 @@
     <string name="loading_news">Загружаем новости…</string>
     <string name="loading_followers">Загружаем подписчиков…</string>
     <string name="loading_people">Загружаем подписки…</string>
-    <string name="loading_gists">Загружаем Gists…</string>
-    <string name="loading_collaborators">Загружаем соучастников…</string>
+    <string name="loading_gists">Загружаем отрывки…</string>
+    <string name="loading_collaborators">Загружаем участников…</string>
     <string name="loading_teams">Загружаем сотрудников…</string>
     <string name="loading_milestones">Загружаем цели…</string>
     <string name="loading_labels">Загружаем теги…</string>
@@ -82,21 +82,21 @@
 
 
     <!-- Empty messages -->
-    <string name="no_notifications">Нет уведомлений</string>
-    <string name="no_bookmarks">Нет закладок</string>
-    <string name="no_repositories">Нет репозиториев</string>
-    <string name="no_contributors">Нет участников</string>
-    <string name="no_issues">Нет задач</string>
-    <string name="no_pull_requests">Нет Pull Requests</string>
-    <string name="no_gists">Нет Gists</string>
-    <string name="no_people">Нет подписок</string>
-    <string name="no_followers">Нет подписчиков</string>
-    <string name="no_members">Нет членов</string>
-    <string name="no_teams">Нет сотрудников</string>
-    <string name="no_news">Нет новостей</string>
-    <string name="no_commits">Нет коммитов</string>
-    <string name="no_projects">Нет проектов</string>
-    <string name="no_cards">Нет карточек</string>
+    <string name="no_notifications">Уведомлений нет</string>
+    <string name="no_bookmarks">Закладок нет</string>
+    <string name="no_repositories">Репозиториев нет</string>
+    <string name="no_contributors">Участников нет</string>
+    <string name="no_issues">Задач нет</string>
+    <string name="no_pull_requests">Пулл реквестов нет</string>
+    <string name="no_gists">Отрывков нет</string>
+    <string name="no_people">Подписок нет</string>
+    <string name="no_followers">Подписчиков нет</string>
+    <string name="no_members">Членов нет</string>
+    <string name="no_teams">Сотрудников нет</string>
+    <string name="no_news">Новостей нет</string>
+    <string name="no_commits">Коммитов нет</string>
+    <string name="no_projects">Проектов нет</string>
+    <string name="no_cards">Карточек нет</string>
     <!--  -->
 
 
@@ -109,7 +109,7 @@
 
     <!-- Issue events texts -->
     <string name="issue_event_label_assigned">было назначено для %1$s</string>
-    <string name="issue_event_label_unassigned">снято назначение для %1$s</string>
+    <string name="issue_event_label_unassigned">назначение для %1$s снято</string>
     <string name="issue_event_label_self_assigned">назначено себе</string>
     <string name="issue_event_label_self_unassigned">назначение себе снято</string>
     <string name="issue_event_label_added">добавлен %1$s тег</string>
@@ -127,7 +127,7 @@
     <string name="issue_event_closed_from_commit">закрыто начиная с коммита %1$s</string>
     <string name="issue_event_reopened">переоткрыто</string>
     <string name="issue_event_rename">изменён заголовок с %1$s на %2$s</string>
-    <string name="issue_event_lock">разговор заблокирован и ограничен для соучастников</string>
+    <string name="issue_event_lock">разговор заблокирован и ограничен для участников</string>
     <string name="issue_event_unlock">разговор разблокирован</string>
     <string name="issue_event_head_ref_deleted">ветка удалена</string>
     <string name="issue_event_head_ref_restored">ветка восстановлена</string>
@@ -138,7 +138,7 @@
     <string name="notifications">Уведомления</string>
     <string name="news">Новости</string>
     <string name="issues">Задачи</string>
-    <string name="gists">Gists</string>
+    <string name="gists">Отрывки (gists)</string>
     <string name="commits">Коммиты</string>
     <string name="global_search">Поиск по GitHub</string>
     <string name="find_repositories">Поиск репозиториев</string>
@@ -147,20 +147,20 @@
     <string name="clear_search_history">Очистить историю</string>
     <string name="search_history_cleared">История очищена</string>
     <string name="login_activity_authenticating">Входим…</string>
-    <string name="creating_gist">Создаем Gist…</string>
+    <string name="creating_gist">Создаем отрывок…</string>
     <string name="create">Создать</string>
-    <string name="create_gist">Создать Gist</string>
+    <string name="create_gist">Создать отрывок</string>
     <string name="gist_content_hint">введите текст</string>
-    <string name="make_public">Сделать этот Gist публичным</string>
+    <string name="make_public">Опубликовать отрывок</string>
     <string name="gist_file_name_hint">file.rb</string>
-    <string name="gist">Gist</string>
+    <string name="gist">Отрывок</string>
     <string name="comments">Комментарии</string>
     <string name="files">Файлы</string>
     <string name="open">Открыть</string>
     <string name="random">Случайный</string>
     <string name="file_name">Имя файла</string>
     <string name="file_content">Содержимое файла</string>
-    <string name="new_gist">Новый Gist</string>
+    <string name="new_gist">Новый отрывок</string>
     <string name="filter">Фильтр</string>
     <string name="bookmark">Закладка</string>
     <string name="comment">Комментарий</string>
@@ -170,12 +170,12 @@
     <string name="bookmarks">Закладки</string>
     <string name="report_issue">Сообщить о проблеме</string>
     <string name="logout">Выйти</string>
-    <string name="gists_title">Gists</string>
+    <string name="gists_title">Отрывки</string>
     <string name="issue_title">Задача #</string>
-    <string name="pull_request_title">Pull Request #</string>
-    <string name="gist_title">Gist\u0020</string>
+    <string name="pull_request_title">Пулл реквест #</string>
+    <string name="gist_title">Отрывок\u0020</string>
     <string name="filter_issues_title">Фильтровать задачи</string>
-    <string name="filter_pull_requests_title">Фильтровать Pull Requests</string>
+    <string name="filter_pull_requests_title">Фильтровать пулл реквесты</string>
     <string name="create_comment_title">Создать комментарий</string>
     <string name="comment_hint">Введите комментарий</string>
     <string name="show_more">Больше…</string>
@@ -187,36 +187,36 @@
     <string name="edit_milestone">Изменить цель</string>
     <string name="edit_assignee">Назначить ответственного</string>
     <string name="description">Описание</string>
-    <string name="gist_description_hint">Gist, созданный на Android</string>
+    <string name="gist_description_hint">Отрывок, созданный на платформе Андроид</string>
     <string name="title">Заголовок</string>
     <string name="edit">Редактировать</string>
-    <string name="starring_gist">Отмечаем Gist…</string>
-    <string name="unstarring_gist">Снимаем отметку с Gist…</string>
+    <string name="starring_gist">Отмечаем отрывок…</string>
+    <string name="unstarring_gist">Снимаем отметку с отрывок…</string>
     <string name="accounts_label">Аккаунты</string>
     <string name="select_assignee">Выбрать ответственного</string>
     <string name="select_milestone">Выбрать цель</string>
     <string name="select_labels">Выбрать тег</string>
     <string name="select_ref">Выбрать ветку или метку</string>
-    <string name="login_pass_explanation">ForkHub будет использовать ваш пароль только для генерации &lt;i>Personal Access Token&lt;/i>. Вы можете &lt;a href=\"https://github.com/settings/tokens\">создать его самостоятельно&lt;/a> и использовать его здесь вместо пароля.</string>
+    <string name="login_pass_explanation">ForkHub будет использовать ваш пароль только для генерации &lt;i>личного маркера доступа (personal access token)&lt;/i>. Вы можете &lt;a href=\"https://github.com/settings/tokens\">создать его самостоятельно&lt;/a> и использовать его здесь вместо пароля.</string>
     <string name="enter_otp_code_title">Код аутентификации</string>
     <string name="enter_otp_code_message">Для вашего аккаунта включена двухэтапная аутентификация. Введите код аутентификации для подтверждения личности.</string>
-    <string name="star_forkhub_dialog_text">Если вам нравится это приложение, пожалуйста оцените его звёздами.</string>
-    <string name="rate_forkhub_dialog_text">Если вам нравится это приложение, пожалуйста оцените его рейтингом Play Store.</string>
-    <string name="rate">Rate</string>
+    <string name="star_forkhub_dialog_text">Если вам нравится приложение, пожалуйста оцените его!</string>
+    <string name="rate_forkhub_dialog_text">Если вам нравится приложение, пожалуйста оцените его в Play Store.</string>
+    <string name="rate">Оценить</string>
     <string name="no_milestone">Нет целей</string>
     <string name="unassigned">Нет ответственных</string>
     <string name="assigned">ответственен</string>
-    <string name="no_gists_found">Gists не найдены</string>
+    <string name="no_gists_found">Отрывки не найдены</string>
     <string name="confirm_gist_delete_title">Подтвердить удаление</string>
-    <string name="confirm_gist_delete_message">Вы действительно хотите удалить этот Gist?</string>
-    <string name="deleting_gist">Удаляем Gist…</string>
+    <string name="confirm_gist_delete_message">Вы действительно хотите удалить этот отрывок?</string>
+    <string name="deleting_gist">Удаляем отрывок…</string>
     <string name="creating_comment">Создаем комментарий…</string>
     <string name="editing_comment">Изменение комментария…</string>
     <string name="deleting_comment">Удаление комментария…</string>
     <string name="confirm_comment_delete_title">Удалить комментарий</string>
     <string name="confirm_comment_delete_message">Вы действительно хотите удалить комментарий?</string>
     <string name="confirm_bookmark_delete_message">Вы действительно хотите удалить эту закладку?</string>
-    <string name="issue_dashboard">Панель задачи</string>
+    <string name="issue_dashboard">Панель задач</string>
     <string name="new_issue">Новая задача</string>
     <string name="anonymous">Анонимно</string>
     <string name="message_filter_saved">Фильтр сохранен в закладки</string>
@@ -249,7 +249,7 @@
     <string name="unfollow">Отписаться</string>
     <string name="star">Отметить</string>
     <string name="unstar">Снять отметку</string>
-    <string name="fork">Fork</string>
+    <string name="fork">Создать форк</string>
     <string name="members">Члены</string>
     <string name="closing_issue">Закрываем задачу…</string>
     <string name="reopening_issue">Переоткрываем задачу…</string>
@@ -265,8 +265,8 @@
     <string name="pull_request_not_mergeable_text">Если конфликты, которые должны быть разрешены</string>
     <string name="open_issues">Открытые задачи</string>
     <string name="closed_issues">Закрытые задачи</string>
-    <string name="open_pull_requests">Открытые Pull Requests</string>
-    <string name="closed_pull_requests">Закрытые Pull Requests</string>
+    <string name="open_pull_requests">Открытые пулл реквесты</string>
+    <string name="closed_pull_requests">Закрытые пулл реквесты</string>
     <string name="confirm_bookmark_delete_title">Удалить закладку</string>
     <string name="save">Сохранить</string>
     <string name="apply">ОК</string>
@@ -284,11 +284,11 @@
     <string name="close">Закрыть</string>
     <string name="reopen">Переоткрыть</string>
     <string name="title_invalid_github_url">Неверный URL GitHub</string>
-    <string name="message_invalid_github_url">Данный URL не может быть открыт в этом приложении:\n{0}</string>
+    <string name="message_invalid_github_url">Данный URL не может быть открыт в приложении:\n{0}</string>
     <string name="cancel">Отменить</string>
     <string name="edited">(отредактировано)</string>
     <string name="authenticator_conflict_title">Конфликт приложений</string>
-    <string name="authenticator_conflict_message">Другое приложение уже настроено для аутентификации на GitHub.\n\nВы должны удалить конфликтующее приложение из учетных записей и настроек синхронизации для использования этого приложения.</string>
+    <string name="authenticator_conflict_message">Другое приложение уже настроено для аутентификации на GitHub.\n\nЧтобы пользоваться этим приложением, нужно удалить конфликтующее приложение из учетных записей и настроек синхронизации.</string>
     <string name="opening_repository">Загрузка {0}…</string>
     <string name="commit_compare_title">Сравнить коммиты</string>
     <string name="commit_prefix">Коммит\u0020</string>
@@ -306,7 +306,7 @@
     <string name="unfollowing_user">Отписываюсь…</string>
     <string name="starring_repository">Отмечаем репозиторий…</string>
     <string name="unstarring_repository">Снимаем отметку с репозитория…</string>
-    <string name="forking_repository">Forking…</string>
+    <string name="forking_repository">Создаём форк…</string>
     <string name="navigate_to">Перейти к…</string>
     <string name="navigate_to_user">Перейти к %s</string>
     <string name="contributions">%d коммитов</string>
@@ -326,7 +326,7 @@
     <string name="tab_commits">коммиты</string>
     <string name="tab_issues">задачи</string>
     <string name="tab_projects">проекты</string>
-    <string name="tab_pull_requests">pull requests</string>
+    <string name="tab_pull_requests">пулл реквесты</string>
     <string name="tab_watched">наблюдаемые</string>
     <string name="tab_assigned">назначенные</string>
     <string name="tab_created">созданные</string>
@@ -340,8 +340,8 @@
     <string name="show_password">Показать пароль</string>
     <string name="write">Написать</string>
     <string name="preview">Предпросмотр</string>
-    <string name="show_raw_markdown">Показать исходный Markdown</string>
-    <string name="render_markdown">Отобразить Markdown</string>
+    <string name="show_raw_markdown">Показать исходный маркдаун</string>
+    <string name="render_markdown">Отобразить маркдаун</string>
     <string name="copy_hash">Копировать хэш</string>
     <string name="toast_msg_copied">Скопировано в буфер обмена</string>
 
