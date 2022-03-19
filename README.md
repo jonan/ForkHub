@@ -10,7 +10,7 @@
 ForkHub started off as a fork of the official Android app from GitHub, and has since seen lots of improvements. You can see a comprehensive list of changes in the [change log](https://github.com/jonan/ForkHub/blob/master/CHANGELOG.md).
 
 Please see the [issues](https://github.com/jonan/ForkHub/issues) section to
-report any bugs or feature requests and to see the list of known issues.
+report any bugs or feature requests and to see the list of known issues. This is a fork test. 
 
 ## Acknowledgements
 
